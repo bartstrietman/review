@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="nl" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">ReviewShield — Bescherm je online reputatie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-900:#0F3D2E;--green-800:#15523E;--green-700:#1B6750;
+  --cream:#FAF8F3;--cream-dark:#F1EDE3;
+  --gold:#E8C547;--gold-dark:#B8962E;
+  --ink:#1A1A1A;--ink-soft:#6B6B63;--line:#E2DDD0;--white:#FFFFFF;
+  --radius-s:6px;--radius-m:10px;--radius-l:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);line-height:1.55;font-size:16px;}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--green-700);display:flex;align-items:center;gap:8px;}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(250,248,243,0.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+.nav-inner{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;}
+.logo-mark{width:28px;height:28px;flex-shrink:0;}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--ink-soft);}
+.nav-links a{cursor:pointer;transition:color 0.15s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.lang-toggle{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;font-size:13px;font-weight:600;}
+.lang-btn{padding:7px 12px;cursor:pointer;background:transparent;border:none;color:var(--ink-soft);transition:all 0.15s;}
+.lang-btn.active{background:var(--green-900);color:var(--white);}
+.nav-cta{background:var(--green-900);color:var(--white);padding:10px 20px;border-radius:var(--radius-s);font-size:14px;font-weight:600;border:none;cursor:pointer;transition:background 0.15s;}
+.nav-cta:hover{background:var(--green-800);}
+@media(max-width:760px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{padding:72px 0 88px;border-bottom:1px solid var(--line);}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.hero h1{font-size:46px;line-height:1.08;font-weight:700;margin:18px 0 20px;letter-spacing:-0.02em;}
+.hero h1 .hl{position:relative;display:inline-block;}
+.hero h1 .hl svg{position:absolute;bottom:-6px;left:0;width:100%;height:14px;}
+.hero p.lede{font-size:18px;color:var(--ink-soft);max-width:480px;margin-bottom:32px;}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+.btn-primary{background:var(--green-900);color:var(--white);padding:14px 26px;border-radius:var(--radius-s);font-size:15px;font-weight:600;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background 0.15s,transform 0.1s;}
+.btn-primary:hover{background:var(--green-800);}
+.btn-primary:active{transform:scale(0.98);}
+.btn-secondary{padding:14px 22px;border-radius:var(--radius-s);font-size:15px;font-weight:600;color:var(--ink);border:1.5px solid var(--ink);background:transparent;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background 0.15s;}
+.btn-secondary:hover{background:var(--cream-dark);}
+.hero-note{margin-top:18px;font-size:13px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
+.phone-frame{background:var(--cream-dark);border-radius:var(--radius-l);padding:28px;}
+.browser-bar{display:flex;align-items:center;gap:6px;margin-bottom:16px;}
+.browser-dot{width:9px;height:9px;border-radius:50%;background:#D8D2C2;}
+.browser-url{flex:1;margin-left:8px;background:var(--white);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--ink-soft);border:1px solid var(--line);}
+.site-mock{background:var(--white);border-radius:var(--radius-m);padding:20px;min-height:240px;border:1px solid var(--line);}
+.site-mock-header{font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:4px;}
+.site-mock-title{font-size:17px;font-weight:600;margin-bottom:18px;}
+.site-mock-line{height:8px;background:var(--cream-dark);border-radius:4px;margin-bottom:8px;}
+.site-mock-line.w90{width:90%}.site-mock-line.w70{width:70%}.site-mock-line.w50{width:50%}
+
+/* TRUST STRIP */
+.trust-strip{background:var(--cream-dark);padding:14px 0;border-bottom:1px solid var(--line);}
+.trust-strip .wrap{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--ink-soft);font-weight:500;}
+.trust-strip .wrap span{display:flex;align-items:center;gap:6px;}
+
+/* SECTIONS */
+section{padding:88px 0;}
+.section-head{max-width:640px;margin-bottom:48px;}
+.section-head h2{font-size:32px;font-weight:700;margin:14px 0 12px;letter-spacing:-0.01em;}
+.section-head p{font-size:17px;color:var(--ink-soft);}
+.section-alt{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+.step-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-l);padding:28px;}
+.step-num{font-size:13px;font-weight:700;color:var(--green-700);letter-spacing:0.06em;margin-bottom:14px;}
+.step-card h3{font-size:19px;font-weight:600;margin-bottom:8px;}
+.step-card p{font-size:15px;color:var(--ink-soft);}
+
+/* BRANCHES */
+.branch-tabs{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;}
+.branch-tab{padding:10px 18px;border-radius:24px;border:1px solid var(--line);background:var(--white);font-size:14px;font-weight:600;cursor:pointer;color:var(--ink-soft);transition:all 0.15s;}
+.branch-tab.active{background:var(--green-900);color:var(--white);border-color:var(--green-900);}
+.branch-tab:hover:not(.active){border-color:var(--green-700);color:var(--ink);}
+.branch-panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-l);padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
+.branch-panel h3{font-size:21px;font-weight:600;margin-bottom:10px;}
+.branch-panel p.scenario{font-size:15px;color:var(--ink-soft);margin-bottom:16px;line-height:1.65;}
+.branch-stat-row{display:flex;gap:20px;margin-top:16px;}
+.branch-stat .num{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--green-800);}
+.branch-stat .lbl{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+.branch-sector-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.branch-sector-tag{font-size:12px;font-weight:600;color:var(--green-800);background:var(--cream-dark);padding:5px 12px;border-radius:20px;}
+.branch-quote{background:var(--cream-dark);border-radius:var(--radius-m);padding:18px;font-size:14px;font-style:italic;color:var(--ink);line-height:1.65;}
+
+/* WIDGET PREVIEWS */
+.widget-previews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:16px;}
+.widget-preview-card{border-radius:var(--radius-l);overflow:hidden;border:1px solid var(--line);}
+.widget-preview-header{padding:12px 16px;font-size:12px;font-weight:600;color:var(--ink-soft);}
+.widget-preview-mock{padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.widget-preview-mock p{font-size:14px;font-weight:600;text-align:center;}
+.widget-preview-stars{display:flex;gap:4px;}
+
+/* DEMO */
+.demo-section{background:var(--green-900);color:var(--white);}
+.demo-section .eyebrow{color:var(--gold);}
+.demo-section .section-head h2{color:var(--white);}
+.demo-section .section-head p{color:#C9D9CE;}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+.demo-context{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:var(--radius-l);padding:24px;}
+.demo-context h4{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--gold);}
+.demo-context p{font-size:15px;color:#D8E3DB;margin-bottom:18px;}
+.demo-context .fake-page{background:var(--white);border-radius:var(--radius-m);padding:18px;color:var(--ink);}
+.demo-stage-wrap{background:var(--white);border-radius:var(--radius-l);padding:24px;color:var(--ink);min-height:220px;}
+.rs-stars{display:flex;gap:8px;justify-content:center;margin:14px 0 6px;}
+.rs-star-btn{border:none;background:none;padding:6px;cursor:pointer;}
+.demo-reset{margin-top:18px;display:flex;justify-content:center;}
+.demo-reset button{background:transparent;border:1px solid rgba(255,255,255,0.3);color:var(--white);padding:8px 16px;border-radius:var(--radius-s);font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;}
+.demo-reset button:hover{background:rgba(255,255,255,0.08);}
+
+/* ROI */
+.roi-section{background:var(--cream-dark);}
+.roi-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-l);padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.roi-inputs label{display:block;font-size:13px;font-weight:600;margin-bottom:8px;}
+.roi-input-row{margin-bottom:22px;}
+.roi-input-row input[type=range]{width:100%;}
+.roi-input-readout{display:flex;justify-content:space-between;font-size:14px;color:var(--ink-soft);margin-top:4px;}
+.roi-input-readout strong{color:var(--ink);font-weight:600;}
+.roi-results{background:var(--green-900);color:var(--white);border-radius:var(--radius-m);padding:24px;display:flex;flex-direction:column;justify-content:center;}
+.roi-results .roi-lbl{font-size:13px;color:#B9D4C5;margin-bottom:4px;}
+.roi-results .roi-num{font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;color:var(--gold);margin-bottom:16px;}
+.roi-results .roi-sub{font-size:13px;color:#C9D9CE;line-height:1.6;}
+.roi-divider{border-top:1px solid rgba(255,255,255,0.15);margin:14px 0;}
+
+/* REVIEWS */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.review-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-l);padding:24px;}
+.review-stars{display:flex;gap:3px;margin-bottom:14px;}
+.review-stars svg{width:16px;height:16px;}
+.review-text{font-size:15px;color:var(--ink);margin-bottom:18px;line-height:1.6;}
+.review-author{display:flex;align-items:center;gap:10px;}
+.review-avatar{width:36px;height:36px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--green-800);flex-shrink:0;}
+.review-author-name{font-size:14px;font-weight:600;}
+.review-author-biz{font-size:12px;color:var(--ink-soft);}
+
+/* COMPARISON */
+.compare-table-wrap{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-l);overflow:hidden;}
+.compare-row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;border-bottom:1px solid var(--line);}
+.compare-row:last-child{border-bottom:none;}
+.compare-row.header{background:var(--cream-dark);font-weight:600;font-size:13px;}
+.compare-cell{padding:16px 18px;font-size:14px;display:flex;align-items:center;}
+.compare-cell.label{color:var(--ink-soft);font-weight:500;}
+.compare-cell.us{background:rgba(232,197,71,0.08);font-weight:600;color:var(--green-800);}
+.compare-cell .x-mark{color:var(--ink-soft);}
+.compare-cell .check-mark{color:var(--green-700);}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.price-card{background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius-l);padding:32px;position:relative;}
+.price-card.featured{border-color:var(--green-900);}
+.featured-badge{position:absolute;top:-12px;left:32px;background:var(--gold);color:var(--green-900);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;}
+.price-card h3{font-size:21px;font-weight:600;margin-bottom:6px;}
+.price-card .price-sub{font-size:14px;color:var(--ink-soft);margin-bottom:20px;}
+.price-amount{font-family:'Space Grotesk',sans-serif;font-size:42px;font-weight:700;display:flex;align-items:baseline;gap:6px;margin-bottom:4px;}
+.price-amount .per{font-size:15px;font-weight:500;color:var(--ink-soft);}
+.price-trial{font-size:13px;color:var(--green-700);font-weight:600;margin-bottom:24px;}
+.price-features{margin-bottom:28px;}
+.price-features li{display:flex;gap:10px;align-items:flex-start;font-size:15px;margin-bottom:12px;list-style:none;}
+.price-features li i{color:var(--green-700);font-size:18px;margin-top:1px;flex-shrink:0;}
+.price-cta{width:100%;padding:14px;border-radius:var(--radius-s);font-size:15px;font-weight:600;cursor:pointer;border:none;}
+.price-card:not(.featured) .price-cta{background:var(--cream-dark);color:var(--ink);}
+.price-card:not(.featured) .price-cta:hover{background:var(--line);}
+.price-card.featured .price-cta{background:var(--green-900);color:var(--white);}
+.price-card.featured .price-cta:hover{background:var(--green-800);}
+
+/* DATA/PRIVACY BLOCK */
+.privacy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.privacy-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-l);padding:24px;}
+.privacy-icon{width:40px;height:40px;border-radius:10px;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.privacy-card h3{font-size:16px;font-weight:600;margin-bottom:8px;}
+.privacy-card p{font-size:14px;color:var(--ink-soft);line-height:1.6;}
+
+/* URGENCY */
+.urgency-section{background:var(--green-900);color:var(--white);}
+.urgency-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.urgency-stat-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:var(--radius-l);padding:24px;}
+.urgency-stat-card .num{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:var(--gold);margin-bottom:8px;}
+.urgency-stat-card .desc{font-size:14px;color:#D8E3DB;line-height:1.55;}
+
+/* EXIT INTENT BANNER */
+.exit-banner{background:var(--cream-dark);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0;}
+.exit-banner-inner{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.exit-banner-text h3{font-size:18px;font-weight:600;margin-bottom:4px;}
+.exit-banner-text p{font-size:14px;color:var(--ink-soft);}
+.exit-banner-form{display:flex;gap:10px;flex:1;min-width:280px;}
+.exit-banner-form input[type=email]{flex:1;padding:11px 14px;border:1px solid var(--line);border-radius:var(--radius-s);font-size:14px;font-family:'Inter',sans-serif;background:var(--white);}
+.exit-banner-form input:focus{outline:2px solid var(--green-700);border-color:var(--green-700);}
+.exit-banner-confirm{font-size:13px;color:var(--green-700);font-weight:600;margin-top:8px;display:none;}
+
+/* SIGNUP FLOW */
+.signup-section{background:var(--cream-dark);}
+.flow-shell{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-l);max-width:680px;margin:0 auto;overflow:hidden;}
+.flow-progress{display:flex;border-bottom:1px solid var(--line);}
+.flow-progress-step{flex:1;padding:14px 12px;font-size:12px;font-weight:600;color:var(--ink-soft);border-bottom:3px solid var(--line);display:flex;align-items:center;gap:6px;}
+.flow-progress-step.active{color:var(--green-900);border-bottom-color:var(--green-900);}
+.flow-progress-step.done{color:var(--green-700);}
+.flow-progress-step .step-circle{width:20px;height:20px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.flow-progress-step.active .step-circle{background:var(--green-900);color:var(--white);}
+.flow-progress-step.done .step-circle{background:var(--green-700);color:var(--white);}
+.flow-body{padding:36px;}
+.flow-body h3{font-size:21px;font-weight:600;margin-bottom:6px;}
+.flow-body .flow-sub{font-size:14px;color:var(--ink-soft);margin-bottom:26px;}
+.form-row{margin-bottom:18px;}
+.form-row label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+.form-row .hint{font-size:12px;color:var(--ink-soft);margin-top:5px;}
+.form-row input[type=text],.form-row input[type=email],.form-row input[type=url]{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:var(--radius-s);font-size:15px;font-family:'Inter',sans-serif;background:var(--cream);}
+.form-row input:focus{outline:2px solid var(--green-700);border-color:var(--green-700);}
+.color-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.color-swatch{width:32px;height:32px;border-radius:8px;border:2px solid transparent;cursor:pointer;flex-shrink:0;}
+.color-swatch.selected{box-shadow:0 0 0 2px var(--white),0 0 0 3.5px var(--ink);}
+.hex-input-row{display:flex;gap:10px;align-items:center;margin-top:8px;}
+.hex-input-row input{width:130px;font-family:'Courier New',monospace;font-size:14px;}
+.hex-swatch-preview{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);flex-shrink:0;}
+.color-pair-preview{display:inline-flex;align-items:center;padding:10px 18px;border-radius:var(--radius-s);font-size:14px;font-weight:600;margin-top:14px;border:1px solid var(--line);}
+.pkg-pick{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px;}
+.pkg-pick-card{border:1.5px solid var(--line);border-radius:var(--radius-m);padding:18px;cursor:pointer;transition:border-color 0.15s,background 0.15s;}
+.pkg-pick-card:hover{border-color:var(--green-700);}
+.pkg-pick-card.selected{border-color:var(--green-900);background:var(--cream);}
+.pkg-pick-card h4{font-size:16px;font-weight:600;margin-bottom:4px;}
+.pkg-pick-card .pkg-price{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px;}
+.pkg-pick-card .pkg-price span{font-size:13px;font-weight:500;color:var(--ink-soft);}
+.pkg-pick-card p.desc{font-size:13px;color:var(--ink-soft);}
+.summary-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;}
+.summary-row.total{font-weight:700;font-size:16px;border-bottom:none;padding-top:16px;}
+.summary-row .lbl{color:var(--ink-soft);}
+.fake-card-input{border:1px solid var(--line);border-radius:var(--radius-s);padding:12px 14px;display:flex;align-items:center;gap:10px;background:var(--cream);font-size:14px;color:var(--ink-soft);margin-bottom:18px;}
+.form-actions{display:flex;justify-content:space-between;margin-top:32px;gap:12px;}
+.form-actions .spacer{flex:1;}
+.success-box{text-align:center;padding:20px 0;}
+.success-icon{width:56px;height:56px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.success-icon i{font-size:28px;color:var(--green-700);}
+.code-preview{background:#1E1E1E;border-radius:var(--radius-s);padding:14px 16px;font-family:'Courier New',monospace;font-size:13px;color:#7EC8A4;text-align:left;overflow-x:auto;margin:18px 0;word-break:break-all;}
+
+/* FAQ */
+.faq-list{max-width:760px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-question{width:100%;text-align:left;background:none;border:none;padding:20px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:16px;font-weight:600;color:var(--ink);font-family:inherit;gap:12px;}
+.faq-chev{transition:transform 0.2s;flex-shrink:0;color:var(--ink-soft);}
+.faq-item.open .faq-chev{transform:rotate(180deg);}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+.faq-item.open .faq-answer{max-height:500px;}
+.faq-answer-inner{padding:0 0 20px;font-size:15px;color:var(--ink-soft);line-height:1.65;}
+
+/* STANDALONE PAGES */
+.page-section{display:none;}
+.page-section.active{display:block;}
+.page-hero{background:var(--green-900);color:var(--white);padding:56px 0 48px;}
+.page-hero .eyebrow{color:var(--gold);}
+.page-hero h1{color:var(--white);font-size:34px;margin:14px 0 8px;}
+.page-hero p{color:#C9D9CE;font-size:16px;max-width:560px;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-soft);margin-bottom:18px;cursor:pointer;}
+.back-link:hover{color:var(--ink);}
+.install-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-l);padding:28px;margin-bottom:24px;}
+.install-card h3{font-size:18px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.install-card .tag{font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;background:var(--cream-dark);color:var(--green-800);padding:3px 10px;border-radius:20px;}
+.install-card p.desc{font-size:14px;color:var(--ink-soft);margin-bottom:16px;}
+.confirmation-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+.detail-box{background:var(--cream-dark);border-radius:var(--radius-m);padding:16px;}
+.detail-box .lbl{font-size:12px;color:var(--ink-soft);margin-bottom:4px;}
+.detail-box .val{font-size:15px;font-weight:600;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.contact-info-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:24px;}
+.contact-info-icon{width:40px;height:40px;background:var(--cream-dark);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.contact-info-item h4{font-size:14px;font-weight:600;margin-bottom:3px;}
+.contact-info-item p{font-size:14px;color:var(--ink-soft);}
+.contact-form-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-l);padding:32px;}
+.contact-form-card h3{font-size:20px;font-weight:600;margin-bottom:20px;}
+.contact-form-card textarea{width:100%;min-height:120px;resize:vertical;padding:11px 14px;border:1px solid var(--line);border-radius:var(--radius-s);font-size:15px;font-family:'Inter',sans-serif;background:var(--cream);margin-bottom:16px;}
+.contact-form-card textarea:focus{outline:2px solid var(--green-700);border-color:var(--green-700);}
+.contact-confirm{background:var(--cream-dark);border-radius:var(--radius-m);padding:16px;font-size:14px;color:var(--green-800);font-weight:600;display:none;margin-top:12px;}
+
+/* FOOTER */
+footer{padding:48px 0;border-top:1px solid var(--line);}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.footer-links{display:flex;gap:24px;font-size:14px;color:var(--ink-soft);}
+.footer-links a{cursor:pointer;}
+.footer-links a:hover{color:var(--ink);}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .hero-grid,.demo-grid,.roi-card,.contact-grid,.pricing-grid,.steps,.reviews-grid,.privacy-grid,.urgency-grid,.widget-previews-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:34px;}
+  .compare-row{grid-template-columns:1.2fr 1fr 1fr 1fr;font-size:12px;}
+  .compare-cell{padding:12px 10px;}
+  .branch-panel{grid-template-columns:1fr;}
+  .pkg-pick{grid-template-columns:1fr;}
+  .flow-progress-step{font-size:11px;padding:12px 8px;}
+}
+</style>
+</head>
+<body>
+
+<div id="page-home" class="page-section active">
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="showPage('home')" style="cursor:pointer;">
+      <svg class="logo-mark" viewBox="0 0 28 28" fill="none">
+        <path d="M14 2L25 6V13C25 20 20 25 14 27C8 25 3 20 3 13V6L14 2Z" fill="#0F3D2E"/>
+        <path d="M14 8L16.5 13L21.5 13.7L18 17L18.9 22L14 19.6L9.1 22L10 17L6.5 13.7L11.5 13L14 8Z" fill="#E8C547"/>
+      </svg>
+      ReviewShield
+    </div>
+    <div class="nav-links">
+      <a href="#werking" data-i18n="nav.how">Hoe het werkt</a>
+      <a href="#demo" data-i18n="nav.demo">Demo</a>
+      <a href="#pakketten" data-i18n="nav.pricing">Pakketten</a>
+      <a onclick="showPage('faq')" data-i18n="nav.faq">FAQ</a>
+      <a onclick="showPage('contact')" data-i18n="nav.contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="lang-nl" onclick="setLang('nl')">NL</button>
+        <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="nav-cta" onclick="goToSignup()" data-i18n="nav.cta">Aanmelden</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">Voor lokale ondernemers</span></div>
+      <h1 data-i18n-html="hero.h1">Laat tevreden klanten spreken. Houd <span class="hl">klachten<svg viewBox="0 0 200 14"><path d="M2 10C40 2 160 2 198 10" stroke="#E8C547" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span> privé.</h1>
+      <p class="lede" data-i18n="hero.lede">ReviewShield vraagt elke klant om een score. Bij 4 of 5 sterren gaat hij direct naar Google. Bij een lagere score komt het rechtstreeks bij jou terecht — niet online.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="goToSignup()"><span data-i18n="hero.cta">Start gratis proefperiode</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button class="btn-secondary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16l13-8z"/></svg> <span data-i18n="hero.demo">Bekijk demo</span></button>
+      </div>
+      <div class="hero-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> <span data-i18n="hero.note">14 dagen gratis, geen verplichtingen</span></div>
+    </div>
+    <div class="phone-frame">
+      <div class="browser-bar">
+        <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+        <div class="browser-url" data-i18n="hero.mockurl">vandijkloodgieter.nl/bedankt</div>
+      </div>
+      <div class="site-mock">
+        <div class="site-mock-header" data-i18n="hero.mockbiz">Loodgietersbedrijf Van Dijk</div>
+        <div class="site-mock-title" data-i18n="hero.mocktitle">Bedankt voor uw aanvraag</div>
+        <div class="site-mock-line w90"></div><div class="site-mock-line w70"></div><div class="site-mock-line w50"></div>
+        <div id="hero-widget-mount" style="margin-top:20px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="wrap">
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/><path d="M9.5 12l2 2 3.5-4"/></svg> <span data-i18n="trust.1">Geen technische kennis nodig</span></span>
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L4 14h6l-1 7 9-11h-6l1-7z"/></svg> <span data-i18n="trust.2">Live binnen 1 minuut</span></span>
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg> <span data-i18n="trust.3">Geen opzegtermijn</span></span>
+  </div>
+</div>
+
+<section id="werking">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="how.eyebrow">Hoe het werkt</span></div>
+      <h2 data-i18n="how.h2">Drie stappen, daarna draait het zichzelf</h2>
+      <p data-i18n="how.sub">Eén regel code op de juiste pagina, en de rest gaat automatisch.</p>
+    </div>
+    <div class="steps">
+      <div class="step-card"><div class="step-num" data-i18n="how.step1.num">STAP 1</div><h3 data-i18n="how.step1.h">Plak de code</h3><p data-i18n="how.step1.p">Je plaatst één regel op de pagina waar tevreden klanten komen — zoals je bedankpagina na een afspraak of bestelling.</p></div>
+      <div class="step-card"><div class="step-num" data-i18n="how.step2.num">STAP 2</div><h3 data-i18n="how.step2.h">Klant geeft score</h3><p data-i18n="how.step2.p">De widget vraagt om een beoordeling van 1 tot 5 sterren, in jouw eigen kleur en stijl.</p></div>
+      <div class="step-card"><div class="step-num" data-i18n="how.step3.num">STAP 3</div><h3 data-i18n="how.step3.h">Juiste route, automatisch</h3><p data-i18n="how.step3.p">4 of 5 sterren: direct naar Google. Lager: feedback komt privé bij jou, geen review online.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="branches" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="branches.eyebrow">Voor elke sector met klantcontact</span></div>
+      <h2 data-i18n="branches.h2">Werkt voor vrijwel elk bedrijf</h2>
+      <p data-i18n="branches.sub">Of je klanten nu komen voor een afspraak, een offerte, een bestelling of een klus — het principe werkt overal hetzelfde.</p>
+    </div>
+    <div class="branch-tabs" id="branch-tabs"></div>
+    <div class="branch-panel" id="branch-panel"></div>
+  </div>
+</section>
+
+<section id="widget-examples">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="examples.eyebrow">Zo ziet het eruit</span></div>
+      <h2 data-i18n="examples.h2">In jouw huisstijl, op elke website</h2>
+      <p data-i18n="examples.sub">De widget past zich aan jouw kleuren aan. Hieronder drie voorbeelden in verschillende huisstijlen.</p>
+    </div>
+    <div class="widget-previews-grid" id="widget-previews-grid"></div>
+  </div>
+</section>
+
+<section id="demo" class="demo-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="demo.eyebrow">Live demo</span></div>
+      <h2 data-i18n="demo.h2">Probeer het zelf</h2>
+      <p data-i18n="demo.sub">Dit is exact hoe de widget op de website van je klant verschijnt. Geen echte review wordt hierdoor beïnvloed.</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-context">
+        <h4 data-i18n="demo.context.label">VOORBEELDPAGINA</h4>
+        <p data-i18n="demo.context.p">Stel je voor: een klant van Kapsalon Anna heeft net een knipbeurt gehad en komt op de bedankpagina terecht.</p>
+        <div class="fake-page">
+          <div class="site-mock-header">Kapsalon Anna</div>
+          <div class="site-mock-title" data-i18n="demo.context.thanks" style="margin-bottom:14px;">Bedankt voor uw bezoek</div>
+          <div class="site-mock-line w90"></div><div class="site-mock-line w50"></div>
+        </div>
+      </div>
+      <div class="demo-stage-wrap" id="rs-demo-stage"></div>
+    </div>
+    <div class="demo-reset"><button id="rs-demo-reset"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></svg> <span data-i18n="demo.reset">Demo opnieuw starten</span></button></div>
+  </div>
+</section>
+
+<section id="roi" class="roi-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="roi.eyebrow">Reken het zelf uit</span></div>
+      <h2 data-i18n="roi.h2">Wat levert een betere score je op</h2>
+      <p data-i18n="roi.sub">Vul je huidige situatie in en zie het effect van meer positieve reviews op je omzet.</p>
+    </div>
+    <div class="roi-card">
+      <div class="roi-inputs">
+        <div class="roi-input-row">
+          <label for="roi-klanten" data-i18n="roi.klanten.lbl">Nieuwe aanvragen per maand</label>
+          <input type="range" id="roi-klanten" min="5" max="200" value="40" step="5">
+          <div class="roi-input-readout"><span data-i18n="roi.klanten.unit">Aantal</span><strong id="roi-klanten-out">40</strong></div>
+        </div>
+        <div class="roi-input-row">
+          <label for="roi-waarde" data-i18n="roi.waarde.lbl">Gemiddelde waarde per klant (€)</label>
+          <input type="range" id="roi-waarde" min="20" max="2000" value="150" step="10">
+          <div class="roi-input-readout"><span data-i18n="roi.waarde.unit">Bedrag</span><strong id="roi-waarde-out">€150</strong></div>
+        </div>
+        <div class="roi-input-row">
+          <label for="roi-score" data-i18n="roi.score.lbl">Huidige Google-score</label>
+          <input type="range" id="roi-score" min="3.5" max="4.6" value="4.0" step="0.1">
+          <div class="roi-input-readout"><span data-i18n="roi.score.unit">Score</span><strong id="roi-score-out">4,0</strong></div>
+        </div>
+      </div>
+      <div class="roi-results">
+        <div class="roi-lbl" data-i18n="roi.result.lbl">Geschatte extra omzet per maand</div>
+        <div class="roi-num" id="roi-extra-omzet">€0</div>
+        <div class="roi-divider"></div>
+        <div class="roi-sub" id="roi-explainer">Onderzoek naar lokale zoekresultaten laat zien dat een hogere Google-score samenhangt met meer aanvragen. Dit is een indicatie, geen garantie.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="testimonials.eyebrow">Ervaringen</span></div>
+      <h2 data-i18n="testimonials.h2">Ondernemers die hun score al verbeterden</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="review-stars" data-stars="5"></div><p class="review-text" data-i18n="testimonials.1.text">Binnen twee maanden gingen we van 4,1 naar 4,6 op Google. Klachten komen nu bij mij terecht in plaats van online.</p><div class="review-author"><div class="review-avatar">MD</div><div><div class="review-author-name">Mark de Vries</div><div class="review-author-biz" data-i18n="testimonials.1.biz">Loodgietersbedrijf De Vries</div></div></div></div>
+      <div class="review-card"><div class="review-stars" data-stars="5"></div><p class="review-text" data-i18n="testimonials.2.text">Installatie kostte me letterlijk twee minuten. Geen technische kennis nodig, en het werkt direct zoals beloofd.</p><div class="review-author"><div class="review-avatar">AK</div><div><div class="review-author-name">Anna Kuiper</div><div class="review-author-biz" data-i18n="testimonials.2.biz">Kapsalon Anna</div></div></div></div>
+      <div class="review-card"><div class="review-stars" data-stars="5"></div><p class="review-text" data-i18n="testimonials.3.text">We krijgen nu veel vaker een seintje als een klant ontevreden is, vóórdat het een publieke review wordt.</p><div class="review-author"><div class="review-avatar">RB</div><div><div class="review-author-name">Rik Bakker</div><div class="review-author-biz" data-i18n="testimonials.3.biz">Verhuisbedrijf Bakker &amp; Zn</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy-data">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="privacy.eyebrow">Gegevens &amp; verwerking</span></div>
+      <h2 data-i18n="privacy.h2">Wat er met gegevens gebeurt</h2>
+      <p data-i18n="privacy.sub">Voor zowel jou als ondernemer als je eindklanten is duidelijkheid over dataverwerking belangrijk. Hier is hoe het werkt.</p>
+    </div>
+    <div class="privacy-grid">
+      <div class="privacy-card">
+        <div class="privacy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/></svg></div>
+        <h3 data-i18n="privacy.1.h">Feedbackdata</h3>
+        <p data-i18n="privacy.1.p">Ingevulde klachten (1-3 sterren) worden direct en uitsluitend doorgestuurd naar jou als ondernemer via e-mail. Ze worden niet opgeslagen op onze servers en niet gedeeld met derden.</p>
+      </div>
+      <div class="privacy-card">
+        <div class="privacy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3 data-i18n="privacy.2.h">Anonimiteit eindklant</h3>
+        <p data-i18n="privacy.2.p">De widget vraagt geen naam of e-mailadres van je eindklant. Alleen de gegeven sterrenscore en de ingevulde tekst worden doorgestuurd. De klant blijft anoniem als hij dat wil.</p>
+      </div>
+      <div class="privacy-card">
+        <div class="privacy-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg></div>
+        <h3 data-i18n="privacy.3.h">Jouw bedrijfsgegevens</h3>
+        <p data-i18n="privacy.3.p">Je naam, e-mailadres en betaalgegevens worden beheerd via Stripe, een gecertificeerde betaalverwerker. Wij hebben nooit toegang tot je betaalkaartgegevens.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vergelijking" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="compare.eyebrow">Eerlijke vergelijking</span></div>
+      <h2 data-i18n="compare.h2">Waarom dit goedkoper en simpeler is</h2>
+      <p data-i18n="compare.sub">Reputatiebeheer-tools bestaan al langer — meestal met een prijs en complexiteit gericht op grote bedrijven.</p>
+    </div>
+    <div class="compare-table-wrap">
+      <div class="compare-row header">
+        <div class="compare-cell label">&nbsp;</div>
+        <div class="compare-cell us">ReviewShield</div>
+        <div class="compare-cell" data-i18n="compare.col2">Grote reputatie-tools</div>
+        <div class="compare-cell" data-i18n="compare.col3">Zelf nabellen</div>
+      </div>
+      <div class="compare-row"><div class="compare-cell label" data-i18n="compare.row1.lbl">Prijs per maand</div><div class="compare-cell us">€19,99 – €34,49</div><div class="compare-cell">€75 – €400+</div><div class="compare-cell" data-i18n="compare.row1.c3">Gratis, maar tijd</div></div>
+      <div class="compare-row"><div class="compare-cell label" data-i18n="compare.row2.lbl">Installatietijd</div><div class="compare-cell us" data-i18n="compare.row2.us">±1 minuut</div><div class="compare-cell" data-i18n="compare.row2.c2">Implementatietraject</div><div class="compare-cell" data-i18n="compare.row2.c3">Direct, elke keer</div></div>
+      <div class="compare-row"><div class="compare-cell label" data-i18n="compare.row3.lbl">Negatieve feedback opvangen</div><div class="compare-cell us"><span class="check-mark">&#10003;</span> <span data-i18n="compare.auto">Automatisch</span></div><div class="compare-cell"><span class="check-mark">&#10003;</span></div><div class="compare-cell"><span class="x-mark">&#10005;</span> <span data-i18n="compare.manual">Alleen als je het merkt</span></div></div>
+      <div class="compare-row"><div class="compare-cell label" data-i18n="compare.row4.lbl">Geschikt voor eenmanszaak</div><div class="compare-cell us"><span class="check-mark">&#10003;</span></div><div class="compare-cell"><span class="x-mark">&#10005;</span> <span data-i18n="compare.tooexp">Vaak te duur</span></div><div class="compare-cell"><span class="check-mark">&#10003;</span></div></div>
+      <div class="compare-row"><div class="compare-cell label" data-i18n="compare.row5.lbl">Opzegtermijn</div><div class="compare-cell us" data-i18n="compare.none">Geen</div><div class="compare-cell" data-i18n="compare.yearly">Vaak jaarcontract</div><div class="compare-cell">N.v.t.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pakketten">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="pricing.eyebrow">Pakketten</span></div>
+      <h2 data-i18n="pricing.h2">Simpele prijzen, geen verrassingen</h2>
+      <p data-i18n="pricing.sub">Begin met één platform, of dek alles in één keer af. Maandelijks opzegbaar.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3 data-i18n="pricing.lokaal.name">Lokaal</h3>
+        <p class="price-sub" data-i18n="pricing.lokaal.sub">Voor wie net begint met reviewbeheer</p>
+        <div class="price-amount">€19,99<span class="per">/ <span data-i18n="pricing.permonth">maand</span></span></div>
+        <div class="price-trial" data-i18n="pricing.trial">14 dagen gratis proberen</div>
+        <ul class="price-features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> <span data-i18n="pricing.lokaal.f1">Widget gekoppeld aan 1 platform (bijv. Google)</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> <span data-i18n="pricing.lokaal.f2">Kant-en-klare WhatsApp- en mailteksten</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> <span data-i18n="pricing.lokaal.f3">Basiskleur instelbaar</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> <span data-i18n="pricing.lokaal.f4">Installatie binnen 1 minuut</span></li>
+        </ul>
+        <button class="price-cta" onclick="goToSignup('lokaal')" data-i18n="pricing.lokaal.cta">Kies Lokaal</button>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-badge" data-i18n="pricing.popular">Meest gekozen</div>
+        <h3 data-i18n="pricing.pro.name">Professional</h3>
+        <p class="price-sub" data-i18n="pricing.pro.sub">Voor wie overal aanwezig wil zijn</p>
+        <div class="price-amount">€34,49<span class="per">/ <span data-i18n="pricing.permonth">maand</span></span></div>
+        <div class="price-trial" data-i18n="pricing.trial">14 dagen gratis proberen</div>
+        <ul class="price-features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> <span data-i18n="pricing.pro.f1">Onbeperkt platforms (Google, Trustpilot, TripAdvisor)</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> <span data-i18n="pricing.pro.f2">Volledige huisstijl: kleur, logo, lettertype</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> <span data-i18n="pricing.pro.f3">Kant-en-klare WhatsApp- en mailteksten</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> <span data-i18n="pricing.pro.f4">Installatie binnen 1 minuut</span></li>
+        </ul>
+        <button class="price-cta" onclick="goToSignup('pro')" data-i18n="pricing.pro.cta">Kies Professional</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="urgentie" class="urgency-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span><span data-i18n="urgency.eyebrow">Waarom nu</span></div>
+      <h2 data-i18n="urgency.h2">Elke maand wachten kost je iets</h2>
+      <p style="color:#C9D9CE;" data-i18n="urgency.sub">Onbeantwoorde negatieve reviews en gemiste positieve reviews stapelen zich op, ook als je er niet naar kijkt.</p>
+    </div>
+    <div class="urgency-grid">
+      <div class="urgency-stat-card"><div class="num">97%</div><div class="desc" data-i18n="urgency.stat1">van de consumenten leest online reviews van een lokaal bedrijf voordat ze langsgaan of contact opnemen.</div></div>
+      <div class="urgency-stat-card"><div class="num">68%</div><div class="desc" data-i18n="urgency.stat2">kiest alleen een bedrijf met vier sterren of meer. Onder de 4 sterren val je voor steeds meer potentiële klanten af.</div></div>
+      <div class="urgency-stat-card"><div class="num">14 <span data-i18n="urgency.days">dagen</span></div><div class="desc" data-i18n="urgency.stat3">gratis om het zelf te ervaren. Hoe eerder je begint, hoe eerder tevreden klanten zichtbaar worden.</div></div>
+    </div>
+    <p style="font-size:12px;color:#9FB5A8;margin-top:18px;" data-i18n="urgency.source">Bronnen: Capital One Shopping Research (2025-2026), BrightLocal Local Consumer Review Survey (2026)</p>
+  </div>
+</section>
+
+<section id="exit-intent">
+  <div class="exit-banner">
+    <div class="wrap exit-banner-inner">
+      <div class="exit-banner-text">
+        <h3 data-i18n="exit.h">Nog niet klaar voor een abonnement?</h3>
+        <p data-i18n="exit.p">Laat je e-mailadres achter en ontvang een gratis gids: 5 manieren om meer reviews te krijgen.</p>
+      </div>
+      <div>
+        <div class="exit-banner-form">
+          <input type="email" id="exit-email" placeholder="naam@bedrijf.nl">
+          <button class="btn-primary" id="exit-submit" data-i18n="exit.btn">Stuur mij de gids</button>
+        </div>
+        <div class="exit-banner-confirm" id="exit-confirm" data-i18n="exit.confirm">Bedankt! De gids is onderweg naar je inbox.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="aanmelden" class="signup-section">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 40px;text-align:center;max-width:100%;">
+      <div class="eyebrow" style="justify-content:center;"><span class="dot"></span><span data-i18n="signup.eyebrow">Aanmelden</span></div>
+      <h2 data-i18n="signup.h2">Zo werkt de aanmelding</h2>
+      <p style="margin:0 auto;" data-i18n="signup.sub">Een paar korte stappen. Aan het einde heb je je eigen widget-code in je mailbox.</p>
+    </div>
+    <div class="flow-shell">
+      <div class="flow-progress" id="flow-progress"></div>
+      <div class="flow-body" id="flow-body"></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /page-home -->
+
+<!-- BEVESTIGINGSPAGINA -->
+<div id="page-confirmation" class="page-section">
+  <div class="page-hero"><div class="wrap"><div class="eyebrow"><span class="dot"></span><span data-i18n="conf.eyebrow">Aanmelding voltooid</span></div><h1 id="conf-heading" data-i18n="conf.h1">Je widget staat klaar</h1><p id="conf-sub" data-i18n="conf.sub">We hebben alles ook naar je mail gestuurd.</p></div></div>
+  <section><div class="wrap">
+    <a class="back-link" onclick="showPage('home')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> <span data-i18n="back">Terug naar de homepage</span></a>
+    <div id="conf-summary" class="confirmation-detail-grid"></div>
+    <div class="install-card"><h3><span class="tag" data-i18n="conf.opt1.tag">Optie 1</span> <span data-i18n="conf.opt1.h">Als pop-up</span></h3><p class="desc" data-i18n="conf.opt1.p">Plaats deze code op de pagina waar tevreden klanten terechtkomen. De widget verschijnt automatisch als pop-up.</p><div class="code-preview" id="code-popup"></div></div>
+    <div class="install-card"><h3><span class="tag" data-i18n="conf.opt2.tag">Optie 2</span> <span data-i18n="conf.opt2.h">Als vast blok</span></h3><p class="desc" data-i18n="conf.opt2.p">Dit toont de widget permanent op een vaste plek in je pagina — rustiger dan een pop-up, ideaal voor een contactpagina of footer.</p><div class="code-preview" id="code-embed"></div></div>
+    <div style="display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="showPage('howitworks')" data-i18n="conf.howbtn">Hoe werkt installeren</button>
+      <button class="btn-secondary" onclick="showPage('faq')" data-i18n="conf.faqbtn">Veelgestelde vragen</button>
+      <button class="btn-secondary" id="conf-restart" data-i18n="conf.restart">Nieuwe aanmelding simuleren</button>
+    </div>
+  </div></section>
+</div>
+
+<!-- HOE WERKT HET PAGINA -->
+<div id="page-howitworks" class="page-section">
+  <div class="page-hero"><div class="wrap"><div class="eyebrow"><span class="dot"></span><span data-i18n="howpage.eyebrow">Documentatie</span></div><h1 data-i18n="howpage.h1">Hoe werkt het &amp; installeren</h1><p data-i18n="howpage.sub">Alles wat je nodig hebt om de widget live te zetten op je eigen website.</p></div></div>
+  <section><div class="wrap">
+    <a class="back-link" onclick="showPage('home')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> <span data-i18n="back">Terug naar de homepage</span></a>
+    <div class="install-card"><h3 data-i18n="howpage.s1.h">1. Kies waar de widget komt</h3><p class="desc" data-i18n="howpage.s1.p">De widget werkt het best op een pagina die mensen zien ná een positieve ervaring: een bedankpagina na een bestelling, een bevestigingspagina na een afspraak, of een mail na afronding van een klus.</p></div>
+    <div class="install-card"><h3 data-i18n="howpage.s2.h">2. Plak de code in je website</h3><p class="desc" data-i18n="howpage.s2.p">Open de pagina-editor van je website (WordPress, Shopify, Wix, of een eigen HTML-bestand) en plak de code vlak vóór de afsluitende &lt;/body&gt;-tag, of in een tekst/HTML-blok op de gewenste plek.</p></div>
+    <div class="install-card"><h3 data-i18n="howpage.s3.h">3. Test de widget zelf</h3><p class="desc" data-i18n="howpage.s3.p">Open je pagina in een incognitovenster en klik door de sterren. Bij 4 of 5 sterren word je doorgestuurd naar je reviewlink; bij een lagere score zie je het interne feedbackformulier.</p></div>
+    <div class="install-card"><h3 data-i18n="howpage.s4.h">4. Pop-up versus vast blok</h3><p class="desc" data-i18n="howpage.s4.p">De pop-up-code laat de widget automatisch verschijnen na een paar seconden op de pagina. Het vaste blok toont de widget permanent op een plek — handig als je hem zichtbaar wilt houden in plaats van als overlay.</p></div>
+    <div class="install-card"><h3 data-i18n="howpage.s5.h">5. Wat als een klant de pop-up wegklikt?</h3><p class="desc" data-i18n="howpage.s5.p">Geen probleem. Wie de pop-up wegklikt, heeft simpelweg geen beoordeling gegeven — dat is altijd zijn keuze. De widget grijpt nooit in als iemand niet wil meedoen. Klanten zonder smartphone hoeven niets te doen; de widget is optioneel en storend hinderlijk is hij nooit.</p></div>
+  </div></section>
+</div>
+
+<!-- FAQ PAGINA -->
+<div id="page-faq" class="page-section">
+  <div class="page-hero"><div class="wrap"><div class="eyebrow"><span class="dot"></span><span data-i18n="faqpage.eyebrow">Support</span></div><h1 data-i18n="faqpage.h1">Veelgestelde vragen</h1><p data-i18n="faqpage.sub">Staat je vraag er niet bij? Stuur een mail naar support@reviewshield.nl.</p></div></div>
+  <section><div class="wrap">
+    <a class="back-link" onclick="showPage('home')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> <span data-i18n="back">Terug naar de homepage</span></a>
+    <div class="faq-list" id="faq-list"></div>
+  </div></section>
+</div>
+
+<!-- CONTACT PAGINA -->
+<div id="page-contact" class="page-section">
+  <div class="page-hero"><div class="wrap"><div class="eyebrow"><span class="dot"></span><span data-i18n="contactpage.eyebrow">Contact</span></div><h1 data-i18n="contactpage.h1">Neem contact op</h1><p data-i18n="contactpage.sub">Heb je een vraag, wil je iets doorgeven, of loop je ergens tegenaan? We reageren binnen één werkdag.</p></div></div>
+  <section><div class="wrap contact-grid">
+    <div>
+      <a class="back-link" onclick="showPage('home')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> <span data-i18n="back">Terug naar de homepage</span></a>
+      <div style="margin-top:24px;">
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></div>
+          <div><h4 data-i18n="contact.email.h">E-mail</h4><p>support@reviewshield.nl</p></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><h4 data-i18n="contact.response.h">Reactietijd</h4><p data-i18n="contact.response.p">We reageren binnen één werkdag. Vragen over installatie zijn vaak dezelfde dag opgelost.</p></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><h4 data-i18n="contact.opzeg.h">Opzeggen</h4><p data-i18n="contact.opzeg.p">Opzeggen doe je via een simpele mail naar opzeggen@reviewshield.nl. Geen gedoe, geen formulieren.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-card">
+      <h3 data-i18n="contact.form.h">Stuur een bericht</h3>
+      <div class="form-row"><label for="c-naam" data-i18n="contact.form.name">Naam</label><input type="text" id="c-naam" placeholder="Jan de Vries"></div>
+      <div class="form-row"><label for="c-email" data-i18n="contact.form.email">E-mailadres</label><input type="email" id="c-email" placeholder="jan@bedrijf.nl"></div>
+      <div class="form-row"><label for="c-message" data-i18n="contact.form.msg">Bericht</label><textarea id="c-message" placeholder="Hoe kunnen we je helpen?"></textarea></div>
+      <button class="btn-primary" id="contact-submit" style="width:100%;justify-content:center;" data-i18n="contact.form.btn">Verstuur bericht</button>
+      <div class="contact-confirm" id="contact-confirm" data-i18n="contact.form.confirm">Bedankt! Je bericht is ontvangen. We reageren binnen één werkdag.</div>
+    </div>
+  </div></section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="logo" style="font-size:16px;" onclick="showPage('home')" style="cursor:pointer;">
+      <svg class="logo-mark" style="width:20px;height:20px;" viewBox="0 0 28 28" fill="none"><path d="M14 2L25 6V13C25 20 20 25 14 27C8 25 3 20 3 13V6L14 2Z" fill="#0F3D2E"/><path d="M14 8L16.5 13L21.5 13.7L18 17L18.9 22L14 19.6L9.1 22L10 17L6.5 13.7L11.5 13L14 8Z" fill="#E8C547"/></svg>
+      ReviewShield
+    </div>
+    <div class="footer-links">
+      <a onclick="showPage('faq')" data-i18n="nav.faq">FAQ</a>
+      <a onclick="showPage('howitworks')" data-i18n="nav.how">Hoe het werkt</a>
+      <a onclick="showPage('contact')" data-i18n="nav.contact">Contact</a>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);" data-i18n="footer.copy">© 2026 ReviewShield · Prototype</p>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// TRANSLATIONS — NL + EN
+// ============================================================
+const T = {
+  nl: {
+    'nav.how':'Hoe het werkt','nav.demo':'Demo','nav.pricing':'Pakketten',
+    'nav.faq':'FAQ','nav.contact':'Contact','nav.cta':'Aanmelden',
+    'hero.eyebrow':'Voor lokale ondernemers',
+    'hero.h1':'Laat tevreden klanten spreken. Houd <span class="hl">klachten<svg viewBox="0 0 200 14"><path d="M2 10C40 2 160 2 198 10" stroke="#E8C547" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span> privé.',
+    'hero.lede':'ReviewShield vraagt elke klant om een score. Bij 4 of 5 sterren gaat hij direct naar Google. Bij een lagere score komt het rechtstreeks bij jou terecht — niet online.',
+    'hero.cta':'Start gratis proefperiode','hero.demo':'Bekijk demo',
+    'hero.note':'14 dagen gratis, geen verplichtingen',
+    'hero.mockurl':'vandijkloodgieter.nl/bedankt',
+    'hero.mockbiz':'Loodgietersbedrijf Van Dijk','hero.mocktitle':'Bedankt voor uw aanvraag',
+    'trust.1':'Geen technische kennis nodig','trust.2':'Live binnen 1 minuut','trust.3':'Geen opzegtermijn',
+    'how.eyebrow':'Hoe het werkt','how.h2':'Drie stappen, daarna draait het zichzelf',
+    'how.sub':'Eén regel code op de juiste pagina, en de rest gaat automatisch.',
+    'how.step1.num':'STAP 1','how.step1.h':'Plak de code','how.step1.p':'Je plaatst één regel op de pagina waar tevreden klanten komen — zoals je bedankpagina na een afspraak of bestelling.',
+    'how.step2.num':'STAP 2','how.step2.h':'Klant geeft score','how.step2.p':'De widget vraagt om een beoordeling van 1 tot 5 sterren, in jouw eigen kleur en stijl.',
+    'how.step3.num':'STAP 3','how.step3.h':'Juiste route, automatisch','how.step3.p':'4 of 5 sterren: direct naar Google. Lager: feedback komt privé bij jou, geen review online.',
+    'branches.eyebrow':'Voor elke sector met klantcontact','branches.h2':'Werkt voor vrijwel elk bedrijf',
+    'branches.sub':'Of je klanten nu komen voor een afspraak, een offerte, een bestelling of een klus — het principe werkt overal hetzelfde.',
+    'examples.eyebrow':'Zo ziet het eruit','examples.h2':'In jouw huisstijl, op elke website',
+    'examples.sub':'De widget past zich aan jouw kleuren aan. Hieronder drie voorbeelden in verschillende huisstijlen.',
+    'examples.preview.q':'Hoe was uw ervaring?',
+    'demo.eyebrow':'Live demo','demo.h2':'Probeer het zelf',
+    'demo.sub':'Dit is exact hoe de widget op de website van je klant verschijnt. Geen echte review wordt hierdoor beïnvloed.',
+    'demo.context.label':'VOORBEELDPAGINA','demo.context.p':'Stel je voor: een klant van Kapsalon Anna heeft net een knipbeurt gehad en komt op de bedankpagina terecht.',
+    'demo.context.thanks':'Bedankt voor uw bezoek','demo.reset':'Demo opnieuw starten',
+    'demo.widget.q':'Hoe was uw ervaring met Kapsalon Anna?',
+    'demo.widget.hint':'Klik op een aantal sterren',
+    'demo.widget.redirect.title':'Fijn om te horen!',
+    'demo.widget.redirect.sub':'U wordt nu doorgestuurd naar Google om uw review achter te laten.',
+    'demo.widget.redirect.btn':'Naar Google Reviews',
+    'demo.widget.thanks':'Bedankt voor uw review!',
+    'demo.widget.feedback.title':'We willen het graag rechtzetten',
+    'demo.widget.feedback.sub':'Uw feedback gaat direct en privé naar de ondernemer. Er verschijnt geen publieke review.',
+    'demo.widget.feedback.placeholder':'Wat kunnen we beter doen?',
+    'demo.widget.feedback.btn':'Feedback versturen',
+    'demo.widget.feedbackthanks.title':'Bedankt voor uw feedback',
+    'demo.widget.feedbackthanks.sub':'De ondernemer heeft een melding ontvangen en neemt mogelijk contact op.',
+    'roi.eyebrow':'Reken het zelf uit','roi.h2':'Wat levert een betere score je op',
+    'roi.sub':'Vul je huidige situatie in en zie het effect van meer positieve reviews op je omzet.',
+    'roi.klanten.lbl':'Nieuwe aanvragen per maand','roi.klanten.unit':'Aantal',
+    'roi.waarde.lbl':'Gemiddelde waarde per klant (€)','roi.waarde.unit':'Bedrag',
+    'roi.score.lbl':'Huidige Google-score','roi.score.unit':'Score',
+    'roi.result.lbl':'Geschatte extra omzet per maand',
+    'roi.explainer.default':'Onderzoek naar lokale zoekresultaten laat zien dat een hogere Google-score samenhangt met meer aanvragen. Dit is een indicatie, geen garantie.',
+    'roi.explainer.maxed':'Je score zit al dicht bij het maximum. De grootste winst van ReviewShield zit dan in het voorkomen van negatieve reviews.',
+    'testimonials.eyebrow':'Ervaringen','testimonials.h2':'Ondernemers die hun score al verbeterden',
+    'testimonials.1.text':'Binnen twee maanden gingen we van 4,1 naar 4,6 op Google. Klachten komen nu bij mij terecht in plaats van online.',
+    'testimonials.1.biz':'Loodgietersbedrijf De Vries',
+    'testimonials.2.text':'Installatie kostte me letterlijk twee minuten. Geen technische kennis nodig, en het werkt direct zoals beloofd.',
+    'testimonials.2.biz':'Kapsalon Anna',
+    'testimonials.3.text':'We krijgen nu veel vaker een seintje als een klant ontevreden is, vóórdat het een publieke review wordt.',
+    'testimonials.3.biz':'Verhuisbedrijf Bakker & Zn',
+    'privacy.eyebrow':'Gegevens & verwerking','privacy.h2':'Wat er met gegevens gebeurt',
+    'privacy.sub':'Voor zowel jou als ondernemer als je eindklanten is duidelijkheid over dataverwerking belangrijk. Hier is hoe het werkt.',
+    'privacy.1.h':'Feedbackdata','privacy.1.p':'Ingevulde klachten (1-3 sterren) worden direct en uitsluitend doorgestuurd naar jou als ondernemer via e-mail. Ze worden niet opgeslagen op onze servers en niet gedeeld met derden.',
+    'privacy.2.h':'Anonimiteit eindklant','privacy.2.p':'De widget vraagt geen naam of e-mailadres van je eindklant. Alleen de sterrenscore en ingevulde tekst worden doorgestuurd. De klant blijft anoniem als hij dat wil.',
+    'privacy.3.h':'Jouw bedrijfsgegevens','privacy.3.p':'Je naam, e-mailadres en betaalgegevens worden beheerd via Stripe, een gecertificeerde betaalverwerker. Wij hebben nooit toegang tot je betaalkaartgegevens.',
+    'compare.eyebrow':'Eerlijke vergelijking','compare.h2':'Waarom dit goedkoper en simpeler is',
+    'compare.sub':'Reputatiebeheer-tools bestaan al langer — meestal met een prijs en complexiteit gericht op grote bedrijven.',
+    'compare.col2':'Grote reputatie-tools','compare.col3':'Zelf nabellen',
+    'compare.row1.lbl':'Prijs per maand','compare.row1.c3':'Gratis, maar tijd',
+    'compare.row2.lbl':'Installatietijd','compare.row2.us':'±1 minuut','compare.row2.c2':'Implementatietraject','compare.row2.c3':'Direct, elke keer',
+    'compare.row3.lbl':'Negatieve feedback opvangen','compare.auto':'Automatisch','compare.manual':'Alleen als je het merkt',
+    'compare.row4.lbl':'Geschikt voor eenmanszaak','compare.tooexp':'Vaak te duur',
+    'compare.row5.lbl':'Opzegtermijn','compare.none':'Geen','compare.yearly':'Vaak jaarcontract',
+    'pricing.eyebrow':'Pakketten','pricing.h2':'Simpele prijzen, geen verrassingen',
+    'pricing.sub':'Begin met één platform, of dek alles in één keer af. Maandelijks opzegbaar.',
+    'pricing.lokaal.name':'Lokaal','pricing.lokaal.sub':'Voor wie net begint met reviewbeheer',
+    'pricing.lokaal.f1':'Widget gekoppeld aan 1 platform (bijv. Google)',
+    'pricing.lokaal.f2':'Kant-en-klare WhatsApp- en mailteksten',
+    'pricing.lokaal.f3':'Basiskleur instelbaar','pricing.lokaal.f4':'Installatie binnen 1 minuut',
+    'pricing.lokaal.cta':'Kies Lokaal',
+    'pricing.pro.name':'Professional','pricing.pro.sub':'Voor wie overal aanwezig wil zijn',
+    'pricing.pro.f1':'Onbeperkt platforms (Google, Trustpilot, TripAdvisor)',
+    'pricing.pro.f2':'Volledige huisstijl: kleur, logo, lettertype',
+    'pricing.pro.f3':'Kant-en-klare WhatsApp- en mailteksten','pricing.pro.f4':'Installatie binnen 1 minuut',
+    'pricing.pro.cta':'Kies Professional',
+    'pricing.popular':'Meest gekozen','pricing.permonth':'maand','pricing.trial':'14 dagen gratis proberen',
+    'urgency.eyebrow':'Waarom nu','urgency.h2':'Elke maand wachten kost je iets',
+    'urgency.sub':'Onbeantwoorde negatieve reviews en gemiste positieve reviews stapelen zich op, ook als je er niet naar kijkt.',
+    'urgency.stat1':'van de consumenten leest online reviews van een lokaal bedrijf voordat ze langsgaan of contact opnemen.',
+    'urgency.stat2':'kiest alleen een bedrijf met vier sterren of meer. Onder de 4 sterren val je voor steeds meer potentiële klanten af.',
+    'urgency.stat3':'gratis om het zelf te ervaren. Hoe eerder je begint, hoe eerder tevreden klanten zichtbaar worden.',
+    'urgency.days':'dagen',
+    'urgency.source':'Bronnen: Capital One Shopping Research (2025-2026), BrightLocal Local Consumer Review Survey (2026)',
+    'exit.h':'Nog niet klaar voor een abonnement?',
+    'exit.p':'Laat je e-mailadres achter en ontvang een gratis gids: 5 manieren om meer reviews te krijgen.',
+    'exit.btn':'Stuur mij de gids','exit.confirm':'Bedankt! De gids is onderweg naar je inbox.',
+    'signup.eyebrow':'Aanmelden','signup.h2':'Zo werkt de aanmelding',
+    'signup.sub':'Een paar korte stappen. Aan het einde heb je je eigen widget-code in je mailbox.',
+    'back':'Terug naar de homepage',
+    'conf.eyebrow':'Aanmelding voltooid','conf.h1':'Je widget staat klaar',
+    'conf.sub':'We hebben alles ook naar je mail gestuurd.',
+    'conf.opt1.tag':'Optie 1','conf.opt1.h':'Als pop-up',
+    'conf.opt1.p':'Plaats deze code op de pagina waar tevreden klanten terechtkomen. De widget verschijnt automatisch als pop-up.',
+    'conf.opt2.tag':'Optie 2','conf.opt2.h':'Als vast blok',
+    'conf.opt2.p':'Dit toont de widget permanent op een vaste plek in je pagina — rustiger dan een pop-up, ideaal voor een contactpagina of footer.',
+    'conf.howbtn':'Hoe werkt installeren','conf.faqbtn':'Veelgestelde vragen','conf.restart':'Nieuwe aanmelding simuleren',
+    'howpage.eyebrow':'Documentatie','howpage.h1':'Hoe werkt het & installeren',
+    'howpage.sub':'Alles wat je nodig hebt om de widget live te zetten op je eigen website.',
+    'howpage.s1.h':'1. Kies waar de widget komt','howpage.s1.p':'De widget werkt het best op een pagina die mensen zien ná een positieve ervaring: een bedankpagina na een bestelling, een bevestigingspagina na een afspraak, of een mail na afronding van een klus.',
+    'howpage.s2.h':'2. Plak de code in je website','howpage.s2.p':'Open de pagina-editor van je website (WordPress, Shopify, Wix, of een eigen HTML-bestand) en plak de code vlak vóór de afsluitende </body>-tag, of in een tekst/HTML-blok op de gewenste plek.',
+    'howpage.s3.h':'3. Test de widget zelf','howpage.s3.p':'Open je pagina in een incognitovenster en klik door de sterren. Bij 4 of 5 sterren word je doorgestuurd naar je reviewlink; bij een lagere score zie je het interne feedbackformulier.',
+    'howpage.s4.h':'4. Pop-up versus vast blok','howpage.s4.p':'De pop-up-code laat de widget automatisch verschijnen na een paar seconden op de pagina. Het vaste blok toont de widget permanent op een plek — handig als je hem zichtbaar wilt houden in plaats van als overlay.',
+    'howpage.s5.h':'5. Wat als een klant de pop-up wegklikt?','howpage.s5.p':'Geen probleem. Wie wegklikt, heeft simpelweg geen beoordeling gegeven — dat is altijd zijn keuze. De widget grijpt nooit in als iemand niet wil meedoen. Klanten zonder smartphone hoeven niets te doen; de widget is volledig optioneel.',
+    'faqpage.eyebrow':'Support','faqpage.h1':'Veelgestelde vragen','faqpage.sub':'Staat je vraag er niet bij? Stuur een mail naar support@reviewshield.nl.',
+    'contactpage.eyebrow':'Contact','contactpage.h1':'Neem contact op','contactpage.sub':'Heb je een vraag, wil je iets doorgeven, of loop je ergens tegenaan? We reageren binnen één werkdag.',
+    'contact.email.h':'E-mail','contact.response.h':'Reactietijd','contact.response.p':'We reageren binnen één werkdag. Vragen over installatie zijn vaak dezelfde dag opgelost.',
+    'contact.opzeg.h':'Opzeggen','contact.opzeg.p':'Opzeggen doe je via een simpele mail naar opzeggen@reviewshield.nl. Geen gedoe, geen formulieren.',
+    'contact.form.h':'Stuur een bericht','contact.form.name':'Naam','contact.form.email':'E-mailadres',
+    'contact.form.msg':'Bericht','contact.form.btn':'Verstuur bericht',
+    'contact.form.confirm':'Bedankt! Je bericht is ontvangen. We reageren binnen één werkdag.',
+    'footer.copy':'© 2026 ReviewShield · Prototype',
+    // Flow
+    'flow.steps':['Pakket','Bedrijf','Huisstijl','Betaling','Klaar'],
+    'flow.pkg.h':'Welk pakket past bij jou?','flow.pkg.sub':'Je kunt later altijd upgraden.',
+    'flow.pkg.lokaal.name':'Lokaal','flow.pkg.lokaal.price':'€19,99','flow.pkg.lokaal.desc':'1 platform, basiskleur',
+    'flow.pkg.pro.name':'Professional','flow.pkg.pro.price':'€34,49','flow.pkg.pro.desc':'Onbeperkt platforms, volledige huisstijl',
+    'flow.biz.h':'Vertel ons over je bedrijf','flow.biz.sub':'Deze gegevens gebruiken we om jouw widget automatisch te maken.',
+    'flow.biz.naam':'Bedrijfsnaam','flow.biz.straat':'Straat en huisnummer','flow.biz.postcode':'Postcode en plaats',
+    'flow.biz.tel':'Telefoonnummer','flow.biz.telopt':'(optioneel)',
+    'flow.biz.tel.hint':'Gebruiken we voor onze administratie. Optioneel tonen in het feedbackformulier, zodat een ontevreden klant je direct kan bellen.',
+    'flow.biz.site':'Website-URL van je bedrijf','flow.biz.site.hint':'De pagina waar je de widget gaat plaatsen, bijv. je bedankpagina.',
+    'flow.biz.google':'Google Bedrijfspagina — reviewlink',
+    'flow.biz.google.hint':'Dit is de specifieke "schrijf een review"-link. Te vinden via je Google Bedrijfsprofiel onder "Reviews aanvragen".',
+    'flow.style.h':'Kies de huisstijl','flow.style.sub':'Stel een achtergrond- en tekstkleur in, of vul je eigen kleurcode in.',
+    'flow.style.bg':'Achtergrondkleur','flow.style.fg':'Tekstkleur','flow.style.preview':'Voorbeeld',
+    'flow.style.preview.text':'Hoe was uw ervaring?','flow.style.hex':'Eigen kleurcode (hex)',
+    'flow.pay.h':'Bijna klaar','flow.pay.sub':'14 dagen gratis. Je betaalt pas na de proefperiode, en je kunt op elk moment opzeggen.',
+    'flow.pay.biz':'Bedrijf','flow.pay.pkg':'Pakket','flow.pay.after':'Na proefperiode',
+    'flow.pay.method':'Betaalmethode','flow.pay.stripe':'Stripe Checkout wordt hier geladen (koppeling volgt in latere bouwfase)',
+    'flow.pay.email':'E-mailadres','flow.pay.email.hint':'Hier ontvang je je widget-code direct na bevestiging.',
+    'flow.pay.cta':'Proefperiode starten',
+    'flow.btn.next':'Volgende','flow.btn.back':'Terug',
+    'conf.detail.biz':'Bedrijf','conf.detail.pkg':'Pakket','conf.detail.color':'Huisstijl','conf.detail.tel':'Telefoon','conf.detail.notfilled':'Niet opgegeven',
+  },
+  en: {
+    'nav.how':'How it works','nav.demo':'Demo','nav.pricing':'Pricing',
+    'nav.faq':'FAQ','nav.contact':'Contact','nav.cta':'Sign up',
+    'hero.eyebrow':'For local businesses',
+    'hero.h1':'Let happy customers speak. Keep <span class="hl">complaints<svg viewBox="0 0 200 14"><path d="M2 10C40 2 160 2 198 10" stroke="#E8C547" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span> private.',
+    'hero.lede':'ReviewShield asks every customer for a rating. 4 or 5 stars goes straight to Google. A lower score comes directly to you — never posted online.',
+    'hero.cta':'Start free trial','hero.demo':'Watch demo',
+    'hero.note':'14 days free, no commitments',
+    'hero.mockurl':'plumbervandjik.com/thank-you',
+    'hero.mockbiz':'Van Dijk Plumbing','hero.mocktitle':'Thank you for your request',
+    'trust.1':'No technical knowledge needed','trust.2':'Live within 1 minute','trust.3':'Cancel anytime',
+    'how.eyebrow':'How it works','how.h2':'Three steps, then it runs itself',
+    'how.sub':'One line of code on the right page, and the rest is automatic.',
+    'how.step1.num':'STEP 1','how.step1.h':'Paste the code','how.step1.p':'Place one line on the page where happy customers land — like your thank-you page after an appointment or order.',
+    'how.step2.num':'STEP 2','how.step2.h':'Customer rates you','how.step2.p':'The widget asks for a 1 to 5 star rating, in your own colors and style.',
+    'how.step3.num':'STEP 3','how.step3.h':'Right route, automatically','how.step3.p':'4 or 5 stars: straight to Google. Lower: feedback comes to you privately, no public review.',
+    'branches.eyebrow':'For every sector with customer contact','branches.h2':'Works for virtually any business',
+    'branches.sub':'Whether customers come for an appointment, a quote, an order or a job — the principle works the same everywhere.',
+    'examples.eyebrow':'What it looks like','examples.h2':'In your brand colors, on any website',
+    'examples.sub':'The widget adapts to your colors. Three examples in different brand styles below.',
+    'examples.preview.q':'How was your experience?',
+    'demo.eyebrow':'Live demo','demo.h2':'Try it yourself',
+    'demo.sub':'This is exactly how the widget appears on your customer\'s website. No real review is affected.',
+    'demo.context.label':'EXAMPLE PAGE','demo.context.p':'Imagine: a customer of Anna\'s Salon just had a haircut and lands on the thank-you page.',
+    'demo.context.thanks':'Thank you for your visit','demo.reset':'Reset demo',
+    'demo.widget.q':'How was your experience at Anna\'s Salon?',
+    'demo.widget.hint':'Click on a number of stars',
+    'demo.widget.redirect.title':'Great to hear!',
+    'demo.widget.redirect.sub':'You are now being redirected to Google to leave your review.',
+    'demo.widget.redirect.btn':'Go to Google Reviews',
+    'demo.widget.thanks':'Thank you for your review!',
+    'demo.widget.feedback.title':'We\'d love to make it right',
+    'demo.widget.feedback.sub':'Your feedback goes directly and privately to the business. No public review will be posted.',
+    'demo.widget.feedback.placeholder':'What could we do better?',
+    'demo.widget.feedback.btn':'Send feedback',
+    'demo.widget.feedbackthanks.title':'Thank you for your feedback',
+    'demo.widget.feedbackthanks.sub':'The business has been notified and may contact you.',
+    'roi.eyebrow':'Calculate it yourself','roi.h2':'What a better score is worth to you',
+    'roi.sub':'Enter your current situation and see the impact of more positive reviews on your revenue.',
+    'roi.klanten.lbl':'New inquiries per month','roi.klanten.unit':'Number',
+    'roi.waarde.lbl':'Average value per customer (€)','roi.waarde.unit':'Amount',
+    'roi.score.lbl':'Current Google score','roi.score.unit':'Score',
+    'roi.result.lbl':'Estimated extra revenue per month',
+    'roi.explainer.default':'Research on local search results shows that a higher Google score correlates with more inquiries. This is an estimate, not a guarantee.',
+    'roi.explainer.maxed':'Your score is already close to the maximum. The biggest benefit of ReviewShield is then preventing future negative reviews.',
+    'testimonials.eyebrow':'Reviews','testimonials.h2':'Business owners who already improved their score',
+    'testimonials.1.text':'Within two months we went from 4.1 to 4.6 on Google. Complaints now reach me instead of going public.',
+    'testimonials.1.biz':'Van Dijk Plumbing',
+    'testimonials.2.text':'Installation took me literally two minutes. No technical knowledge needed, and it works exactly as promised.',
+    'testimonials.2.biz':'Anna\'s Salon',
+    'testimonials.3.text':'We now get notified much more often when a customer is unhappy, before it becomes a public review.',
+    'testimonials.3.biz':'Bakker & Sons Moving',
+    'privacy.eyebrow':'Data & processing','privacy.h2':'What happens with data',
+    'privacy.sub':'Transparency about data processing matters for both you as a business and your end customers. Here\'s how it works.',
+    'privacy.1.h':'Feedback data','privacy.1.p':'Submitted complaints (1-3 stars) are forwarded directly and exclusively to you as the business owner via email. They are not stored on our servers and not shared with third parties.',
+    'privacy.2.h':'End customer anonymity','privacy.2.p':'The widget does not ask for your end customer\'s name or email address. Only the star rating and submitted text are forwarded. The customer remains anonymous if they wish.',
+    'privacy.3.h':'Your business data','privacy.3.p':'Your name, email address and payment details are managed via Stripe, a certified payment processor. We never have access to your payment card details.',
+    'compare.eyebrow':'Fair comparison','compare.h2':'Why this is cheaper and simpler',
+    'compare.sub':'Reputation management tools have existed for a while — usually priced and built for large companies.',
+    'compare.col2':'Large reputation tools','compare.col3':'Manual follow-up',
+    'compare.row1.lbl':'Price per month','compare.row1.c3':'Free, but takes time',
+    'compare.row2.lbl':'Setup time','compare.row2.us':'±1 minute','compare.row2.c2':'Implementation project','compare.row2.c3':'Immediate, each time',
+    'compare.row3.lbl':'Capture negative feedback','compare.auto':'Automatic','compare.manual':'Only if you notice it',
+    'compare.row4.lbl':'Suitable for sole traders','compare.tooexp':'Usually too expensive',
+    'compare.row5.lbl':'Contract term','compare.none':'None','compare.yearly':'Often annual contract',
+    'pricing.eyebrow':'Pricing','pricing.h2':'Simple prices, no surprises',
+    'pricing.sub':'Start with one platform, or cover everything at once. Cancel monthly.',
+    'pricing.lokaal.name':'Local','pricing.lokaal.sub':'For those just starting with review management',
+    'pricing.lokaal.f1':'Widget linked to 1 platform (e.g. Google)',
+    'pricing.lokaal.f2':'Ready-made WhatsApp and email templates',
+    'pricing.lokaal.f3':'Basic color customizable','pricing.lokaal.f4':'Live within 1 minute',
+    'pricing.lokaal.cta':'Choose Local',
+    'pricing.pro.name':'Professional','pricing.pro.sub':'For those who want to be everywhere',
+    'pricing.pro.f1':'Unlimited platforms (Google, Trustpilot, TripAdvisor)',
+    'pricing.pro.f2':'Full brand styling: color, logo, font',
+    'pricing.pro.f3':'Ready-made WhatsApp and email templates','pricing.pro.f4':'Live within 1 minute',
+    'pricing.pro.cta':'Choose Professional',
+    'pricing.popular':'Most popular','pricing.permonth':'month','pricing.trial':'14 days free trial',
+    'urgency.eyebrow':'Why now','urgency.h2':'Every month you wait costs you something',
+    'urgency.sub':'Unanswered negative reviews and missed positive reviews accumulate, even when you\'re not looking.',
+    'urgency.stat1':'of consumers read online reviews of a local business before visiting or contacting them.',
+    'urgency.stat2':'only choose a business with four or more stars. Below 4 stars, more and more potential customers will skip you.',
+    'urgency.stat3':'free to experience it yourself. The sooner you start, the sooner satisfied customers become visible.',
+    'urgency.days':'days',
+    'urgency.source':'Sources: Capital One Shopping Research (2025-2026), BrightLocal Local Consumer Review Survey (2026)',
+    'exit.h':'Not ready for a subscription yet?',
+    'exit.p':'Leave your email and receive a free guide: 5 ways to get more reviews.',
+    'exit.btn':'Send me the guide','exit.confirm':'Thanks! The guide is on its way to your inbox.',
+    'signup.eyebrow':'Sign up','signup.h2':'How to get started',
+    'signup.sub':'A few short steps. At the end, your own widget code lands in your inbox.',
+    'back':'Back to homepage',
+    'conf.eyebrow':'Registration complete','conf.h1':'Your widget is ready',
+    'conf.sub':'We\'ve also sent everything to your email.',
+    'conf.opt1.tag':'Option 1','conf.opt1.h':'As a pop-up',
+    'conf.opt1.p':'Place this code on the page where happy customers arrive. The widget appears automatically as a pop-up.',
+    'conf.opt2.tag':'Option 2','conf.opt2.h':'As an embedded block',
+    'conf.opt2.p':'This shows the widget permanently in a fixed place on your page — quieter than a pop-up, ideal for a contact page or footer.',
+    'conf.howbtn':'How to install','conf.faqbtn':'FAQ','conf.restart':'Simulate new sign-up',
+    'howpage.eyebrow':'Documentation','howpage.h1':'How it works & installing',
+    'howpage.sub':'Everything you need to get the widget live on your website.',
+    'howpage.s1.h':'1. Choose where the widget goes','howpage.s1.p':'The widget works best on a page people see after a positive experience: a thank-you page after an order, a confirmation page after an appointment, or an email after completing a job.',
+    'howpage.s2.h':'2. Paste the code into your website','howpage.s2.p':'Open your website\'s page editor (WordPress, Shopify, Wix, or your own HTML file) and paste the code just before the closing </body> tag, or in an HTML block in the desired location.',
+    'howpage.s3.h':'3. Test the widget yourself','howpage.s3.p':'Open your page in an incognito window and click through the stars. With 4 or 5 stars you get redirected to your review link; with a lower score you see the internal feedback form.',
+    'howpage.s4.h':'4. Pop-up versus embedded block','howpage.s4.p':'The pop-up code makes the widget appear automatically after a few seconds on the page. The embedded block shows the widget permanently in a fixed spot — useful if you want it visible rather than as an overlay.',
+    'howpage.s5.h':'5. What if a customer closes the pop-up?','howpage.s5.p':'No problem. Whoever closes it simply hasn\'t given a rating — that\'s always their choice. The widget never intervenes if someone doesn\'t want to participate. Customers without a smartphone don\'t need to do anything; the widget is completely optional.',
+    'faqpage.eyebrow':'Support','faqpage.h1':'Frequently asked questions','faqpage.sub':'Can\'t find your question? Send an email to support@reviewshield.nl.',
+    'contactpage.eyebrow':'Contact','contactpage.h1':'Get in touch','contactpage.sub':'Have a question, want to report something, or stuck somewhere? We respond within one business day.',
+    'contact.email.h':'Email','contact.response.h':'Response time','contact.response.p':'We respond within one business day. Installation questions are often resolved the same day.',
+    'contact.opzeg.h':'Cancellation','contact.opzeg.p':'Cancel by sending a simple email to cancel@reviewshield.nl. No hassle, no forms.',
+    'contact.form.h':'Send a message','contact.form.name':'Name','contact.form.email':'Email address',
+    'contact.form.msg':'Message','contact.form.btn':'Send message',
+    'contact.form.confirm':'Thank you! Your message has been received. We\'ll respond within one business day.',
+    'footer.copy':'© 2026 ReviewShield · Prototype',
+    'flow.steps':['Package','Business','Style','Payment','Done'],
+    'flow.pkg.h':'Which package suits you?','flow.pkg.sub':'You can always upgrade later.',
+    'flow.pkg.lokaal.name':'Local','flow.pkg.lokaal.price':'€19.99','flow.pkg.lokaal.desc':'1 platform, basic color',
+    'flow.pkg.pro.name':'Professional','flow.pkg.pro.price':'€34.49','flow.pkg.pro.desc':'Unlimited platforms, full branding',
+    'flow.biz.h':'Tell us about your business','flow.biz.sub':'We use this to automatically build your widget.',
+    'flow.biz.naam':'Business name','flow.biz.straat':'Street and house number','flow.biz.postcode':'Zip code and city',
+    'flow.biz.tel':'Phone number','flow.biz.telopt':'(optional)',
+    'flow.biz.tel.hint':'Used for our records. Optionally shown in the feedback form so an unhappy customer can call you directly.',
+    'flow.biz.site':'Your business website URL','flow.biz.site.hint':'The page where you\'ll place the widget, e.g. your thank-you page.',
+    'flow.biz.google':'Google Business Page — review link',
+    'flow.biz.google.hint':'This is the specific "write a review" link. Found in your Google Business Profile under "Ask for reviews".',
+    'flow.style.h':'Choose your brand style','flow.style.sub':'Set a background and text color, or enter your own color code.',
+    'flow.style.bg':'Background color','flow.style.fg':'Text color','flow.style.preview':'Preview',
+    'flow.style.preview.text':'How was your experience?','flow.style.hex':'Custom color code (hex)',
+    'flow.pay.h':'Almost done','flow.pay.sub':'14 days free. You only pay after the trial period, and you can cancel anytime.',
+    'flow.pay.biz':'Business','flow.pay.pkg':'Package','flow.pay.after':'After trial',
+    'flow.pay.method':'Payment method','flow.pay.stripe':'Stripe Checkout will load here (integration coming in a later build phase)',
+    'flow.pay.email':'Email address','flow.pay.email.hint':'Your widget code will be sent here immediately after confirmation.',
+    'flow.pay.cta':'Start free trial',
+    'flow.btn.next':'Next','flow.btn.back':'Back',
+    'conf.detail.biz':'Business','conf.detail.pkg':'Package','conf.detail.color':'Brand style','conf.detail.tel':'Phone','conf.detail.notfilled':'Not provided',
+  }
+};
+
+
+// ============================================================
+// REVIEWSHIELD MAIN JS — i18n + all features
+// ============================================================
+
+let LANG = 'nl';
+
+function t(key) {
+  return (T[LANG] && T[LANG][key] !== undefined) ? T[LANG][key] : (T['nl'][key] || key);
+}
+
+function setLang(lang) {
+  LANG = lang;
+  document.getElementById('html-root').setAttribute('lang', lang);
+  document.getElementById('lang-nl').classList.toggle('active', lang === 'nl');
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  applyTranslations();
+  renderBranches();
+  renderWidgetPreviews();
+  renderDemoInitial();
+  renderFaq();
+  renderFlow();
+}
+
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (typeof val === 'string') el.textContent = val;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    const val = t(key);
+    if (typeof val === 'string') el.innerHTML = val;
+  });
+  document.getElementById('page-title').textContent = LANG === 'nl'
+    ? 'ReviewShield — Bescherm je online reputatie'
+    : 'ReviewShield — Protect your online reputation';
+}
+
+// ── PAGE ROUTER ───────────────────────────────────────────
+function showPage(name) {
+  const ids = ['page-home','page-confirmation','page-howitworks','page-faq','page-contact'];
+  const map = {home:'page-home',confirmation:'page-confirmation',howitworks:'page-howitworks',faq:'page-faq',contact:'page-contact'};
+  ids.forEach(id => document.getElementById(id).classList.remove('active'));
+  document.getElementById(map[name]).classList.add('active');
+  try { window.scrollTo({top:0,behavior:'auto'}); } catch(e) { window.scrollTo(0,0); }
+  if (name === 'faq') renderFaq();
+  if (name === 'howitworks') applyTranslations();
+  if (name === 'contact') applyTranslations();
+}
+
+function goToSignup(pkg) {
+  showPage('home');
+  setTimeout(() => {
+    const el = document.getElementById('aanmelden');
+    if (el) el.scrollIntoView({behavior:'smooth'});
+  }, 50);
+  if (pkg) flowState.data.pakket = pkg;
+}
+
+// ── STAR SVG ──────────────────────────────────────────────
+function starSvg(filled, size) {
+  size = size || 28;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${filled?'#E8C547':'none'}" stroke="${filled?'#E8C547':'#D8D2C2'}" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.2 1.3 6L12 16.5 6.6 19.4l1.3-6L3.3 9.2l6.1-.6L12 3z"/></svg>`;
+}
+
+function reviewStarSvg(filled) {
+  return `<svg width="16" height="16" viewBox="0 0 24 24" fill="${filled?'#E8C547':'#D8D2C2'}" stroke="${filled?'#E8C547':'#D8D2C2'}" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.2 1.3 6L12 16.5 6.6 19.4l1.3-6L3.3 9.2l6.1-.6L12 3z"/></svg>`;
+}
+
+// ── HERO MINI WIDGET ──────────────────────────────────────
+function buildStarWidget(mountId, onRated) {
+  const mount = document.getElementById(mountId);
+  if (!mount) return;
+  mount.innerHTML = `<p style="font-size:14px;color:var(--ink-soft);margin-bottom:8px;">${t('examples.preview.q')}</p><div class="rs-stars">${[1,2,3,4,5].map(n=>`<button class="rs-star-btn" data-star="${n}">${starSvg(false)}</button>`).join('')}</div>`;
+  const btns = mount.querySelectorAll('[data-star]');
+  btns.forEach(btn => {
+    btn.addEventListener('mouseenter',()=>highlightMount(mount,parseInt(btn.dataset.star)));
+    btn.addEventListener('mouseleave',()=>highlightMount(mount,0));
+    btn.addEventListener('click',()=>onRated(parseInt(btn.dataset.star)));
+  });
+}
+
+function highlightMount(mount, count) {
+  mount.querySelectorAll('.rs-star-btn').forEach(btn => {
+    btn.innerHTML = starSvg(parseInt(btn.dataset.star) <= count);
+  });
+}
+
+function handleHeroRating(rating) {
+  const mount = document.getElementById('hero-widget-mount');
+  if (!mount) return;
+  mount.innerHTML = `<p style="font-size:13px;color:var(--green-700);font-weight:600;">${rating>=4?'→ '+t('nav.how'):('→ '+t('privacy.1.h'))}</p>`;
+  setTimeout(()=>buildStarWidget('hero-widget-mount',handleHeroRating),2400);
+}
+
+// ── DEMO WIDGET ───────────────────────────────────────────
+function renderDemoInitial() {
+  const stage = document.getElementById('rs-demo-stage');
+  if (!stage) return;
+  stage.innerHTML = `
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:6px;">${t('demo.widget.q')}</p>
+    <div class="rs-stars">${[1,2,3,4,5].map(n=>`<button class="rs-star-btn" data-star="${n}">${starSvg(false)}</button>`).join('')}</div>
+    <p style="text-align:center;font-size:12px;color:var(--ink-soft);margin-top:4px;">${t('demo.widget.hint')}</p>`;
+  stage.querySelectorAll('[data-star]').forEach(btn => {
+    btn.addEventListener('mouseenter',()=>highlightMount(stage,parseInt(btn.dataset.star)));
+    btn.addEventListener('mouseleave',()=>highlightMount(stage,0));
+    btn.addEventListener('click',()=>{
+      const r=parseInt(btn.dataset.star);
+      r>=4?renderDemoRedirect(r):renderDemoFeedback(r);
+    });
+  });
+}
+
+function renderDemoRedirect(rating) {
+  const stage = document.getElementById('rs-demo-stage');
+  stage.innerHTML = `<div style="text-align:center;padding:10px 0;">
+    <div style="width:48px;height:48px;border-radius:50%;background:#EAF3DE;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">${starSvg(true,24)}</div>
+    <p style="font-weight:600;margin-bottom:6px;">${t('demo.widget.redirect.title')} (${rating} ★)</p>
+    <p style="font-size:13px;color:var(--ink-soft);margin-bottom:18px;">${t('demo.widget.redirect.sub')}</p>
+    <button class="btn-primary" id="demo-go" style="margin:0 auto;">${t('demo.widget.redirect.btn')}</button>
+  </div>`;
+  document.getElementById('demo-go').addEventListener('click',()=>{
+    stage.innerHTML=`<div style="text-align:center;padding:20px 0;"><p style="font-weight:600;">${t('demo.widget.thanks')}</p></div>`;
+  });
+}
+
+function renderDemoFeedback(rating) {
+  const stage = document.getElementById('rs-demo-stage');
+  stage.innerHTML = `
+    <p style="font-weight:600;margin-bottom:4px;">${t('demo.widget.feedback.title')}</p>
+    <p style="font-size:13px;color:var(--ink-soft);margin-bottom:14px;">${t('demo.widget.feedback.sub')}</p>
+    <textarea id="demo-fb" placeholder="${t('demo.widget.feedback.placeholder')}" style="width:100%;min-height:80px;resize:vertical;margin-bottom:12px;padding:10px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;"></textarea>
+    <button class="btn-primary" id="demo-fb-submit" style="width:100%;justify-content:center;">${t('demo.widget.feedback.btn')}</button>`;
+  document.getElementById('demo-fb-submit').addEventListener('click',()=>{
+    stage.innerHTML=`<div style="text-align:center;padding:10px 0;">
+      <div style="width:48px;height:48px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+      <p style="font-weight:600;margin-bottom:6px;">${t('demo.widget.feedbackthanks.title')}</p>
+      <p style="font-size:13px;color:var(--ink-soft);">${t('demo.widget.feedbackthanks.sub')}</p>
+    </div>`;
+  });
+}
+
+document.addEventListener('click', e => {
+  if (e.target && e.target.id === 'rs-demo-reset') renderDemoInitial();
+});
+
+// ── WIDGET PREVIEWS ───────────────────────────────────────
+const WIDGET_STYLES = [
+  {bg:'#0F3D2E', fg:'#FFFFFF', biz: {nl:'Loodgietersbedrijf Van Dijk', en:'Van Dijk Plumbing'}},
+  {bg:'#1A56A0', fg:'#FFFFFF', biz: {nl:'Kapsalon Anna', en:"Anna's Salon"}},
+  {bg:'#FAF8F3', fg:'#1A1A1A', biz: {nl:'Bakker Fysiotherapie', en:'Bakker Physiotherapy'}},
+];
+
+function renderWidgetPreviews() {
+  const grid = document.getElementById('widget-previews-grid');
+  if (!grid) return;
+  grid.innerHTML = WIDGET_STYLES.map(s => `
+    <div class="widget-preview-card">
+      <div class="widget-preview-header" style="background:var(--cream-dark);">${s.biz[LANG]}</div>
+      <div class="widget-preview-mock" style="background:${s.bg};">
+        <p style="color:${s.fg};font-size:14px;font-weight:600;">${t('examples.preview.q')}</p>
+        <div class="widget-preview-stars">${[1,2,3,4,5].map((_,i)=>starSvg(i<4,22)).join('')}</div>
+        <p style="font-size:11px;color:${s.fg};opacity:0.7;">${t('demo.widget.hint')}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── REVIEWS STARS ─────────────────────────────────────────
+function renderReviewStars() {
+  document.querySelectorAll('.review-stars').forEach(el => {
+    const n = parseInt(el.dataset.stars)||5;
+    el.innerHTML = Array.from({length:n}, ()=>reviewStarSvg(true)).join('');
+  });
+}
+
+// ── BRANCHES ─────────────────────────────────────────────
+const BRANCHES_DATA = {
+  nl: [
+    { label:'Techniek & vakmensen', title:'Na een klus, reparatie of installatie', scenario:'De klus is geklaard en de rekening is betaald. Dit is het beste moment om te vragen hoe het ging, terwijl de tevredenheid nog vers is.', quote:'"Ik was zo opgelucht dat het probleem was opgelost, een review schrijven was het laatste waar ik aan dacht — totdat de widget het me vroeg."', stat1:{num:'+0,4',lbl:'gemiddelde scoreverbetering'}, stat2:{num:'< 1 min',lbl:'tijd die de klant kwijt is'}, sectors:['Loodgieter','Elektricien','Timmerman','Dakdekker','Autogarage','Installateur','Schilder','Glazenwasser','Hovenier','Dakkapelspecialist'] },
+    { label:'Persoonlijke dienstverlening', title:'Direct na de afspraak of behandeling', scenario:'De klant zit nog in de stoel of staat net op bij de kassa. Precies het moment waarop de tevredenheid het hoogst is.', quote:'"Bij de kassa scan ik een QR-code en binnen tien seconden weet de salon hoe het was. Veel makkelijker dan een mail achteraf."', stat1:{num:'92%',lbl:'vult de widget direct in'}, stat2:{num:'0',lbl:'negatieve reviews nog online'}, sectors:['Kapper','Schoonheidsspecialist','Fysiotherapeut','Tandarts','Huisarts','Personal trainer','Massagepraktijk','Dierenarts','Optician','Coach'] },
+    { label:'Horeca & retail', title:'Bij het afrekenen of na levering', scenario:'De rekening of het bonnetje is het moment. Tevreden gasten worden doorgestuurd, een mindere ervaring komt privé bij de eigenaar.', quote:'"Eén keer kreeg ik via het formulier te horen dat het eten te lang op zich liet wachten. Ik kon het rechtzetten voordat het een publieke review werd."', stat1:{num:'4,1→4,6',lbl:'scoreverbetering in 2 mnd'}, stat2:{num:'15+',lbl:'klachten per maand privé opgevangen'}, sectors:['Restaurant','Café','Hotel','Bakker','Fietsenwinkel','Kledingwinkel','Slijterij','Webshop','Supermarkt','Bloemist','Speelgoedwinkel','Boekenwinkel'] },
+    { label:'Zakelijke & financiële dienstverlening', title:'Na afronding van een opdracht of advies', scenario:'Het rapport is opgeleverd, de aankoop is afgerond, het advies is gegeven. Een goed moment om de klant te vragen hoe het traject is bevallen.', quote:'"Bij een taxatierapport is er vaak maar één contactmoment. Dit zorgt dat we daar altijd om een beoordeling vragen, zonder dat het op nabellen voelt."', stat1:{num:'3x',lbl:'meer reviews per opdracht'}, stat2:{num:'€0',lbl:'extra tijd aan handmatig opvolgen'}, sectors:['Makelaar','Taxateur','Bouwkundig keurder','Hypotheekadviseur','Notaris','Accountant','Verzekeringsadviseur','Advocaat','HR-adviseur','IT-dienstverlener'] },
+    { label:'Transport, events & overig', title:'Direct na levering of afronding', scenario:'De factuur of bevestiging gaat per mail, met de widget-link erin verwerkt voor een directe beoordeling.', quote:'"We werken met korte klussen bij veel verschillende klanten. Dit is de enige manier waarop we structureel reviews binnenkrijgen zonder er zelf achteraan te bellen."', stat1:{num:'3x',lbl:'meer reviews per maand'}, stat2:{num:'€0',lbl:'extra tijd aan nabellen'}, sectors:['Verhuisbedrijf','Bezorgdienst','Koeriersbedrijf','Fotograaf','DJ / Band','Bruiloftslocatie','Escape room','Sportschool','Kinderdagverblijf','Schoonmaakbedrijf','Beveiligingsbedrijf'] }
+  ],
+  en: [
+    { label:'Trades & technicians', title:'After a job, repair or installation', scenario:'The job is done and the bill is paid. This is the best moment to ask how it went, while satisfaction is still fresh.', quote:'"I was so relieved the problem was solved, writing a review was the last thing on my mind — until the widget asked me."', stat1:{num:'+0.4',lbl:'avg score improvement'}, stat2:{num:'< 1 min',lbl:'time the customer spends'}, sectors:['Plumber','Electrician','Carpenter','Roofer','Auto garage','Installer','Painter','Window cleaner','Gardener','Specialist contractor'] },
+    { label:'Personal services', title:'Right after the appointment or treatment', scenario:'The customer is still in the chair or just stood up at the register. Exactly the moment when satisfaction is highest.', quote:'"At the register they scan a QR code and within ten seconds the salon knows how it went. Much easier than an email afterwards."', stat1:{num:'92%',lbl:'complete the widget on the spot'}, stat2:{num:'0',lbl:'negative reviews still posted'}, sectors:['Hairdresser','Beauty specialist','Physiotherapist','Dentist','GP','Personal trainer','Massage studio','Veterinarian','Optician','Coach'] },
+    { label:'Hospitality & retail', title:'At checkout or after delivery', scenario:'The bill or receipt is the moment. Happy guests get directed to Google, a less-than-great experience comes to the owner privately.', quote:'"Once I got feedback via the form that the food took too long. I could fix it before it became a public review."', stat1:{num:'4.1→4.6',lbl:'score improvement in 2 mo'}, stat2:{num:'15+',lbl:'complaints caught privately per month'}, sectors:['Restaurant','Café','Hotel','Bakery','Bike shop','Clothing store','Wine shop','Webshop','Supermarket','Florist','Toy store','Bookshop'] },
+    { label:'Business & financial services', title:'After completing an assignment or advice', scenario:'The report is delivered, the purchase is complete, the advice is given. A good moment to ask the client how the process went.', quote:'"With a valuation report there\'s often just one contact moment. This ensures we always ask for a review there, without it feeling like a follow-up call."', stat1:{num:'3x',lbl:'more reviews per assignment'}, stat2:{num:'€0',lbl:'extra time on manual follow-up'}, sectors:['Estate agent','Appraiser','Building inspector','Mortgage advisor','Notary','Accountant','Insurance advisor','Lawyer','HR consultant','IT service provider'] },
+    { label:'Transport, events & other', title:'Directly after delivery or completion', scenario:'The invoice or confirmation goes by email, with the widget link included for a direct rating.', quote:'"We work on short jobs with many different clients. This is the only way we systematically collect reviews without calling everyone ourselves."', stat1:{num:'3x',lbl:'more reviews per month'}, stat2:{num:'€0',lbl:'extra time calling clients'}, sectors:['Moving company','Delivery service','Courier','Photographer','DJ / Band','Wedding venue','Escape room','Gym','Childcare','Cleaning company','Security company'] }
+  ]
+};
+
+let activeBranch = 0;
+
+function renderBranches() {
+  const tabsEl = document.getElementById('branch-tabs');
+  const panelEl = document.getElementById('branch-panel');
+  if (!tabsEl || !panelEl) return;
+  const data = BRANCHES_DATA[LANG] || BRANCHES_DATA.nl;
+
+  tabsEl.innerHTML = data.map((b,i) =>
+    `<button class="branch-tab ${i===activeBranch?'active':''}" data-branch="${i}">${b.label}</button>`
+  ).join('');
+
+  const b = data[activeBranch];
+  panelEl.innerHTML = `
+    <div>
+      <h3>${b.title}</h3>
+      <p class="scenario">${b.scenario}</p>
+      <div class="branch-stat-row">
+        <div class="branch-stat"><div class="num">${b.stat1.num}</div><div class="lbl">${b.stat1.lbl}</div></div>
+        <div class="branch-stat"><div class="num">${b.stat2.num}</div><div class="lbl">${b.stat2.lbl}</div></div>
+      </div>
+      <div class="branch-sector-tags">${b.sectors.map(s=>`<span class="branch-sector-tag">${s}</span>`).join('')}</div>
+    </div>
+    <div class="branch-quote">${b.quote}</div>`;
+
+  tabsEl.querySelectorAll('[data-branch]').forEach(btn => {
+    btn.addEventListener('click',()=>{ activeBranch=parseInt(btn.dataset.branch); renderBranches(); });
+  });
+}
+
+// ── ROI CALCULATOR ────────────────────────────────────────
+function calculateRoi() {
+  const klanten = parseInt(document.getElementById('roi-klanten').value);
+  const waarde = parseInt(document.getElementById('roi-waarde').value);
+  const score = parseFloat(document.getElementById('roi-score').value);
+  document.getElementById('roi-klanten-out').textContent = klanten;
+  document.getElementById('roi-waarde-out').textContent = '€'+waarde;
+  document.getElementById('roi-score-out').textContent = score.toFixed(1).replace('.',LANG==='nl'?',':'.');
+  const ruimte = Math.max(0, 4.7-score);
+  const pct = Math.min(0.18, ruimte*0.12);
+  const extra = Math.round(klanten*pct*waarde);
+  document.getElementById('roi-extra-omzet').textContent = '€'+extra.toLocaleString('nl-NL');
+  const expl = document.getElementById('roi-explainer');
+  if (expl) expl.textContent = extra > 0
+    ? (LANG==='nl' ? `Bij een verbetering richting 4,5+ sterren is een toename van ~${Math.round(pct*100)}% in aanvragen realistisch. Dit is een indicatie, geen garantie.` : `With an improvement towards 4.5+ stars, an increase of ~${Math.round(pct*100)}% in inquiries is realistic. This is an estimate, not a guarantee.`)
+    : t('roi.explainer.maxed');
+}
+
+['roi-klanten','roi-waarde','roi-score'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', calculateRoi);
+});
+
+// ── FAQ ───────────────────────────────────────────────────
+const FAQ_DATA = {
+  nl: [
+    {q:'Is dit toegestaan volgens het beleid van Google?', a:'ReviewShield vraagt intern om feedback voordat iemand wordt uitgenodigd voor een publieke review. Je bepaalt zelf wie je uitnodigt, net als bij een persoonlijke follow-up. Veel gevestigde reputatie-tools werken op dezelfde manier. Belangrijk is dat je niemand verhindert die al actief naar een reviewpagina onderweg was.'},
+    {q:'Heb ik technische kennis nodig?', a:'Nee. Je plakt één regel code op de pagina van je keuze, vergelijkbaar met het toevoegen van een Google Analytics-tag. Het werkt op WordPress, Shopify, Wix en aangepaste HTML-sites.'},
+    {q:'Wat is het verschil tussen de pop-up en het vaste blok?', a:'De pop-up verschijnt automatisch na een paar seconden op de pagina, ideaal voor een bedankpagina. Het vaste blok staat permanent op een vaste plek, bijvoorbeeld onderin een contactpagina — rustiger en altijd zichtbaar.'},
+    {q:'Wat als de klant de pop-up wegklikt of geen smartphone heeft?', a:'Geen enkel probleem. Wie wegklikt, heeft simpelweg geen beoordeling gegeven — dat is altijd zijn keuze. De widget grijpt nooit in als iemand niet wil meedoen. Klanten zonder smartphone hoeven niets te doen; de widget is volledig optioneel.'},
+    {q:'Hoe werkt de betaling en facturatie?', a:'Na je proefperiode van 14 dagen wordt het abonnement automatisch maandelijks geïncasseerd via automatische incasso. Je ontvangt elke maand automatisch een factuur per e-mail voor je administratie. Er is geen jaarcontract — je zit gewoon maand op maand.'},
+    {q:'Hoe kan ik opzeggen?', a:'Opzeggen doe je via een simpele mail naar opzeggen@reviewshield.nl. Geen formulieren, geen gedoe, geen opzegtermijn. Het abonnement stopt aan het einde van de lopende maand.'},
+    {q:'Kan ik op elk moment opzeggen?', a:'Ja. Je kunt op elk moment per mail opzeggen. Je behoudt toegang tot het einde van de betaalde maand.'},
+    {q:'Wat gebeurt er na de proefperiode als ik niets doe?', a:'Na 14 dagen starten we de eerste automatische incasso voor het gekozen pakket. Je ontvangt hier een herinnering per e-mail vóórdat dit gebeurt. Wil je niet doorgaan, stuur dan vóór het einde van de proefperiode een mail naar opzeggen@reviewshield.nl.'},
+    {q:'Wat gebeurt er met de feedbackdata van mijn klanten?', a:'Ingevulde klachten worden direct via e-mail doorgestuurd naar jou. Ze worden niet opgeslagen op onze servers en niet gedeeld met derden. De eindklant blijft anoniem als hij dat wil — de widget vraagt geen naam of e-mailadres.'},
+    {q:'Werkt dit voor meerdere vestigingen?', a:'Op dit moment is elk abonnement gekoppeld aan één bedrijfsprofiel. Voor meerdere vestigingen kun je losse abonnementen afsluiten of contact opnemen voor een maatwerkoplossing.'},
+  ],
+  en: [
+    {q:'Is this allowed under Google\'s policy?', a:'ReviewShield asks for feedback internally before someone is invited to leave a public review. You decide who you invite, just like with a personal follow-up. Many established reputation tools work the same way. What matters is that you don\'t prevent anyone who was already actively heading to a review page.'},
+    {q:'Do I need technical knowledge?', a:'No. You paste one line of code on the page of your choice, similar to adding a Google Analytics tag. It works on WordPress, Shopify, Wix and custom HTML sites.'},
+    {q:'What\'s the difference between the pop-up and the embedded block?', a:'The pop-up appears automatically after a few seconds on the page, ideal for a thank-you page. The embedded block stays permanently in a fixed spot, for example at the bottom of a contact page — quieter and always visible.'},
+    {q:'What if the customer closes the pop-up or doesn\'t have a smartphone?', a:'No problem at all. Whoever closes it simply hasn\'t given a rating — that\'s always their choice. The widget never intervenes if someone doesn\'t want to participate. Customers without a smartphone don\'t need to do anything; the widget is completely optional.'},
+    {q:'How does payment and invoicing work?', a:'After your 14-day trial period, the subscription is automatically billed monthly via direct debit. You automatically receive an invoice by email every month for your records. There is no annual contract — you\'re simply month-to-month.'},
+    {q:'How do I cancel?', a:'Cancel by sending a simple email to cancel@reviewshield.nl. No forms, no hassle, no notice period. The subscription stops at the end of the current month.'},
+    {q:'Can I cancel at any time?', a:'Yes. You can cancel at any time by email. You retain access until the end of the paid month.'},
+    {q:'What happens after the trial if I don\'t do anything?', a:'After 14 days we start the first automatic payment for the chosen package. You\'ll receive a reminder by email before this happens. If you don\'t want to continue, send an email to cancel@reviewshield.nl before the end of the trial period.'},
+    {q:'What happens with my customers\' feedback data?', a:'Submitted complaints are forwarded directly to you via email. They are not stored on our servers and not shared with third parties. The end customer remains anonymous if they wish — the widget does not ask for a name or email address.'},
+    {q:'Does this work for multiple locations?', a:'Currently each subscription is linked to one business profile. For multiple locations you can take out separate subscriptions or contact us for a custom solution.'},
+  ]
+};
+
+function renderFaq() {
+  const list = document.getElementById('faq-list');
+  if (!list) return;
+  const data = FAQ_DATA[LANG] || FAQ_DATA.nl;
+  list.innerHTML = data.map((item,i)=>`
+    <div class="faq-item" data-faq="${i}">
+      <button class="faq-question">${item.q}<span class="faq-chev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner">${item.a}</div></div>
+    </div>`).join('');
+  list.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-question').addEventListener('click',()=>{
+      const was = item.classList.contains('open');
+      list.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if (!was) item.classList.add('open');
+    });
+  });
+}
+
+// ── EXIT INTENT ───────────────────────────────────────────
+document.addEventListener('click', e => {
+  if (e.target && e.target.id === 'exit-submit') {
+    const email = document.getElementById('exit-email');
+    if (email && email.value.includes('@')) {
+      document.getElementById('exit-confirm').style.display = 'block';
+      email.style.display = 'none';
+      e.target.style.display = 'none';
+    }
+  }
+  if (e.target && e.target.id === 'contact-submit') {
+    const confirm = document.getElementById('contact-confirm');
+    if (confirm) confirm.style.display = 'block';
+  }
+  if (e.target && e.target.id === 'conf-restart') {
+    flowState.step=1;
+    flowState.data={pakket:'lokaal',bedrijfsnaam:'',eigenSite:'',googleUrl:'',straatHuisnummer:'',postcodePlaats:'',telefoon:'',achtergrondkleur:'#0F3D2E',tekstkleur:'#FFFFFF'};
+    showPage('home');
+    renderFlow();
+  }
+});
+
+// ── SIGNUP FLOW ───────────────────────────────────────────
+const COLOR_PALETTE=['#0F3D2E','#15523E','#1B6750','#1A56A0','#072539','#0C447C','#534AB7','#3C3489','#993C1D','#D85A30','#993556','#D4537E','#B8962E','#E8C547','#444441','#1A1A1A','#FFFFFF','#FAF8F3'];
+const ICON_ARROW='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const ICON_CHECK='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M5 12l5 5L20 7"/></svg>';
+
+const flowState = {
+  step:1,
+  data:{pakket:'lokaal',bedrijfsnaam:'',eigenSite:'',googleUrl:'',straatHuisnummer:'',postcodePlaats:'',telefoon:'',achtergrondkleur:'#0F3D2E',tekstkleur:'#FFFFFF'}
+};
+
+function renderProgress() {
+  const wrap = document.getElementById('flow-progress');
+  if (!wrap) return;
+  const steps = t('flow.steps');
+  wrap.innerHTML = steps.map((label,i)=>{
+    const n=i+1;
+    const state=n<flowState.step?'done':(n===flowState.step?'active':'');
+    const icon=n<flowState.step?ICON_CHECK:n;
+    return `<div class="flow-progress-step ${state}"><div class="step-circle">${icon}</div> ${label}</div>`;
+  }).join('');
+}
+
+function renderFlowBody() {
+  const body = document.getElementById('flow-body');
+  if (!body) return;
+  if (flowState.step===1) body.innerHTML=stepPackageHtml();
+  else if (flowState.step===2) body.innerHTML=stepBusinessHtml();
+  else if (flowState.step===3) body.innerHTML=stepStyleHtml();
+  else if (flowState.step===4) body.innerHTML=stepPaymentHtml();
+  else if (flowState.step===5) finishSignup();
+  attachStepHandlers();
+}
+
+function stepPackageHtml(){
+  const p=flowState.data.pakket;
+  return `<h3>${t('flow.pkg.h')}</h3><p class="flow-sub">${t('flow.pkg.sub')}</p>
+  <div class="pkg-pick">
+    <div class="pkg-pick-card ${p==='lokaal'?'selected':''}" data-pkg="lokaal">
+      <h4>${t('flow.pkg.lokaal.name')}</h4><div class="pkg-price">${t('flow.pkg.lokaal.price')} <span>/ ${t('pricing.permonth')}</span></div><p class="desc">${t('flow.pkg.lokaal.desc')}</p>
+    </div>
+    <div class="pkg-pick-card ${p==='pro'?'selected':''}" data-pkg="pro">
+      <h4>${t('flow.pkg.pro.name')}</h4><div class="pkg-price">${t('flow.pkg.pro.price')} <span>/ ${t('pricing.permonth')}</span></div><p class="desc">${t('flow.pkg.pro.desc')}</p>
+    </div>
+  </div>
+  <div class="form-actions"><div class="spacer"></div><button class="btn-primary" id="flow-next-1">${t('flow.btn.next')} ${ICON_ARROW}</button></div>`;
+}
+
+function stepBusinessHtml(){
+  const d=flowState.data;
+  return `<h3>${t('flow.biz.h')}</h3><p class="flow-sub">${t('flow.biz.sub')}</p>
+  <div class="form-row"><label>${t('flow.biz.naam')}</label><input type="text" id="f-bedrijfsnaam" value="${d.bedrijfsnaam}" placeholder="${LANG==='nl'?'Bijv. Loodgietersbedrijf Van Dijk':'E.g. Van Dijk Plumbing'}"></div>
+  <div class="form-row"><label>${t('flow.biz.straat')}</label><input type="text" id="f-straat" value="${d.straatHuisnummer}" placeholder="${LANG==='nl'?'Hoofdstraat 12':'Main Street 12'}"></div>
+  <div class="form-row"><label>${t('flow.biz.postcode')}</label><input type="text" id="f-postcode" value="${d.postcodePlaats}" placeholder="${LANG==='nl'?'1234 AB Amsterdam':'1234 AB Amsterdam'}"></div>
+  <div class="form-row"><label>${t('flow.biz.tel')} <span style="font-weight:400;color:var(--ink-soft);">${t('flow.biz.telopt')}</span></label><input type="text" id="f-telefoon" value="${d.telefoon}" placeholder="${LANG==='nl'?'06 12345678':'+31 6 12345678'}"><p class="hint">${t('flow.biz.tel.hint')}</p></div>
+  <div class="form-row"><label>${t('flow.biz.site')}</label><input type="url" id="f-eigensite" value="${d.eigenSite}" placeholder="https://jouwbedrijf.nl"><p class="hint">${t('flow.biz.site.hint')}</p></div>
+  <div class="form-row"><label>${t('flow.biz.google')}</label><input type="url" id="f-googleurl" value="${d.googleUrl}" placeholder="https://g.page/r/.../review"><p class="hint">${t('flow.biz.google.hint')}</p></div>
+  <div class="form-actions"><button class="btn-secondary" id="flow-back-2">${t('flow.btn.back')}</button><div class="spacer"></div><button class="btn-primary" id="flow-next-2">${t('flow.btn.next')} ${ICON_ARROW}</button></div>`;
+}
+
+function colorBlock(key, label, val) {
+  return `<div class="form-row"><label>${label}</label>
+  <div class="color-row">${COLOR_PALETTE.map(c=>`<div class="color-swatch ${val.toUpperCase()===c.toUpperCase()?'selected':''}" data-color="${c}" data-target="${key}" style="background:${c};border:1px solid ${c==='#FFFFFF'||c==='#FAF8F3'?'var(--line)':'transparent'};"></div>`).join('')}</div>
+  <div class="hex-input-row"><div class="hex-swatch-preview" id="preview-${key}" style="background:${val};"></div><input type="text" id="hex-${key}" value="${val}" maxlength="7" placeholder="#0F3D2E"><span class="hint">${t('flow.style.hex')}</span></div></div>`;
+}
+
+function stepStyleHtml(){
+  const d=flowState.data;
+  return `<h3>${t('flow.style.h')}</h3><p class="flow-sub">${t('flow.style.sub')}</p>
+  ${colorBlock('achtergrondkleur',t('flow.style.bg'),d.achtergrondkleur)}
+  ${colorBlock('tekstkleur',t('flow.style.fg'),d.tekstkleur)}
+  <div class="form-row"><label>${t('flow.style.preview')}</label>
+  <div class="color-pair-preview" id="color-preview-pair" style="background:${d.achtergrondkleur};color:${d.tekstkleur};">${t('flow.style.preview.text')}</div></div>
+  <div class="form-actions"><button class="btn-secondary" id="flow-back-3">${t('flow.btn.back')}</button><div class="spacer"></div><button class="btn-primary" id="flow-next-3">${t('flow.btn.next')} ${ICON_ARROW}</button></div>`;
+}
+
+function stepPaymentHtml(){
+  const d=flowState.data, isL=d.pakket==='lokaal';
+  return `<h3>${t('flow.pay.h')}</h3><p class="flow-sub">${t('flow.pay.sub')}</p>
+  <div class="summary-row"><span class="lbl">${t('flow.pay.biz')}</span><span>${d.bedrijfsnaam||'—'}</span></div>
+  <div class="summary-row"><span class="lbl">${t('flow.pay.pkg')}</span><span>${isL?t('flow.pkg.lokaal.name'):t('flow.pkg.pro.name')}</span></div>
+  <div class="summary-row total"><span class="lbl">${t('flow.pay.after')}</span><span>${isL?t('flow.pkg.lokaal.price'):t('flow.pkg.pro.price')} / ${t('pricing.permonth')}</span></div>
+  <div style="margin-top:24px;">
+    <div class="form-row"><label>${t('flow.pay.method')}</label><div class="fake-card-input"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> ${t('flow.pay.stripe')}</div></div>
+    <div class="form-row"><label>${t('flow.pay.email')}</label><input type="email" id="f-email" placeholder="${LANG==='nl'?'naam@bedrijf.nl':'name@company.com'}"><p class="hint">${t('flow.pay.email.hint')}</p></div>
+  </div>
+  <div class="form-actions"><button class="btn-secondary" id="flow-back-4">${t('flow.btn.back')}</button><div class="spacer"></div><button class="btn-primary" id="flow-next-4">${t('flow.pay.cta')} ${ICON_ARROW}</button></div>`;
+}
+
+function slugify(name){ return (name||'business').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')||'business'; }
+
+function finishSignup(){
+  const d=flowState.data, slug=slugify(d.bedrijfsnaam);
+  const emailEl = document.getElementById('f-email');
+  const emailVal = emailEl ? emailEl.value : '';
+
+  document.getElementById('conf-heading').textContent = `${d.bedrijfsnaam||t('conf.h1')}`;
+  document.getElementById('conf-sub').textContent = LANG==='nl'
+    ? `We hebben alles ook naar ${emailVal||'je e-mailadres'} gestuurd.`
+    : `We've also sent everything to ${emailVal||'your email address'}.`;
+
+  document.getElementById('conf-summary').innerHTML = `
+    <div class="detail-box"><div class="lbl">${t('conf.detail.biz')}</div><div class="val">${d.bedrijfsnaam||'—'}</div></div>
+    <div class="detail-box"><div class="lbl">${t('conf.detail.pkg')}</div><div class="val">${d.pakket==='lokaal'?t('flow.pkg.lokaal.name'):t('flow.pkg.pro.name')} (${d.pakket==='lokaal'?t('flow.pkg.lokaal.price'):t('flow.pkg.pro.price')}/${t('pricing.permonth')})</div></div>
+    <div class="detail-box"><div class="lbl">${t('conf.detail.color')}</div><div class="val" style="display:flex;align-items:center;gap:8px;"><span style="width:16px;height:16px;border-radius:4px;background:${d.achtergrondkleur};display:inline-block;border:1px solid var(--line);"></span>${d.achtergrondkleur}</div></div>
+    <div class="detail-box"><div class="lbl">${t('conf.detail.tel')}</div><div class="val">${d.telefoon||t('conf.detail.notfilled')}</div></div>`;
+
+  document.getElementById('code-popup').textContent = `<script src="https://reviewshield.nl/widget/${slug}.js" data-mode="popup"><\/script>`;
+  document.getElementById('code-embed').textContent = `<div id="rs-embed-${slug}"></div>\n<script src="https://reviewshield.nl/widget/${slug}.js" data-mode="embed" data-target="rs-embed-${slug}"><\/script>`;
+
+  applyTranslations();
+  showPage('confirmation');
+}
+
+function attachStepHandlers(){
+  const n1=document.getElementById('flow-next-1');
+  if(n1) n1.addEventListener('click',()=>{flowState.step=2;renderFlow();});
+  document.querySelectorAll('.pkg-pick-card').forEach(c=>{
+    c.addEventListener('click',()=>{flowState.data.pakket=c.dataset.pkg;renderFlowBody();});
+  });
+
+  const back2=document.getElementById('flow-back-2'), n2=document.getElementById('flow-next-2');
+  if(back2) back2.addEventListener('click',()=>{flowState.step=1;renderFlow();});
+  if(n2) n2.addEventListener('click',()=>{
+    flowState.data.bedrijfsnaam=document.getElementById('f-bedrijfsnaam').value;
+    flowState.data.straatHuisnummer=document.getElementById('f-straat').value;
+    flowState.data.postcodePlaats=document.getElementById('f-postcode').value;
+    flowState.data.telefoon=document.getElementById('f-telefoon').value;
+    flowState.data.eigenSite=document.getElementById('f-eigensite').value;
+    flowState.data.googleUrl=document.getElementById('f-googleurl').value;
+    flowState.step=3;renderFlow();
+  });
+
+  const back3=document.getElementById('flow-back-3'), n3=document.getElementById('flow-next-3');
+  if(back3) back3.addEventListener('click',()=>{flowState.step=2;renderFlow();});
+  if(n3) n3.addEventListener('click',()=>{flowState.step=4;renderFlow();});
+
+  document.querySelectorAll('.color-swatch').forEach(sw=>{
+    sw.addEventListener('click',()=>{
+      flowState.data[sw.dataset.target]=sw.dataset.color;
+      renderFlowBody();
+    });
+  });
+  ['achtergrondkleur','tekstkleur'].forEach(key=>{
+    const inp=document.getElementById('hex-'+key);
+    if(inp) inp.addEventListener('input',()=>{
+      let v=inp.value.trim();
+      if(!v.startsWith('#')) v='#'+v;
+      if(/^#[0-9A-Fa-f]{6}$/.test(v)){
+        flowState.data[key]=v.toUpperCase();
+        const prev=document.getElementById('preview-'+key);
+        if(prev) prev.style.background=v;
+        const pair=document.getElementById('color-preview-pair');
+        if(pair){pair.style.background=flowState.data.achtergrondkleur;pair.style.color=flowState.data.tekstkleur;}
+      }
+    });
+  });
+
+  const back4=document.getElementById('flow-back-4'), n4=document.getElementById('flow-next-4');
+  if(back4) back4.addEventListener('click',()=>{flowState.step=3;renderFlow();});
+  if(n4) n4.addEventListener('click',()=>{flowState.step=5;renderFlow();});
+}
+
+function renderFlow(){ renderProgress(); renderFlowBody(); }
+
+// ── INIT ──────────────────────────────────────────────────
+renderBranches();
+renderWidgetPreviews();
+renderReviewStars();
+renderFaq();
+renderFlow();
+calculateRoi();
+buildStarWidget('hero-widget-mount', handleHeroRating);
+renderDemoInitial();
+
+</script>
+</body>
+</html>
