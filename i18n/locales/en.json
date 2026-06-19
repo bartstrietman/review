@@ -1,0 +1,400 @@
+{
+  "nav": {
+    "how": "How it works",
+    "demo": "Demo",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "cta": "Sign up"
+  },
+  "hero": {
+    "eyebrow": "For local businesses",
+    "h1": "Let happy customers speak. Keep <span class=\"hl\">complaints<svg viewBox=\"0 0 200 14\"><path d=\"M2 10C40 2 160 2 198 10\" stroke=\"#E8C547\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/></svg></span> private.",
+    "lede": "ReviewShield asks every customer for a rating. 4 or 5 stars goes straight to Google. A lower score comes directly to you — never posted online.",
+    "cta": "Start free trial",
+    "demo": "Watch demo",
+    "note": "14 days free, no commitments",
+    "mockurl": "plumbervandjik.com/thank-you",
+    "mockbiz": "Van Dijk Plumbing",
+    "mocktitle": "Thank you for your request"
+  },
+  "trust": {
+    "1": "No technical knowledge needed",
+    "2": "Live within 1 minute",
+    "3": "Cancel anytime"
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "h2": "Three steps, then it runs itself",
+    "sub": "One line of code on the right page, and the rest is automatic.",
+    "step1": {
+      "num": "STEP 1",
+      "h": "Paste the code",
+      "p": "Place one line on the page where happy customers land — like your thank-you page after an appointment or order."
+    },
+    "step2": {
+      "num": "STEP 2",
+      "h": "Customer rates you",
+      "p": "The widget asks for a 1 to 5 star rating, in your own colors and style."
+    },
+    "step3": {
+      "num": "STEP 3",
+      "h": "Right route, automatically",
+      "p": "4 or 5 stars: straight to Google. Lower: feedback comes to you privately, no public review."
+    }
+  },
+  "branches": {
+    "eyebrow": "For every sector with customer contact",
+    "h2": "Works for virtually any business",
+    "sub": "Whether customers come for an appointment, a quote, an order or a job — the principle works the same everywhere."
+  },
+  "examples": {
+    "eyebrow": "What it looks like",
+    "h2": "In your brand colors, on any website",
+    "sub": "The widget adapts to your colors. Three examples in different brand styles below.",
+    "preview": {
+      "q": "How was your experience?"
+    }
+  },
+  "demo": {
+    "eyebrow": "Live demo",
+    "h2": "Try it yourself",
+    "sub": "This is exactly how the widget appears on your customer's website. No real review is affected.",
+    "context": {
+      "label": "EXAMPLE PAGE",
+      "p": "Imagine: a customer of Anna's Salon just had a haircut and lands on the thank-you page.",
+      "thanks": "Thank you for your visit"
+    },
+    "reset": "Reset demo",
+    "widget": {
+      "q": "How was your experience at Anna's Salon?",
+      "hint": "Click on a number of stars",
+      "redirect": {
+        "title": "Great to hear!",
+        "sub": "You are now being redirected to Google to leave your review.",
+        "btn": "Go to Google Reviews"
+      },
+      "thanks": "Thank you for your review!",
+      "feedback": {
+        "title": "We'd love to make it right",
+        "sub": "Your feedback goes directly and privately to the business. No public review will be posted.",
+        "placeholder": "What could we do better?",
+        "btn": "Send feedback"
+      },
+      "feedbackthanks": {
+        "title": "Thank you for your feedback",
+        "sub": "The business has been notified and may contact you."
+      }
+    }
+  },
+  "roi": {
+    "eyebrow": "Calculate it yourself",
+    "h2": "What a better score is worth to you",
+    "sub": "Enter your current situation and see the impact of more positive reviews on your revenue.",
+    "klanten": {
+      "lbl": "New inquiries per month",
+      "unit": "Number"
+    },
+    "waarde": {
+      "lbl": "Average value per customer (€)",
+      "unit": "Amount"
+    },
+    "score": {
+      "lbl": "Current Google score",
+      "unit": "Score"
+    },
+    "result": {
+      "lbl": "Estimated extra revenue per month"
+    },
+    "explainer": {
+      "default": "Research on local search results shows that a higher Google score correlates with more inquiries. This is an estimate, not a guarantee.",
+      "maxed": "Your score is already close to the maximum. The biggest benefit of ReviewShield is then preventing future negative reviews."
+    }
+  },
+  "testimonials": {
+    "1": {
+      "text": "Within two months we went from 4.1 to 4.6 on Google. Complaints now reach me instead of going public.",
+      "biz": "Van Dijk Plumbing"
+    },
+    "2": {
+      "text": "Installation took me literally two minutes. No technical knowledge needed, and it works exactly as promised.",
+      "biz": "Anna's Salon"
+    },
+    "3": {
+      "text": "We now get notified much more often when a customer is unhappy, before it becomes a public review.",
+      "biz": "Bakker & Sons Moving"
+    },
+    "eyebrow": "Reviews",
+    "h2": "Business owners who already improved their score"
+  },
+  "privacy": {
+    "1": {
+      "h": "Feedback data",
+      "p": "Submitted complaints (1-3 stars) are forwarded directly and exclusively to you as the business owner via email. They are not stored on our servers and not shared with third parties."
+    },
+    "2": {
+      "h": "End customer anonymity",
+      "p": "The widget does not ask for your end customer's name or email address. Only the star rating and submitted text are forwarded. The customer remains anonymous if they wish."
+    },
+    "3": {
+      "h": "Your business data",
+      "p": "Your name, email address and payment details are managed via Stripe, a certified payment processor. We never have access to your payment card details."
+    },
+    "eyebrow": "Data & processing",
+    "h2": "What happens with data",
+    "sub": "Transparency about data processing matters for both you as a business and your end customers. Here's how it works."
+  },
+  "compare": {
+    "eyebrow": "Fair comparison",
+    "h2": "Why this is cheaper and simpler",
+    "sub": "Reputation management tools have existed for a while — usually priced and built for large companies.",
+    "col2": "Large reputation tools",
+    "col3": "Manual follow-up",
+    "row1": {
+      "lbl": "Price per month",
+      "c3": "Free, but takes time"
+    },
+    "row2": {
+      "lbl": "Setup time",
+      "us": "±1 minute",
+      "c2": "Implementation project",
+      "c3": "Immediate, each time"
+    },
+    "row3": {
+      "lbl": "Capture negative feedback"
+    },
+    "auto": "Automatic",
+    "manual": "Only if you notice it",
+    "row4": {
+      "lbl": "Suitable for sole traders"
+    },
+    "tooexp": "Usually too expensive",
+    "row5": {
+      "lbl": "Contract term"
+    },
+    "none": "None",
+    "yearly": "Often annual contract"
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "h2": "Simple prices, no surprises",
+    "sub": "Start with one platform, or cover everything at once. Cancel monthly.",
+    "lokaal": {
+      "name": "Local",
+      "sub": "For those just starting with review management",
+      "f1": "Widget linked to 1 platform (e.g. Google)",
+      "f2": "Ready-made WhatsApp and email templates",
+      "f3": "Basic color customizable",
+      "f4": "Live within 1 minute",
+      "cta": "Choose Local"
+    },
+    "pro": {
+      "name": "Professional",
+      "sub": "For those who want to be everywhere",
+      "f1": "Unlimited platforms (Google, Trustpilot, TripAdvisor)",
+      "f2": "Full brand styling: color, logo, font",
+      "f3": "Ready-made WhatsApp and email templates",
+      "f4": "Live within 1 minute",
+      "cta": "Choose Professional"
+    },
+    "popular": "Most popular",
+    "permonth": "month",
+    "trial": "14 days free trial"
+  },
+  "urgency": {
+    "eyebrow": "Why now",
+    "h2": "Every month you wait costs you something",
+    "sub": "Unanswered negative reviews and missed positive reviews accumulate, even when you're not looking.",
+    "stat1": "of consumers read online reviews of a local business before visiting or contacting them.",
+    "stat2": "only choose a business with four or more stars. Below 4 stars, more and more potential customers will skip you.",
+    "stat3": "free to experience it yourself. The sooner you start, the sooner satisfied customers become visible.",
+    "days": "days",
+    "source": "Sources: Capital One Shopping Research (2025-2026), BrightLocal Local Consumer Review Survey (2026)"
+  },
+  "exit": {
+    "h": "Not ready for a subscription yet?",
+    "p": "Leave your email and receive a free guide: 5 ways to get more reviews.",
+    "btn": "Send me the guide",
+    "confirm": "Thanks! The guide is on its way to your inbox."
+  },
+  "signup": {
+    "eyebrow": "Sign up",
+    "h2": "How to get started",
+    "sub": "A few short steps. At the end, your own widget code lands in your inbox."
+  },
+  "back": "Back to homepage",
+  "conf": {
+    "eyebrow": "Registration complete",
+    "h1": "Your widget is ready",
+    "sub": "We've also sent everything to your email.",
+    "opt1": {
+      "tag": "Option 1",
+      "h": "As a pop-up",
+      "p": "Place this code on the page where happy customers arrive. The widget appears automatically as a pop-up."
+    },
+    "opt2": {
+      "tag": "Option 2",
+      "h": "As an embedded block",
+      "p": "This shows the widget permanently in a fixed place on your page — quieter than a pop-up, ideal for a contact page or footer."
+    },
+    "howbtn": "How to install",
+    "faqbtn": "FAQ",
+    "restart": "Simulate new sign-up",
+    "detail": {
+      "biz": "Business",
+      "pkg": "Package",
+      "color": "Brand style",
+      "tel": "Phone",
+      "notfilled": "Not provided"
+    }
+  },
+  "howpage": {
+    "eyebrow": "Documentation",
+    "h1": "How it works & installing",
+    "sub": "Everything you need to get the widget live on your website.",
+    "s1": {
+      "h": "1. Choose where the widget goes",
+      "p": "The widget works best on a page people see after a positive experience: a thank-you page after an order, a confirmation page after an appointment, or an email after completing a job."
+    },
+    "s2": {
+      "h": "2. Paste the code into your website",
+      "p": "Open your website's page editor (WordPress, Shopify, Wix, or your own HTML file) and paste the code just before the closing </body> tag, or in an HTML block in the desired location."
+    },
+    "s3": {
+      "h": "3. Test the widget yourself",
+      "p": "Open your page in an incognito window and click through the stars. With 4 or 5 stars you get redirected to your review link; with a lower score you see the internal feedback form."
+    },
+    "s4": {
+      "h": "4. Pop-up versus embedded block",
+      "p": "The pop-up code makes the widget appear automatically after a few seconds on the page. The embedded block shows the widget permanently in a fixed spot — useful if you want it visible rather than as an overlay."
+    },
+    "s5": {
+      "h": "5. What if a customer closes the pop-up?",
+      "p": "No problem. Whoever closes it simply hasn't given a rating — that's always their choice. The widget never intervenes if someone doesn't want to participate. Customers without a smartphone don't need to do anything; the widget is completely optional."
+    }
+  },
+  "faqpage": {
+    "eyebrow": "Support",
+    "h1": "Frequently asked questions",
+    "sub": "Can't find your question? Send an email to support{'@'}reviewshield.nl."
+  },
+  "contactpage": {
+    "eyebrow": "Contact",
+    "h1": "Get in touch",
+    "sub": "Have a question, want to report something, or stuck somewhere? We respond within one business day."
+  },
+  "contact": {
+    "email": {
+      "h": "Email"
+    },
+    "response": {
+      "h": "Response time",
+      "p": "We respond within one business day. Installation questions are often resolved the same day."
+    },
+    "opzeg": {
+      "h": "Cancellation",
+      "p": "Cancel by sending a simple email to cancel{'@'}reviewshield.nl. No hassle, no forms."
+    },
+    "form": {
+      "h": "Send a message",
+      "name": "Name",
+      "email": "Email address",
+      "msg": "Message",
+      "btn": "Send message",
+      "confirm": "Thank you! Your message has been received. We'll respond within one business day."
+    }
+  },
+  "footer": {
+    "copy": "© 2026 ReviewShield · Prototype"
+  },
+  "flow": {
+    "steps": [
+      "Package",
+      "Business",
+      "Style",
+      "Payment",
+      "Done"
+    ],
+    "pkg": {
+      "h": "Which package suits you?",
+      "sub": "You can always upgrade later.",
+      "lokaal": {
+        "name": "Local",
+        "price": "€19.99",
+        "desc": "1 platform, basic color"
+      },
+      "pro": {
+        "name": "Professional",
+        "price": "€34.49",
+        "desc": "Unlimited platforms, full branding"
+      }
+    },
+    "biz": {
+      "h": "Tell us about your business",
+      "sub": "We use this to automatically build your widget.",
+      "naam": "Business name",
+      "straat": "Street and house number",
+      "postcode": "Zip code and city",
+      "tel": {
+        "label": "Phone number",
+        "hint": "Used for our records. Optionally shown in the feedback form so an unhappy customer can call you directly."
+      },
+      "telopt": "(optional)",
+      "site": {
+        "label": "Your business website URL",
+        "hint": "The page where you'll place the widget, e.g. your thank-you page."
+      },
+      "google": {
+        "label": "Google Business Page — review link",
+        "hint": "This is the specific \"write a review\" link. Found in your Google Business Profile under \"Ask for reviews\"."
+      }
+    },
+    "style": {
+      "h": "Choose your brand style",
+      "sub": "Set a background and text color, or enter your own color code.",
+      "bg": "Background color",
+      "fg": "Text color",
+      "preview": {
+        "label": "Preview",
+        "text": "How was your experience?"
+      },
+      "hex": "Custom color code (hex)"
+    },
+    "pay": {
+      "h": "Almost done",
+      "sub": "14 days free. You only pay after the trial period, and you can cancel anytime.",
+      "biz": "Business",
+      "pkg": "Package",
+      "after": "After trial",
+      "method": "Payment method",
+      "stripe": "Stripe Checkout will load here (integration coming in a later build phase)",
+      "email": {
+        "label": "Email address",
+        "hint": "Your widget code will be sent here immediately after confirmation."
+      },
+      "cta": "Start free trial"
+    },
+    "btn": {
+      "next": "Next",
+      "back": "Back"
+    }
+  },
+  "otp": {
+    "h": "Email & verification",
+    "sub": "No password needed. We send you a 6-digit code by email.",
+    "email": "Email address",
+    "send": "Send verification code",
+    "code": "Verification code",
+    "codeHint": "Check your inbox for the 6-digit code.",
+    "verify": "Verify & finish",
+    "resend": "Resend code",
+    "sent": "Code sent to",
+    "back": "Different email",
+    "loggedInAs": "Logged in as",
+    "finish": "Complete sign-up",
+    "dev": "Dev login (skip OTP)",
+    "saving": "Saving…",
+    "invalidEmail": "Enter a valid email address.",
+    "invalidCode": "The code is incorrect. Try again."
+  }
+}

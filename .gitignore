@@ -1,0 +1,15 @@
+# Secrets — nooit committen
+.env
+.env.local
+.dev.vars
+
+# Nuxt / build
+node_modules
+.nuxt
+.output
+.data
+dist
+.wrangler
+
+# OS
+.DS_Store

@@ -1,0 +1,400 @@
+{
+  "nav": {
+    "how": "Hoe het werkt",
+    "demo": "Demo",
+    "pricing": "Pakketten",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "cta": "Aanmelden"
+  },
+  "hero": {
+    "eyebrow": "Voor lokale ondernemers",
+    "h1": "Laat tevreden klanten spreken. Houd <span class=\"hl\">klachten<svg viewBox=\"0 0 200 14\"><path d=\"M2 10C40 2 160 2 198 10\" stroke=\"#E8C547\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/></svg></span> privé.",
+    "lede": "ReviewShield vraagt elke klant om een score. Bij 4 of 5 sterren gaat hij direct naar Google. Bij een lagere score komt het rechtstreeks bij jou terecht — niet online.",
+    "cta": "Start gratis proefperiode",
+    "demo": "Bekijk demo",
+    "note": "14 dagen gratis, geen verplichtingen",
+    "mockurl": "vandijkloodgieter.nl/bedankt",
+    "mockbiz": "Loodgietersbedrijf Van Dijk",
+    "mocktitle": "Bedankt voor uw aanvraag"
+  },
+  "trust": {
+    "1": "Geen technische kennis nodig",
+    "2": "Live binnen 1 minuut",
+    "3": "Geen opzegtermijn"
+  },
+  "how": {
+    "eyebrow": "Hoe het werkt",
+    "h2": "Drie stappen, daarna draait het zichzelf",
+    "sub": "Eén regel code op de juiste pagina, en de rest gaat automatisch.",
+    "step1": {
+      "num": "STAP 1",
+      "h": "Plak de code",
+      "p": "Je plaatst één regel op de pagina waar tevreden klanten komen — zoals je bedankpagina na een afspraak of bestelling."
+    },
+    "step2": {
+      "num": "STAP 2",
+      "h": "Klant geeft score",
+      "p": "De widget vraagt om een beoordeling van 1 tot 5 sterren, in jouw eigen kleur en stijl."
+    },
+    "step3": {
+      "num": "STAP 3",
+      "h": "Juiste route, automatisch",
+      "p": "4 of 5 sterren: direct naar Google. Lager: feedback komt privé bij jou, geen review online."
+    }
+  },
+  "branches": {
+    "eyebrow": "Voor elke sector met klantcontact",
+    "h2": "Werkt voor vrijwel elk bedrijf",
+    "sub": "Of je klanten nu komen voor een afspraak, een offerte, een bestelling of een klus — het principe werkt overal hetzelfde."
+  },
+  "examples": {
+    "eyebrow": "Zo ziet het eruit",
+    "h2": "In jouw huisstijl, op elke website",
+    "sub": "De widget past zich aan jouw kleuren aan. Hieronder drie voorbeelden in verschillende huisstijlen.",
+    "preview": {
+      "q": "Hoe was uw ervaring?"
+    }
+  },
+  "demo": {
+    "eyebrow": "Live demo",
+    "h2": "Probeer het zelf",
+    "sub": "Dit is exact hoe de widget op de website van je klant verschijnt. Geen echte review wordt hierdoor beïnvloed.",
+    "context": {
+      "label": "VOORBEELDPAGINA",
+      "p": "Stel je voor: een klant van Kapsalon Anna heeft net een knipbeurt gehad en komt op de bedankpagina terecht.",
+      "thanks": "Bedankt voor uw bezoek"
+    },
+    "reset": "Demo opnieuw starten",
+    "widget": {
+      "q": "Hoe was uw ervaring met Kapsalon Anna?",
+      "hint": "Klik op een aantal sterren",
+      "redirect": {
+        "title": "Fijn om te horen!",
+        "sub": "U wordt nu doorgestuurd naar Google om uw review achter te laten.",
+        "btn": "Naar Google Reviews"
+      },
+      "thanks": "Bedankt voor uw review!",
+      "feedback": {
+        "title": "We willen het graag rechtzetten",
+        "sub": "Uw feedback gaat direct en privé naar de ondernemer. Er verschijnt geen publieke review.",
+        "placeholder": "Wat kunnen we beter doen?",
+        "btn": "Feedback versturen"
+      },
+      "feedbackthanks": {
+        "title": "Bedankt voor uw feedback",
+        "sub": "De ondernemer heeft een melding ontvangen en neemt mogelijk contact op."
+      }
+    }
+  },
+  "roi": {
+    "eyebrow": "Reken het zelf uit",
+    "h2": "Wat levert een betere score je op",
+    "sub": "Vul je huidige situatie in en zie het effect van meer positieve reviews op je omzet.",
+    "klanten": {
+      "lbl": "Nieuwe aanvragen per maand",
+      "unit": "Aantal"
+    },
+    "waarde": {
+      "lbl": "Gemiddelde waarde per klant (€)",
+      "unit": "Bedrag"
+    },
+    "score": {
+      "lbl": "Huidige Google-score",
+      "unit": "Score"
+    },
+    "result": {
+      "lbl": "Geschatte extra omzet per maand"
+    },
+    "explainer": {
+      "default": "Onderzoek naar lokale zoekresultaten laat zien dat een hogere Google-score samenhangt met meer aanvragen. Dit is een indicatie, geen garantie.",
+      "maxed": "Je score zit al dicht bij het maximum. De grootste winst van ReviewShield zit dan in het voorkomen van negatieve reviews."
+    }
+  },
+  "testimonials": {
+    "1": {
+      "text": "Binnen twee maanden gingen we van 4,1 naar 4,6 op Google. Klachten komen nu bij mij terecht in plaats van online.",
+      "biz": "Loodgietersbedrijf De Vries"
+    },
+    "2": {
+      "text": "Installatie kostte me letterlijk twee minuten. Geen technische kennis nodig, en het werkt direct zoals beloofd.",
+      "biz": "Kapsalon Anna"
+    },
+    "3": {
+      "text": "We krijgen nu veel vaker een seintje als een klant ontevreden is, vóórdat het een publieke review wordt.",
+      "biz": "Verhuisbedrijf Bakker & Zn"
+    },
+    "eyebrow": "Ervaringen",
+    "h2": "Ondernemers die hun score al verbeterden"
+  },
+  "privacy": {
+    "1": {
+      "h": "Feedbackdata",
+      "p": "Ingevulde klachten (1-3 sterren) worden direct en uitsluitend doorgestuurd naar jou als ondernemer via e-mail. Ze worden niet opgeslagen op onze servers en niet gedeeld met derden."
+    },
+    "2": {
+      "h": "Anonimiteit eindklant",
+      "p": "De widget vraagt geen naam of e-mailadres van je eindklant. Alleen de sterrenscore en ingevulde tekst worden doorgestuurd. De klant blijft anoniem als hij dat wil."
+    },
+    "3": {
+      "h": "Jouw bedrijfsgegevens",
+      "p": "Je naam, e-mailadres en betaalgegevens worden beheerd via Stripe, een gecertificeerde betaalverwerker. Wij hebben nooit toegang tot je betaalkaartgegevens."
+    },
+    "eyebrow": "Gegevens & verwerking",
+    "h2": "Wat er met gegevens gebeurt",
+    "sub": "Voor zowel jou als ondernemer als je eindklanten is duidelijkheid over dataverwerking belangrijk. Hier is hoe het werkt."
+  },
+  "compare": {
+    "eyebrow": "Eerlijke vergelijking",
+    "h2": "Waarom dit goedkoper en simpeler is",
+    "sub": "Reputatiebeheer-tools bestaan al langer — meestal met een prijs en complexiteit gericht op grote bedrijven.",
+    "col2": "Grote reputatie-tools",
+    "col3": "Zelf nabellen",
+    "row1": {
+      "lbl": "Prijs per maand",
+      "c3": "Gratis, maar tijd"
+    },
+    "row2": {
+      "lbl": "Installatietijd",
+      "us": "±1 minuut",
+      "c2": "Implementatietraject",
+      "c3": "Direct, elke keer"
+    },
+    "row3": {
+      "lbl": "Negatieve feedback opvangen"
+    },
+    "auto": "Automatisch",
+    "manual": "Alleen als je het merkt",
+    "row4": {
+      "lbl": "Geschikt voor eenmanszaak"
+    },
+    "tooexp": "Vaak te duur",
+    "row5": {
+      "lbl": "Opzegtermijn"
+    },
+    "none": "Geen",
+    "yearly": "Vaak jaarcontract"
+  },
+  "pricing": {
+    "eyebrow": "Pakketten",
+    "h2": "Simpele prijzen, geen verrassingen",
+    "sub": "Begin met één platform, of dek alles in één keer af. Maandelijks opzegbaar.",
+    "lokaal": {
+      "name": "Lokaal",
+      "sub": "Voor wie net begint met reviewbeheer",
+      "f1": "Widget gekoppeld aan 1 platform (bijv. Google)",
+      "f2": "Kant-en-klare WhatsApp- en mailteksten",
+      "f3": "Basiskleur instelbaar",
+      "f4": "Installatie binnen 1 minuut",
+      "cta": "Kies Lokaal"
+    },
+    "pro": {
+      "name": "Professional",
+      "sub": "Voor wie overal aanwezig wil zijn",
+      "f1": "Onbeperkt platforms (Google, Trustpilot, TripAdvisor)",
+      "f2": "Volledige huisstijl: kleur, logo, lettertype",
+      "f3": "Kant-en-klare WhatsApp- en mailteksten",
+      "f4": "Installatie binnen 1 minuut",
+      "cta": "Kies Professional"
+    },
+    "popular": "Meest gekozen",
+    "permonth": "maand",
+    "trial": "14 dagen gratis proberen"
+  },
+  "urgency": {
+    "eyebrow": "Waarom nu",
+    "h2": "Elke maand wachten kost je iets",
+    "sub": "Onbeantwoorde negatieve reviews en gemiste positieve reviews stapelen zich op, ook als je er niet naar kijkt.",
+    "stat1": "van de consumenten leest online reviews van een lokaal bedrijf voordat ze langsgaan of contact opnemen.",
+    "stat2": "kiest alleen een bedrijf met vier sterren of meer. Onder de 4 sterren val je voor steeds meer potentiële klanten af.",
+    "stat3": "gratis om het zelf te ervaren. Hoe eerder je begint, hoe eerder tevreden klanten zichtbaar worden.",
+    "days": "dagen",
+    "source": "Bronnen: Capital One Shopping Research (2025-2026), BrightLocal Local Consumer Review Survey (2026)"
+  },
+  "exit": {
+    "h": "Nog niet klaar voor een abonnement?",
+    "p": "Laat je e-mailadres achter en ontvang een gratis gids: 5 manieren om meer reviews te krijgen.",
+    "btn": "Stuur mij de gids",
+    "confirm": "Bedankt! De gids is onderweg naar je inbox."
+  },
+  "signup": {
+    "eyebrow": "Aanmelden",
+    "h2": "Zo werkt de aanmelding",
+    "sub": "Een paar korte stappen. Aan het einde heb je je eigen widget-code in je mailbox."
+  },
+  "back": "Terug naar de homepage",
+  "conf": {
+    "eyebrow": "Aanmelding voltooid",
+    "h1": "Je widget staat klaar",
+    "sub": "We hebben alles ook naar je mail gestuurd.",
+    "opt1": {
+      "tag": "Optie 1",
+      "h": "Als pop-up",
+      "p": "Plaats deze code op de pagina waar tevreden klanten terechtkomen. De widget verschijnt automatisch als pop-up."
+    },
+    "opt2": {
+      "tag": "Optie 2",
+      "h": "Als vast blok",
+      "p": "Dit toont de widget permanent op een vaste plek in je pagina — rustiger dan een pop-up, ideaal voor een contactpagina of footer."
+    },
+    "howbtn": "Hoe werkt installeren",
+    "faqbtn": "Veelgestelde vragen",
+    "restart": "Nieuwe aanmelding simuleren",
+    "detail": {
+      "biz": "Bedrijf",
+      "pkg": "Pakket",
+      "color": "Huisstijl",
+      "tel": "Telefoon",
+      "notfilled": "Niet opgegeven"
+    }
+  },
+  "howpage": {
+    "eyebrow": "Documentatie",
+    "h1": "Hoe werkt het & installeren",
+    "sub": "Alles wat je nodig hebt om de widget live te zetten op je eigen website.",
+    "s1": {
+      "h": "1. Kies waar de widget komt",
+      "p": "De widget werkt het best op een pagina die mensen zien ná een positieve ervaring: een bedankpagina na een bestelling, een bevestigingspagina na een afspraak, of een mail na afronding van een klus."
+    },
+    "s2": {
+      "h": "2. Plak de code in je website",
+      "p": "Open de pagina-editor van je website (WordPress, Shopify, Wix, of een eigen HTML-bestand) en plak de code vlak vóór de afsluitende </body>-tag, of in een tekst/HTML-blok op de gewenste plek."
+    },
+    "s3": {
+      "h": "3. Test de widget zelf",
+      "p": "Open je pagina in een incognitovenster en klik door de sterren. Bij 4 of 5 sterren word je doorgestuurd naar je reviewlink; bij een lagere score zie je het interne feedbackformulier."
+    },
+    "s4": {
+      "h": "4. Pop-up versus vast blok",
+      "p": "De pop-up-code laat de widget automatisch verschijnen na een paar seconden op de pagina. Het vaste blok toont de widget permanent op een plek — handig als je hem zichtbaar wilt houden in plaats van als overlay."
+    },
+    "s5": {
+      "h": "5. Wat als een klant de pop-up wegklikt?",
+      "p": "Geen probleem. Wie wegklikt, heeft simpelweg geen beoordeling gegeven — dat is altijd zijn keuze. De widget grijpt nooit in als iemand niet wil meedoen. Klanten zonder smartphone hoeven niets te doen; de widget is volledig optioneel."
+    }
+  },
+  "faqpage": {
+    "eyebrow": "Support",
+    "h1": "Veelgestelde vragen",
+    "sub": "Staat je vraag er niet bij? Stuur een mail naar support{'@'}reviewshield.nl."
+  },
+  "contactpage": {
+    "eyebrow": "Contact",
+    "h1": "Neem contact op",
+    "sub": "Heb je een vraag, wil je iets doorgeven, of loop je ergens tegenaan? We reageren binnen één werkdag."
+  },
+  "contact": {
+    "email": {
+      "h": "E-mail"
+    },
+    "response": {
+      "h": "Reactietijd",
+      "p": "We reageren binnen één werkdag. Vragen over installatie zijn vaak dezelfde dag opgelost."
+    },
+    "opzeg": {
+      "h": "Opzeggen",
+      "p": "Opzeggen doe je via een simpele mail naar opzeggen{'@'}reviewshield.nl. Geen gedoe, geen formulieren."
+    },
+    "form": {
+      "h": "Stuur een bericht",
+      "name": "Naam",
+      "email": "E-mailadres",
+      "msg": "Bericht",
+      "btn": "Verstuur bericht",
+      "confirm": "Bedankt! Je bericht is ontvangen. We reageren binnen één werkdag."
+    }
+  },
+  "footer": {
+    "copy": "© 2026 ReviewShield · Prototype"
+  },
+  "flow": {
+    "steps": [
+      "Pakket",
+      "Bedrijf",
+      "Huisstijl",
+      "Betaling",
+      "Klaar"
+    ],
+    "pkg": {
+      "h": "Welk pakket past bij jou?",
+      "sub": "Je kunt later altijd upgraden.",
+      "lokaal": {
+        "name": "Lokaal",
+        "price": "€19,99",
+        "desc": "1 platform, basiskleur"
+      },
+      "pro": {
+        "name": "Professional",
+        "price": "€34,49",
+        "desc": "Onbeperkt platforms, volledige huisstijl"
+      }
+    },
+    "biz": {
+      "h": "Vertel ons over je bedrijf",
+      "sub": "Deze gegevens gebruiken we om jouw widget automatisch te maken.",
+      "naam": "Bedrijfsnaam",
+      "straat": "Straat en huisnummer",
+      "postcode": "Postcode en plaats",
+      "tel": {
+        "label": "Telefoonnummer",
+        "hint": "Gebruiken we voor onze administratie. Optioneel tonen in het feedbackformulier, zodat een ontevreden klant je direct kan bellen."
+      },
+      "telopt": "(optioneel)",
+      "site": {
+        "label": "Website-URL van je bedrijf",
+        "hint": "De pagina waar je de widget gaat plaatsen, bijv. je bedankpagina."
+      },
+      "google": {
+        "label": "Google Bedrijfspagina — reviewlink",
+        "hint": "Dit is de specifieke \"schrijf een review\"-link. Te vinden via je Google Bedrijfsprofiel onder \"Reviews aanvragen\"."
+      }
+    },
+    "style": {
+      "h": "Kies de huisstijl",
+      "sub": "Stel een achtergrond- en tekstkleur in, of vul je eigen kleurcode in.",
+      "bg": "Achtergrondkleur",
+      "fg": "Tekstkleur",
+      "preview": {
+        "label": "Voorbeeld",
+        "text": "Hoe was uw ervaring?"
+      },
+      "hex": "Eigen kleurcode (hex)"
+    },
+    "pay": {
+      "h": "Bijna klaar",
+      "sub": "14 dagen gratis. Je betaalt pas na de proefperiode, en je kunt op elk moment opzeggen.",
+      "biz": "Bedrijf",
+      "pkg": "Pakket",
+      "after": "Na proefperiode",
+      "method": "Betaalmethode",
+      "stripe": "Stripe Checkout wordt hier geladen (koppeling volgt in latere bouwfase)",
+      "email": {
+        "label": "E-mailadres",
+        "hint": "Hier ontvang je je widget-code direct na bevestiging."
+      },
+      "cta": "Proefperiode starten"
+    },
+    "btn": {
+      "next": "Volgende",
+      "back": "Terug"
+    }
+  },
+  "otp": {
+    "h": "E-mail & verificatie",
+    "sub": "Geen wachtwoord nodig. We sturen je een 6-cijferige code per e-mail.",
+    "email": "E-mailadres",
+    "send": "Stuur verificatiecode",
+    "code": "Verificatiecode",
+    "codeHint": "Check je inbox voor de 6-cijferige code.",
+    "verify": "Verifieer & rond af",
+    "resend": "Code opnieuw sturen",
+    "sent": "Code verstuurd naar",
+    "back": "Ander e-mailadres",
+    "loggedInAs": "Ingelogd als",
+    "finish": "Aanmelding afronden",
+    "dev": "Dev-login (sla OTP over)",
+    "saving": "Bezig met opslaan…",
+    "invalidEmail": "Vul een geldig e-mailadres in.",
+    "invalidCode": "De code klopt niet. Probeer opnieuw."
+  }
+}

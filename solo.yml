@@ -1,0 +1,14 @@
+name: ReviewShield
+icon_initials: RS
+processes:
+  Dev server:
+    command: pnpm dev
+    working_dir: .
+    auto_start: true
+    auto_restart: false
+    restart_when_changed:
+      - nuxt.config.ts
+      - app.config.ts
+      - package.json
+    env:
+      NODE_ENV: development
