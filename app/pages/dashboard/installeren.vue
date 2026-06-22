@@ -6,6 +6,8 @@ const toast = useToast()
 const origin = useRequestURL().origin
 const { customer } = useMyBusiness()
 
+const previewOpen = ref(false)
+
 const reviewUrl = computed(() => customer.value ? `${origin}/r/${customer.value.slug}` : '')
 const popupCode = computed(() => customer.value
   ? `<script src="${origin}/widget/${customer.value.slug}.js" data-mode="popup"><\/script>` : '')
@@ -37,6 +39,71 @@ useSeoMeta({ title: 'Installeren — ReviewShield' })
     <template #body>
       <div class="max-w-3xl space-y-6">
         <p class="text-muted">{{ t('dash.install.intro') }}</p>
+
+        <!-- LIVE PREVIEW of the popup -->
+        <UCard>
+          <template #header><h2 class="font-semibold">{{ t('dash.install.previewTitle') }}</h2></template>
+          <div class="grid md:grid-cols-[1fr_auto] gap-5 items-start">
+            <div>
+              <p class="text-sm text-muted mb-3">{{ t('dash.install.previewD') }}</p>
+              <!-- mock website with the launcher / popup contained inside -->
+              <div class="relative h-80 rounded-xl border border-default bg-white overflow-hidden">
+                <!-- fake page content -->
+                <div class="p-5">
+                  <div class="flex items-center gap-1.5 mb-4">
+                    <span class="size-2 rounded-full bg-sand-200" />
+                    <span class="size-2 rounded-full bg-sand-200" />
+                    <span class="size-2 rounded-full bg-sand-200" />
+                    <span class="ml-2 h-4 flex-1 max-w-48 rounded bg-elevated" />
+                  </div>
+                  <p class="font-semibold">{{ t('dash.install.mockTitle') }}</p>
+                  <p class="text-sm text-muted">{{ t('dash.install.mockSub') }}</p>
+                  <div class="mt-4 space-y-2">
+                    <div class="h-2.5 w-3/4 rounded bg-elevated" />
+                    <div class="h-2.5 w-1/2 rounded bg-elevated" />
+                  </div>
+                </div>
+
+                <!-- launcher button (matches the real widget) -->
+                <button
+                  v-if="!previewOpen"
+                  type="button"
+                  class="absolute bottom-4 right-4 rounded-full bg-green-700 text-white text-sm font-semibold px-4 py-2.5 shadow-lg hover:bg-green-600 transition-colors"
+                  @click="previewOpen = true"
+                >
+                  {{ t('dash.install.launcher') }}
+                </button>
+                <span v-if="!previewOpen" class="absolute bottom-16 right-4 text-xs text-muted">{{ t('dash.install.tryIt') }}</span>
+
+                <!-- popup overlay (scoped to the preview box) -->
+                <div v-else class="absolute inset-0 bg-black/45 flex items-center justify-center p-3">
+                  <div class="relative w-full max-w-[300px]">
+                    <button
+                      type="button" aria-label="Sluiten"
+                      class="absolute -top-7 right-0 text-white text-2xl leading-none"
+                      @click="previewOpen = false"
+                    >&times;</button>
+                    <iframe
+                      :src="`/r/${customer?.slug}`" title="Review-voorbeeld"
+                      class="w-full rounded-2xl border-0 bg-white" style="height:290px"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- how it works -->
+            <div class="md:w-56">
+              <h3 class="font-semibold text-sm mb-2">{{ t('dash.install.howTitle') }}</h3>
+              <ol class="space-y-2.5">
+                <li v-for="(s, i) in [t('dash.install.how1'), t('dash.install.how2'), t('dash.install.how3')]" :key="i" class="flex gap-2.5 text-sm">
+                  <span class="size-5 shrink-0 rounded-full bg-green-700 text-white text-[11px] flex items-center justify-center font-bold">{{ i + 1 }}</span>
+                  <span class="text-muted">{{ s }}</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </UCard>
 
         <!-- popup -->
         <UCard>

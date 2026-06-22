@@ -516,7 +516,17 @@
       "s2": "2. Paste the code",
       "s2d": "Open your website’s page editor (WordPress, Shopify, Wix, or your own HTML) and paste the code just before the closing </body> tag, or in a text/HTML block.",
       "s3": "3. Test it yourself",
-      "s3d": "Open your page in an incognito window and click through the stars. 4–5 stars redirect to your review link; a lower score shows the internal feedback form."
+      "s3d": "Open your page in an incognito window and click through the stars. 4–5 stars redirect to your review link; a lower score shows the internal feedback form.",
+      "previewTitle": "Preview — what the pop-up looks like",
+      "previewD": "This is an example page of your website. Click the button bottom-right to open the pop-up — exactly what your customer sees.",
+      "mockTitle": "Thanks for your visit!",
+      "mockSub": "Example page on your website.",
+      "launcher": "Leave a review",
+      "tryIt": "Click to try →",
+      "howTitle": "How it works",
+      "how1": "The button appears bottom-right on your page.",
+      "how2": "The customer clicks and gives a rating.",
+      "how3": "4–5 stars → public review · 1–3 stars → private to you."
     },
     "set": {
       "save": "Save",

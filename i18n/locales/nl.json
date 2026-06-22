@@ -516,7 +516,17 @@
       "s2": "2. Plak de code",
       "s2d": "Open de pagina-editor van je website (WordPress, Shopify, Wix, of je eigen HTML) en plak de code vlak vóór de afsluitende </body>-tag, of in een tekst/HTML-blok op de gewenste plek.",
       "s3": "3. Test zelf",
-      "s3d": "Open je pagina in een incognitovenster en klik door de sterren. Bij 4–5 sterren word je doorgestuurd naar je reviewlink; bij een lagere score zie je het interne feedbackformulier."
+      "s3d": "Open je pagina in een incognitovenster en klik door de sterren. Bij 4–5 sterren word je doorgestuurd naar je reviewlink; bij een lagere score zie je het interne feedbackformulier.",
+      "previewTitle": "Voorbeeld — zo ziet de pop-up eruit",
+      "previewD": "Dit is een voorbeeldpagina van jouw website. Klik op de knop rechtsonder om de pop-up te openen — precies wat je klant ziet.",
+      "mockTitle": "Bedankt voor je bezoek!",
+      "mockSub": "Voorbeeldpagina op jouw website.",
+      "launcher": "Laat een review achter",
+      "tryIt": "Klik om te proberen →",
+      "howTitle": "Hoe het werkt",
+      "how1": "De knop verschijnt rechtsonder op je pagina.",
+      "how2": "De klant klikt en geeft een score.",
+      "how3": "4–5 sterren → openbare review · 1–3 sterren → privé bij jou."
     },
     "set": {
       "save": "Opslaan",
