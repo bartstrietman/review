@@ -575,7 +575,11 @@
       "feedbackPlaceholder": "Text field hint",
       "leaveEmpty": "Leave empty to use the default text.",
       "save": "Save",
-      "saved": "Saved"
+      "saved": "Saved",
+      "step1": "Set up",
+      "step2": "Install",
+      "next": "Next: install",
+      "back": "Back to setup"
     }
   }
 }

@@ -114,7 +114,7 @@ useSeoMeta({ title: 'Overzicht — ReviewShield' })
             <li class="flex items-start gap-3">
               <span class="size-6 shrink-0 rounded-full bg-green-700 text-white text-xs flex items-center justify-center font-bold">2</span>
               <div>
-                <p class="text-sm font-medium">{{ t('dash.start.s2') }} <NuxtLink :to="localePath('/dashboard/installeren')" class="text-green-700 underline">→ {{ t('dash.nav.install') }}</NuxtLink></p>
+                <p class="text-sm font-medium">{{ t('dash.start.s2') }} <NuxtLink :to="localePath('/dashboard/widget') + '?step=2'" class="text-green-700 underline">→ {{ t('dash.widget.step2') }}</NuxtLink></p>
                 <p class="text-xs text-muted">{{ t('dash.start.s2d') }}</p>
               </div>
             </li>

@@ -575,7 +575,11 @@
       "feedbackPlaceholder": "Tekstveld-hint",
       "leaveEmpty": "Laat leeg om de standaardtekst te gebruiken.",
       "save": "Opslaan",
-      "saved": "Opgeslagen"
+      "saved": "Opgeslagen",
+      "step1": "Instellen",
+      "step2": "Installeren",
+      "next": "Volgende: installeren",
+      "back": "Terug naar instellen"
     }
   }
 }
