@@ -6,9 +6,11 @@ processes:
     working_dir: .
     auto_start: true
     auto_restart: false
+    port: 2001
     restart_when_changed:
       - nuxt.config.ts
       - app.config.ts
       - package.json
     env:
       NODE_ENV: development
+      PORT: "2001"

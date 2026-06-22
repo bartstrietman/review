@@ -3,7 +3,7 @@ const { t, locale } = useI18n()
 
 const klanten = ref(40)
 const waarde = ref(150)
-const score = ref(4.1)
+const score = ref(4.0)
 
 const pct = computed(() => Math.min(0.18, Math.max(0, 4.7 - score.value) * 0.12))
 const extra = computed(() => Math.round(klanten.value * pct.value * waarde.value))
@@ -28,21 +28,21 @@ const explainer = computed(() => {
         <div class="space-y-6">
           <div>
             <label class="block text-[13px] font-semibold mb-2">{{ t('roi.klanten.lbl') }}</label>
-            <USlider v-model="klanten" :min="5" :max="300" :step="5" />
+            <USlider v-model="klanten" :min="5" :max="200" :step="5" />
             <div class="flex justify-between text-sm text-muted mt-1.5">
               <span>{{ t('roi.klanten.unit') }}</span><strong class="text-default">{{ klanten }}</strong>
             </div>
           </div>
           <div>
             <label class="block text-[13px] font-semibold mb-2">{{ t('roi.waarde.lbl') }}</label>
-            <USlider v-model="waarde" :min="10" :max="2000" :step="10" />
+            <USlider v-model="waarde" :min="20" :max="2000" :step="10" />
             <div class="flex justify-between text-sm text-muted mt-1.5">
               <span>{{ t('roi.waarde.unit') }}</span><strong class="text-default">€{{ waarde }}</strong>
             </div>
           </div>
           <div>
             <label class="block text-[13px] font-semibold mb-2">{{ t('roi.score.lbl') }}</label>
-            <USlider v-model="score" :min="2.5" :max="4.7" :step="0.1" />
+            <USlider v-model="score" :min="3.5" :max="4.6" :step="0.1" />
             <div class="flex justify-between text-sm text-muted mt-1.5">
               <span>{{ t('roi.score.unit') }}</span><strong class="text-default">{{ scoreOut }}</strong>
             </div>

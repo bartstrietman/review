@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const cards = computed(() => [
-  { h: t('privacy.1.h'), p: t('privacy.1.p'), icon: 'i-lucide-mail' },
-  { h: t('privacy.2.h'), p: t('privacy.2.p'), icon: 'i-lucide-user-x' },
+  { h: t('privacy.1.h'), p: t('privacy.1.p'), icon: 'i-lucide-shield-check' },
+  { h: t('privacy.2.h'), p: t('privacy.2.p'), icon: 'i-lucide-lock' },
   { h: t('privacy.3.h'), p: t('privacy.3.p'), icon: 'i-lucide-credit-card' },
 ])
 </script>
 
 <template>
-  <section class="border-y border-default bg-white py-20 sm:py-22">
+  <section class="py-20 sm:py-22">
     <UContainer>
       <MarketingSectionHead :eyebrow="t('privacy.eyebrow')" :title="t('privacy.h2')" :sub="t('privacy.sub')" />
       <div class="grid md:grid-cols-3 gap-6">

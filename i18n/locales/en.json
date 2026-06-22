@@ -5,7 +5,8 @@
     "pricing": "Pricing",
     "faq": "FAQ",
     "contact": "Contact",
-    "cta": "Sign up"
+    "cta": "Sign up",
+    "login": "Log in"
   },
   "hero": {
     "eyebrow": "For local businesses",
@@ -334,7 +335,7 @@
       "sub": "We use this to automatically build your widget.",
       "naam": "Business name",
       "straat": "Street and house number",
-      "postcode": "Zip code and city",
+      "postcode": "Zip code",
       "tel": {
         "label": "Phone number",
         "hint": "Used for our records. Optionally shown in the feedback form so an unhappy customer can call you directly."
@@ -347,7 +348,8 @@
       "google": {
         "label": "Google Business Page — review link",
         "hint": "This is the specific \"write a review\" link. Found in your Google Business Profile under \"Ask for reviews\"."
-      }
+      },
+      "plaats": "City"
     },
     "style": {
       "h": "Choose your brand style",
@@ -381,9 +383,9 @@
   },
   "otp": {
     "h": "Email & verification",
-    "sub": "No password needed. We send you a 6-digit code by email.",
+    "sub": "No password needed. We email you a confirmation link.",
     "email": "Email address",
-    "send": "Send verification code",
+    "send": "Send confirmation link",
     "code": "Verification code",
     "codeHint": "Check your inbox for the 6-digit code.",
     "verify": "Verify & finish",
@@ -395,6 +397,150 @@
     "dev": "Dev login (skip OTP)",
     "saving": "Saving…",
     "invalidEmail": "Enter a valid email address.",
-    "invalidCode": "The code is incorrect. Try again."
+    "invalidCode": "The code is incorrect. Try again.",
+    "linkSentTitle": "Check your inbox",
+    "linkSentBody": "We sent a confirmation link to",
+    "linkSentHint": "Click the link in the email to finish signing up. Tip: open your email on this device so your details are saved automatically."
+  },
+  "voltooien": {
+    "working": "Finishing your sign-up…",
+    "failedTitle": "Something went wrong",
+    "failedBody": "We could not finish your sign-up automatically. Please try signing up again.",
+    "retry": "Sign up again",
+    "noData": "You are logged in."
+  },
+  "widget": {
+    "question": "How was your experience?",
+    "hint": "Tap a number of stars",
+    "redirectTitle": "Great to hear!",
+    "redirectSub": "Thank you! Leave your review below.",
+    "redirectBtn": "Leave a review on",
+    "thanks": "Thanks for your review!",
+    "feedbackTitle": "We'd love to make it right",
+    "feedbackSub": "Your feedback goes directly and privately to the business. No public review will be posted.",
+    "feedbackPlaceholder": "Tell us more…",
+    "feedbackBtn": "Send feedback",
+    "feedbackThanksTitle": "Thanks for your feedback",
+    "feedbackThanksSub": "The business has been notified and may reach out.",
+    "notFound": "This review page does not exist.",
+    "poweredBy": "Powered by ReviewShield",
+    "reviewPrompt": "Write your review here",
+    "reviewPlaceholder": "What did you like about your experience?",
+    "reviewBtn": "Continue",
+    "postedTitle": "Thanks for your review!",
+    "postedSub": "Copy your text and post it on {p} to help others choose.",
+    "copyBtn": "Copy text",
+    "copied": "Copied!",
+    "postBtn": "Post on"
+  },
+  "search": {
+    "label": "Find your business on Google",
+    "placeholder": "Business name + city, e.g. Anna Salon Utrecht",
+    "button": "Search",
+    "hint": "Or fill in the details manually below.",
+    "none": "No results found — fill in manually below.",
+    "filled": "Details imported from Google ✓"
+  },
+  "dash": {
+    "nav": {
+      "overview": "Overview",
+      "invite": "Invite",
+      "install": "Install",
+      "settings": "Settings",
+      "viewPage": "View review page",
+      "toSite": "To website"
+    },
+    "role": "Business owner",
+    "logout": "Log out",
+    "noWidget": "No widget yet",
+    "noBiz": "You haven't registered a business yet.",
+    "signup": "Sign up",
+    "reviewPage": "Review page",
+    "how": {
+      "title": "How reviews come in",
+      "body": "Customers give a rating. 4–5 stars are sent to a public review (e.g. Google). 1–3 stars come to you privately as an improvement point — never posted online."
+    },
+    "stat": {
+      "reviews": "Public reviews",
+      "avg": "Avg. review score",
+      "improvements": "Private improvement points"
+    },
+    "start": {
+      "title": "Get started",
+      "s1": "Share your review link",
+      "s1d": "Send it via WhatsApp, email or a QR code.",
+      "s2": "Or install the widget on your site",
+      "s2d": "One line of code on your thank-you page.",
+      "s3": "Invite (past) customers",
+      "s3d": "Send multiple customers an invitation at once."
+    },
+    "link": {
+      "title": "Your review link",
+      "hint": "Share with customers — a score can be included:",
+      "copy": "Copy",
+      "label": "Review link",
+      "refresh": "Refresh"
+    },
+    "received": "Received reviews",
+    "tabReviews": "Reviews",
+    "tabImpr": "Improvement points",
+    "emptyReviews": "No public reviews yet. Share your review link or",
+    "inviteCustomers": "invite customers",
+    "emptyImpr": "No improvement points yet — that’s good news.",
+    "invite": {
+      "intro": "Invite (past) customers to leave a review. They get an email with your review link and a button to rate you directly. 4–5 stars go to Google; 1–3 stars come to you privately.",
+      "send": "Send invitations",
+      "emails": "Email addresses",
+      "emailsHelp": "Multiple? Separate with comma, space or new line (max. 25 at a time).",
+      "msg": "Personal message (optional)",
+      "msgHelp": "Shown at the top of the email.",
+      "valid": "valid address",
+      "validP": "valid addresses",
+      "share": "Rather share yourself?",
+      "shareHint": "Share this link via WhatsApp or social, or scan/print the QR code:",
+      "tip": "Tip",
+      "tipBody": "The best moment to invite is right after a positive experience — for example right after delivery or an appointment."
+    },
+    "install": {
+      "intro": "Paste one of the codes below on your website to show the review widget. One line of code, no technical knowledge needed — similar to adding a Google Analytics tag.",
+      "popup": "As a pop-up",
+      "popupD": "Appears automatically as a pop-up after a few seconds — ideal for a thank-you page.",
+      "embed": "As an embedded block",
+      "embedD": "Stays permanently in a fixed spot — quieter than a pop-up, ideal for a contact page or footer.",
+      "noSite": "No website? Use the direct link or QR code",
+      "noSiteD": "Share the link via email or WhatsApp, or print the QR code for the counter.",
+      "scan": "Scan the QR code to open the review page.",
+      "steps": "Step by step",
+      "s1": "1. Choose where the widget goes",
+      "s1d": "The widget works best on a page people see after a positive experience: a thank-you page after an order, a confirmation page after an appointment, or an email after completing a job.",
+      "s2": "2. Paste the code",
+      "s2d": "Open your website’s page editor (WordPress, Shopify, Wix, or your own HTML) and paste the code just before the closing </body> tag, or in a text/HTML block.",
+      "s3": "3. Test it yourself",
+      "s3d": "Open your page in an incognito window and click through the stars. 4–5 stars redirect to your review link; a lower score shows the internal feedback form."
+    },
+    "set": {
+      "save": "Save",
+      "saved": "Saved",
+      "biz": "Business details",
+      "name": "Business name",
+      "phone": "Phone",
+      "street": "Street + number",
+      "postcode": "Zip code",
+      "city": "City",
+      "website": "Website",
+      "routing": "Review routing",
+      "routingD": "Where customers with 4–5 stars are sent to leave a public review.",
+      "platform": "Platform",
+      "placeId": "Google Place ID",
+      "placeIdHelp": "The review link is generated from this automatically.",
+      "url": "Review URL",
+      "urlHelp": "Your platform’s direct 'write a review' link.",
+      "prompt": "Feedback prompt (1–3 stars)",
+      "promptHelp": "The question unhappy customers see before the feedback field.",
+      "style": "Branding",
+      "bg": "Background color",
+      "text": "Text color",
+      "preview": "How was your experience?"
+    }
   }
 }

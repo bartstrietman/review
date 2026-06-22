@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const stats = computed(() => [
-  { num: '9/10', suffix: '', desc: t('urgency.stat1') },
-  { num: '87%', suffix: '', desc: t('urgency.stat2') },
+  { num: '97%', suffix: '', desc: t('urgency.stat1') },
+  { num: '68%', suffix: '', desc: t('urgency.stat2') },
   { num: '14', suffix: ' ' + t('urgency.days'), desc: t('urgency.stat3') },
 ])
 </script>

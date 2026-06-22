@@ -1,5 +1,18 @@
 # Project: review
 
+## Solo MCP — dev server beheren
+
+De dev server draait onder **Solo** (zie `solo.yml`, proces **"Dev server"**, poort **2001**).
+Gebruik de **Solo MCP** om 'm te beheren in plaats van zelf `pnpm dev` in een shell te starten:
+
+- **Herstarten:** `restart_process` met `name: "Dev server"` (of `restart_all_commands`).
+- **Starten / stoppen:** `start_process` / `stop_process`.
+- **Status & logs:** `get_process_status`, `get_process_output`, `search_output`.
+- **Poort checken:** `get_process_ports` of `wait_for_bound_port` (verwacht **2001**).
+
+Na een config-wijziging (bv. poort in `package.json` of `solo.yml`) herstart je het
+"Dev server"-proces via `restart_process` zodat de nieuwe config actief wordt.
+
 ## Supabase MCP
 
 Dit project gebruikt een **project-scoped Supabase MCP-server**, geconfigureerd in `.mcp.json`.

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { COLOR_PALETTE, slugify } from '~/data/marketing'
-import type { Database } from '~/types/database.types'
+import { COLOR_PALETTE } from '~/data/marketing'
 
-const { t, tm } = useI18n()
+const { t, tm, rt } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
 const router = useRouter()
-const supabase = useSupabaseClient<Database>()
+const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const config = useRuntimeConfig()
 const toast = useToast()
 
-const data = useSignup()
+const { data, clear } = useSignup()
+const saveCustomer = useSaveCustomer()
 const step = ref(1)
 const totalSteps = 4
 
@@ -22,45 +22,53 @@ onMounted(() => {
 })
 
 const stepLabels = computed(() => {
-  const s = tm('flow.steps') as unknown as string[]
-  return [s?.[0] ?? 'Pakket', s?.[1] ?? 'Bedrijf', s?.[2] ?? 'Huisstijl', t('otp.h')]
+  // tm() returns compiled message AST nodes for array messages; rt() resolves them to strings.
+  const s = tm('flow.steps') as unknown[]
+  const label = (i: number, fallback: string) => (s?.[i] != null ? rt(s[i] as never) : fallback)
+  return [label(0, 'Pakket'), label(1, 'Bedrijf'), label(2, 'Huisstijl'), t('otp.h')]
 })
 
 function next() { if (step.value < totalSteps) step.value++ }
 function back() { if (step.value > 1) step.value-- }
 
-// ── OTP / auth state ────────────────────────────────────────
-const otpPhase = ref<'email' | 'code'>('email')
-const otpCode = ref('')
+// Autofill from a Google Maps (Serper) result — user can still edit everything.
+const placeFilled = ref(false)
+function onPlaceSelect(p: import('~/components/Signup/BusinessSearch.vue').PlaceResult) {
+  const d = data.value
+  d.bedrijfsnaam = p.title || d.bedrijfsnaam
+  if (p.street) d.straatHuisnummer = p.street
+  if (p.postcode) d.postcode = p.postcode
+  if (p.city) d.plaats = p.city
+  if (p.phone) d.telefoon = p.phone
+  if (p.website) d.eigenSite = p.website
+  if (p.reviewUrl) d.googleUrl = p.reviewUrl
+  if (p.placeId) d.googlePlaceId = p.placeId
+  placeFilled.value = true
+}
+
+// ── Auth state ──────────────────────────────────────────────
+// Free-tier Supabase + default mail provider can only send a confirmation
+// LINK (no 6-digit code). So we email a magic link; the signup data is kept
+// in localStorage (see useSignup) and the customer row is saved on
+// /aanmelden/voltooien after the user returns authenticated.
+const linkPhase = ref<'email' | 'sent'>('email')
 const otpLoading = ref(false)
 const finishing = ref(false)
 
-async function sendOtp() {
+async function sendLink() {
   if (!data.value.email.includes('@')) { toast.add({ title: t('otp.invalidEmail'), color: 'error' }); return }
   otpLoading.value = true
+  const redirectTo = `${window.location.origin}${localePath('/welkom')}`
   const { error } = await supabase.auth.signInWithOtp({
     email: data.value.email,
-    options: { shouldCreateUser: true },
+    options: { shouldCreateUser: true, emailRedirectTo: redirectTo },
   })
   otpLoading.value = false
   if (error) { toast.add({ title: error.message, color: 'error' }); return }
-  otpPhase.value = 'code'
-  toast.add({ title: `${t('otp.sent')} ${data.value.email}`, color: 'success' })
+  linkPhase.value = 'sent'
 }
 
-async function verifyOtp() {
-  otpLoading.value = true
-  const { error } = await supabase.auth.verifyOtp({
-    email: data.value.email,
-    token: otpCode.value.trim(),
-    type: 'email',
-  })
-  otpLoading.value = false
-  if (error) { toast.add({ title: t('otp.invalidCode'), color: 'error' }); return }
-  await finishSignup()
-}
-
-// Dev-only: sign in as the seeded customer to skip real OTP email.
+// Dev-only: sign in as the seeded customer to skip real email.
 async function devLogin() {
   otpLoading.value = true
   const { error } = await supabase.auth.signInWithPassword({
@@ -73,43 +81,14 @@ async function devLogin() {
   toast.add({ title: 'Dev login OK', color: 'success' })
 }
 
+// Same-tab finish (used after dev-login or when already authenticated).
 async function finishSignup() {
   if (!user.value) return
   finishing.value = true
   try {
-    const d = data.value
-    const base = slugify(d.bedrijfsnaam)
-    const payload = {
-      user_id: user.value.id,
-      company_name: d.bedrijfsnaam,
-      street: d.straatHuisnummer || null,
-      postcode_city: d.postcodePlaats || null,
-      phone: d.telefoon || null,
-      website: d.eigenSite || null,
-      google_url: d.googleUrl || null,
-      package: d.pakket,
-      bg_color: d.achtergrondkleur,
-      text_color: d.tekstkleur,
-      email: d.email,
-      status: 'trial' as const,
-    }
-
-    // Insert under the user's session (RLS: user_id = auth.uid()).
-    // Retry with a short suffix if the clean slug is already taken.
-    let savedSlug = ''
-    for (let attempt = 0; attempt < 6; attempt++) {
-      const slug = attempt === 0 ? base : `${base}-${Math.random().toString(36).slice(2, 6)}`
-      const { data: row, error } = await supabase
-        .from('customers')
-        .insert({ ...payload, slug })
-        .select('slug')
-        .single()
-      if (!error && row) { savedSlug = row.slug; break }
-      if (error && error.code !== '23505') throw new Error(error.message)
-    }
-    if (!savedSlug) throw new Error('Kon geen unieke slug genereren')
-
-    await router.push(localePath(`/bevestiging/${savedSlug}`))
+    const slug = await saveCustomer(data.value, user.value.id)
+    clear()
+    await router.push(localePath(`/bevestiging/${slug}`))
   }
   catch (e: unknown) {
     toast.add({ title: (e as Error)?.message ?? 'Error', color: 'error' })
@@ -182,6 +161,12 @@ useSeoMeta({ title: () => `${t('signup.h2')} — ReviewShield` })
           <div v-else-if="step === 2">
             <h3 class="text-xl font-semibold">{{ t('flow.biz.h') }}</h3>
             <p class="text-sm text-muted mb-6">{{ t('flow.biz.sub') }}</p>
+
+            <SignupBusinessSearch @select="onPlaceSelect" />
+            <p v-if="placeFilled" class="-mt-3 mb-4 text-xs text-green-700 font-medium flex items-center gap-1.5">
+              <UIcon name="i-lucide-check-circle" class="size-4" />{{ t('search.filled') }}
+            </p>
+
             <div class="space-y-4">
               <UFormField :label="t('flow.biz.naam')">
                 <UInput v-model="data.bedrijfsnaam" class="w-full" placeholder="Loodgietersbedrijf Van Dijk" />
@@ -189,9 +174,14 @@ useSeoMeta({ title: () => `${t('signup.h2')} — ReviewShield` })
               <UFormField :label="t('flow.biz.straat')">
                 <UInput v-model="data.straatHuisnummer" class="w-full" placeholder="Hoofdstraat 12" />
               </UFormField>
-              <UFormField :label="t('flow.biz.postcode')">
-                <UInput v-model="data.postcodePlaats" class="w-full" placeholder="1234 AB Amsterdam" />
-              </UFormField>
+              <div class="grid grid-cols-2 gap-4">
+                <UFormField :label="t('flow.biz.postcode')">
+                  <UInput v-model="data.postcode" class="w-full" placeholder="1234 AB" />
+                </UFormField>
+                <UFormField :label="t('flow.biz.plaats')">
+                  <UInput v-model="data.plaats" class="w-full" placeholder="Amsterdam" />
+                </UFormField>
+              </div>
               <UFormField :label="`${t('flow.biz.tel.label')} ${t('flow.biz.telopt')}`" :help="t('flow.biz.tel.hint')">
                 <UInput v-model="data.telefoon" class="w-full" placeholder="06 12345678" />
               </UFormField>
@@ -231,12 +221,12 @@ useSeoMeta({ title: () => `${t('signup.h2')} — ReviewShield` })
             </div>
           </div>
 
-          <!-- STEP 4: email + OTP -->
+          <!-- STEP 4: email + magic link -->
           <div v-else-if="step === 4">
             <h3 class="text-xl font-semibold">{{ t('otp.h') }}</h3>
             <p class="text-sm text-muted mb-6">{{ t('otp.sub') }}</p>
 
-            <!-- already authenticated -->
+            <!-- already authenticated (dev-login or returning user) -->
             <div v-if="user">
               <div class="flex items-center gap-2 rounded-lg bg-green-50 p-4 text-sm text-green-800 mb-5">
                 <UIcon name="i-lucide-check-circle" class="size-5 shrink-0" />
@@ -248,11 +238,11 @@ useSeoMeta({ title: () => `${t('signup.h2')} — ReviewShield` })
             </div>
 
             <!-- email entry -->
-            <div v-else-if="otpPhase === 'email'">
+            <div v-else-if="linkPhase === 'email'">
               <UFormField :label="t('otp.email')" :help="t('flow.pay.email.hint')">
-                <UInput v-model="data.email" type="email" class="w-full" placeholder="naam@bedrijf.nl" @keydown.enter="sendOtp" />
+                <UInput v-model="data.email" type="email" class="w-full" placeholder="naam@bedrijf.nl" @keydown.enter="sendLink" />
               </UFormField>
-              <UButton color="primary" block size="lg" class="mt-5" :loading="otpLoading" @click="sendOtp">
+              <UButton color="primary" block size="lg" class="mt-5" :loading="otpLoading" @click="sendLink">
                 {{ t('otp.send') }}
               </UButton>
               <UButton
@@ -264,18 +254,21 @@ useSeoMeta({ title: () => `${t('signup.h2')} — ReviewShield` })
               </UButton>
             </div>
 
-            <!-- code entry -->
+            <!-- link sent -->
             <div v-else>
-              <p class="text-sm text-muted mb-3">{{ t('otp.sent') }} <strong>{{ data.email }}</strong></p>
-              <UFormField :label="t('otp.code')" :help="t('otp.codeHint')">
-                <UInput v-model="otpCode" class="w-full tracking-widest" placeholder="000000" maxlength="6" @keydown.enter="verifyOtp" />
-              </UFormField>
-              <UButton color="primary" block size="lg" class="mt-5" :loading="otpLoading || finishing" @click="verifyOtp">
-                {{ t('otp.verify') }}
-              </UButton>
+              <div class="rounded-xl border border-default bg-elevated p-6 text-center">
+                <div class="size-12 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-3">
+                  <UIcon name="i-lucide-mail-check" class="size-6 text-green-700" />
+                </div>
+                <p class="font-semibold">{{ t('otp.linkSentTitle') }}</p>
+                <p class="text-sm text-muted mt-1.5">
+                  {{ t('otp.linkSentBody') }} <strong>{{ data.email }}</strong>.
+                </p>
+                <p class="text-xs text-muted mt-3">{{ t('otp.linkSentHint') }}</p>
+              </div>
               <div class="flex justify-between mt-3">
-                <UButton variant="link" color="neutral" size="xs" @click="otpPhase = 'email'">{{ t('otp.back') }}</UButton>
-                <UButton variant="link" color="neutral" size="xs" :loading="otpLoading" @click="sendOtp">{{ t('otp.resend') }}</UButton>
+                <UButton variant="link" color="neutral" size="xs" @click="linkPhase = 'email'">{{ t('otp.back') }}</UButton>
+                <UButton variant="link" color="neutral" size="xs" :loading="otpLoading" @click="sendLink">{{ t('otp.resend') }}</UButton>
               </div>
             </div>
 

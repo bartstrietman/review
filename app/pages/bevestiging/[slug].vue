@@ -8,6 +8,8 @@ const supabase = useSupabaseClient<Database>()
 const toast = useToast()
 
 const slug = computed(() => route.params.slug as string)
+const origin = useRequestURL().origin
+const reviewUrl = computed(() => `${origin}/r/${slug.value}`)
 
 const { data: customer } = await useAsyncData(`customer-${slug.value}`, async () => {
   const { data } = await supabase.from('customers').select('*').eq('slug', slug.value).single()
@@ -15,10 +17,10 @@ const { data: customer } = await useAsyncData(`customer-${slug.value}`, async ()
 })
 
 const popupCode = computed(() =>
-  `<script src="https://reviewshield.nl/widget/${slug.value}.js" data-mode="popup"><\/script>`,
+  `<script src="${origin}/widget/${slug.value}.js" data-mode="popup"><\/script>`,
 )
 const embedCode = computed(() =>
-  `<div id="rs-embed-${slug.value}"></div>\n<script src="https://reviewshield.nl/widget/${slug.value}.js" data-mode="embed" data-target="rs-embed-${slug.value}"><\/script>`,
+  `<div id="rs-embed-${slug.value}"></div>\n<script src="${origin}/widget/${slug.value}.js" data-mode="embed" data-target="rs-embed-${slug.value}"><\/script>`,
 )
 
 async function copy(text: string) {
@@ -70,8 +72,22 @@ useSeoMeta({ title: () => `${t('conf.h1')} — ReviewShield` })
       </div>
     </div>
 
+    <!-- review page link -->
+    <div class="mt-10 rounded-xl border border-green-200 bg-green-50 p-5">
+      <div class="flex items-center gap-2 mb-1.5">
+        <UIcon name="i-lucide-link" class="size-4 text-green-700" />
+        <h3 class="font-semibold text-green-800">Jouw reviewpagina</h3>
+      </div>
+      <p class="text-sm text-green-800/80 mb-3">Deel deze link met klanten (QR-code, mail of WhatsApp). Een cijfer kan ook direct mee: <code class="text-xs">?score=5</code>.</p>
+      <div class="flex items-center gap-2">
+        <UInput :model-value="reviewUrl" readonly class="flex-1 font-mono text-sm" />
+        <UButton icon="i-lucide-copy" color="primary" @click="copy(reviewUrl)">Kopieer</UButton>
+        <UButton :to="`/r/${slug}`" target="_blank" icon="i-lucide-external-link" color="neutral" variant="soft">Open</UButton>
+      </div>
+    </div>
+
     <!-- embed snippets -->
-    <div class="mt-10 space-y-6">
+    <div class="mt-8 space-y-6">
       <div>
         <div class="flex items-center gap-2 mb-2">
           <UBadge color="primary" variant="subtle">{{ t('conf.opt1.tag') }}</UBadge>
@@ -100,7 +116,7 @@ useSeoMeta({ title: () => `${t('conf.h1')} — ReviewShield` })
     <div class="flex flex-wrap gap-3 mt-10">
       <UButton :to="localePath('/hoe-werkt-het')" color="primary" variant="soft">{{ t('conf.howbtn') }}</UButton>
       <UButton :to="localePath('/faq')" color="neutral" variant="soft">{{ t('conf.faqbtn') }}</UButton>
-      <UButton :to="localePath('/admin')" color="neutral" variant="ghost" trailing-icon="i-lucide-arrow-right">Dashboard</UButton>
+      <UButton :to="localePath('/dashboard')" color="neutral" variant="ghost" trailing-icon="i-lucide-arrow-right">Dashboard</UButton>
     </div>
   </UContainer>
 </template>

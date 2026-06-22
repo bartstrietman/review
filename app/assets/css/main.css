@@ -53,6 +53,10 @@
 :root {
   /* Warm the line/border tone */
   --ui-radius: 0.375rem;
+  /* A11y: default muted (sand-500 #8A8474) failed WCAG AA on white (~3.5:1).
+     Darken muted/dimmed so helper text is readable (sand-600 #6B6B63 ≈ 4.6:1). */
+  --ui-text-dimmed: var(--color-sand-500);
+  --ui-text-muted: var(--color-sand-600);
 }
 
 html,

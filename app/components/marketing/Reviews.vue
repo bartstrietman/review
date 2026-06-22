@@ -5,7 +5,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <section class="py-20 sm:py-22">
+  <section class="border-y border-default bg-white py-20 sm:py-22">
     <UContainer>
       <MarketingSectionHead :eyebrow="t('testimonials.eyebrow')" :title="t('testimonials.h2')" />
       <div class="grid md:grid-cols-3 gap-6">
@@ -16,7 +16,10 @@ const { t } = useI18n()
             <span class="size-9 rounded-full bg-elevated flex items-center justify-center text-[13px] font-semibold text-green-700">
               {{ item.initials }}
             </span>
-            <span class="text-[13px] font-semibold text-muted">{{ t(`testimonials.${item.key}.biz`) }}</span>
+            <div>
+              <div class="text-sm font-semibold">{{ item.name }}</div>
+              <div class="text-xs text-muted">{{ t(`testimonials.${item.key}.biz`) }}</div>
+            </div>
           </div>
         </UCard>
       </div>

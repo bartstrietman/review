@@ -6,7 +6,7 @@ const localePath = useLocalePath()
 </script>
 
 <template>
-  <section id="pricing" class="bg-elevated py-20 sm:py-22 scroll-mt-16">
+  <section id="pricing" class="py-20 sm:py-22 scroll-mt-16">
     <UContainer>
       <MarketingSectionHead :eyebrow="t('pricing.eyebrow')" :title="t('pricing.h2')" :sub="t('pricing.sub')" />
       <div class="grid md:grid-cols-2 gap-7 max-w-3xl">

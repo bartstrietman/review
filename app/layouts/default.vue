@@ -1,8 +1,11 @@
 <script setup lang="ts">
-const { t, locale, locales } = useI18n()
-const switchLocalePath = useSwitchLocalePath()
+const { t, locale, locales, setLocale } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
+const user = useSupabaseUser()
+const supabase = useSupabaseClient()
+
+const isAdmin = computed(() => (user.value?.app_metadata as { role?: string } | undefined)?.role === 'admin')
 
 const navLinks = computed(() => [
   { label: t('nav.how'), to: localePath('/hoe-werkt-het') },
@@ -11,6 +14,19 @@ const navLinks = computed(() => [
   { label: t('nav.faq'), to: localePath('/faq') },
   { label: t('nav.contact'), to: localePath('/contact') },
 ])
+
+const dashboardPath = computed(() => isAdmin.value ? localePath('/admin') : localePath('/dashboard'))
+const accountItems = computed(() => [[
+  { label: 'Mijn dashboard', icon: 'i-lucide-layout-dashboard', to: localePath('/dashboard') },
+  ...(isAdmin.value ? [{ label: 'Beheer', icon: 'i-lucide-shield', to: localePath('/admin') }] : []),
+  { label: 'Uitloggen', icon: 'i-lucide-log-out', onSelect: () => logout() },
+]])
+
+async function logout() {
+  await supabase.auth.signOut()
+  mobileOpen.value = false
+  await router.push(localePath('/'))
+}
 
 const mobileOpen = ref(false)
 function go(to: string) {
@@ -39,18 +55,38 @@ function go(to: string) {
 
         <div class="flex items-center gap-3">
           <div class="hidden sm:flex overflow-hidden rounded-md border border-default text-xs font-semibold">
-            <NuxtLink
+            <button
               v-for="l in locales" :key="l.code"
-              :to="switchLocalePath(l.code)"
+              type="button"
               class="px-3 py-1.5 transition-colors"
               :class="locale === l.code ? 'bg-green-700 text-white' : 'text-muted hover:text-highlighted'"
+              @click="setLocale(l.code)"
             >
               {{ l.code.toUpperCase() }}
-            </NuxtLink>
+            </button>
           </div>
-          <UButton :to="localePath('/aanmelden')" color="primary" size="md" class="hidden sm:inline-flex">
-            {{ t('nav.cta') }}
-          </UButton>
+          <template v-if="user">
+            <UDropdownMenu :items="accountItems" :content="{ align: 'end' }">
+              <UButton color="neutral" variant="ghost" size="md" class="hidden sm:inline-flex" trailing-icon="i-lucide-chevron-down">
+                <UAvatar :alt="user.email || 'Account'" size="2xs" />
+                <span class="max-w-32 truncate">{{ user.email }}</span>
+              </UButton>
+            </UDropdownMenu>
+            <UButton
+              :to="dashboardPath" color="primary" size="md"
+              icon="i-lucide-layout-dashboard" class="hidden sm:inline-flex"
+            >
+              {{ isAdmin ? 'Beheer' : 'Dashboard' }}
+            </UButton>
+          </template>
+          <template v-else>
+            <UButton :to="localePath('/login')" color="neutral" variant="ghost" size="md" class="hidden sm:inline-flex">
+              {{ t('nav.login') }}
+            </UButton>
+            <UButton :to="localePath('/aanmelden')" color="primary" size="md" class="hidden sm:inline-flex">
+              {{ t('nav.cta') }}
+            </UButton>
+          </template>
           <UButton
             class="md:hidden" color="neutral" variant="ghost" icon="i-lucide-menu"
             :aria-label="t('nav.cta')" @click="mobileOpen = true"
@@ -73,16 +109,42 @@ function go(to: string) {
           <div class="flex gap-2">
             <UButton
               v-for="l in locales" :key="l.code"
-              :to="switchLocalePath(l.code)" size="sm"
+              size="sm"
               :variant="locale === l.code ? 'solid' : 'outline'" color="primary"
-              @click="mobileOpen = false"
+              @click="setLocale(l.code)"
             >
               {{ l.code.toUpperCase() }}
             </UButton>
           </div>
-          <UButton :to="localePath('/aanmelden')" color="primary" block class="mt-3" @click="mobileOpen = false">
-            {{ t('nav.cta') }}
-          </UButton>
+          <template v-if="user">
+            <div class="mt-3 flex items-center gap-2.5 px-1 text-sm">
+              <UAvatar :alt="user.email || 'Account'" size="2xs" />
+              <span class="truncate text-muted">{{ user.email }}</span>
+            </div>
+            <UButton
+              :to="localePath('/dashboard')" color="primary" block class="mt-2"
+              icon="i-lucide-layout-dashboard" @click="mobileOpen = false"
+            >
+              Mijn dashboard
+            </UButton>
+            <UButton
+              v-if="isAdmin" :to="localePath('/admin')" color="neutral" variant="soft" block class="mt-2"
+              icon="i-lucide-shield" @click="mobileOpen = false"
+            >
+              Beheer
+            </UButton>
+            <UButton color="neutral" variant="soft" block class="mt-2" icon="i-lucide-log-out" @click="logout">
+              Uitloggen
+            </UButton>
+          </template>
+          <template v-else>
+            <UButton :to="localePath('/login')" color="neutral" variant="soft" block class="mt-3" @click="mobileOpen = false">
+              {{ t('nav.login') }}
+            </UButton>
+            <UButton :to="localePath('/aanmelden')" color="primary" block class="mt-2" @click="mobileOpen = false">
+              {{ t('nav.cta') }}
+            </UButton>
+          </template>
         </div>
       </template>
     </USlideover>

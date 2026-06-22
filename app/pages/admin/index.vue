@@ -30,7 +30,7 @@ const cards = computed(() => [
   { label: 'Aanmeldingen', value: stats.value?.customers ?? 0, icon: 'i-lucide-users', to: '/admin/klanten' },
   { label: 'Leads', value: stats.value?.leads ?? 0, icon: 'i-lucide-inbox', to: '/admin/leads' },
   { label: 'Contactberichten', value: stats.value?.contact ?? 0, icon: 'i-lucide-mail', to: '/admin/leads' },
-  { label: 'Privé-feedback', value: stats.value?.feedback ?? 0, icon: 'i-lucide-message-square', to: '/admin/feedback' },
+  { label: 'Feedback & reviews', value: stats.value?.feedback ?? 0, icon: 'i-lucide-message-square', to: '/admin/feedback' },
 ])
 
 function statusColor(s: string) {

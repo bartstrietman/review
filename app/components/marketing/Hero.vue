@@ -21,7 +21,7 @@ const rated = ref(0)
             <UButton :to="localePath('/aanmelden')" color="primary" size="xl" trailing-icon="i-lucide-arrow-right">
               {{ t('hero.cta') }}
             </UButton>
-            <UButton to="#demo" color="neutral" variant="outline" size="xl">
+            <UButton to="#demo" color="neutral" variant="outline" size="xl" icon="i-lucide-play">
               {{ t('hero.demo') }}
             </UButton>
           </div>

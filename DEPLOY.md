@@ -40,6 +40,11 @@ npx wrangler secret put SUPABASE_KEY          # sb_publishable_... (publishable/
 npx wrangler secret put SUPABASE_SERVICE_KEY
 ```
 
+**Serper (bedrijf-zoeken bij aanmelden):** de key `SERPER_KEY` staat in `.env`
+(server-only, gitignored) en wordt bij `pnpm build` in de server-bundle gebakken
+(niet in de client). Bij **git-based CI-deploys** zet je 'm als Worker-secret:
+`npx wrangler secret put NUXT_SERPER_KEY` (Nuxt leest `NUXT_SERPER_KEY` runtime).
+
 `SUPABASE_KEY` is de **publishable/anon** key — veilig client-side, RLS beschermt
 de data. De `sbp_`-token (MCP) en de service-role key horen hier **niet**.
 

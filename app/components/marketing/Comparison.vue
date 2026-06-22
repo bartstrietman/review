@@ -6,7 +6,7 @@ const rows = computed<{ lbl: string; us: Cell; c2: Cell; c3: Cell }[]>(() => [
   {
     lbl: t('compare.row1.lbl'),
     us: { text: '€19,99 – €34,49' },
-    c2: { text: '€100+' },
+    c2: { text: '€75 – €400+' },
     c3: { text: t('compare.row1.c3') },
   },
   {
@@ -18,7 +18,7 @@ const rows = computed<{ lbl: string; us: Cell; c2: Cell; c3: Cell }[]>(() => [
   {
     lbl: t('compare.row3.lbl'),
     us: { text: t('compare.auto'), mark: 'check' },
-    c2: { text: t('compare.auto'), mark: 'check' },
+    c2: { mark: 'check' },
     c3: { text: t('compare.manual'), mark: 'x' },
   },
   {
@@ -31,13 +31,13 @@ const rows = computed<{ lbl: string; us: Cell; c2: Cell; c3: Cell }[]>(() => [
     lbl: t('compare.row5.lbl'),
     us: { text: t('compare.none') },
     c2: { text: t('compare.yearly') },
-    c3: { text: t('compare.none') },
+    c3: { text: 'N.v.t.' },
   },
 ])
 </script>
 
 <template>
-  <section class="py-20 sm:py-22">
+  <section class="border-y border-default bg-white py-20 sm:py-22">
     <UContainer>
       <MarketingSectionHead :eyebrow="t('compare.eyebrow')" :title="t('compare.h2')" :sub="t('compare.sub')" />
       <div class="overflow-hidden rounded-2xl border border-default bg-white">

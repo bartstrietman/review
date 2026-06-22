@@ -22,20 +22,23 @@ export type Database = {
         Row: {
           bg_color: string; company_name: string | null; created_at: string; email: string | null
           google_url: string | null; id: string; package: string; phone: string | null
-          postcode_city: string | null; slug: string; status: string; street: string | null
+          postcode: string | null; city: string | null; slug: string; status: string; street: string | null
           text_color: string; user_id: string; website: string | null
+          feedback_prompt: string; review_platform: string; google_place_id: string | null
         }
         Insert: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
           google_url?: string | null; id?: string; package?: string; phone?: string | null
-          postcode_city?: string | null; slug: string; status?: string; street?: string | null
+          postcode?: string | null; city?: string | null; slug: string; status?: string; street?: string | null
           text_color?: string; user_id: string; website?: string | null
+          feedback_prompt?: string; review_platform?: string; google_place_id?: string | null
         }
         Update: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
           google_url?: string | null; id?: string; package?: string; phone?: string | null
-          postcode_city?: string | null; slug?: string; status?: string; street?: string | null
+          postcode?: string | null; city?: string | null; slug?: string; status?: string; street?: string | null
           text_color?: string; user_id?: string; website?: string | null
+          feedback_prompt?: string; review_platform?: string; google_place_id?: string | null
         }
         Relationships: []
       }
@@ -61,7 +64,17 @@ export type Database = {
       }
     }
     Views: Record<never, never>
-    Functions: { is_admin: { Args: Record<string, never>; Returns: boolean } }
+    Functions: {
+      is_admin: { Args: Record<string, never>; Returns: boolean }
+      get_widget: {
+        Args: { p_slug: string }
+        Returns: {
+          customer_id: string; slug: string; company_name: string | null
+          bg_color: string; text_color: string; google_url: string | null
+          feedback_prompt: string; review_platform: string; google_place_id: string | null
+        }[]
+      }
+    }
     Enums: Record<never, never>
     CompositeTypes: Record<never, never>
   }
@@ -74,5 +87,6 @@ export type TablesUpdate<T extends keyof PublicSchema['Tables']> = PublicSchema[
 
 export type Customer = Tables<'customers'>
 export type Feedback = Tables<'feedback'>
+export type WidgetPublic = Database['public']['Functions']['get_widget']['Returns'][number]
 export type Lead = Tables<'leads'>
 export type ContactMessage = Tables<'contact_messages'>

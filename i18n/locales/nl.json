@@ -5,7 +5,8 @@
     "pricing": "Pakketten",
     "faq": "FAQ",
     "contact": "Contact",
-    "cta": "Aanmelden"
+    "cta": "Aanmelden",
+    "login": "Inloggen"
   },
   "hero": {
     "eyebrow": "Voor lokale ondernemers",
@@ -334,7 +335,7 @@
       "sub": "Deze gegevens gebruiken we om jouw widget automatisch te maken.",
       "naam": "Bedrijfsnaam",
       "straat": "Straat en huisnummer",
-      "postcode": "Postcode en plaats",
+      "postcode": "Postcode",
       "tel": {
         "label": "Telefoonnummer",
         "hint": "Gebruiken we voor onze administratie. Optioneel tonen in het feedbackformulier, zodat een ontevreden klant je direct kan bellen."
@@ -347,7 +348,8 @@
       "google": {
         "label": "Google Bedrijfspagina — reviewlink",
         "hint": "Dit is de specifieke \"schrijf een review\"-link. Te vinden via je Google Bedrijfsprofiel onder \"Reviews aanvragen\"."
-      }
+      },
+      "plaats": "Plaats"
     },
     "style": {
       "h": "Kies de huisstijl",
@@ -381,9 +383,9 @@
   },
   "otp": {
     "h": "E-mail & verificatie",
-    "sub": "Geen wachtwoord nodig. We sturen je een 6-cijferige code per e-mail.",
+    "sub": "Geen wachtwoord nodig. We sturen je een bevestigingslink per e-mail.",
     "email": "E-mailadres",
-    "send": "Stuur verificatiecode",
+    "send": "Stuur bevestigingslink",
     "code": "Verificatiecode",
     "codeHint": "Check je inbox voor de 6-cijferige code.",
     "verify": "Verifieer & rond af",
@@ -395,6 +397,150 @@
     "dev": "Dev-login (sla OTP over)",
     "saving": "Bezig met opslaan…",
     "invalidEmail": "Vul een geldig e-mailadres in.",
-    "invalidCode": "De code klopt niet. Probeer opnieuw."
+    "invalidCode": "De code klopt niet. Probeer opnieuw.",
+    "linkSentTitle": "Check je inbox",
+    "linkSentBody": "We hebben een bevestigingslink gestuurd naar",
+    "linkSentHint": "Klik op de link in de mail om je aanmelding af te ronden. Tip: open je mail op dit apparaat, dan worden je gegevens automatisch opgeslagen."
+  },
+  "voltooien": {
+    "working": "Je aanmelding wordt afgerond…",
+    "failedTitle": "Er ging iets mis",
+    "failedBody": "We konden je aanmelding niet automatisch afronden. Probeer opnieuw aan te melden.",
+    "retry": "Opnieuw aanmelden",
+    "noData": "Je bent ingelogd."
+  },
+  "widget": {
+    "question": "Hoe was uw ervaring?",
+    "hint": "Klik op een aantal sterren",
+    "redirectTitle": "Fijn om te horen!",
+    "redirectSub": "Bedankt! Plaats hieronder je review.",
+    "redirectBtn": "Plaats review op",
+    "thanks": "Bedankt voor je review!",
+    "feedbackTitle": "We willen het graag rechtzetten",
+    "feedbackSub": "Je feedback gaat direct en privé naar het bedrijf. Er verschijnt geen publieke review.",
+    "feedbackPlaceholder": "Vertel ons meer…",
+    "feedbackBtn": "Feedback versturen",
+    "feedbackThanksTitle": "Bedankt voor je feedback",
+    "feedbackThanksSub": "Het bedrijf heeft een melding ontvangen en neemt mogelijk contact op.",
+    "notFound": "Deze reviewpagina bestaat niet.",
+    "poweredBy": "Mogelijk gemaakt door ReviewShield",
+    "reviewPrompt": "Schrijf hier je review",
+    "reviewPlaceholder": "Wat vond je goed aan je ervaring?",
+    "reviewBtn": "Doorgaan",
+    "postedTitle": "Bedankt voor je review!",
+    "postedSub": "Kopieer je tekst en plaats ’m op {p} om anderen te helpen kiezen.",
+    "copyBtn": "Kopieer tekst",
+    "copied": "Gekopieerd!",
+    "postBtn": "Plaats op"
+  },
+  "search": {
+    "label": "Zoek je bedrijf op Google",
+    "placeholder": "Bedrijfsnaam + plaats, bijv. Kapsalon Anna Utrecht",
+    "button": "Zoeken",
+    "hint": "Of vul de gegevens hieronder handmatig in.",
+    "none": "Geen resultaten gevonden — vul hieronder handmatig in.",
+    "filled": "Gegevens overgenomen van Google ✓"
+  },
+  "dash": {
+    "nav": {
+      "overview": "Overzicht",
+      "invite": "Uitnodigen",
+      "install": "Installeren",
+      "settings": "Instellingen",
+      "viewPage": "Bekijk reviewpagina",
+      "toSite": "Naar website"
+    },
+    "role": "Ondernemer",
+    "logout": "Uitloggen",
+    "noWidget": "Nog geen widget",
+    "noBiz": "Je hebt nog geen bedrijf aangemeld.",
+    "signup": "Aanmelden",
+    "reviewPage": "Reviewpagina",
+    "how": {
+      "title": "Hoe je reviews binnenkomen",
+      "body": "Klanten geven een cijfer. 4–5 sterren worden doorgestuurd naar een openbare review (bv. Google). 1–3 sterren komen als privé-verbeterpunt alleen bij jou binnen — niet online."
+    },
+    "stat": {
+      "reviews": "Openbare reviews",
+      "avg": "Gem. reviewscore",
+      "improvements": "Privé-verbeterpunten"
+    },
+    "start": {
+      "title": "Aan de slag",
+      "s1": "Deel je reviewlink",
+      "s1d": "Stuur 'm via WhatsApp, mail of een QR-code.",
+      "s2": "Of installeer de widget op je site",
+      "s2d": "Eén regel code op je bedankpagina.",
+      "s3": "Nodig (oud-)klanten uit",
+      "s3d": "Stuur in één keer meerdere klanten een uitnodiging."
+    },
+    "link": {
+      "title": "Jouw reviewlink",
+      "hint": "Deel met klanten — een cijfer kan mee:",
+      "copy": "Kopieer",
+      "label": "Reviewlink",
+      "refresh": "Vernieuwen"
+    },
+    "received": "Ontvangen reviews",
+    "tabReviews": "Reviews",
+    "tabImpr": "Verbeterpunten",
+    "emptyReviews": "Nog geen openbare reviews. Deel je reviewlink of",
+    "inviteCustomers": "nodig klanten uit",
+    "emptyImpr": "Nog geen verbeterpunten ontvangen — dat is goed nieuws.",
+    "invite": {
+      "intro": "Nodig (oud-)klanten uit om een review achter te laten. Ze krijgen een e-mail met jouw reviewlink en een knop om direct een beoordeling te geven. Bij 4–5 sterren worden ze doorgestuurd naar Google; bij 1–3 sterren krijg jij de feedback privé binnen.",
+      "send": "Verstuur uitnodigingen",
+      "emails": "E-mailadressen",
+      "emailsHelp": "Meerdere? Scheid met komma, spatie of nieuwe regel (max. 25 per keer).",
+      "msg": "Persoonlijk bericht (optioneel)",
+      "msgHelp": "Wordt bovenaan de e-mail getoond.",
+      "valid": "geldig adres",
+      "validP": "geldige adressen",
+      "share": "Liever zelf delen?",
+      "shareHint": "Deel deze link via WhatsApp of social, of scan/print de QR-code:",
+      "tip": "Tip",
+      "tipBody": "Het beste moment om uit te nodigen is vlak na een positieve ervaring — bijvoorbeeld direct na levering of afspraak."
+    },
+    "install": {
+      "intro": "Plak één van onderstaande codes op je website om de reviewwidget te tonen. Eén regel code, geen technische kennis nodig — vergelijkbaar met het plaatsen van een Google Analytics-tag.",
+      "popup": "Als pop-up",
+      "popupD": "Verschijnt automatisch als pop-up na een paar seconden — ideaal voor een bedankpagina.",
+      "embed": "Als vast blok",
+      "embedD": "Staat permanent op een vaste plek — rustiger dan een pop-up, ideaal voor een contactpagina of footer.",
+      "noSite": "Geen website? Gebruik de directe link of QR-code",
+      "noSiteD": "Deel de link via e-mail of WhatsApp, of print de QR-code voor op de balie.",
+      "scan": "Scan de QR-code om de reviewpagina te openen.",
+      "steps": "Stap voor stap",
+      "s1": "1. Kies waar de widget komt",
+      "s1d": "De widget werkt het best op een pagina die mensen zien ná een positieve ervaring: een bedankpagina na een bestelling, een bevestigingspagina na een afspraak, of een mail na afronding van een klus.",
+      "s2": "2. Plak de code",
+      "s2d": "Open de pagina-editor van je website (WordPress, Shopify, Wix, of je eigen HTML) en plak de code vlak vóór de afsluitende </body>-tag, of in een tekst/HTML-blok op de gewenste plek.",
+      "s3": "3. Test zelf",
+      "s3d": "Open je pagina in een incognitovenster en klik door de sterren. Bij 4–5 sterren word je doorgestuurd naar je reviewlink; bij een lagere score zie je het interne feedbackformulier."
+    },
+    "set": {
+      "save": "Opslaan",
+      "saved": "Opgeslagen",
+      "biz": "Bedrijfsgegevens",
+      "name": "Bedrijfsnaam",
+      "phone": "Telefoon",
+      "street": "Straat + huisnummer",
+      "postcode": "Postcode",
+      "city": "Plaats",
+      "website": "Website",
+      "routing": "Review-routing",
+      "routingD": "Waar klanten met 4–5 sterren naartoe worden gestuurd om een openbare review te plaatsen.",
+      "platform": "Platform",
+      "placeId": "Google Place ID",
+      "placeIdHelp": "De review-link wordt hier automatisch uit gegenereerd.",
+      "url": "Review-URL",
+      "urlHelp": "De directe 'schrijf een review'-link van je platform.",
+      "prompt": "Feedback-prompt (1–3 sterren)",
+      "promptHelp": "De vraag die ontevreden klanten zien vóór het feedbackveld.",
+      "style": "Huisstijl",
+      "bg": "Achtergrondkleur",
+      "text": "Tekstkleur",
+      "preview": "Hoe was uw ervaring?"
+    }
   }
 }

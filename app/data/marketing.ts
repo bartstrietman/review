@@ -12,11 +12,11 @@ export const WIDGET_STYLES: WidgetStyle[] = [
   { bg: '#FAF8F3', fg: '#1A1A1A', biz: { nl: 'Bakker Fysiotherapie', en: 'Bakker Physiotherapy' } },
 ]
 
-// Testimonials reference avatars (initials) + i18n text keys
+// Testimonials: author name + avatar initials + i18n text keys (from prototype)
 export const TESTIMONIALS = [
-  { initials: 'DV', key: '1' },
-  { initials: 'KA', key: '2' },
-  { initials: 'BB', key: '3' },
+  { name: 'Mark de Vries', initials: 'MD', key: '1' },
+  { name: 'Anna Kuiper', initials: 'AK', key: '2' },
+  { name: 'Rik Bakker', initials: 'RB', key: '3' },
 ]
 
 export interface PricingPlan {
