@@ -24,21 +24,21 @@ export type Database = {
           google_url: string | null; id: string; package: string; phone: string | null
           postcode: string | null; city: string | null; slug: string; status: string; street: string | null
           text_color: string; user_id: string; website: string | null
-          feedback_prompt: string; review_platform: string; google_place_id: string | null
+          feedback_prompt: string; review_platform: string; google_place_id: string | null; widget_texts: Json
         }
         Insert: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
           google_url?: string | null; id?: string; package?: string; phone?: string | null
           postcode?: string | null; city?: string | null; slug: string; status?: string; street?: string | null
           text_color?: string; user_id: string; website?: string | null
-          feedback_prompt?: string; review_platform?: string; google_place_id?: string | null
+          feedback_prompt?: string; review_platform?: string; google_place_id?: string | null; widget_texts?: Json
         }
         Update: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
           google_url?: string | null; id?: string; package?: string; phone?: string | null
           postcode?: string | null; city?: string | null; slug?: string; status?: string; street?: string | null
           text_color?: string; user_id?: string; website?: string | null
-          feedback_prompt?: string; review_platform?: string; google_place_id?: string | null
+          feedback_prompt?: string; review_platform?: string; google_place_id?: string | null; widget_texts?: Json
         }
         Relationships: []
       }
@@ -71,7 +71,7 @@ export type Database = {
         Returns: {
           customer_id: string; slug: string; company_name: string | null
           bg_color: string; text_color: string; google_url: string | null
-          feedback_prompt: string; review_platform: string; google_place_id: string | null
+          feedback_prompt: string; review_platform: string; google_place_id: string | null; widget_texts: Json
         }[]
       }
     }

@@ -87,6 +87,13 @@ async function copyReview() {
   catch { /* ignore */ }
 }
 
+// Per-business text overrides (fall back to the translated defaults).
+const wt = computed(() => (widget.value?.widget_texts ?? {}) as Record<string, string>)
+function txt(key: string, fallback: string) {
+  const v = wt.value[key]
+  return (typeof v === 'string' && v.trim()) ? v : fallback
+}
+
 const bg = computed(() => widget.value?.bg_color || '#0F3D2E')
 const fg = computed(() => widget.value?.text_color || '#FFFFFF')
 
@@ -107,19 +114,20 @@ useHead({ title: () => widget.value ? `Review — ${widget.value.company_name}` 
 
         <!-- rate -->
         <template v-if="stage === 'rate'">
-          <h1 class="text-center text-xl font-semibold mb-5">{{ t('widget.question') }}</h1>
+          <h1 class="text-center text-xl font-semibold mb-5">{{ txt('question', t('widget.question')) }}</h1>
           <StarRating :size="40" @rate="choose" />
           <p class="text-center text-xs text-muted mt-3">{{ t('widget.hint') }}</p>
         </template>
 
         <!-- 4-5: write the review (saved on our side) -->
         <template v-else-if="stage === 'review'">
-          <div class="size-12 rounded-full flex items-center justify-center mx-auto mb-3" :style="{ background: bg }">
-            <UIcon name="i-lucide-star" class="size-6" :style="{ color: fg }" />
+          <div class="flex items-center gap-2 mb-1">
+            <UIcon name="i-lucide-party-popper" class="size-5 text-gold-500" />
+            <h1 class="text-lg font-semibold">{{ txt('reviewTitle', t('widget.redirectTitle')) }}</h1>
           </div>
-          <h1 class="text-center text-lg font-semibold mb-1">{{ t('widget.redirectTitle') }}</h1>
-          <label class="block text-sm font-semibold mt-4 mb-2">{{ t('widget.reviewPrompt') }}</label>
-          <UTextarea v-model="reviewText" :rows="4" autoresize class="w-full mb-4" :placeholder="t('widget.reviewPlaceholder')" />
+          <p class="text-sm text-muted mb-4">{{ t('widget.reviewSub') }}</p>
+          <label class="block text-sm font-semibold mb-2">{{ txt('reviewPrompt', t('widget.reviewPrompt')) }}</label>
+          <UTextarea v-model="reviewText" :rows="4" autoresize class="w-full mb-4" :placeholder="txt('reviewPlaceholder', t('widget.reviewPlaceholder'))" />
           <button
             class="block w-full rounded-lg px-5 py-3 font-semibold transition-opacity hover:opacity-90 disabled:opacity-60"
             :style="{ background: bg, color: fg }"
@@ -157,10 +165,10 @@ useHead({ title: () => widget.value ? `Review — ${widget.value.company_name}` 
 
         <!-- 1-3: private feedback with the business's custom prompt -->
         <template v-else-if="stage === 'feedback'">
-          <h1 class="text-lg font-semibold mb-1">{{ t('widget.feedbackTitle') }}</h1>
+          <h1 class="text-lg font-semibold mb-1">{{ txt('feedbackTitle', t('widget.feedbackTitle')) }}</h1>
           <p class="text-sm text-muted mb-4">{{ t('widget.feedbackSub') }}</p>
-          <label class="block text-sm font-semibold mb-2">{{ widget.feedback_prompt }}</label>
-          <UTextarea v-model="message" :rows="4" autoresize class="w-full mb-4" :placeholder="t('widget.feedbackPlaceholder')" />
+          <label class="block text-sm font-semibold mb-2">{{ txt('feedbackPrompt', widget.feedback_prompt) }}</label>
+          <UTextarea v-model="message" :rows="4" autoresize class="w-full mb-4" :placeholder="txt('feedbackPlaceholder', t('widget.feedbackPlaceholder'))" />
           <button
             class="block w-full rounded-lg px-5 py-3 font-semibold transition-opacity hover:opacity-90 disabled:opacity-60"
             :style="{ background: bg, color: fg }"

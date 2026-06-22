@@ -431,7 +431,8 @@
     "postedSub": "Copy your text and post it on {p} to help others choose.",
     "copyBtn": "Copy text",
     "copied": "Copied!",
-    "postBtn": "Post on"
+    "postBtn": "Post on",
+    "reviewSub": "Glad you enjoyed it! Share your experience briefly."
   },
   "search": {
     "label": "Find your business on Google",
@@ -551,6 +552,30 @@
       "bg": "Background color",
       "text": "Text color",
       "preview": "How was your experience?"
+    },
+    "widget": {
+      "nav": "Widget",
+      "intro": "Fully customise the text and colors of your review widget. The preview on the right updates instantly.",
+      "preview": "Live preview",
+      "stRate": "Stars",
+      "stPos": "Positive (4–5)",
+      "stNeg": "Improvement (1–3)",
+      "colors": "Colors",
+      "bg": "Background color",
+      "text": "Text color",
+      "secRate": "Question (star screen)",
+      "question": "Main question",
+      "secPos": "Positive screen (4–5 stars)",
+      "reviewTitle": "Title",
+      "reviewPrompt": "Label above the text field",
+      "reviewPlaceholder": "Text field hint",
+      "secNeg": "Improvement screen (1–3 stars)",
+      "feedbackTitle": "Title",
+      "feedbackPrompt": "Question to the customer",
+      "feedbackPlaceholder": "Text field hint",
+      "leaveEmpty": "Leave empty to use the default text.",
+      "save": "Save",
+      "saved": "Saved"
     }
   }
 }

@@ -431,7 +431,8 @@
     "postedSub": "Kopieer je tekst en plaats ’m op {p} om anderen te helpen kiezen.",
     "copyBtn": "Kopieer tekst",
     "copied": "Gekopieerd!",
-    "postBtn": "Plaats op"
+    "postBtn": "Plaats op",
+    "reviewSub": "Fijn dat je tevreden bent! Deel kort je ervaring."
   },
   "search": {
     "label": "Zoek je bedrijf op Google",
@@ -551,6 +552,30 @@
       "bg": "Achtergrondkleur",
       "text": "Tekstkleur",
       "preview": "Hoe was uw ervaring?"
+    },
+    "widget": {
+      "nav": "Widget",
+      "intro": "Pas de teksten en kleuren van je reviewwidget volledig aan. Het voorbeeld rechts verandert direct mee.",
+      "preview": "Live voorbeeld",
+      "stRate": "Sterren",
+      "stPos": "Positief (4–5)",
+      "stNeg": "Verbeterpunt (1–3)",
+      "colors": "Kleuren",
+      "bg": "Achtergrondkleur",
+      "text": "Tekstkleur",
+      "secRate": "Vraag (sterrenscherm)",
+      "question": "Hoofdvraag",
+      "secPos": "Positief scherm (4–5 sterren)",
+      "reviewTitle": "Titel",
+      "reviewPrompt": "Label boven het tekstveld",
+      "reviewPlaceholder": "Tekstveld-hint",
+      "secNeg": "Verbeterpunt-scherm (1–3 sterren)",
+      "feedbackTitle": "Titel",
+      "feedbackPrompt": "Vraag aan de klant",
+      "feedbackPlaceholder": "Tekstveld-hint",
+      "leaveEmpty": "Laat leeg om de standaardtekst te gebruiken.",
+      "save": "Opslaan",
+      "saved": "Opgeslagen"
     }
   }
 }

@@ -47,7 +47,7 @@ useSeoMeta({ title: 'Installeren — ReviewShield' })
             <div>
               <p class="text-sm text-muted mb-3">{{ t('dash.install.previewD') }}</p>
               <!-- mock website with the launcher / popup contained inside -->
-              <div class="relative h-80 rounded-xl border border-default bg-white overflow-hidden">
+              <div class="relative h-[480px] rounded-xl border border-default bg-white overflow-hidden">
                 <!-- fake page content -->
                 <div class="p-5">
                   <div class="flex items-center gap-1.5 mb-4">
@@ -76,16 +76,16 @@ useSeoMeta({ title: 'Installeren — ReviewShield' })
                 <span v-if="!previewOpen" class="absolute bottom-16 right-4 text-xs text-muted">{{ t('dash.install.tryIt') }}</span>
 
                 <!-- popup overlay (scoped to the preview box) -->
-                <div v-else class="absolute inset-0 bg-black/45 flex items-center justify-center p-3">
-                  <div class="relative w-full max-w-[300px]">
+                <div v-else class="absolute inset-0 bg-black/45 flex items-center justify-center p-4">
+                  <div class="relative w-full max-w-[320px]">
                     <button
                       type="button" aria-label="Sluiten"
-                      class="absolute -top-7 right-0 text-white text-2xl leading-none"
+                      class="absolute -top-8 right-0 text-white text-2xl leading-none"
                       @click="previewOpen = false"
                     >&times;</button>
                     <iframe
                       :src="`/r/${customer?.slug}`" title="Review-voorbeeld"
-                      class="w-full rounded-2xl border-0 bg-white" style="height:290px"
+                      class="w-full rounded-2xl border-0 bg-white" style="height:400px"
                     />
                   </div>
                 </div>
