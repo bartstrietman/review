@@ -1,11 +1,9 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const { siteName } = useSite()
 
-useHead({
-  title: () => t('page.title') === 'page.title' ? 'ReviewShield' : t('page.title'),
-})
 useSeoMeta({
-  title: 'ReviewShield — Bescherm je online reputatie',
+  title: () => `${siteName.value} — ${t('page.tagline')}`,
   description: () => t('hero.lede'),
 })
 </script>

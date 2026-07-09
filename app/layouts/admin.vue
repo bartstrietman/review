@@ -3,6 +3,7 @@ const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const localePath = useLocalePath()
 const router = useRouter()
+const { siteName } = useSite()
 
 const links = computed(() => [[
   { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: localePath('/admin'), exact: true },
@@ -24,7 +25,7 @@ async function logout() {
     <UDashboardSidebar collapsible resizable :min-size="14" :default-size="17">
       <template #header>
         <NuxtLink :to="localePath('/admin')" class="flex items-center gap-2.5 font-display font-bold">
-          <Logo :size="26" /> ReviewShield
+          <Logo :size="26" /> {{ siteName }}
         </NuxtLink>
       </template>
 

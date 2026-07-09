@@ -1,4 +1,4 @@
-# ReviewShield — deploy & runtime
+# ReviewUpgrade — deploy & runtime
 
 Nuxt 4 + Nuxt UI v4 + Supabase, gehost als **Cloudflare Worker** (Nitro
 `cloudflare_module`-preset). Lokale dev draait op **poort 2001**.
@@ -54,11 +54,11 @@ de data. De `sbp_`-token (MCP) en de service-role key horen hier **niet**.
    **niet** gezet zijn — de waarde wordt at build-time in de client gebakken
    (`runtimeConfig.public.devLogin`). Bouw productie dus met die env **leeg/uit**.
 2. **Dev-users verwijderen.** De seed `supabase/seed-dev-users.sql` maakt
-   `admin@reviewshield.test` en `klant@reviewshield.test` met wachtwoord
+   `admin@reviewupgrade.test` en `klant@reviewupgrade.test` met wachtwoord
    `devpass1234`. Die zijn alleen voor lokaal testen. Verwijder ze (of rouleer)
    voordat dit project naar productie gaat:
    ```sql
-   delete from auth.users where email like '%@reviewshield.test';
+   delete from auth.users where email like '%@reviewupgrade.test';
    ```
 3. **Echte admin aanmaken.** Geef een echte gebruiker de admin-rol:
    ```sql

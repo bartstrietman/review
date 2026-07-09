@@ -26,7 +26,7 @@ function reset() {
           <h4 class="text-sm font-semibold text-gold-400 mb-1.5">{{ t('demo.context.label') }}</h4>
           <p class="text-[15px] text-green-100/90 mb-4">{{ t('demo.context.p') }}</p>
           <div class="rounded-xl bg-white p-5 text-default">
-            <p class="text-sm font-semibold text-muted">Kapsalon Anna</p>
+            <p class="text-sm font-semibold text-muted">{{ t('demo.context.biz') }}</p>
             <p class="text-base font-semibold">{{ t('demo.context.thanks') }}</p>
           </div>
         </div>
@@ -72,7 +72,13 @@ function reset() {
       </div>
 
       <div class="flex justify-center mt-7">
-        <UButton variant="outline" color="neutral" class="!text-white !ring-white/30 hover:!bg-white/10" icon="i-lucide-rotate-ccw" @click="reset">
+        <UButton
+          variant="solid"
+          color="neutral"
+          class="bg-white/15 text-white ring-1 ring-white/40 hover:bg-white/25"
+          icon="i-lucide-rotate-ccw"
+          @click="reset"
+        >
           {{ t('demo.reset') }}
         </UButton>
       </div>

@@ -72,12 +72,12 @@ async function sendLink() {
 async function devLogin() {
   otpLoading.value = true
   const { error } = await supabase.auth.signInWithPassword({
-    email: config.public.devLogin ? 'klant@reviewshield.test' : '',
+    email: config.public.devLogin ? 'klant@reviewupgrade.test' : '',
     password: 'devpass1234',
   })
   otpLoading.value = false
   if (error) { toast.add({ title: error.message, color: 'error' }); return }
-  if (!data.value.email) data.value.email = 'klant@reviewshield.test'
+  if (!data.value.email) data.value.email = 'klant@reviewupgrade.test'
   toast.add({ title: 'Dev login OK', color: 'success' })
 }
 
@@ -98,7 +98,7 @@ async function finishSignup() {
   }
 }
 
-useSeoMeta({ title: () => `${t('signup.h2')} — ReviewShield` })
+usePageTitle(() => t('signup.h2'))
 </script>
 
 <template>

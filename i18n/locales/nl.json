@@ -1,4 +1,8 @@
 {
+  "page": {
+    "title": "ReviewUpgrade",
+    "tagline": "Bescherm je online reputatie"
+  },
   "nav": {
     "how": "Hoe het werkt",
     "demo": "Demo",
@@ -6,12 +10,15 @@
     "faq": "FAQ",
     "contact": "Contact",
     "cta": "Aanmelden",
-    "login": "Inloggen"
+    "login": "Inloggen",
+    "menu": "Menu",
+    "dashboard": "Dashboard",
+    "admin": "Beheer"
   },
   "hero": {
     "eyebrow": "Voor lokale ondernemers",
     "h1": "Laat tevreden klanten spreken. Houd <span class=\"hl\">klachten<svg viewBox=\"0 0 200 14\"><path d=\"M2 10C40 2 160 2 198 10\" stroke=\"#E8C547\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/></svg></span> privé.",
-    "lede": "ReviewShield vraagt elke klant om een score. Bij 4 of 5 sterren gaat hij direct naar Google. Bij een lagere score komt het rechtstreeks bij jou terecht — niet online.",
+    "lede": "ReviewUpgrade vraagt elke klant om een score. Bij 4 of 5 sterren gaat hij direct naar Google. Bij een lagere score komt het rechtstreeks bij jou terecht — niet online.",
     "cta": "Start gratis proefperiode",
     "demo": "Bekijk demo",
     "note": "14 dagen gratis, geen verplichtingen",
@@ -64,7 +71,8 @@
     "context": {
       "label": "VOORBEELDPAGINA",
       "p": "Stel je voor: een klant van Kapsalon Anna heeft net een knipbeurt gehad en komt op de bedankpagina terecht.",
-      "thanks": "Bedankt voor uw bezoek"
+      "thanks": "Bedankt voor uw bezoek",
+      "biz": "Kapsalon Anna"
     },
     "reset": "Demo opnieuw starten",
     "widget": {
@@ -109,7 +117,7 @@
     },
     "explainer": {
       "default": "Onderzoek naar lokale zoekresultaten laat zien dat een hogere Google-score samenhangt met meer aanvragen. Dit is een indicatie, geen garantie.",
-      "maxed": "Je score zit al dicht bij het maximum. De grootste winst van ReviewShield zit dan in het voorkomen van negatieve reviews."
+      "maxed": "Je score zit al dicht bij het maximum. De grootste winst van ReviewUpgrade zit dan in het voorkomen van negatieve reviews."
     }
   },
   "testimonials": {
@@ -277,7 +285,7 @@
   "faqpage": {
     "eyebrow": "Support",
     "h1": "Veelgestelde vragen",
-    "sub": "Staat je vraag er niet bij? Stuur een mail naar support{'@'}reviewshield.nl."
+    "sub": "Staat je vraag er niet bij? Stuur een mail naar support{'@'}reviewupgrade.nl."
   },
   "contactpage": {
     "eyebrow": "Contact",
@@ -294,7 +302,7 @@
     },
     "opzeg": {
       "h": "Opzeggen",
-      "p": "Opzeggen doe je via een simpele mail naar opzeggen{'@'}reviewshield.nl. Geen gedoe, geen formulieren."
+      "p": "Opzeggen doe je via een simpele mail naar opzeggen{'@'}reviewupgrade.nl. Geen gedoe, geen formulieren."
     },
     "form": {
       "h": "Stuur een bericht",
@@ -303,10 +311,12 @@
       "msg": "Bericht",
       "btn": "Verstuur bericht",
       "confirm": "Bedankt! Je bericht is ontvangen. We reageren binnen één werkdag."
-    }
+    },
+    "supportEmail": "support{'@'}reviewupgrade.nl",
+    "cancelEmail": "opzeggen{'@'}reviewupgrade.nl"
   },
   "footer": {
-    "copy": "© 2026 ReviewShield · Prototype"
+    "copy": "© 2026 ReviewUpgrade"
   },
   "flow": {
     "steps": [
@@ -423,7 +433,7 @@
     "feedbackThanksTitle": "Bedankt voor je feedback",
     "feedbackThanksSub": "Het bedrijf heeft een melding ontvangen en neemt mogelijk contact op.",
     "notFound": "Deze reviewpagina bestaat niet.",
-    "poweredBy": "Mogelijk gemaakt door ReviewShield",
+    "poweredBy": "Mogelijk gemaakt door ReviewUpgrade",
     "reviewPrompt": "Schrijf hier je review",
     "reviewPlaceholder": "Wat vond je goed aan je ervaring?",
     "reviewBtn": "Doorgaan",
@@ -581,5 +591,10 @@
       "next": "Volgende: installeren",
       "back": "Terug naar instellen"
     }
+  },
+  "account": {
+    "dashboard": "Mijn dashboard",
+    "admin": "Beheer",
+    "logout": "Uitloggen"
   }
 }

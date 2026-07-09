@@ -29,7 +29,7 @@ async function onSubmit() {
   done.value = true
 }
 
-useSeoMeta({ title: () => `${t('contactpage.h1')} — ReviewShield` })
+usePageTitle(() => t('contactpage.h1'))
 </script>
 
 <template>
@@ -47,7 +47,7 @@ useSeoMeta({ title: () => `${t('contactpage.h1')} — ReviewShield` })
             <h3 class="text-sm font-semibold flex items-center gap-2">
               <UIcon name="i-lucide-mail" class="size-4 text-green-700" />{{ t('contact.email.h') }}
             </h3>
-            <p class="text-sm text-muted mt-1">support@reviewshield.nl</p>
+            <p class="text-sm text-muted mt-1">{{ t('contact.supportEmail') }}</p>
           </div>
           <div>
             <h3 class="text-sm font-semibold flex items-center gap-2">

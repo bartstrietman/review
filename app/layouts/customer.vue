@@ -4,6 +4,7 @@ const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const localePath = useLocalePath()
 const router = useRouter()
+const { siteName } = useSite()
 const { customers, customer, selectedId } = useMyBusiness()
 
 const links = computed(() => [[
@@ -29,7 +30,7 @@ async function logout() {
     <UDashboardSidebar collapsible resizable :min-size="15" :default-size="18">
       <template #header>
         <NuxtLink :to="localePath('/dashboard')" class="flex items-center gap-2.5 font-display font-bold">
-          <Logo :size="26" /> ReviewShield
+          <Logo :size="26" /> {{ siteName }}
         </NuxtLink>
       </template>
 

@@ -44,7 +44,7 @@ onMounted(async () => {
   setTimeout(() => { if (!done) status.value = 'error' }, 9000)
 })
 
-useSeoMeta({ title: 'ReviewShield' })
+usePageTitle()
 </script>
 
 <template>

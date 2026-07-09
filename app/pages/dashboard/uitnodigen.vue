@@ -42,7 +42,7 @@ async function send() {
   finally { inviting.value = false }
 }
 
-useSeoMeta({ title: 'Uitnodigen — ReviewShield' })
+usePageTitle('Uitnodigen')
 </script>
 
 <template>

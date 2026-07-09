@@ -1,8 +1,8 @@
-# ReviewShield → Nuxt-app (Cloudflare + Supabase)
+# ReviewUpgrade → Nuxt-app (Cloudflare + Supabase)
 
 ## Context
 
-`index.html` (1478 regels) is een self-contained vanilla HTML/CSS/JS-prototype voor **ReviewShield**: een SaaS-widget waarmee lokale ondernemers tevreden klanten naar Google sturen en ontevreden klanten privé opvangen. Het bevat een marketing-homepage, een 5-staps aanmeldflow, subpagina's (hoe-werkt-het / FAQ / contact / bevestiging), NL/EN i18n en widget-demo-logica — alles client-side, geen backend.
+`index.html` (1478 regels) is een self-contained vanilla HTML/CSS/JS-prototype voor **ReviewUpgrade**: een SaaS-widget waarmee lokale ondernemers tevreden klanten naar Google sturen en ontevreden klanten privé opvangen. Het bevat een marketing-homepage, een 5-staps aanmeldflow, subpagina's (hoe-werkt-het / FAQ / contact / bevestiging), NL/EN i18n en widget-demo-logica — alles client-side, geen backend.
 
 We bouwen dit om tot een echte full-stack Nuxt-applicatie:
 - **Nuxt 4 + Nuxt UI v4 + Tailwind v4**, huidige groen/cream/goud-huisstijl omgezet naar Nuxt UI theming.
@@ -49,7 +49,7 @@ Nieuwe Nuxt-app in de repo-root (`index.html` blijft als referentie staan, wordt
 
 ## 2. Huisstijl → Nuxt UI theming
 
-- `app/assets/css/main.css`: `@import "tailwindcss"; @import "@nuxt/ui";` + een `@theme`-blok dat de ReviewShield-tokens als custom Tailwind-kleuren registreert (een `green`-schaal 50-950 rond `#0F3D2E`, plus `gold`/`cream`/`ink`).
+- `app/assets/css/main.css`: `@import "tailwindcss"; @import "@nuxt/ui";` + een `@theme`-blok dat de ReviewUpgrade-tokens als custom Tailwind-kleuren registreert (een `green`-schaal 50-950 rond `#0F3D2E`, plus `gold`/`cream`/`ink`).
 - `app.config.ts`: `ui.colors.primary = 'green'`, `ui.colors.neutral` = warme stone/cream-schaal; goud als secundaire/accent. Semantische utilities (`text-default`, `bg-elevated`, `border-muted`) gebruiken — geen rauwe palettkleuren.
 - Fonts via `@nuxt/fonts`; koppen `font-display` (Space Grotesk), body Inter.
 - Component-defaults (radius, button-stijl) afstemmen op het prototype via `app.config.ts` en waar nodig de `:ui`-prop.
@@ -78,7 +78,7 @@ Demo/ROI/branches-data en alle teksten verplaatsen naar i18n-locale-bestanden + 
 4. **E-mail + OTP** (vervangt de fake Stripe-stap): e-mail invoeren → `supabase.auth.signInWithOtp({ email })` → OTP-code invoeren → `verifyOtp`. Bij succes is de gebruiker ingelogd.
 5. Na verificatie: customer-record opslaan (gekoppeld aan `auth.uid()`), `slug` genereren → redirect naar `bevestiging/[slug]`.
 
-`app/pages/bevestiging/[slug].vue` — toont samenvatting + de twee embed-snippets (popup / vast blok), zoals `finishSignup` (regels 1392-1413). Embed-URL voorlopig placeholder (`https://reviewshield.nl/widget/{slug}.js`) tot de widget gebouwd is.
+`app/pages/bevestiging/[slug].vue` — toont samenvatting + de twee embed-snippets (popup / vast blok), zoals `finishSignup` (regels 1392-1413). Embed-URL voorlopig placeholder (`https://reviewupgrade.nl/widget/{slug}.js`) tot de widget gebouwd is.
 
 `app/pages/login.vue` — losse OTP-login voor terugkerende klanten/admin.
 

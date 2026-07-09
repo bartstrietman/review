@@ -8,6 +8,7 @@ const route = useRoute()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const config = useRuntimeConfig()
+const { siteName } = useSite()
 const toast = useToast()
 
 const email = ref('')
@@ -54,7 +55,7 @@ async function sendLink() {
 async function devLogin(which: 'admin' | 'klant') {
   loading.value = true
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: `${which}@reviewshield.test`,
+    email: `${which}@reviewupgrade.test`,
     password: 'devpass1234',
   })
   loading.value = false
@@ -62,14 +63,14 @@ async function devLogin(which: 'admin' | 'klant') {
   navigateByRole(data.user)
 }
 
-useSeoMeta({ title: 'Inloggen — ReviewShield' })
+usePageTitle('Inloggen')
 </script>
 
 <template>
   <UContainer class="py-16 sm:py-24 max-w-md">
     <div class="rounded-2xl border border-default bg-white p-8">
       <div class="flex items-center gap-2.5 font-display text-lg font-bold mb-6">
-        <Logo :size="28" /> ReviewShield
+        <Logo :size="28" /> {{ siteName }}
       </div>
       <h1 class="text-2xl font-bold">Inloggen</h1>
       <p class="text-sm text-muted mt-1 mb-6">Geen wachtwoord nodig — we sturen je een inloglink per e-mail.</p>

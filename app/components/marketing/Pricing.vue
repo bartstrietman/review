@@ -9,11 +9,11 @@ const localePath = useLocalePath()
   <section id="pricing" class="py-20 sm:py-22 scroll-mt-16">
     <UContainer>
       <MarketingSectionHead :eyebrow="t('pricing.eyebrow')" :title="t('pricing.h2')" :sub="t('pricing.sub')" />
-      <div class="grid md:grid-cols-2 gap-7 max-w-3xl">
+      <div class="grid md:grid-cols-2 gap-7 max-w-3xl mx-auto">
         <div
           v-for="plan in PRICING_PLANS" :key="plan.id"
           class="relative rounded-2xl border bg-white p-8"
-          :class="plan.featured ? 'border-green-700' : 'border-default'"
+          :class="plan.featured ? 'border-green-700 shadow-sm' : 'border-default'"
         >
           <span
             v-if="plan.featured"
@@ -37,7 +37,7 @@ const localePath = useLocalePath()
             :to="localePath('/aanmelden') + `?pkg=${plan.id}`"
             block size="lg"
             :color="plan.featured ? 'primary' : 'neutral'"
-            :variant="plan.featured ? 'solid' : 'soft'"
+            :variant="plan.featured ? 'solid' : 'outline'"
           >
             {{ t(`pricing.${plan.id}.cta`) }}
           </UButton>

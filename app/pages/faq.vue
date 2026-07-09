@@ -6,7 +6,7 @@ const items = computed(() =>
   (FAQ_DATA[locale.value as 'nl' | 'en'] ?? FAQ_DATA.nl).map(f => ({ label: f.q, content: f.a })),
 )
 
-useSeoMeta({ title: () => `${t('faqpage.h1')} — ReviewShield` })
+usePageTitle(() => t('faqpage.h1'))
 </script>
 
 <template>

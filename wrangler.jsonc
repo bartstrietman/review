@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "reviewshield",
+  "name": "reviewupgrade",
   "account_id": "fb35f0f78f45d7cfec69d8ba74bba2b8",
   "main": "./.output/server/index.mjs",
   "compatibility_date": "2025-01-01",
@@ -19,6 +19,6 @@
     "SUPABASE_URL": "https://outddpbiubsqnqxzufcm.supabase.co",
     "SUPABASE_KEY": "sb_publishable_Y8VREQfrem6LULE5PtwfKw_TLtGuDKo",
     "DEV_LOGIN_ENABLED": "true",
-    "DEV_ADMIN_EMAIL": "admin@reviewshield.test"
+    "DEV_ADMIN_EMAIL": "admin@reviewupgrade.test"
   }
 }

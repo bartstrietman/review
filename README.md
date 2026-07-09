@@ -1,6 +1,6 @@
-# ReviewShield — Prototype site
+# ReviewUpgrade — Prototype site
 
-Landingspagina + aanmeldflow voor ReviewShield: een SaaS-widget waarmee lokale ondernemers tevreden klanten doorsturen naar Google en ontevreden klanten privé opvangen.
+Landingspagina + aanmeldflow voor ReviewUpgrade: een SaaS-widget waarmee lokale ondernemers tevreden klanten doorsturen naar Google en ontevreden klanten privé opvangen.
 
 ## Structuur
 
@@ -37,11 +37,11 @@ README.md      ← dit bestand
 
 1. Ga naar de repo → Settings → Pages
 2. Kies bij "Source": `Deploy from a branch` → `main` → `/ (root)`
-3. Sla op — na ~1 minuut is de site live op `gebruikersnaam.github.io/reviewshield`
+3. Sla op — na ~1 minuut is de site live op `gebruikersnaam.github.io/reviewupgrade`
 
 ## Domein koppelen (later)
 
-Zodra je een domeinnaam hebt (bijv. reviewshield.nl of een alternatief):
+Zodra je een domeinnaam hebt (bijv. reviewupgrade.nl of een alternatief):
 1. Voeg een `CNAME` bestand toe aan de repo met daarin de domeinnaam
 2. Stel bij je domeingregistrar een A-record in naar GitHub Pages IP-adressen
 3. Zet "Enforce HTTPS" aan in GitHub Pages settings

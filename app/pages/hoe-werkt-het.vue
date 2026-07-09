@@ -10,7 +10,7 @@ const steps = computed(() => [
   { h: t('howpage.s5.h'), p: t('howpage.s5.p') },
 ])
 
-useSeoMeta({ title: () => `${t('howpage.h1')} — ReviewShield` })
+usePageTitle(() => t('howpage.h1'))
 </script>
 
 <template>

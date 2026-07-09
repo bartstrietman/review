@@ -47,7 +47,7 @@ function statusColor(s: string) {
   return s === 'active' ? 'success' : s === 'trial' ? 'primary' : s === 'paused' ? 'warning' : 'neutral'
 }
 
-useSeoMeta({ title: 'Overzicht — ReviewShield' })
+usePageTitle('Overzicht')
 </script>
 
 <template>

@@ -35,7 +35,7 @@ async function copy(text: string) {
 
 const pkgLabel = computed(() => customer.value?.package === 'pro' ? t('flow.pkg.pro.name') : t('flow.pkg.lokaal.name'))
 
-useSeoMeta({ title: () => `${t('conf.h1')} — ReviewShield` })
+usePageTitle(() => t('conf.h1'))
 </script>
 
 <template>

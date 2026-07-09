@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const { siteName } = useSite()
 
 interface Cell { text?: string; mark?: 'check' | 'x' }
 const rows = computed<{ lbl: string; us: Cell; c2: Cell; c3: Cell }[]>(() => [
@@ -43,7 +44,7 @@ const rows = computed<{ lbl: string; us: Cell; c2: Cell; c3: Cell }[]>(() => [
       <div class="overflow-hidden rounded-2xl border border-default bg-white">
         <div class="grid grid-cols-[1.4fr_1fr_1fr_1fr] bg-elevated text-[13px] font-semibold">
           <div class="px-4 py-4" />
-          <div class="px-4 py-4 text-green-700">ReviewShield</div>
+          <div class="px-4 py-4 text-green-700">{{ siteName }}</div>
           <div class="px-4 py-4 text-muted">{{ t('compare.col2') }}</div>
           <div class="px-4 py-4 text-muted">{{ t('compare.col3') }}</div>
         </div>

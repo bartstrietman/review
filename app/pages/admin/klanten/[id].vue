@@ -39,7 +39,7 @@ async function save() {
 }
 
 const popupCode = computed(() =>
-  c.value ? `<script src="https://reviewshield.nl/widget/${c.value.slug}.js" data-mode="popup"><\/script>` : '',
+  c.value ? `<script src="https://reviewupgrade.nl/widget/${c.value.slug}.js" data-mode="popup"><\/script>` : '',
 )
 </script>
 

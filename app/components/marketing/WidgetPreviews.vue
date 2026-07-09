@@ -19,7 +19,12 @@ const { t, locale } = useI18n()
           <div class="flex flex-col items-center gap-2.5 px-4 py-6" :style="{ background: s.bg }">
             <p class="text-sm font-semibold" :style="{ color: s.fg }">{{ t('examples.preview.q') }}</p>
             <StarRating :size="22" :filled="4" readonly />
-            <p class="text-[11px]" :style="{ color: s.fg, opacity: 0.7 }">{{ t('demo.widget.hint') }}</p>
+            <p
+              class="text-[11px]"
+              :style="{ color: s.fg === '#FFFFFF' ? 'rgba(255,255,255,0.85)' : '#5C5C54' }"
+            >
+              {{ t('demo.widget.hint') }}
+            </p>
           </div>
         </div>
       </div>

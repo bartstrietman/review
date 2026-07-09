@@ -34,12 +34,12 @@ export default defineNuxtConfig({
     supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY || '',
     serperKey: process.env.SERPER_KEY || '',
     resendKey: process.env.RESEND_API_KEY || '',
-    resendFrom: process.env.RESEND_FROM || 'ReviewShield <onboarding@resend.dev>',
+    resendFrom: process.env.RESEND_FROM || 'ReviewUpgrade <onboarding@resend.dev>',
     // dev-only admin login bypass (never enabled in prod)
     devLoginEnabled: process.env.DEV_LOGIN_ENABLED || '',
     devAdminEmail: process.env.DEV_ADMIN_EMAIL || '',
     public: {
-      siteName: 'ReviewShield',
+      siteName: 'ReviewUpgrade',
       // Exposed so the client can show the dev-login UI only in dev.
       devLogin: process.env.DEV_LOGIN_ENABLED === 'true',
     },

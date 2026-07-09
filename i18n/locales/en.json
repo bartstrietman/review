@@ -1,4 +1,8 @@
 {
+  "page": {
+    "title": "ReviewUpgrade",
+    "tagline": "Protect your online reputation"
+  },
   "nav": {
     "how": "How it works",
     "demo": "Demo",
@@ -6,16 +10,19 @@
     "faq": "FAQ",
     "contact": "Contact",
     "cta": "Sign up",
-    "login": "Log in"
+    "login": "Log in",
+    "menu": "Menu",
+    "dashboard": "Dashboard",
+    "admin": "Admin"
   },
   "hero": {
     "eyebrow": "For local businesses",
     "h1": "Let happy customers speak. Keep <span class=\"hl\">complaints<svg viewBox=\"0 0 200 14\"><path d=\"M2 10C40 2 160 2 198 10\" stroke=\"#E8C547\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/></svg></span> private.",
-    "lede": "ReviewShield asks every customer for a rating. 4 or 5 stars goes straight to Google. A lower score comes directly to you — never posted online.",
+    "lede": "ReviewUpgrade asks every customer for a rating. 4 or 5 stars goes straight to Google. A lower score comes directly to you — never posted online.",
     "cta": "Start free trial",
     "demo": "Watch demo",
     "note": "14 days free, no commitments",
-    "mockurl": "plumbervandjik.com/thank-you",
+    "mockurl": "plumbervandijk.com/thank-you",
     "mockbiz": "Van Dijk Plumbing",
     "mocktitle": "Thank you for your request"
   },
@@ -64,7 +71,8 @@
     "context": {
       "label": "EXAMPLE PAGE",
       "p": "Imagine: a customer of Anna's Salon just had a haircut and lands on the thank-you page.",
-      "thanks": "Thank you for your visit"
+      "thanks": "Thank you for your visit",
+      "biz": "Anna's Salon"
     },
     "reset": "Reset demo",
     "widget": {
@@ -109,7 +117,7 @@
     },
     "explainer": {
       "default": "Research on local search results shows that a higher Google score correlates with more inquiries. This is an estimate, not a guarantee.",
-      "maxed": "Your score is already close to the maximum. The biggest benefit of ReviewShield is then preventing future negative reviews."
+      "maxed": "Your score is already close to the maximum. The biggest benefit of ReviewUpgrade is then preventing future negative reviews."
     }
   },
   "testimonials": {
@@ -277,7 +285,7 @@
   "faqpage": {
     "eyebrow": "Support",
     "h1": "Frequently asked questions",
-    "sub": "Can't find your question? Send an email to support{'@'}reviewshield.nl."
+    "sub": "Can't find your question? Send an email to support{'@'}reviewupgrade.nl."
   },
   "contactpage": {
     "eyebrow": "Contact",
@@ -294,7 +302,7 @@
     },
     "opzeg": {
       "h": "Cancellation",
-      "p": "Cancel by sending a simple email to cancel{'@'}reviewshield.nl. No hassle, no forms."
+      "p": "Cancel by sending a simple email to cancel{'@'}reviewupgrade.nl. No hassle, no forms."
     },
     "form": {
       "h": "Send a message",
@@ -303,10 +311,12 @@
       "msg": "Message",
       "btn": "Send message",
       "confirm": "Thank you! Your message has been received. We'll respond within one business day."
-    }
+    },
+    "supportEmail": "support{'@'}reviewupgrade.nl",
+    "cancelEmail": "cancel{'@'}reviewupgrade.nl"
   },
   "footer": {
-    "copy": "© 2026 ReviewShield · Prototype"
+    "copy": "© 2026 ReviewUpgrade"
   },
   "flow": {
     "steps": [
@@ -423,7 +433,7 @@
     "feedbackThanksTitle": "Thanks for your feedback",
     "feedbackThanksSub": "The business has been notified and may reach out.",
     "notFound": "This review page does not exist.",
-    "poweredBy": "Powered by ReviewShield",
+    "poweredBy": "Powered by ReviewUpgrade",
     "reviewPrompt": "Write your review here",
     "reviewPlaceholder": "What did you like about your experience?",
     "reviewBtn": "Continue",
@@ -581,5 +591,10 @@
       "next": "Next: install",
       "back": "Back to setup"
     }
+  },
+  "account": {
+    "dashboard": "My dashboard",
+    "admin": "Admin",
+    "logout": "Log out"
   }
 }

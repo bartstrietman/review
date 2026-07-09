@@ -98,7 +98,7 @@ const steps = computed(() => [
   { h: t('dash.install.s3'), p: t('dash.install.s3d') },
 ])
 
-useSeoMeta({ title: 'Widget — ReviewShield' })
+usePageTitle('Widget')
 </script>
 
 <template>

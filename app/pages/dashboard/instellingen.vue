@@ -39,7 +39,7 @@ async function save() {
   await refresh()
 }
 
-useSeoMeta({ title: 'Instellingen — ReviewShield' })
+usePageTitle('Instellingen')
 </script>
 
 <template>

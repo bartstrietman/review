@@ -97,7 +97,8 @@ function txt(key: string, fallback: string) {
 const bg = computed(() => widget.value?.bg_color || '#0F3D2E')
 const fg = computed(() => widget.value?.text_color || '#FFFFFF')
 
-useHead({ title: () => widget.value ? `Review — ${widget.value.company_name}` : 'ReviewShield' })
+const { siteName } = useSite()
+useHead({ title: () => widget.value ? `Review — ${widget.value.company_name}` : siteName.value })
 </script>
 
 <template>
