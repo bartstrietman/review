@@ -53,8 +53,29 @@ export async function copyLogoToStorage(
   const ext = CONTENT_TYPE_EXT[contentType]
   if (!ext) return null
 
-  const buf = new Uint8Array(await res.arrayBuffer())
-  if (!buf.byteLength || buf.byteLength > MAX_BYTES) return null
+  // Reject oversize bodies up front, then stream with a hard cap so a lying or
+  // missing content-length can't OOM the worker (arrayBuffer() would buffer it all).
+  const declared = Number(res.headers.get('content-length'))
+  if (Number.isFinite(declared) && declared > MAX_BYTES) return null
+
+  const reader = res.body.getReader()
+  const chunks: Uint8Array[] = []
+  let size = 0
+  try {
+    for (;;) {
+      const { done, value } = await reader.read()
+      if (done) break
+      size += value.length
+      if (size > MAX_BYTES) { reader.cancel().catch(() => {}); return null }
+      chunks.push(value)
+    }
+  }
+  catch { return null }
+  if (!size) return null
+
+  const buf = new Uint8Array(size)
+  let off = 0
+  for (const c of chunks) { buf.set(c, off); off += c.length }
 
   const path = `${customerId}/${Math.random().toString(36).slice(2)}.${ext}`
   const { error } = await admin.storage.from('logos').upload(path, buf, { contentType, upsert: false })

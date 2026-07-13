@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { COLOR_PALETTE } from '~/data/marketing'
-
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const router = useRouter()
