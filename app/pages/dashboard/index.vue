@@ -123,39 +123,45 @@ usePageTitle('Overzicht')
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <UCard class="ring-1 ring-green-200">
-            <div class="size-10 rounded-lg bg-green-700 flex items-center justify-center mb-3">
+            <div class="size-11 rounded-xl bg-green-800 flex items-center justify-center mb-3.5">
               <UIcon name="i-lucide-send" class="size-5 text-gold-400" />
             </div>
-            <h3 class="font-semibold mb-1">{{ t('dash.tempo.inviteT') }}</h3>
-            <p class="text-sm text-muted mb-4">
+            <h3 class="font-semibold text-[17px] mb-1.5">{{ t('dash.tempo.inviteT') }}</h3>
+            <p class="text-sm text-muted mb-5">
               {{ (inviteStats?.completed ?? 0) > 0 ? t('dash.tempo.inviteWorking', { n: inviteStats!.completed }) : t('dash.tempo.inviteD') }}
             </p>
-            <UButton :to="localePath('/dashboard/uitnodigen')" color="primary" size="sm">{{ t('dash.tempo.inviteCta') }}</UButton>
-            <p v-if="(inviteStats?.sent ?? 0) > 0" class="text-xs text-muted mt-3 flex items-center gap-1">
+            <UButton :to="localePath('/dashboard/uitnodigen')" size="lg" class="bg-green-800 hover:bg-green-700 text-white px-5 font-semibold">
+              {{ t('dash.tempo.inviteCta') }}
+            </UButton>
+            <p v-if="(inviteStats?.sent ?? 0) > 0" class="text-xs text-muted mt-3.5 flex items-center gap-1">
               <UIcon name="i-lucide-check" class="size-3.5 text-green-600" />
               {{ t('dash.tempo.inviteStats', { sent: inviteStats!.sent, done: inviteStats!.completed }) }}
             </p>
           </UCard>
 
           <UCard>
-            <div class="size-10 rounded-lg bg-green-50 flex items-center justify-center mb-3">
+            <div class="size-11 rounded-xl bg-green-50 flex items-center justify-center mb-3.5">
               <UIcon name="i-lucide-link" class="size-5 text-green-700" />
             </div>
-            <h3 class="font-semibold mb-1">{{ t('dash.tempo.linkT') }}</h3>
-            <p class="text-sm text-muted mb-4">{{ t('dash.tempo.linkD') }}</p>
-            <div class="flex gap-2">
-              <UInput :model-value="reviewUrl" readonly class="flex-1 font-mono text-[11px]" :aria-label="t('dash.link.label')" />
-              <UButton icon="i-lucide-copy" color="neutral" variant="soft" size="sm" @click="copy(reviewUrl)">{{ t('dash.link.copy') }}</UButton>
+            <h3 class="font-semibold text-[17px] mb-1.5">{{ t('dash.tempo.linkT') }}</h3>
+            <p class="text-sm text-muted mb-5">{{ t('dash.tempo.linkD') }}</p>
+            <div class="flex items-center gap-2 rounded-xl border border-default p-1.5">
+              <span class="flex-1 truncate font-mono text-xs px-2" :title="reviewUrl">{{ reviewUrl }}</span>
+              <UButton icon="i-lucide-copy" color="neutral" variant="outline" class="bg-white shrink-0" @click="copy(reviewUrl)">
+                {{ t('dash.link.copy') }}
+              </UButton>
             </div>
           </UCard>
 
           <UCard>
-            <div class="size-10 rounded-lg bg-green-50 flex items-center justify-center mb-3">
+            <div class="size-11 rounded-xl bg-green-50 flex items-center justify-center mb-3.5">
               <UIcon name="i-lucide-code" class="size-5 text-green-700" />
             </div>
-            <h3 class="font-semibold mb-1">{{ t('dash.tempo.widgetT') }}</h3>
-            <p class="text-sm text-muted mb-4">{{ t('dash.tempo.widgetD') }}</p>
-            <UButton :to="localePath('/dashboard/widget') + '?step=2'" color="neutral" variant="soft" size="sm">{{ t('dash.tempo.widgetCta') }}</UButton>
+            <h3 class="font-semibold text-[17px] mb-1.5">{{ t('dash.tempo.widgetT') }}</h3>
+            <p class="text-sm text-muted mb-5">{{ t('dash.tempo.widgetD') }}</p>
+            <UButton :to="localePath('/dashboard/widget') + '?step=2'" color="primary" variant="soft" size="lg" class="px-5 font-semibold">
+              {{ t('dash.tempo.widgetCta') }}
+            </UButton>
           </UCard>
         </div>
 
