@@ -18,7 +18,7 @@
   "hero": {
     "eyebrow": "Voor lokale ondernemers",
     "h1": "Laat tevreden klanten spreken. Houd <span class=\"hl\">klachten<svg viewBox=\"0 0 200 14\"><path d=\"M2 10C40 2 160 2 198 10\" stroke=\"#E8C547\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/></svg></span> privé.",
-    "lede": "ReviewUpgrade vraagt elke klant om een score. Bij 4 of 5 sterren gaat hij direct naar Google. Bij een lagere score komt het rechtstreeks bij jou terecht — niet online.",
+    "lede": "ReviewUpgrade vraagt elke klant om een score. Bij 4 of 5 sterren helpen we hem meteen een review op Google te plaatsen. Bij een lagere score komt het rechtstreeks bij jou terecht — niet online.",
     "cta": "Start gratis proefperiode",
     "demo": "Bekijk demo",
     "note": "14 dagen gratis, geen verplichtingen",
@@ -48,7 +48,7 @@
     "step3": {
       "num": "STAP 3",
       "h": "Juiste route, automatisch",
-      "p": "4 of 5 sterren: direct naar Google. Lager: feedback komt privé bij jou, geen review online."
+      "p": "4 of 5 sterren: de klant plaatst een review op Google. Lager: feedback komt privé bij jou, geen review online."
     }
   },
   "branches": {
@@ -67,7 +67,7 @@
   "demo": {
     "eyebrow": "Live demo",
     "h2": "Probeer het zelf",
-    "sub": "Dit is exact hoe de widget op de website van je klant verschijnt. Geen echte review wordt hierdoor beïnvloed.",
+    "sub": "Zo werkt de widget op de website van je klant (vereenvoudigde demo). Geen echte review wordt hierdoor beïnvloed.",
     "context": {
       "label": "VOORBEELDPAGINA",
       "p": "Stel je voor: een klant van Kapsalon Anna heeft net een knipbeurt gehad en komt op de bedankpagina terecht.",
@@ -92,7 +92,7 @@
       },
       "feedbackthanks": {
         "title": "Bedankt voor uw feedback",
-        "sub": "De ondernemer heeft een melding ontvangen en neemt mogelijk contact op."
+        "sub": "De ondernemer ziet je feedback in zijn dashboard en neemt mogelijk contact op."
       }
     }
   },
@@ -139,15 +139,15 @@
   "privacy": {
     "1": {
       "h": "Feedbackdata",
-      "p": "Ingevulde klachten (1-3 sterren) worden direct en uitsluitend doorgestuurd naar jou als ondernemer via e-mail. Ze worden niet opgeslagen op onze servers en niet gedeeld met derden."
+      "p": "Lage beoordelingen (1-3 sterren) komen privé in jouw dashboard terecht — niet openbaar en niet op Google. Ze worden versleuteld opgeslagen bij onze hostingpartner (Supabase) binnen de EU en zijn uitsluitend voor jou zichtbaar."
     },
     "2": {
       "h": "Anonimiteit eindklant",
-      "p": "De widget vraagt geen naam of e-mailadres van je eindklant. Alleen de sterrenscore en ingevulde tekst worden doorgestuurd. De klant blijft anoniem als hij dat wil."
+      "p": "De widget zelf vraagt geen naam of e-mailadres van je eindklant — alleen de sterrenscore en eventuele tekst. Nodig je klanten actief uit via e-mail, dan verwerken we hun e-mailadres om de uitnodiging te sturen en de status te volgen."
     },
     "3": {
       "h": "Jouw bedrijfsgegevens",
-      "p": "Je naam, e-mailadres en betaalgegevens worden beheerd via Stripe, een gecertificeerde betaalverwerker. Wij hebben nooit toegang tot je betaalkaartgegevens."
+      "p": "Je betaalt op factuur per e-mail — we vragen geen creditcard en slaan geen betaalkaartgegevens op. Je bedrijfsgegevens (naam, e-mail, adres) bewaren we bij onze hostingpartner binnen de EU."
     },
     "eyebrow": "Gegevens & verwerking",
     "h2": "Wat er met gegevens gebeurt",
@@ -193,7 +193,7 @@
       "sub": "Alles wat je nodig hebt voor meer positieve reviews",
       "f1": "Widget voor Google, Trustpilot of TripAdvisor",
       "f2": "Volledig in je eigen huisstijl",
-      "f3": "Kant-en-klare WhatsApp- en mailteksten",
+      "f3": "Kant-en-klare mailteksten + deelbare reviewlink (WhatsApp, QR, mail)",
       "f4": "Installatie binnen 1 minuut",
       "cta": "Probeer 14 dagen gratis"
     },
@@ -212,9 +212,9 @@
   },
   "exit": {
     "h": "Nog niet klaar voor een abonnement?",
-    "p": "Laat je e-mailadres achter en ontvang een gratis gids: 5 manieren om meer reviews te krijgen.",
-    "btn": "Stuur mij de gids",
-    "confirm": "Bedankt! De gids is onderweg naar je inbox."
+    "p": "Laat je e-mailadres achter, dan sturen we je af en toe praktische tips om meer reviews te krijgen.",
+    "btn": "Houd me op de hoogte",
+    "confirm": "Bedankt! We nemen contact met je op."
   },
   "signup": {
     "eyebrow": "Aanmelden",

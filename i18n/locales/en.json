@@ -18,7 +18,7 @@
   "hero": {
     "eyebrow": "For local businesses",
     "h1": "Let happy customers speak. Keep <span class=\"hl\">complaints<svg viewBox=\"0 0 200 14\"><path d=\"M2 10C40 2 160 2 198 10\" stroke=\"#E8C547\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/></svg></span> private.",
-    "lede": "ReviewUpgrade asks every customer for a rating. 4 or 5 stars goes straight to Google. A lower score comes directly to you — never posted online.",
+    "lede": "ReviewUpgrade asks every customer for a rating. At 4 or 5 stars we help them post a review on Google right away. A lower score comes directly to you — never posted online.",
     "cta": "Start free trial",
     "demo": "Watch demo",
     "note": "14 days free, no commitments",
@@ -48,7 +48,7 @@
     "step3": {
       "num": "STEP 3",
       "h": "Right route, automatically",
-      "p": "4 or 5 stars: straight to Google. Lower: feedback comes to you privately, no public review."
+      "p": "4 or 5 stars: the customer posts a review on Google. Lower: feedback comes to you privately, no public review."
     }
   },
   "branches": {
@@ -67,7 +67,7 @@
   "demo": {
     "eyebrow": "Live demo",
     "h2": "Try it yourself",
-    "sub": "This is exactly how the widget appears on your customer's website. No real review is affected.",
+    "sub": "This is how the widget appears on your customer's website (simplified demo). No real review is affected.",
     "context": {
       "label": "EXAMPLE PAGE",
       "p": "Imagine: a customer of Anna's Salon just had a haircut and lands on the thank-you page.",
@@ -92,7 +92,7 @@
       },
       "feedbackthanks": {
         "title": "Thank you for your feedback",
-        "sub": "The business has been notified and may contact you."
+        "sub": "The business sees your feedback in their dashboard and may contact you."
       }
     }
   },
@@ -139,15 +139,15 @@
   "privacy": {
     "1": {
       "h": "Feedback data",
-      "p": "Submitted complaints (1-3 stars) are forwarded directly and exclusively to you as the business owner via email. They are not stored on our servers and not shared with third parties."
+      "p": "Low ratings (1-3 stars) land privately in your dashboard — not public and not on Google. They are stored encrypted with our hosting partner (Supabase) inside the EU and are visible to you alone."
     },
     "2": {
       "h": "End customer anonymity",
-      "p": "The widget does not ask for your end customer's name or email address. Only the star rating and submitted text are forwarded. The customer remains anonymous if they wish."
+      "p": "The widget itself does not ask for your end customer's name or email — only the star rating and any text. If you actively invite customers by email, we process their email address to send the invitation and track its status."
     },
     "3": {
       "h": "Your business data",
-      "p": "Your name, email address and payment details are managed via Stripe, a certified payment processor. We never have access to your payment card details."
+      "p": "You pay by invoice via email — we don't ask for a credit card and store no payment card details. Your business details (name, email, address) are kept with our hosting partner inside the EU."
     },
     "eyebrow": "Data & processing",
     "h2": "What happens with data",
@@ -193,7 +193,7 @@
       "sub": "Everything you need for more positive reviews",
       "f1": "Widget for Google, Trustpilot or TripAdvisor",
       "f2": "Fully in your own branding",
-      "f3": "Ready-made WhatsApp and email templates",
+      "f3": "Ready-made email templates + shareable review link (WhatsApp, QR, mail)",
       "f4": "Live within 1 minute",
       "cta": "Try 14 days free"
     },
@@ -212,9 +212,9 @@
   },
   "exit": {
     "h": "Not ready for a subscription yet?",
-    "p": "Leave your email and receive a free guide: 5 ways to get more reviews.",
-    "btn": "Send me the guide",
-    "confirm": "Thanks! The guide is on its way to your inbox."
+    "p": "Leave your email and we'll send you practical tips to get more reviews from time to time.",
+    "btn": "Keep me posted",
+    "confirm": "Thanks! We'll be in touch."
   },
   "signup": {
     "eyebrow": "Sign up",
