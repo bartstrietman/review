@@ -12,6 +12,11 @@
   "observability": {
     "enabled": true
   },
+  // Daily Google-score cron (03:30 UTC) → Worker scheduled() → Nitro
+  // cloudflare:scheduled hook (server/plugins/cloudflare-scheduled.ts).
+  "triggers": {
+    "crons": ["30 3 * * *"]
+  },
   "routes": [
     { "pattern": "reviewupgrade.nl", "custom_domain": true },
     { "pattern": "www.reviewupgrade.nl", "custom_domain": true }

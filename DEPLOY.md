@@ -58,6 +58,38 @@ npx wrangler secret put NUXT_RESEND_FROM      # ReviewUpgrade <noreply@reviewupg
 `SUPABASE_KEY` is de **publishable/anon** key — veilig client-side, RLS beschermt
 de data. De `sbp_`-token (MCP) en de service-role key horen hier **niet**.
 
+## Google-score cron (dagelijkse snapshots)
+
+Dagelijks (03:30 UTC) haalt de Worker voor elke klant met een `google_place_id`
+én status `trial`/`active` de Google-score op en logt een snapshot
+(`source='cron'`) — zonder dat er iemand op het dashboard hoeft te komen. De
+planning staat in `wrangler.jsonc` (`"triggers": { "crons": ["30 3 * * *"] }`) en
+vuurt de Nitro-hook `cloudflare:scheduled`
+(`server/plugins/cloudflare-scheduled.ts`), die `logAllGoogleScores` draait.
+
+De cron insert de snapshots **direct** via de service-role (geen user-sessie), dus
+deze twee secrets zijn vereist:
+
+```bash
+npx wrangler secret put NUXT_SUPABASE_SERVICE_KEY   # service-role key (sb_secret_... of legacy service_role JWT)
+npx wrangler secret put NUXT_CRON_SECRET            # willekeurige string; beschermt het handmatige/externe trigger-endpoint
+```
+
+`NUXT_CRON_SECRET` beschermt het HTTP-endpoint
+`POST /api/cron/google-scores` (header `x-cron-secret`), waarmee je de run
+handmatig of extern kunt aftrappen. Lokaal test je met `CRON_SECRET` uit `.env`:
+
+```bash
+curl -X POST http://localhost:2001/api/cron/google-scores -H "x-cron-secret: <CRON_SECRET>"
+# -> {"checked":N,"logged":M}  (verkeerde/ontbrekende header -> 401)
+```
+
+**Fallback (als de CF Cron Trigger ooit niet beschikbaar is):** zet in Supabase
+een `pg_cron`-job die met `pg_net` een POST doet naar
+`https://reviewupgrade.nl/api/cron/google-scores` met de `x-cron-secret`-header.
+Het HTTP-endpoint is de primaire, geteste route; de CF-trigger is enkel een
+tweede aanroeper van dezelfde code.
+
 ## ⚠️ Belangrijk vóór productie
 
 1. **Dev-login uitzetten.** `DEV_LOGIN_ENABLED` mag in een productie-build
