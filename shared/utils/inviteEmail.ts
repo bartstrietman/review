@@ -7,6 +7,7 @@ export interface InviteTexts {
   subject?: string
   heading?: string
   intro?: string
+  starsQuestion?: string
   buttonLabel?: string
   starsHint?: string
 }
@@ -16,6 +17,7 @@ export function defaultInviteTexts(company: string): Required<InviteTexts> {
     subject: `Laat een review achter voor ${company}`,
     heading: `Laat een review achter voor ${company}`,
     intro: 'Je wordt uitgenodigd om je ervaring te delen. Het duurt minder dan een minuut.',
+    starsQuestion: 'Hoe was je ervaring? Klik op een ster:',
     buttonLabel: 'Geef je beoordeling',
     starsHint: 'Het zou ons enorm helpen als je een 5-sterrenreview achterlaat — zo gaan we vooruit.',
   }
@@ -45,6 +47,7 @@ export function renderInviteEmail(opts: {
   const subject = pick(t.subject, d.subject)
   const heading = pick(t.heading, d.heading)
   const intro = pick(t.intro, d.intro)
+  const starsQuestion = pick(t.starsQuestion, d.starsQuestion)
   const buttonLabel = pick(t.buttonLabel, d.buttonLabel)
   const starsHint = pick(t.starsHint, d.starsHint)
   const bg = safeHex(opts.bgColor, '#0F3D2E')
@@ -72,7 +75,7 @@ export function renderInviteEmail(opts: {
       ${messageBlock}
       <h2 style="color:${bg}">${escapeHtml(heading)}</h2>
       <p style="color:#333;white-space:pre-wrap">${escapeHtml(intro)}</p>
-      <p style="margin:22px 0 4px;font-weight:600;font-size:15px">Hoe was je ervaring? Klik op een ster:</p>
+      <p style="margin:22px 0 4px;font-weight:600;font-size:15px">${escapeHtml(starsQuestion)}</p>
       <p style="margin:0 0 6px">${stars}</p>
       <p style="color:#555;font-size:13px;margin:0 0 4px">${escapeHtml(starsHint)}</p>
       <p style="margin:24px 0">

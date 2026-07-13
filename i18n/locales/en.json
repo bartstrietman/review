@@ -524,6 +524,7 @@
         "subject": "Subject",
         "heading": "Heading",
         "intro": "Intro text",
+        "starsQuestion": "Question above the stars",
         "button": "Button label",
         "starsHint": "Text below the stars",
         "save": "Save text",

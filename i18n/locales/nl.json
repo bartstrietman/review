@@ -524,6 +524,7 @@
         "subject": "Onderwerp",
         "heading": "Kop",
         "intro": "Introtekst",
+        "starsQuestion": "Vraag boven de sterren",
         "button": "Knoptekst",
         "starsHint": "Tekst onder de sterren",
         "save": "Tekst opslaan",

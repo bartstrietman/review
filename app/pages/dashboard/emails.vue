@@ -38,13 +38,13 @@ const inviting = ref(false)
 // Same override pattern as widget_texts: only non-empty values are stored;
 // empty falls back to the default (shown as the field placeholder). The real
 // send renders through renderInviteEmail with these same values.
-const textsForm = reactive({ subject: '', heading: '', intro: '', buttonLabel: '', starsHint: '' })
-const TEXT_KEYS = ['subject', 'heading', 'intro', 'buttonLabel', 'starsHint'] as const
+const textsForm = reactive({ subject: '', heading: '', intro: '', starsQuestion: '', buttonLabel: '', starsHint: '' })
+const TEXT_KEYS = ['subject', 'heading', 'intro', 'starsQuestion', 'buttonLabel', 'starsHint'] as const
 watchEffect(() => {
   const wt = (customer.value?.invite_texts ?? {}) as InviteTexts
   Object.assign(textsForm, {
     subject: wt.subject ?? '', heading: wt.heading ?? '', intro: wt.intro ?? '',
-    buttonLabel: wt.buttonLabel ?? '', starsHint: wt.starsHint ?? '',
+    starsQuestion: wt.starsQuestion ?? '', buttonLabel: wt.buttonLabel ?? '', starsHint: wt.starsHint ?? '',
   })
 })
 const textDefaults = computed(() => defaultInviteTexts(customer.value?.company_name || 'ons'))
@@ -174,7 +174,13 @@ usePageTitle('E-mails')
               />
             </div>
 
-            <p class="font-semibold text-[15px] mt-6 mb-1">Hoe was je ervaring? Klik op een ster:</p>
+            <div class="mt-6 mb-1">
+              <EditableText
+                v-model="textsForm.starsQuestion" :fallback="textDefaults.starsQuestion"
+                :label="t('dash.invite.editor.starsQuestion')" :maxlength="80" wrap
+                text-class="font-semibold text-[15px]"
+              />
+            </div>
             <p class="text-[26px] leading-none tracking-wide mb-2" style="color:#E8C547">★★★★★</p>
             <EditableText
               v-model="textsForm.starsHint" :fallback="textDefaults.starsHint"

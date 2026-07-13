@@ -74,14 +74,14 @@ function onEnter(e: KeyboardEvent) {
     <UIcon name="i-lucide-pencil" class="size-3.5 mt-1 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-70" />
   </span>
 
-  <div v-else class="relative">
-    <div class="absolute -top-9 left-0 z-10 flex items-center gap-3">
-      <span class="inline-flex items-center gap-1.5 rounded-full bg-primary px-2.5 py-1 text-xs font-medium text-white shadow-sm">
-        <UIcon name="i-lucide-pencil" class="size-3" /> {{ t('dash.invite.edit.editing', { field: label }) }}
+  <div v-else class="my-0.5 overflow-hidden rounded-xl border-2 border-primary bg-white shadow-sm">
+    <div class="flex items-center justify-between gap-2 border-b border-primary/15 bg-primary/5 px-3 py-1.5">
+      <span class="inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-medium text-primary">
+        <UIcon name="i-lucide-pencil" class="size-3.5" /> {{ t('dash.invite.edit.editing', { field: label }) }}
       </span>
       <button
         v-if="hasFallback" type="button"
-        class="text-xs text-primary underline underline-offset-2 hover:no-underline"
+        class="whitespace-nowrap text-xs text-primary underline underline-offset-2 hover:no-underline"
         @mousedown.prevent="restore"
       >
         {{ t('dash.invite.edit.restore') }}
@@ -91,20 +91,20 @@ function onEnter(e: KeyboardEvent) {
     <textarea
       v-if="useTextarea" ref="inputEl" v-model="draft" rows="1"
       :maxlength="maxlength || undefined"
-      :class="[textClass, 'block w-full rounded-lg border-2 border-primary bg-white px-3 py-2 text-default outline-none']"
+      :class="[textClass, 'block w-full border-0 bg-transparent px-3 py-2 text-default outline-none']"
       :style="textStyle" style="field-sizing:content;resize:none"
       @blur="commit" @keydown.enter="onEnter"
     />
     <input
       v-else ref="inputEl" v-model="draft"
       :maxlength="maxlength || undefined"
-      :class="[textClass, 'block w-full rounded-lg border-2 border-primary bg-white px-3 py-2 text-default outline-none']"
+      :class="[textClass, 'block w-full border-0 bg-transparent px-3 py-2 text-default outline-none']"
       :style="textStyle" @blur="commit" @keydown.enter="onEnter"
     >
 
-    <div class="mt-1 flex items-center justify-between text-xs text-muted">
+    <div class="flex items-center justify-between gap-3 px-3 pb-1.5 text-xs text-muted">
       <span>{{ multiline ? t('dash.invite.edit.doneMulti') : t('dash.invite.edit.doneSingle') }}</span>
-      <span v-if="maxlength">{{ draft.length }}/{{ maxlength }}</span>
+      <span v-if="maxlength" class="shrink-0">{{ draft.length }}/{{ maxlength }}</span>
     </div>
   </div>
 </template>
