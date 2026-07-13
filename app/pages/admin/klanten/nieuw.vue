@@ -70,6 +70,22 @@ async function scanBrand() {
   catch { /* stil: defaults blijven staan */ }
 }
 
+// Pick a scanned website colour as the background and auto-set a readable text
+// colour (same luminance threshold as the server-side brand-scan suggestion).
+function contrastText(hex: string): string {
+  const m = /^#?([0-9a-fA-F]{6})$/.exec(hex.trim())
+  if (!m) return form.text_color
+  const n = Number.parseInt(m[1]!, 16)
+  const chan = [(n >> 16) & 255, (n >> 8) & 255, n & 255]
+  const lin = (c: number) => { const v = c / 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4 }
+  const lum = 0.2126 * lin(chan[0]!) + 0.7152 * lin(chan[1]!) + 0.0722 * lin(chan[2]!)
+  return lum > 0.179 ? '#1A1A1A' : '#FFFFFF'
+}
+function applyBrandColor(hex: string) {
+  form.bg_color = hex.toUpperCase()
+  form.text_color = contrastText(hex)
+}
+
 const creating = ref(false)
 async function submit() {
   if (!form.company_name || !form.email) {
@@ -144,26 +160,20 @@ async function submit() {
           <UCard>
             <template #header><h3 class="font-semibold">Huisstijl</h3></template>
             <div class="space-y-4">
-              <div v-if="brand.colors.length" class="flex flex-wrap gap-2">
-                <button
-                  v-for="c in brand.colors" :key="c" type="button"
-                  class="size-8 rounded-md border border-default"
-                  :style="{ background: c }"
-                  @click="form.bg_color = c"
-                />
+              <div v-if="brand.colors.length">
+                <p class="text-xs font-medium text-muted mb-1.5">Kleuren van de website</p>
+                <div class="flex flex-wrap gap-2">
+                  <button
+                    v-for="c in brand.colors" :key="c" type="button"
+                    class="size-8 rounded-md border border-default transition hover:scale-110"
+                    :class="{ 'ring-2 ring-offset-2 ring-primary': form.bg_color.toUpperCase() === c.toUpperCase() }"
+                    :style="{ background: c }" :title="c"
+                    @click="applyBrandColor(c)"
+                  />
+                </div>
               </div>
-              <UFormField label="Achtergrondkleur">
-                <div class="flex items-center gap-2">
-                  <span class="size-8 rounded-md border border-default" :style="{ background: form.bg_color }" />
-                  <UInput v-model="form.bg_color" class="w-32" />
-                </div>
-              </UFormField>
-              <UFormField label="Tekstkleur">
-                <div class="flex items-center gap-2">
-                  <span class="size-8 rounded-md border border-default" :style="{ background: form.text_color }" />
-                  <UInput v-model="form.text_color" class="w-32" />
-                </div>
-              </UFormField>
+              <ColorField v-model="form.bg_color" label="Achtergrondkleur" />
+              <ColorField v-model="form.text_color" label="Tekstkleur" />
               <div class="rounded-xl p-5 text-center font-semibold" :style="{ background: form.bg_color, color: form.text_color }">
                 Hoe was uw ervaring?
               </div>
