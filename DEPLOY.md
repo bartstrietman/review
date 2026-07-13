@@ -58,6 +58,33 @@ npx wrangler secret put NUXT_RESEND_FROM      # ReviewUpgrade <noreply@reviewupg
 `SUPABASE_KEY` is de **publishable/anon** key — veilig client-side, RLS beschermt
 de data. De `sbp_`-token (MCP) en de service-role key horen hier **niet**.
 
+## Inbound: doorstuur-naar-uitnodiging
+
+Elke ondernemer heeft een uniek inbox-adres `<invite_inbox>@invite.reviewupgrade.nl`
+(kolom `customers.invite_inbox`). Stuurt hij een klant-mail door, dan vist de
+webhook `POST /api/inbound-invite` het klant-adres eruit en stuurt die persoon een
+review-uitnodiging (`invites.source='inbound'`). De afzender moet de eigen
+`customers.email` van het bedrijf zijn (anti-misbruik).
+
+Eenmalige setup in het **Resend-dashboard**:
+
+1. **Receiving** aanzetten voor `invite.reviewupgrade.nl` en de opgegeven **MX-records**
+   in Cloudflare DNS zetten (subdomein → root-MX blijft ongemoeid).
+2. **Webhook** `email.received` → `https://reviewupgrade.nl/api/inbound-invite`.
+   (Aangemaakt via de API: webhook-id `fee6f12d-7b07-477a-9f0c-11cd5cf84e56`.)
+
+Secrets (naast `NUXT_SUPABASE_SERVICE_KEY`, zie cron hieronder — vereist, want de
+webhook draait zonder user-sessie):
+
+```bash
+npx wrangler secret put NUXT_RESEND_WEBHOOK_SECRET   # whsec_... (Svix signing secret van de webhook)
+# Optioneel als je een ander (sub)domein gebruikt dan de default invite.reviewupgrade.nl:
+npx wrangler secret put NUXT_PUBLIC_INVITE_INBOX_DOMAIN
+```
+
+Lokaal (`.env`): `RESEND_WEBHOOK_SECRET` + `INVITE_INBOX_DOMAIN`. Volledig end-to-end
+testen kan alleen op productie — Resend kan `localhost` niet bereiken.
+
 ## Google-score cron (dagelijkse snapshots)
 
 Dagelijks (03:30 UTC) haalt de Worker voor elke klant met een `google_place_id`
