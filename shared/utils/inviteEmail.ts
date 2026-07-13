@@ -87,3 +87,17 @@ export function renderInviteEmail(opts: {
 
   return { subject, html }
 }
+
+/** Account-invite mail sent when an admin creates a customer: same inline style as renderInviteEmail. */
+export function renderAccountInviteEmail(opts: { company: string, actionLink: string }): { subject: string, html: string } {
+  const subject = 'Activeer uw ReviewUpgrade-account'
+  const html = `<div style="font-family:Inter,Arial,sans-serif;color:#1A1A1A;max-width:480px">
+      <h2 style="color:#0F3D2E">Welkom bij ReviewUpgrade, ${escapeHtml(opts.company)}!</h2>
+      <p style="color:#333">Er is een account voor u aangemaakt. Klik op de knop hieronder om uw account te activeren en een wachtwoord in te stellen.</p>
+      <p style="margin:24px 0">
+        <a href="${opts.actionLink}" style="background:#0F3D2E;color:#FFFFFF;text-decoration:none;padding:12px 22px;border-radius:8px;font-weight:600;display:inline-block">Account activeren</a>
+      </p>
+      <p style="color:#9a958a;font-size:12px">Werkt de knop niet? Open: ${opts.actionLink}</p>
+    </div>`
+  return { subject, html }
+}

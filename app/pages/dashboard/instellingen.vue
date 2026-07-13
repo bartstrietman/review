@@ -18,6 +18,7 @@ const form = reactive({
   company_name: '', street: '', postcode: '', city: '', phone: '', website: '',
   google_url: '', review_platform: 'google',
 })
+const logoUrl = ref<string | null>(null)
 watchEffect(() => {
   const c = customer.value
   if (!c) return
@@ -26,6 +27,7 @@ watchEffect(() => {
     phone: c.phone ?? '', website: c.website ?? '', google_url: c.google_url ?? '',
     review_platform: c.review_platform ?? 'google',
   })
+  logoUrl.value = c.logo_url
 })
 
 // Google Place linking: reuse the signup search to (re)link the business profile.
@@ -85,6 +87,14 @@ usePageTitle('Instellingen')
             </div>
             <UFormField :label="t('dash.set.website')" class="sm:col-span-2"><UInput v-model="form.website" class="w-full" /></UFormField>
           </div>
+        </UCard>
+
+        <UCard>
+          <template #header><h2 class="font-semibold">{{ t('dash.set.logo') }}</h2></template>
+          <LogoUploader
+            :customer-id="customer.id" v-model="logoUrl"
+            :label="t('dash.set.logoUpload')" :help="t('dash.set.logoHelp')"
+          />
         </UCard>
 
         <UCard>

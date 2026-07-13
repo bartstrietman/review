@@ -8,31 +8,28 @@ const supabase = useSupabaseClient<Database>()
 
 type Row = {
   id: string; company_name: string | null; email: string | null
-  package: string; status: string; created_at: string; slug: string
+  status: string; created_at: string; slug: string; reviews: number
 }
 
 const { data: rows, refresh } = await useAsyncData('admin-customers', async () => {
   const { data } = await supabase
     .from('customers')
-    .select('id, company_name, email, package, status, created_at, slug')
+    .select('id, company_name, email, status, created_at, slug, feedback(count)')
     .order('created_at', { ascending: false })
-  return (data ?? []) as Row[]
+  return ((data ?? []) as unknown as (Omit<Row, 'reviews'> & { feedback: { count: number }[] })[])
+    .map(r => ({ ...r, reviews: r.feedback?.[0]?.count ?? 0 }))
 })
 
 const columns: TableColumn<Row>[] = [
   { accessorKey: 'company_name', header: 'Bedrijf' },
   { accessorKey: 'email', header: 'E-mail' },
-  { accessorKey: 'package', header: 'Pakket' },
+  { accessorKey: 'reviews', header: 'Reviews verzameld' },
   { accessorKey: 'status', header: 'Status' },
   { accessorKey: 'created_at', header: 'Aangemeld' },
   { id: 'actions', header: '' },
 ]
 
 const statusOptions = ['trial', 'active', 'paused', 'cancelled']
-function statusColor(s: string) {
-  return s === 'active' ? 'success' : s === 'trial' ? 'primary' : s === 'paused' ? 'warning' : 'neutral'
-}
-function fmt(d: string) { return new Date(d).toLocaleDateString('nl-NL') }
 
 const toast = useToast()
 async function setStatus(row: Row, status: string) {
@@ -62,14 +59,14 @@ async function setStatus(row: Row, status: string) {
           </NuxtLink>
           <div class="text-xs text-muted">{{ row.original.slug }}</div>
         </template>
-        <template #package-cell="{ row }">
-          <UBadge variant="subtle" color="neutral">{{ row.original.package }}</UBadge>
+        <template #reviews-cell="{ row }">
+          <span class="tabular-nums font-medium">{{ row.original.reviews }}</span>
         </template>
         <template #status-cell="{ row }">
           <UBadge variant="subtle" :color="statusColor(row.original.status)">{{ row.original.status }}</UBadge>
         </template>
         <template #created_at-cell="{ row }">
-          <span class="text-sm text-muted">{{ fmt(row.original.created_at) }}</span>
+          <span class="text-sm text-muted">{{ fmtDate(row.original.created_at) }}</span>
         </template>
         <template #actions-cell="{ row }">
           <UDropdownMenu

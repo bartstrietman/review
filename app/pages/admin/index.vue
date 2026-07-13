@@ -5,37 +5,33 @@ definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const supabase = useSupabaseClient<Database>()
 
-async function countOf(table: 'customers' | 'leads' | 'contact_messages' | 'feedback') {
-  const { count } = await supabase.from(table).select('*', { count: 'exact', head: true })
+async function countOf(table: 'customers' | 'feedback', match?: Record<string, string>) {
+  let query = supabase.from(table).select('*', { count: 'exact', head: true })
+  if (match) query = query.match(match)
+  const { count } = await query
   return count ?? 0
 }
 
 const { data: stats } = await useAsyncData('admin-stats', async () => ({
   customers: await countOf('customers'),
-  leads: await countOf('leads'),
-  contact: await countOf('contact_messages'),
-  feedback: await countOf('feedback'),
+  active: await countOf('customers', { status: 'active' }),
+  reviews: await countOf('feedback'),
 }))
 
 const { data: recent } = await useAsyncData('admin-recent-customers', async () => {
   const { data } = await supabase
     .from('customers')
-    .select('id, company_name, package, status, created_at, slug')
+    .select('id, company_name, status, created_at, slug')
     .order('created_at', { ascending: false })
     .limit(5)
   return data ?? []
 })
 
 const cards = computed(() => [
-  { label: 'Aanmeldingen', value: stats.value?.customers ?? 0, icon: 'i-lucide-users', to: '/admin/klanten' },
-  { label: 'Leads', value: stats.value?.leads ?? 0, icon: 'i-lucide-inbox', to: '/admin/leads' },
-  { label: 'Contactberichten', value: stats.value?.contact ?? 0, icon: 'i-lucide-mail', to: '/admin/leads' },
-  { label: 'Feedback & reviews', value: stats.value?.feedback ?? 0, icon: 'i-lucide-message-square', to: '/admin/feedback' },
+  { label: 'Klanten', value: stats.value?.customers ?? 0, icon: 'i-lucide-users', to: '/admin/klanten' },
+  { label: 'Actieve klanten', value: stats.value?.active ?? 0, icon: 'i-lucide-badge-check', to: '/admin/klanten' },
+  { label: 'Reviews verzameld', value: stats.value?.reviews ?? 0, icon: 'i-lucide-star', to: '/admin/klanten' },
 ])
-
-function statusColor(s: string) {
-  return s === 'active' ? 'success' : s === 'trial' ? 'primary' : s === 'paused' ? 'warning' : 'neutral'
-}
 </script>
 
 <template>
@@ -43,11 +39,14 @@ function statusColor(s: string) {
     <template #header>
       <UDashboardNavbar title="Dashboard">
         <template #leading><UDashboardSidebarCollapse /></template>
+        <template #right>
+          <UButton to="/admin/klanten/nieuw" icon="i-lucide-user-plus" color="primary">Klant toevoegen</UButton>
+        </template>
       </UDashboardNavbar>
     </template>
 
     <template #body>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <NuxtLink v-for="c in cards" :key="c.label" :to="c.to">
           <UCard class="hover:ring-2 hover:ring-primary/30 transition">
             <div class="flex items-center justify-between">
@@ -78,10 +77,7 @@ function statusColor(s: string) {
               <p class="font-medium">{{ r.company_name || '—' }}</p>
               <p class="text-xs text-muted">{{ r.slug }}</p>
             </div>
-            <div class="flex items-center gap-3">
-              <UBadge variant="subtle" color="neutral">{{ r.package }}</UBadge>
-              <UBadge variant="subtle" :color="statusColor(r.status)">{{ r.status }}</UBadge>
-            </div>
+            <UBadge variant="subtle" :color="statusColor(r.status)">{{ r.status }}</UBadge>
           </NuxtLink>
         </div>
         <p v-else class="text-sm text-muted py-6 text-center">Nog geen aanmeldingen.</p>

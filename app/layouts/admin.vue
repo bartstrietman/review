@@ -8,8 +8,7 @@ const { siteName } = useSite()
 const links = computed(() => [[
   { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: localePath('/admin'), exact: true },
   { label: 'Klanten', icon: 'i-lucide-users', to: localePath('/admin/klanten') },
-  { label: 'Feedback', icon: 'i-lucide-message-square', to: localePath('/admin/feedback') },
-  { label: 'Leads & contact', icon: 'i-lucide-inbox', to: localePath('/admin/leads') },
+  { label: 'Klant toevoegen', icon: 'i-lucide-user-plus', to: localePath('/admin/klanten/nieuw') },
 ], [
   { label: 'Naar website', icon: 'i-lucide-external-link', to: localePath('/') },
 ]])

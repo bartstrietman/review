@@ -32,7 +32,7 @@ export type Database = {
           text_color: string; user_id: string; website: string | null
           feedback_prompt: string; review_platform: string; google_place_id: string | null; widget_texts: Json
           coupon: string | null; trial_until: string | null; free_until: string | null
-          monthly_price_cents: number | null; billing_status: string; invite_texts: Json
+          monthly_price_cents: number | null; billing_status: string; invite_texts: Json; logo_url: string | null
         }
         Insert: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
@@ -41,7 +41,7 @@ export type Database = {
           text_color?: string; user_id: string; website?: string | null
           feedback_prompt?: string; review_platform?: string; google_place_id?: string | null; widget_texts?: Json
           coupon?: string | null; trial_until?: string | null; free_until?: string | null
-          monthly_price_cents?: number | null; billing_status?: string; invite_texts?: Json
+          monthly_price_cents?: number | null; billing_status?: string; invite_texts?: Json; logo_url?: string | null
         }
         Update: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
@@ -50,7 +50,7 @@ export type Database = {
           text_color?: string; user_id?: string; website?: string | null
           feedback_prompt?: string; review_platform?: string; google_place_id?: string | null; widget_texts?: Json
           coupon?: string | null; trial_until?: string | null; free_until?: string | null
-          monthly_price_cents?: number | null; billing_status?: string; invite_texts?: Json
+          monthly_price_cents?: number | null; billing_status?: string; invite_texts?: Json; logo_url?: string | null
         }
         Relationships: []
       }

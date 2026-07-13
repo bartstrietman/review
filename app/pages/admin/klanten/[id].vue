@@ -91,6 +91,11 @@ const popupCode = computed(() =>
 
         <div class="space-y-6">
           <UCard>
+            <template #header><h3 class="font-semibold">Logo</h3></template>
+            <LogoUploader v-if="c" :customer-id="c.id" v-model="c.logo_url" />
+          </UCard>
+
+          <UCard>
             <template #header><h3 class="font-semibold">Widget-config</h3></template>
             <div class="space-y-4">
               <UFormField label="Achtergrondkleur">

@@ -122,15 +122,59 @@ export interface BrandScanResult {
   colors: string[]
   suggestedBg: string | null
   suggestedText: string | null
+  logo: string | null
+}
+
+/** Resolves a candidate logo URL against the site and rejects anything unsafe (data: URIs, non-http(s), hostless). */
+function safeLogoUrl(cand: string, site: URL): string | null {
+  if (/^data:/i.test(cand.trim())) return null
+  let u: URL
+  try { u = new URL(cand, site.href) }
+  catch { return null }
+  if (u.protocol !== 'https:' && u.protocol !== 'http:') return null
+  if (!u.hostname.includes('.')) return null
+  return u.href
+}
+
+/** First hit wins, in order of confidence: logo-ish <img>, apple-touch-icon, og:image, favicon. */
+export function extractLogo(html: string, site: URL): string | null {
+  for (const m of html.matchAll(/<img\b[^>]*>/gi)) {
+    const tag = m[0]
+    if (!/(?:class|alt|src)=["'][^"']*logo[^"']*["']/i.test(tag)) continue
+    const src = tag.match(/src=["']([^"']+)["']/i)?.[1]
+    const abs = src ? safeLogoUrl(src, site) : null
+    if (abs) return abs
+  }
+  for (const m of html.matchAll(/<link[^>]+>/gi)) {
+    const tag = m[0]
+    if (!/rel=["']?apple-touch-icon/i.test(tag)) continue
+    const href = tag.match(/href=["']([^"']+)["']/i)?.[1]
+    const abs = href ? safeLogoUrl(href, site) : null
+    if (abs) return abs
+  }
+  for (const m of html.matchAll(/<meta[^>]+property=["']og:image["'][^>]*>/gi)) {
+    const content = m[0].match(/content=["']([^"']+)["']/i)?.[1]
+    const abs = content ? safeLogoUrl(content, site) : null
+    if (abs) return abs
+  }
+  for (const m of html.matchAll(/<link[^>]+>/gi)) {
+    const tag = m[0]
+    if (!/rel=["']?(?:shortcut icon|icon)["']?/i.test(tag)) continue
+    const href = tag.match(/href=["']([^"']+)["']/i)?.[1]
+    const abs = href ? safeLogoUrl(href, site) : null
+    if (abs) return abs
+  }
+  return null
 }
 
 export async function scanBrandColors(input: string): Promise<BrandScanResult> {
-  const empty: BrandScanResult = { colors: [], suggestedBg: null, suggestedText: null }
+  const empty: BrandScanResult = { colors: [], suggestedBg: null, suggestedText: null, logo: null }
   const site = normalizeSiteUrl(input)
   if (!site) return empty
 
   const html = await fetchText(site.href, HTML_MAX_BYTES)
   if (!html) return empty
+  const logo = extractLogo(html, site)
 
   const scores = new Map<string, number>()
   const add = (hex: string, pts: number) => scores.set(hex, (scores.get(hex) ?? 0) + pts)
@@ -174,8 +218,8 @@ export async function scanBrandColors(input: string): Promise<BrandScanResult> {
     if (picked.length >= 6) break
   }
 
-  if (!picked.length) return empty
+  if (!picked.length) return { ...empty, logo }
   const suggestedBg = picked[0]!
   const suggestedText = relativeLuminance(suggestedBg) > 0.179 ? '#1A1A1A' : '#FFFFFF'
-  return { colors: picked, suggestedBg, suggestedText }
+  return { colors: picked, suggestedBg, suggestedText, logo }
 }
