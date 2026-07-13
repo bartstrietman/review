@@ -54,7 +54,7 @@ export function renderInviteEmail(opts: {
   // between the standard texts (design exploration A).
   const messageBlock = opts.message?.trim()
     ? `<div style="border-left:3px solid ${bg};background:#F6F6F4;border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0">
-        <p style="margin:0;color:#444;white-space:pre-wrap">${escapeHtml(opts.message.trim())}</p>
+        <p style="margin:0;color:#333;font-style:italic;white-space:pre-wrap">${escapeHtml(opts.message.trim())}</p>
       </div>`
     : ''
 
@@ -71,10 +71,10 @@ export function renderInviteEmail(opts: {
   const html = `<div style="font-family:Inter,Arial,sans-serif;color:#1A1A1A;max-width:480px">
       ${messageBlock}
       <h2 style="color:${bg}">${escapeHtml(heading)}</h2>
-      <p style="color:#6B6B63;white-space:pre-wrap">${escapeHtml(intro)}</p>
+      <p style="color:#333;white-space:pre-wrap">${escapeHtml(intro)}</p>
       <p style="margin:22px 0 4px;font-weight:600;font-size:15px">Hoe was je ervaring? Klik op een ster:</p>
       <p style="margin:0 0 6px">${stars}</p>
-      <p style="color:#6B6B63;font-size:13px;margin:0 0 4px">${escapeHtml(starsHint)}</p>
+      <p style="color:#555;font-size:13px;margin:0 0 4px">${escapeHtml(starsHint)}</p>
       <p style="margin:24px 0">
         <a href="${opts.reviewUrl}" style="background:${bg};color:${fg};text-decoration:none;padding:12px 22px;border-radius:8px;font-weight:600;display:inline-block">${escapeHtml(buttonLabel)}</a>
       </p>

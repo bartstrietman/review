@@ -496,7 +496,14 @@
       "composeSub": "Dit is de e-mail die je klant krijgt. Pas de tekst direct aan en verstuur.",
       "toPlaceholder": "klant{'@'}voorbeeld.nl — meerdere? scheid met komma of enter",
       "msgPlaceholder": "Voeg hier een persoonlijk bericht toe (optioneel)…",
+      "msgLabel": "Persoonlijk bericht",
       "msgExample": "Bedankt voor je bezoek! Het was fijn om je te helpen — we horen graag wat je van onze service vond.",
+      "edit": {
+        "editing": "{field} bewerken",
+        "restore": "Standaardtekst herstellen",
+        "doneMulti": "Klik ernaast om klaar te zijn",
+        "doneSingle": "Enter of klik ernaast om klaar te zijn"
+      },
       "brandNote": "Wordt verstuurd in jouw huisstijl",
       "send": "Verstuur uitnodigingen",
       "emails": "E-mailadressen",

@@ -496,7 +496,14 @@
       "composeSub": "This is the email your customer receives. Edit the text directly and send.",
       "toPlaceholder": "customer{'@'}example.com — multiple? separate with comma or enter",
       "msgPlaceholder": "Add a personal message here (optional)…",
+      "msgLabel": "Personal message",
       "msgExample": "Thanks for your visit! It was a pleasure helping you — we'd love to hear what you thought of our service.",
+      "edit": {
+        "editing": "Editing {field}",
+        "restore": "Restore default text",
+        "doneMulti": "Click elsewhere when done",
+        "doneSingle": "Enter or click elsewhere when done"
+      },
       "brandNote": "Sent in your brand style",
       "send": "Send invitations",
       "emails": "Email addresses",

@@ -107,10 +107,6 @@ async function send() {
 }
 
 usePageTitle('E-mails')
-
-// ponytail: field-sizing:content auto-grows textareas/inputs natively — no JS.
-const fieldClass = 'block w-full bg-transparent rounded-md outline-none transition-colors '
-  + 'hover:bg-black/[0.035] focus:bg-black/[0.05] focus:ring-2 focus:ring-primary/25 px-1.5 -mx-1.5'
 </script>
 
 <template>
@@ -136,53 +132,64 @@ const fieldClass = 'block w-full bg-transparent rounded-md outline-none transiti
               <span class="text-muted w-20 shrink-0">{{ t('dash.invite.editor.previewTo') }}</span>
               <textarea
                 v-model="emailsRaw" rows="1" :placeholder="t('dash.invite.toPlaceholder')"
-                :class="fieldClass" style="field-sizing:content;resize:none"
+                class="block w-full rounded-lg border border-default bg-elevated/40 px-3 py-2 text-default outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
+                style="field-sizing:content;resize:none"
               />
             </label>
-            <label class="flex items-baseline gap-3 py-3">
-              <span class="text-muted w-20 shrink-0">{{ t('dash.invite.editor.subject') }}</span>
-              <input v-model="textsForm.subject" :placeholder="textDefaults.subject" :class="[fieldClass, 'font-semibold']">
-            </label>
+            <div class="flex items-baseline gap-3 py-3">
+              <span class="text-muted w-20 shrink-0 pt-0.5">{{ t('dash.invite.editor.subject') }}</span>
+              <EditableText
+                v-model="textsForm.subject" :fallback="textDefaults.subject"
+                :label="t('dash.invite.editor.subject')" :maxlength="90"
+                text-class="font-semibold text-default"
+              />
+            </div>
             <div class="flex items-baseline gap-3 py-3">
               <span class="text-muted w-20 shrink-0">{{ t('dash.invite.editor.previewFrom') }}</span>
               <span><strong>{{ customer?.company_name }}</strong> <span class="text-muted">(via ReviewUpgrade)</span></span>
             </div>
           </div>
 
-          <!-- Email body — edit every text in place -->
-          <div class="mt-5 rounded-xl bg-white border border-default p-6 sm:p-7 shadow-sm">
+          <!-- Email body — click any text to edit it in place -->
+          <div class="mt-5 rounded-xl bg-white border border-default p-6 sm:p-7 shadow-sm text-[#1A1A1A]">
             <!-- personal message: quiet accent block, matches renderInviteEmail -->
-            <div class="rounded-r-lg mb-4 pl-4 py-1" :style="{ borderLeft: `3px solid ${bg}`, background: '#F6F6F4' }">
-              <textarea
-                v-model="message" rows="1" :placeholder="t('dash.invite.msgPlaceholder')"
-                class="block w-full bg-transparent outline-none rounded-md px-2 py-1.5 text-[#444] italic focus:not-italic focus:ring-2 focus:ring-primary/25"
-                style="field-sizing:content;resize:none"
+            <div class="rounded-r-lg mb-5 pl-3 py-2" :style="{ borderLeft: `3px solid ${bg}`, background: '#F6F6F4' }">
+              <EditableText
+                v-model="message" :placeholder="t('dash.invite.msgPlaceholder')"
+                :label="t('dash.invite.msgLabel')" :maxlength="300" multiline
+                text-class="text-[15px] italic text-[#333]"
               />
             </div>
 
-            <textarea
-              v-model="textsForm.heading" rows="1" :placeholder="textDefaults.heading"
-              :class="[fieldClass, 'text-2xl font-bold leading-tight']" :style="{ color: bg }"
-              style="field-sizing:content;resize:none"
+            <EditableText
+              v-model="textsForm.heading" :fallback="textDefaults.heading"
+              :label="t('dash.invite.editor.heading')" :maxlength="90" wrap
+              text-class="text-2xl font-bold leading-tight" :text-style="{ color: bg }"
             />
-            <textarea
-              v-model="textsForm.intro" rows="1" :placeholder="textDefaults.intro"
-              :class="[fieldClass, 'text-[15px] mt-3']" style="field-sizing:content;resize:none;color:#6B6B63"
-            />
+            <div class="mt-3">
+              <EditableText
+                v-model="textsForm.intro" :fallback="textDefaults.intro"
+                :label="t('dash.invite.editor.intro')" :maxlength="220" multiline
+                text-class="text-[15px] text-[#333]"
+              />
+            </div>
 
-            <p class="font-semibold text-[15px] mt-6 mb-1 text-highlighted">Hoe was je ervaring? Klik op een ster:</p>
+            <p class="font-semibold text-[15px] mt-6 mb-1">Hoe was je ervaring? Klik op een ster:</p>
             <p class="text-[26px] leading-none tracking-wide mb-2" style="color:#E8C547">★★★★★</p>
-            <textarea
-              v-model="textsForm.starsHint" rows="1" :placeholder="textDefaults.starsHint"
-              :class="[fieldClass, 'text-[13px]']" style="field-sizing:content;resize:none;color:#6B6B63"
+            <EditableText
+              v-model="textsForm.starsHint" :fallback="textDefaults.starsHint"
+              :label="t('dash.invite.editor.starsHint')" :maxlength="180" multiline
+              text-class="text-[13px] text-[#555]"
             />
 
-            <div class="my-6 rounded-lg font-semibold inline-flex px-1.5 py-3" :style="{ background: bg }">
-              <input
-                v-model="textsForm.buttonLabel" :placeholder="textDefaults.buttonLabel"
-                class="bg-transparent outline-none text-center px-3 focus:ring-2 focus:ring-white/40 rounded"
-                :style="{ color: fg }" style="field-sizing:content"
-              >
+            <div class="my-6">
+              <div class="inline-flex rounded-lg font-semibold px-4 py-3" :style="{ background: bg, color: fg }">
+                <EditableText
+                  v-model="textsForm.buttonLabel" :fallback="textDefaults.buttonLabel"
+                  :label="t('dash.invite.editor.button')" :maxlength="40"
+                  text-class="font-semibold" :text-style="{ color: fg }"
+                />
+              </div>
             </div>
 
             <p class="text-xs" style="color:#9a958a">Of open: {{ reviewUrl }}</p>
