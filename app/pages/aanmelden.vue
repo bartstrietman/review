@@ -142,6 +142,7 @@ async function finishSignup() {
     if (!userId) throw new Error('Geen gebruikers-id in de sessie')
     const slug = await saveCustomer(data.value, userId)
     clear()
+    $fetch('/api/brand-import', { method: 'POST', body: { slug } }).catch(() => {})
     await router.push(localePath(`/bevestiging/${slug}`))
   }
   catch (e: unknown) {

@@ -24,6 +24,7 @@ async function complete(u: { id: string; app_metadata?: { role?: string } }) {
   try {
     const slug = await saveCustomer(data.value, u.id)
     clear()
+    $fetch('/api/brand-import', { method: 'POST', body: { slug } }).catch(() => {})
     await router.replace(localePath(`/bevestiging/${slug}`))
   }
   catch {
