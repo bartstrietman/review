@@ -507,6 +507,12 @@
         "doneSingle": "Enter or click elsewhere when done"
       },
       "brandNote": "Sent in your brand style",
+      "inbox": {
+        "title": "Or forward a customer email",
+        "desc": "Forward an email from your customer to this address. We pull out their email address and automatically send them a review invitation.",
+        "label": "Your forwarding address",
+        "hint": "No address found? Put your customer's email in the subject line and forward again."
+      },
       "send": "Send invitations",
       "emails": "Email addresses",
       "emailsHelp": "Multiple? Separate with comma, space or new line (max. 25 at a time).",

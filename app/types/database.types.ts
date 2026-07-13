@@ -33,6 +33,7 @@ export type Database = {
           feedback_prompt: string; review_platform: string; google_place_id: string | null; widget_texts: Json
           coupon: string | null; trial_until: string | null; free_until: string | null
           monthly_price_cents: number | null; billing_status: string; invite_texts: Json; logo_url: string | null
+          invite_inbox: string
         }
         Insert: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
@@ -42,6 +43,7 @@ export type Database = {
           feedback_prompt?: string; review_platform?: string; google_place_id?: string | null; widget_texts?: Json
           coupon?: string | null; trial_until?: string | null; free_until?: string | null
           monthly_price_cents?: number | null; billing_status?: string; invite_texts?: Json; logo_url?: string | null
+          invite_inbox?: string
         }
         Update: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
@@ -51,6 +53,7 @@ export type Database = {
           feedback_prompt?: string; review_platform?: string; google_place_id?: string | null; widget_texts?: Json
           coupon?: string | null; trial_until?: string | null; free_until?: string | null
           monthly_price_cents?: number | null; billing_status?: string; invite_texts?: Json; logo_url?: string | null
+          invite_inbox?: string
         }
         Relationships: []
       }

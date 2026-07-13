@@ -507,6 +507,12 @@
         "doneSingle": "Enter of klik ernaast om klaar te zijn"
       },
       "brandNote": "Wordt verstuurd in jouw huisstijl",
+      "inbox": {
+        "title": "Of stuur een klant-mail door",
+        "desc": "Stuur een e-mail van je klant door naar dit adres. Wij halen het e-mailadres eruit en sturen die klant automatisch een review-uitnodiging.",
+        "label": "Jouw doorstuur-adres",
+        "hint": "Vinden we geen adres? Zet het e-mailadres van je klant in de onderwerpregel en stuur nog eens door."
+      },
       "send": "Verstuur uitnodigingen",
       "emails": "E-mailadressen",
       "emailsHelp": "Meerdere? Scheid met komma, spatie of nieuwe regel (max. 25 per keer).",

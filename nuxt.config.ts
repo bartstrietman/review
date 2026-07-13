@@ -33,8 +33,12 @@ export default defineNuxtConfig({
     // server-only — set as Wrangler secret in prod
     supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY || '',
     serperKey: process.env.SERPER_KEY || '',
+    // shared secret for the Google-score cron trigger (x-cron-secret header)
+    cronSecret: process.env.CRON_SECRET || '',
     resendKey: process.env.RESEND_API_KEY || '',
     resendFrom: process.env.RESEND_FROM || 'ReviewUpgrade <onboarding@resend.dev>',
+    // Svix signing secret for the Resend inbound webhook (whsec_...).
+    resendWebhookSecret: process.env.RESEND_WEBHOOK_SECRET || '',
     // dev-only admin login bypass (never enabled in prod)
     devLoginEnabled: process.env.DEV_LOGIN_ENABLED || '',
     devAdminEmail: process.env.DEV_ADMIN_EMAIL || '',
@@ -42,6 +46,8 @@ export default defineNuxtConfig({
       siteName: 'ReviewUpgrade',
       // Exposed so the client can show the dev-login UI only in dev.
       devLogin: process.env.DEV_LOGIN_ENABLED === 'true',
+      // Domain for the per-business inbound invite address <token>@<domain>.
+      inviteInboxDomain: process.env.INVITE_INBOX_DOMAIN || 'invite.reviewupgrade.nl',
     },
   },
 

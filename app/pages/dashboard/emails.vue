@@ -7,8 +7,14 @@ definePageMeta({ layout: 'customer', middleware: 'auth' })
 const { t, locale } = useI18n()
 const toast = useToast()
 const origin = useRequestURL().origin
+const config = useRuntimeConfig()
 const supabase = useSupabaseClient<Database>()
 const { customer, refresh: refreshCustomer } = useMyBusiness()
+
+// Per-business inbound address: forward a customer email here → auto-invite.
+const inboxAddress = computed(() =>
+  customer.value?.invite_inbox ? `${customer.value.invite_inbox}@${config.public.inviteInboxDomain}` : '',
+)
 
 const tab = ref<'compose' | 'sent'>('compose')
 
@@ -273,6 +279,24 @@ usePageTitle('E-mails')
               <UButton icon="i-lucide-copy" color="primary" size="sm" :aria-label="t('dash.link.copy')" @click="copy(reviewUrl)" />
             </div>
             <QrCode :value="reviewUrl" :size="128" />
+          </UCard>
+
+          <!-- Automatic: forward a customer email → auto-invite -->
+          <UCard v-if="inboxAddress">
+            <template #header>
+              <div class="flex items-center gap-2">
+                <UIcon name="i-lucide-forward" class="size-4 text-primary" />
+                <h2 class="font-semibold text-sm">{{ t('dash.invite.inbox.title') }}</h2>
+              </div>
+            </template>
+            <p class="text-xs text-muted mb-3">{{ t('dash.invite.inbox.desc') }}</p>
+            <div class="flex gap-2 mb-2 max-w-md">
+              <UInput :model-value="inboxAddress" readonly class="flex-1 font-mono text-[11px]" :aria-label="t('dash.invite.inbox.label')" />
+              <UButton icon="i-lucide-copy" color="primary" size="sm" :aria-label="t('dash.link.copy')" @click="copy(inboxAddress)" />
+            </div>
+            <p class="text-xs text-muted flex items-start gap-1.5">
+              <UIcon name="i-lucide-lightbulb" class="size-3.5 mt-0.5 shrink-0" />{{ t('dash.invite.inbox.hint') }}
+            </p>
           </UCard>
         </div>
 
