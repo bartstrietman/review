@@ -412,6 +412,7 @@
     "nav": {
       "overview": "Overview",
       "invite": "Emails",
+      "sent": "Sent",
       "install": "Install",
       "settings": "Settings",
       "viewPage": "View review page",

@@ -4,31 +4,12 @@ import { defaultInviteTexts, type InviteTexts } from '~~/shared/utils/inviteEmai
 
 definePageMeta({ layout: 'customer', middleware: 'auth' })
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const toast = useToast()
 const origin = useRequestURL().origin
+const localePath = useLocalePath()
 const supabase = useSupabaseClient<Database>()
 const { customer, refresh: refreshCustomer } = useMyBusiness()
-
-// Recent invites with tracking status (RLS scopes to the owner's rows).
-const { data: invites, refresh: refreshInvites } = await useAsyncData(
-  'dash-invites',
-  async () => {
-    if (!customer.value) return []
-    const { data } = await supabase
-      .from('invites')
-      .select('id, email, status, created_at')
-      .eq('customer_id', customer.value.id)
-      .order('created_at', { ascending: false })
-      .limit(50)
-    return data ?? []
-  },
-  { watch: [customer] },
-)
-
-const STATUS_COLOR: Record<string, 'neutral' | 'error' | 'secondary' | 'primary'> = {
-  pending: 'neutral', sent: 'neutral', failed: 'error', opened: 'secondary', completed: 'primary',
-}
 
 const emailsRaw = ref('')
 const message = ref(t('dash.invite.msgExample')) // prefilled example — editable/clearable
@@ -98,7 +79,6 @@ async function send() {
       emailsRaw.value = ''; message.value = t('dash.invite.msgExample')
     }
     if (res.failed?.length) toast.add({ title: `${res.failed.length} mislukt`, description: res.failed.join(', '), color: 'warning' })
-    await refreshInvites()
   }
   catch (e: unknown) {
     toast.add({ title: (e as { statusMessage?: string })?.statusMessage ?? 'Versturen mislukt', color: 'error' })
@@ -225,7 +205,7 @@ usePageTitle('E-mails')
           </template>
         </UCard>
 
-        <!-- ── Secondary: share link + history ── -->
+        <!-- ── Secondary: share link + pointer to the sent-invites page ── -->
         <div class="grid sm:grid-cols-2 gap-6 items-start">
           <UCard>
             <template #header><h2 class="font-semibold text-sm">{{ t('dash.invite.share') }}</h2></template>
@@ -237,26 +217,19 @@ usePageTitle('E-mails')
             <QrCode :value="reviewUrl" :size="128" />
           </UCard>
 
-          <UCard>
-            <template #header>
-              <div class="flex items-center justify-between gap-2">
-                <h2 class="font-semibold text-sm">{{ t('dash.invite.history') }}</h2>
-                <span class="text-xs text-muted">{{ t('dash.invite.historyHint') }}</span>
-              </div>
-            </template>
-            <p v-if="!invites?.length" class="text-sm text-muted">{{ t('dash.invite.historyEmpty') }}</p>
-            <ul v-else class="divide-y divide-default">
-              <li v-for="inv in invites" :key="inv.id" class="flex items-center justify-between gap-3 py-2.5">
-                <span class="text-sm truncate">{{ inv.email }}</span>
-                <span class="flex items-center gap-3 shrink-0">
-                  <span class="text-xs text-muted">{{ relativeTime(inv.created_at, locale as 'nl' | 'en') }}</span>
-                  <UBadge :color="STATUS_COLOR[inv.status] ?? 'neutral'" variant="subtle" size="sm">
-                    {{ t(`dash.invite.status.${inv.status}`) }}
-                  </UBadge>
-                </span>
-              </li>
-            </ul>
-          </UCard>
+          <NuxtLink
+            :to="localePath('/dashboard/verzonden')"
+            class="group flex items-center justify-between gap-3 rounded-xl border border-default bg-elevated/30 p-4 transition-colors hover:bg-elevated/60"
+          >
+            <span class="flex items-center gap-3 min-w-0">
+              <UIcon name="i-lucide-mail-check" class="size-5 text-primary shrink-0" />
+              <span class="min-w-0">
+                <span class="block font-semibold text-sm">{{ t('dash.invite.history') }}</span>
+                <span class="block text-xs text-muted truncate">{{ t('dash.invite.historyHint') }}</span>
+              </span>
+            </span>
+            <UIcon name="i-lucide-arrow-right" class="size-4 text-muted shrink-0 transition-transform group-hover:translate-x-0.5" />
+          </NuxtLink>
         </div>
       </div>
     </template>
