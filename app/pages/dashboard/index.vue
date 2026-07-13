@@ -63,9 +63,6 @@ const tabItems = computed(() => [
   { label: `${t('dash.tabReviews')} (${reviews.value.length})`, value: 'reviews', icon: 'i-lucide-star' },
   { label: `${t('dash.tabImpr')} (${improvements.value.length})`, value: 'improvements', icon: 'i-lucide-message-square-warning' },
 ])
-function statusColor(s: string) {
-  return s === 'active' ? 'success' : s === 'trial' ? 'primary' : s === 'paused' ? 'warning' : 'neutral'
-}
 
 usePageTitle('Overzicht')
 </script>
@@ -94,11 +91,6 @@ usePageTitle('Overzicht')
       <!-- single wrapper: the panel body is a flex column; cards with
            overflow-hidden would otherwise be squashed as flex items -->
       <div v-else>
-        <div class="flex items-center gap-2 mb-5">
-          <UBadge variant="subtle" color="neutral">{{ customer.package }}</UBadge>
-          <UBadge variant="subtle" :color="statusColor(customer.status)">{{ customer.status }}</UBadge>
-        </div>
-
         <!-- how it works (first run only) -->
         <UAlert
           v-if="!hasAny"
