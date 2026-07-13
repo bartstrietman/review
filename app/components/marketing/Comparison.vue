@@ -6,7 +6,7 @@ interface Cell { text?: string; mark?: 'check' | 'x' }
 const rows = computed<{ lbl: string; us: Cell; c2: Cell; c3: Cell }[]>(() => [
   {
     lbl: t('compare.row1.lbl'),
-    us: { text: '€19,99 – €34,49' },
+    us: { text: '€19,99' },
     c2: { text: '€75 – €400+' },
     c3: { text: t('compare.row1.c3') },
   },

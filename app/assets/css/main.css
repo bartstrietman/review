@@ -53,6 +53,9 @@
 :root {
   /* Warm the line/border tone */
   --ui-radius: 0.375rem;
+  /* Brand: primary actions are deep green (#0F3D2E), like the design
+     explorations — not the mid green-500 Nuxt UI defaults to. */
+  --ui-primary: var(--color-green-700);
   /* A11y: default muted (sand-500 #8A8474) failed WCAG AA on white (~3.5:1).
      Darken muted/dimmed so helper text is readable (sand-600 #6B6B63 ≈ 4.6:1). */
   --ui-text-dimmed: var(--color-sand-500);

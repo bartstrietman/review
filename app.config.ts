@@ -6,6 +6,9 @@ export default defineAppConfig({
       neutral: 'sand',
     },
     button: {
+      slots: {
+        base: 'font-semibold',
+      },
       defaultVariants: {
         size: 'lg',
       },

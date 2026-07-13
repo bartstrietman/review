@@ -130,7 +130,7 @@ usePageTitle('Overzicht')
             <p class="text-sm text-muted mb-5">
               {{ (inviteStats?.completed ?? 0) > 0 ? t('dash.tempo.inviteWorking', { n: inviteStats!.completed }) : t('dash.tempo.inviteD') }}
             </p>
-            <UButton :to="localePath('/dashboard/uitnodigen')" size="lg" class="bg-green-800 hover:bg-green-700 text-white px-5 font-semibold">
+            <UButton :to="localePath('/dashboard/uitnodigen')" color="primary" size="lg" class="px-5">
               {{ t('dash.tempo.inviteCta') }}
             </UButton>
             <p v-if="(inviteStats?.sent ?? 0) > 0" class="text-xs text-muted mt-3.5 flex items-center gap-1">
@@ -159,7 +159,7 @@ usePageTitle('Overzicht')
             </div>
             <h3 class="font-semibold text-[17px] mb-1.5">{{ t('dash.tempo.widgetT') }}</h3>
             <p class="text-sm text-muted mb-5">{{ t('dash.tempo.widgetD') }}</p>
-            <UButton :to="localePath('/dashboard/widget') + '?step=2'" color="primary" variant="soft" size="lg" class="px-5 font-semibold">
+            <UButton :to="localePath('/dashboard/widget') + '?step=2'" color="primary" variant="soft" size="lg" class="px-5">
               {{ t('dash.tempo.widgetCta') }}
             </UButton>
           </UCard>

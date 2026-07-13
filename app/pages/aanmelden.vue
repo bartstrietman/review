@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import type { Database } from '~/types/database.types'
-import { COLOR_PALETTE } from '~/data/marketing'
 
 const { t, tm, rt } = useI18n()
 const localePath = useLocalePath()
-const route = useRoute()
 const router = useRouter()
 const supabase = useSupabaseClient<Database>()
 const user = useSupabaseUser()
@@ -14,23 +12,20 @@ const toast = useToast()
 const { data, clear } = useSignup()
 const saveCustomer = useSaveCustomer()
 const step = ref(1)
-const totalSteps = 4
-
-// Preselect package from ?pkg=
-onMounted(() => {
-  const pkg = route.query.pkg
-  if (pkg === 'lokaal' || pkg === 'pro') data.value.pakket = pkg
-})
+const totalSteps = 2
 
 const stepLabels = computed(() => {
   // tm() returns compiled message AST nodes for array messages; rt() resolves them to strings.
   const s = tm('flow.steps') as unknown[]
   const label = (i: number, fallback: string) => (s?.[i] != null ? rt(s[i] as never) : fallback)
-  return [label(0, 'Pakket'), label(1, 'Bedrijf'), label(2, 'Huisstijl'), t('otp.h')]
+  return [label(0, 'Bedrijf'), t('otp.h')]
 })
 
 function next() {
-  if (step.value === 2) scanBrand()
+  // Leaving the business step: fetch the site's brand colors in the background
+  // so the widget starts in the customer's own style (editable later in the
+  // dashboard — there is no style step in the wizard anymore).
+  if (step.value === 1) scanBrand()
   if (step.value < totalSteps) step.value++
 }
 function back() { if (step.value > 1) step.value-- }
@@ -57,7 +52,7 @@ async function scanBrand() {
   catch { /* stil: defaults blijven staan */ }
 }
 
-// Coupon (step 1): validated against the coupons table via the anon RPC; a
+// Coupon (account step): validated against the coupons table via the anon RPC; a
 // valid code makes the first N months free (billing handled in useSaveCustomer).
 const couponOpen = ref(false)
 const couponInput = ref('')
@@ -140,7 +135,12 @@ async function finishSignup() {
   if (!user.value) return
   finishing.value = true
   try {
-    const slug = await saveCustomer(data.value, user.value.id)
+    // @nuxtjs/supabase v2: useSupabaseUser() holds JWT claims — the user id
+    // lives in `sub`, there is no `id` property.
+    const userId = (user.value as unknown as { sub?: string; id?: string }).sub
+      ?? (user.value as unknown as { id?: string }).id
+    if (!userId) throw new Error('Geen gebruikers-id in de sessie')
+    const slug = await saveCustomer(data.value, userId)
     clear()
     await router.push(localePath(`/bevestiging/${slug}`))
   }
@@ -187,58 +187,8 @@ usePageTitle(() => t('signup.h2'))
         </div>
 
         <div class="p-7 sm:p-9">
-          <!-- STEP 1: package -->
+          <!-- STEP 1: business -->
           <div v-if="step === 1">
-            <h3 class="text-xl font-semibold">{{ t('flow.pkg.h') }}</h3>
-            <p class="text-sm text-muted mb-6">{{ t('flow.pkg.sub') }}</p>
-            <div class="grid grid-cols-2 gap-4">
-              <button
-                v-for="p in (['lokaal', 'pro'] as const)" :key="p"
-                type="button"
-                class="rounded-xl border-2 p-5 text-left transition-colors"
-                :class="data.pakket === p ? 'border-green-700 bg-green-50' : 'border-default hover:border-green-300'"
-                @click="data.pakket = p"
-              >
-                <h4 class="font-semibold">{{ t(`flow.pkg.${p}.name`) }}</h4>
-                <div class="font-display text-lg font-bold mt-1">
-                  {{ t(`flow.pkg.${p}.price`) }} <span class="text-xs font-medium text-muted">/ {{ t('pricing.permonth') }}</span>
-                </div>
-                <p class="text-[13px] text-muted mt-1.5">{{ t(`flow.pkg.${p}.desc`) }}</p>
-              </button>
-            </div>
-
-            <div class="mt-5">
-              <div v-if="data.coupon" class="flex items-center justify-between gap-2 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-800">
-                <span class="flex items-center gap-1.5">
-                  <UIcon name="i-lucide-ticket-percent" class="size-4 shrink-0" />
-                  {{ t('flow.coupon.applied', { n: data.couponFreeMonths }) }}
-                </span>
-                <UButton variant="link" color="neutral" size="xs" class="!px-0" @click="removeCoupon">{{ t('flow.coupon.remove') }}</UButton>
-              </div>
-              <template v-else>
-                <UButton
-                  v-if="!couponOpen"
-                  variant="link" color="neutral" size="xs" class="!px-0" icon="i-lucide-ticket-percent"
-                  @click="couponOpen = true"
-                >
-                  {{ t('flow.coupon.toggle') }}
-                </UButton>
-                <UFormField v-else :label="t('flow.coupon.label')" :error="couponError ? t('flow.coupon.invalid') : undefined">
-                  <div class="flex gap-2">
-                    <UInput v-model="couponInput" class="flex-1" @keydown.enter="applyCoupon" />
-                    <UButton color="neutral" variant="soft" :loading="couponLoading" @click="applyCoupon">{{ t('flow.coupon.apply') }}</UButton>
-                  </div>
-                </UFormField>
-              </template>
-            </div>
-
-            <div class="flex justify-end mt-7">
-              <UButton color="primary" trailing-icon="i-lucide-arrow-right" @click="next">{{ t('flow.btn.next') }}</UButton>
-            </div>
-          </div>
-
-          <!-- STEP 2: business -->
-          <div v-else-if="step === 2">
             <h3 class="text-xl font-semibold">{{ t('flow.biz.h') }}</h3>
             <p class="text-sm text-muted mb-6">{{ t('flow.biz.sub') }}</p>
 
@@ -272,37 +222,13 @@ usePageTitle(() => t('signup.h2'))
                 <UInput v-model="data.googleUrl" type="url" class="w-full" placeholder="https://g.page/r/.../review" />
               </UFormField>
             </div>
-            <div class="flex justify-between mt-7">
-              <UButton color="neutral" variant="ghost" @click="back">{{ t('flow.btn.back') }}</UButton>
+            <div class="flex justify-end mt-7">
               <UButton color="primary" trailing-icon="i-lucide-arrow-right" :disabled="!data.bedrijfsnaam" @click="next">{{ t('flow.btn.next') }}</UButton>
             </div>
           </div>
 
-          <!-- STEP 3: style -->
-          <div v-else-if="step === 3">
-            <h3 class="text-xl font-semibold">{{ t('flow.style.h') }}</h3>
-            <p class="text-sm text-muted mb-6">{{ t('flow.style.sub') }}</p>
-
-            <SignupColorBlock v-model="data.achtergrondkleur" :label="t('flow.style.bg')" :palette="COLOR_PALETTE" :detected="data.brandColors" />
-            <SignupColorBlock v-model="data.tekstkleur" :label="t('flow.style.fg')" :palette="COLOR_PALETTE" />
-
-            <UFormField :label="t('flow.style.preview.label')">
-              <div
-                class="rounded-xl p-6 text-center font-semibold"
-                :style="{ background: data.achtergrondkleur, color: data.tekstkleur }"
-              >
-                {{ t('flow.style.preview.text') }}
-              </div>
-            </UFormField>
-
-            <div class="flex justify-between mt-7">
-              <UButton color="neutral" variant="ghost" @click="back">{{ t('flow.btn.back') }}</UButton>
-              <UButton color="primary" trailing-icon="i-lucide-arrow-right" @click="next">{{ t('flow.btn.next') }}</UButton>
-            </div>
-          </div>
-
-          <!-- STEP 4: email + magic link -->
-          <div v-else-if="step === 4">
+          <!-- STEP 2: email + magic link -->
+          <div v-else>
             <h3 class="text-xl font-semibold">{{ t('otp.h') }}</h3>
             <p class="text-sm text-muted mb-6">{{ t('otp.sub') }}</p>
 
@@ -350,6 +276,31 @@ usePageTitle(() => t('signup.h2'))
                 <UButton variant="link" color="neutral" size="xs" @click="linkPhase = 'email'">{{ t('otp.back') }}</UButton>
                 <UButton variant="link" color="neutral" size="xs" :loading="otpLoading" @click="sendLink">{{ t('otp.resend') }}</UButton>
               </div>
+            </div>
+
+            <div class="mt-5">
+              <div v-if="data.coupon" class="flex items-center justify-between gap-2 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-800">
+                <span class="flex items-center gap-1.5">
+                  <UIcon name="i-lucide-ticket-percent" class="size-4 shrink-0" />
+                  {{ t('flow.coupon.applied', { n: data.couponFreeMonths }) }}
+                </span>
+                <UButton variant="link" color="neutral" size="xs" class="!px-0" @click="removeCoupon">{{ t('flow.coupon.remove') }}</UButton>
+              </div>
+              <template v-else>
+                <UButton
+                  v-if="!couponOpen"
+                  variant="link" color="neutral" size="xs" class="!px-0" icon="i-lucide-ticket-percent"
+                  @click="couponOpen = true"
+                >
+                  {{ t('flow.coupon.toggle') }}
+                </UButton>
+                <UFormField v-else :label="t('flow.coupon.label')" :error="couponError ? t('flow.coupon.invalid') : undefined">
+                  <div class="flex gap-2">
+                    <UInput v-model="couponInput" class="flex-1" @keydown.enter="applyCoupon" />
+                    <UButton color="neutral" variant="soft" :loading="couponLoading" @click="applyCoupon">{{ t('flow.coupon.apply') }}</UButton>
+                  </div>
+                </UFormField>
+              </template>
             </div>
 
             <div class="flex justify-start mt-6">

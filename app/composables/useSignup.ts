@@ -1,8 +1,7 @@
 import type { Database } from '~/types/database.types'
-import { PRICING_PLANS, slugify } from '~/data/marketing'
+import { PRICING_PLAN, slugify } from '~/data/marketing'
 
 export interface SignupData {
-  pakket: 'lokaal' | 'pro'
   bedrijfsnaam: string
   straatHuisnummer: string
   postcode: string
@@ -23,7 +22,6 @@ const STORAGE_KEY = 'rs_signup'
 
 function defaults(): SignupData {
   return {
-    pakket: 'lokaal',
     bedrijfsnaam: '',
     straatHuisnummer: '',
     postcode: '',
@@ -46,17 +44,23 @@ export function useSignup() {
   const hydrated = useState('signup_hydrated', () => false)
 
   // Persist across the magic-link round-trip (new tab / page reload).
+  // Restore in onMounted — not during setup — so it happens AFTER hydration:
+  // the signup form is SSR'd empty, and Vue doesn't patch attribute diffs
+  // (e.g. the next-button's `disabled`) while hydrating. Registered during
+  // setup, this hook runs before the calling page's own onMounted hooks.
   if (import.meta.client && !hydrated.value) {
     hydrated.value = true
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY)
-      if (saved) Object.assign(data.value, JSON.parse(saved))
-    }
-    catch { /* ignore */ }
-    watch(data, (v) => {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(v)) }
+    onMounted(() => {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY)
+        if (saved) Object.assign(data.value, JSON.parse(saved))
+      }
       catch { /* ignore */ }
-    }, { deep: true })
+      watch(data, (v) => {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(v)) }
+        catch { /* ignore */ }
+      }, { deep: true })
+    })
   }
 
   function clear() {
@@ -94,13 +98,13 @@ export function useSaveCustomer() {
       website: d.eigenSite || null,
       google_url: d.googleUrl || null,
       google_place_id: d.googlePlaceId || null,
-      package: d.pakket,
+      package: PRICING_PLAN.id,
       bg_color: d.achtergrondkleur,
       text_color: d.tekstkleur,
       email: d.email,
       status: 'trial' as const,
       coupon: hasCoupon ? d.coupon : null,
-      monthly_price_cents: PRICING_PLANS.find(p => p.id === d.pakket)?.priceCents ?? null,
+      monthly_price_cents: PRICING_PLAN.priceCents,
       billing_status: hasCoupon ? 'free' : 'trial',
       free_until: hasCoupon ? isoDate(freeUntil) : null,
       trial_until: hasCoupon ? null : isoDate(trialUntil),

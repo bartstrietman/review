@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Database } from '~/types/database.types'
+import { PRICING_PLAN } from '~/data/marketing'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
@@ -33,7 +34,7 @@ async function copy(text: string) {
   }
 }
 
-const pkgLabel = computed(() => customer.value?.package === 'pro' ? t('flow.pkg.pro.name') : t('flow.pkg.lokaal.name'))
+const pkgLabel = computed(() => `${PRICING_PLAN.price} / ${t('pricing.permonth')}`)
 
 usePageTitle(() => t('conf.h1'))
 </script>
