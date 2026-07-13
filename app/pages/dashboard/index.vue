@@ -73,9 +73,6 @@ usePageTitle('Overzicht')
       <UDashboardNavbar :title="customer?.company_name || t('dash.nav.overview')">
         <template #leading><UDashboardSidebarCollapse /></template>
         <template #right>
-          <UButton :to="`/r/${customer?.slug}`" target="_blank" color="neutral" variant="soft" icon="i-lucide-external-link" size="sm">
-            {{ t('dash.reviewPage') }}
-          </UButton>
           <UserMenu />
         </template>
       </UDashboardNavbar>

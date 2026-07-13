@@ -5,6 +5,7 @@ const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const localePath = useLocalePath()
 const router = useRouter()
+const { customer } = useMyBusiness()
 
 async function logout() {
   await supabase.auth.signOut()
@@ -14,6 +15,12 @@ async function logout() {
 const items = computed(() => [
   [{ label: user.value?.email ?? '', type: 'label' as const }],
   [{ label: t('dash.role'), icon: 'i-lucide-store', type: 'label' as const }],
+  [{
+    label: t('dash.nav.viewPage'),
+    icon: 'i-lucide-external-link',
+    to: customer.value ? `/r/${customer.value.slug}` : localePath('/dashboard'),
+    target: '_blank',
+  }],
   [{ label: t('dash.logout'), icon: 'i-lucide-log-out', onSelect: () => logout() }],
 ])
 </script>
