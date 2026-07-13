@@ -9,10 +9,14 @@ export default defineNuxtPlugin((nuxtApp) => {
   const user = useSupabaseUser()
   const supabase = useSupabaseClient()
 
-  // Apply the saved preference when a user logs in / on load.
+  // Apply the saved preference when a user logs in / on load — but only when
+  // this device has no explicit choice yet (rs_locale cookie). The cookie wins:
+  // user_metadata comes from JWT claims, which can lag behind updateUser and
+  // would otherwise fight a fresh language switch on every page load.
   watch(user, (u) => {
     const saved = (u?.user_metadata as { locale?: string } | undefined)?.locale
-    if ((saved === 'nl' || saved === 'en') && saved !== i18n.locale.value) {
+    const explicit = useCookie('rs_locale').value
+    if (!explicit && (saved === 'nl' || saved === 'en') && saved !== i18n.locale.value) {
       i18n.setLocale(saved)
     }
   }, { immediate: true })

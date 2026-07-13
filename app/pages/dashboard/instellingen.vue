@@ -3,8 +3,12 @@ import type { Database } from '~/types/database.types'
 
 definePageMeta({ layout: 'customer', middleware: 'auth' })
 
-const { t } = useI18n()
+const { t, locale, locales, setLocale } = useI18n()
 const localePath = useLocalePath()
+
+// UI language: setLocale is enough — the locale-persist plugin stores it in
+// user_metadata and restores it on login.
+const localeItems = computed(() => locales.value.map(l => ({ label: l.name ?? l.code, value: l.code })))
 const supabase = useSupabaseClient<Database>()
 const toast = useToast()
 const { customer, refresh } = useMyBusiness()
@@ -119,6 +123,16 @@ usePageTitle('Instellingen')
               </UButton>
             </div>
           </div>
+        </UCard>
+
+        <UCard>
+          <template #header><h2 class="font-semibold">{{ t('dash.set.language') }}</h2></template>
+          <UFormField :label="t('dash.set.languageLabel')" :help="t('dash.set.languageHelp')">
+            <USelect
+              :model-value="locale" :items="localeItems" class="w-full sm:w-64"
+              @update:model-value="setLocale($event as 'nl' | 'en')"
+            />
+          </UFormField>
         </UCard>
 
         <UAlert
