@@ -99,7 +99,7 @@ usePageTitle('Overzicht')
 
         <!-- Google score hero -->
         <DashboardGoogleScoreCard
-          class="mb-8"
+          class="mb-12"
           :place-linked="google?.placeLinked ?? false"
           :history="google?.history ?? []"
           :invites-sent="inviteStats?.sent ?? 0"
