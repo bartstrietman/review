@@ -1,9 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const user = useSupabaseUser()
-const supabase = useSupabaseClient()
 const localePath = useLocalePath()
-const router = useRouter()
 const { siteName } = useSite()
 const { customers, customer, selectedId } = useMyBusiness()
 
@@ -12,17 +9,10 @@ const links = computed(() => [[
   { label: t('dash.widget.nav'), icon: 'i-lucide-paintbrush', to: localePath('/dashboard/widget') },
   { label: t('dash.nav.invite'), icon: 'i-lucide-mail', to: localePath('/dashboard/emails') },
   { label: t('dash.nav.settings'), icon: 'i-lucide-settings', to: localePath('/dashboard/instellingen') },
-], [
-  { label: t('dash.nav.viewPage'), icon: 'i-lucide-external-link', to: customer.value ? `/r/${customer.value.slug}` : localePath('/dashboard'), target: '_blank' },
-  { label: t('dash.nav.toSite'), icon: 'i-lucide-home', to: localePath('/') },
 ]])
 
 const businessOptions = computed(() => (customers.value ?? []).map(c => ({ label: c.company_name || c.slug, value: c.id })))
-
-async function logout() {
-  await supabase.auth.signOut()
-  await router.push(localePath('/login'))
-}
+const reviewHref = computed(() => customer.value ? `/r/${customer.value.slug}` : localePath('/dashboard'))
 </script>
 
 <template>
@@ -57,18 +47,19 @@ async function logout() {
       </template>
 
       <template #footer>
-        <div class="w-full">
-          <div class="flex items-center gap-2.5 px-1 py-2">
-            <UAvatar :alt="user?.email || 'Account'" size="sm" />
-            <div class="min-w-0">
-              <p class="text-sm font-medium truncate">{{ user?.email }}</p>
-              <p class="text-xs text-muted">{{ t('dash.role') }}</p>
-            </div>
-          </div>
-          <UButton block color="neutral" variant="ghost" icon="i-lucide-log-out" class="justify-start" @click="logout">
-            {{ t('dash.logout') }}
-          </UButton>
-        </div>
+        <NuxtLink
+          :to="reviewHref" target="_blank"
+          class="group w-full flex items-center gap-3 rounded-xl border border-default bg-elevated/40 p-3 transition-colors hover:border-primary/40 hover:bg-primary/5"
+        >
+          <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <UIcon name="i-lucide-eye" class="size-5" />
+          </span>
+          <span class="min-w-0 flex-1">
+            <span class="block text-sm font-semibold">{{ t('dash.nav.viewPage') }}</span>
+            <span class="block text-xs text-muted truncate">{{ t('dash.nav.viewPageHint') }}</span>
+          </span>
+          <UIcon name="i-lucide-external-link" class="size-4 text-muted shrink-0 transition-colors group-hover:text-primary" />
+        </NuxtLink>
       </template>
     </UDashboardSidebar>
 

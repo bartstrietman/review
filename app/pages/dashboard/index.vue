@@ -76,6 +76,7 @@ usePageTitle('Overzicht')
           <UButton :to="`/r/${customer?.slug}`" target="_blank" color="neutral" variant="soft" icon="i-lucide-external-link" size="sm">
             {{ t('dash.reviewPage') }}
           </UButton>
+          <UserMenu />
         </template>
       </UDashboardNavbar>
     </template>

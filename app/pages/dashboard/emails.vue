@@ -125,6 +125,7 @@ usePageTitle('E-mails')
     <template #header>
       <UDashboardNavbar :title="t('dash.nav.invite')">
         <template #leading><UDashboardSidebarCollapse /></template>
+        <template #right><UserMenu /></template>
       </UDashboardNavbar>
     </template>
 

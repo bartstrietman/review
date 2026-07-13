@@ -108,6 +108,7 @@ usePageTitle('Widget')
         <template #leading><UDashboardSidebarCollapse /></template>
         <template #right>
           <UButton v-if="step === 1" color="primary" icon="i-lucide-save" :loading="saving" @click="save">{{ t('dash.widget.save') }}</UButton>
+          <UserMenu />
         </template>
       </UDashboardNavbar>
     </template>

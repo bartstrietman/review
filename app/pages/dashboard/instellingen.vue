@@ -69,6 +69,7 @@ usePageTitle('Instellingen')
         <template #leading><UDashboardSidebarCollapse /></template>
         <template #right>
           <UButton color="primary" icon="i-lucide-save" :loading="saving" @click="save">{{ t('dash.set.save') }}</UButton>
+          <UserMenu />
         </template>
       </UDashboardNavbar>
     </template>

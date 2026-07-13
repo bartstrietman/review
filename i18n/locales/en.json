@@ -416,6 +416,7 @@
       "install": "Install",
       "settings": "Settings",
       "viewPage": "View review page",
+      "viewPageHint": "How your customer sees your page",
       "toSite": "To website"
     },
     "role": "Business owner",

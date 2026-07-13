@@ -416,6 +416,7 @@
       "install": "Installeren",
       "settings": "Instellingen",
       "viewPage": "Bekijk reviewpagina",
+      "viewPageHint": "Zo ziet je klant je pagina",
       "toSite": "Naar website"
     },
     "role": "Ondernemer",
