@@ -69,7 +69,9 @@ const chartValues = computed(() => props.history.map(s => s.review_count ?? 0))
 
   <!-- STATE: just linked — frame the baseline -->
   <UCard v-else-if="state === 'start'">
-    <div class="grid lg:grid-cols-2 gap-6 items-center">
+    <!-- top-align: the baseline copy is short, so items-center would leave a
+         big empty gap above it next to the taller ghost chart. -->
+    <div class="grid lg:grid-cols-2 gap-6 items-start">
       <div>
         <p class="text-xs font-semibold uppercase tracking-wider text-muted flex items-center gap-1.5 mb-3">
           <UIcon name="i-lucide-map-pin-check" class="size-4 text-green-600" />{{ t('dash.google.eyebrow') }}
