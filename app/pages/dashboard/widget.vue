@@ -116,19 +116,19 @@ usePageTitle('Widget')
       <!-- step indicator -->
       <div class="flex items-center gap-2 mb-6 text-sm font-semibold">
         <button
-          type="button" class="flex items-center gap-2 rounded-lg px-3 py-1.5 transition-colors"
-          :class="step === 1 ? 'bg-green-700 text-white' : 'bg-elevated text-muted hover:text-highlighted'"
+          type="button" class="flex items-center gap-2 rounded-lg px-3 py-1.5 border transition-colors"
+          :class="step === 1 ? 'bg-green-700 border-green-700 text-white' : 'bg-accented border-default text-muted hover:text-highlighted hover:border-green-700/40'"
           @click="step = 1"
         >
-          <span class="size-5 rounded-full bg-white/20 flex items-center justify-center text-xs">1</span>{{ t('dash.widget.step1') }}
+          <span class="size-5 rounded-full flex items-center justify-center text-xs" :class="step === 1 ? 'bg-white/25 text-white' : 'bg-default text-dimmed'">1</span>{{ t('dash.widget.step1') }}
         </button>
         <UIcon name="i-lucide-chevron-right" class="size-4 text-dimmed" />
         <button
-          type="button" class="flex items-center gap-2 rounded-lg px-3 py-1.5 transition-colors"
-          :class="step === 2 ? 'bg-green-700 text-white' : 'bg-elevated text-muted hover:text-highlighted'"
+          type="button" class="flex items-center gap-2 rounded-lg px-3 py-1.5 border transition-colors"
+          :class="step === 2 ? 'bg-green-700 border-green-700 text-white' : 'bg-accented border-default text-muted hover:text-highlighted hover:border-green-700/40'"
           @click="step = 2"
         >
-          <span class="size-5 rounded-full bg-white/20 flex items-center justify-center text-xs">2</span>{{ t('dash.widget.step2') }}
+          <span class="size-5 rounded-full flex items-center justify-center text-xs" :class="step === 2 ? 'bg-white/25 text-white' : 'bg-default text-dimmed'">2</span>{{ t('dash.widget.step2') }}
         </button>
       </div>
 

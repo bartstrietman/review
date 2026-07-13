@@ -1,7 +1,7 @@
 // Copies a remote logo image (found via brand-scan or supplied by hand) into the
 // `logos` storage bucket, so customer branding no longer depends on a third-party
 // site staying up. Best-effort: any failure returns null, never throws.
-import type { SupabaseClient } from '@supabase/supabase-js'
+import type { serverSupabaseServiceRole } from '#supabase/server'
 import type { Database } from '~/types/database.types'
 import { normalizeSiteUrl } from './brandColors'
 
@@ -14,8 +14,10 @@ const CONTENT_TYPE_EXT: Record<string, string> = {
   'image/gif': 'gif',
 }
 
+type AdminClient = ReturnType<typeof serverSupabaseServiceRole<Database>>
+
 export async function copyLogoToStorage(
-  admin: SupabaseClient<Database>,
+  admin: AdminClient,
   customerId: string,
   rawUrl: string,
 ): Promise<string | null> {

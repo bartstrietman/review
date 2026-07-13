@@ -47,7 +47,13 @@ async function logout() {
           <span class="truncate">{{ customer.company_name || customer.slug }}</span>
         </div>
 
-        <UNavigationMenu :items="links" orientation="vertical" />
+        <UNavigationMenu
+          :items="links" orientation="vertical" color="primary"
+          :ui="{
+            link: 'data-[active]:bg-primary/10 data-[active]:text-primary data-[active]:font-semibold',
+            linkLeadingIcon: 'data-[active]:text-primary',
+          }"
+        />
       </template>
 
       <template #footer>

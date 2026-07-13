@@ -600,7 +600,15 @@
       "style": "Branding",
       "bg": "Background color",
       "text": "Text color",
-      "preview": "How was your experience?"
+      "preview": "How was your experience?",
+      "logo": "Logo",
+      "logoUpload": "Upload logo",
+      "logoReplace": "Replace logo",
+      "logoNone": "No logo uploaded yet.",
+      "logoHelp": "Used in the review widget and on your customer pages. PNG, JPEG, WebP or GIF, max 2 MB.",
+      "logoTooLarge": "File is too large (max 2 MB).",
+      "logoBadType": "This file type isn't supported.",
+      "logoSaved": "Logo saved"
     },
     "widget": {
       "nav": "Widget",

@@ -600,7 +600,15 @@
       "style": "Huisstijl",
       "bg": "Achtergrondkleur",
       "text": "Tekstkleur",
-      "preview": "Hoe was uw ervaring?"
+      "preview": "Hoe was uw ervaring?",
+      "logo": "Logo",
+      "logoUpload": "Logo uploaden",
+      "logoReplace": "Logo vervangen",
+      "logoNone": "Nog geen logo geüpload.",
+      "logoHelp": "Gebruikt in de review-widget en op je klantpagina's. PNG, JPEG, WebP of GIF, max 2 MB.",
+      "logoTooLarge": "Bestand is te groot (max 2 MB).",
+      "logoBadType": "Bestandstype wordt niet ondersteund.",
+      "logoSaved": "Logo opgeslagen"
     },
     "widget": {
       "nav": "Widget",
