@@ -39,6 +39,16 @@ const reviewText = ref('')
 const submitting = ref(false)
 const copied = ref(false)
 
+// Invite-tracking: links from invitation emails carry ?i=<invite-uuid>.
+// Visiting counts as "opened" (more reliable than the email pixel); submitting
+// marks the invite "completed". Both fire-and-forget — never block the flow.
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+const rawInvite = Array.isArray(route.query.i) ? route.query.i[0] : route.query.i
+const inviteId = typeof rawInvite === 'string' && UUID_RE.test(rawInvite) ? rawInvite : null
+onMounted(() => {
+  if (inviteId) supabase.rpc('mark_invite_opened', { p_invite: inviteId }).then(() => {}, () => {})
+})
+
 function choose(n: number) {
   rating.value = n
   stage.value = n >= 4 ? 'review' : 'feedback'
@@ -46,11 +56,14 @@ function choose(n: number) {
 
 async function saveRow(text: string) {
   if (!widget.value) return
-  await supabase.from('feedback').insert({
+  const { data: row } = await supabase.from('feedback').insert({
     customer_id: widget.value.customer_id,
     rating: rating.value,
     message: text || null,
-  })
+  }).select('id').single()
+  if (inviteId && row?.id) {
+    supabase.rpc('mark_invite_completed', { p_invite: inviteId, p_feedback: row.id }).then(() => {}, () => {})
+  }
 }
 
 // Pre-select rating from the URL (?score=4 or ?rating=4) at render time so the

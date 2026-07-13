@@ -22,13 +22,14 @@ export const TESTIMONIALS = [
 export interface PricingPlan {
   id: 'lokaal' | 'pro'
   price: string
+  priceCents: number
   featured: boolean
   featureKeys: string[]
 }
 
 export const PRICING_PLANS: PricingPlan[] = [
-  { id: 'lokaal', price: '€19,99', featured: false, featureKeys: ['f1', 'f2', 'f3', 'f4'] },
-  { id: 'pro', price: '€34,49', featured: true, featureKeys: ['f1', 'f2', 'f3', 'f4'] },
+  { id: 'lokaal', price: '€19,99', priceCents: 1999, featured: false, featureKeys: ['f1', 'f2', 'f3', 'f4'] },
+  { id: 'pro', price: '€34,49', priceCents: 3449, featured: true, featureKeys: ['f1', 'f2', 'f3', 'f4'] },
 ]
 
 export function slugify(name: string): string {

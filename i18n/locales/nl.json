@@ -322,9 +322,7 @@
     "steps": [
       "Pakket",
       "Bedrijf",
-      "Huisstijl",
-      "Betaling",
-      "Klaar"
+      "Huisstijl"
     ],
     "pkg": {
       "h": "Welk pakket past bij jou?",
@@ -370,21 +368,16 @@
         "label": "Voorbeeld",
         "text": "Hoe was uw ervaring?"
       },
-      "hex": "Eigen kleurcode (hex)"
+      "hex": "Eigen kleurcode (hex)",
+      "detected": "Gevonden op jouw website"
     },
-    "pay": {
-      "h": "Bijna klaar",
-      "sub": "14 dagen gratis. Je betaalt pas na de proefperiode, en je kunt op elk moment opzeggen.",
-      "biz": "Bedrijf",
-      "pkg": "Pakket",
-      "after": "Na proefperiode",
-      "method": "Betaalmethode",
-      "stripe": "Stripe Checkout wordt hier geladen (koppeling volgt in latere bouwfase)",
-      "email": {
-        "label": "E-mailadres",
-        "hint": "Hier ontvang je je widget-code direct na bevestiging."
-      },
-      "cta": "Proefperiode starten"
+    "coupon": {
+      "toggle": "Heb je een actiecode?",
+      "label": "Actiecode",
+      "apply": "Toepassen",
+      "applied": "Actiecode toegepast: de eerste {n} maanden zijn gratis.",
+      "invalid": "Deze actiecode is niet geldig.",
+      "remove": "Verwijderen"
     },
     "btn": {
       "next": "Volgende",
@@ -395,6 +388,7 @@
     "h": "E-mail & verificatie",
     "sub": "Geen wachtwoord nodig. We sturen je een bevestigingslink per e-mail.",
     "email": "E-mailadres",
+    "emailHint": "Hier ontvang je je widget-code direct na bevestiging.",
     "send": "Stuur bevestigingslink",
     "code": "Verificatiecode",
     "codeHint": "Check je inbox voor de 6-cijferige code.",
@@ -476,6 +470,42 @@
       "avg": "Gem. reviewscore",
       "improvements": "Privé-verbeterpunten"
     },
+    "google": {
+      "eyebrow": "Jouw Google-beoordeling",
+      "reviewsOn": "reviews op Google",
+      "reviewsShort": "reviews",
+      "now": "nu",
+      "chipReviews": "reviews",
+      "newSince": "{n} nieuwe review | {n} nieuwe reviews",
+      "sinceStart": "sinds je startpunt op {date}",
+      "attrAll": "allemaal via jouw uitnodigingen.",
+      "attrSome": "waarvan {n} via jouw uitnodigingen.",
+      "noNewYet": "Nog geen nieuwe reviews sinds je startpunt op {date} — verstuur uitnodigingen om de teller te laten lopen.",
+      "scoreFlat": "Score: {a} → {b}. Je gemiddelde beweegt zodra er meer reviews bijkomen — met {count} reviews telt elke nieuwe review mee.",
+      "scoreUp": "Je score ging van {a} naar {b} sinds je start.",
+      "chartTitle": "Aantal reviews",
+      "scoreLabel": "Score",
+      "flatNote": "nog vlak — dat is normaal in de eerste weken",
+      "ghostTag": "Voorbeeld",
+      "linkH": "Laat zien hoe je score groeit sinds ReviewUpgrade",
+      "linkB": "Koppel je Google-bedrijfsprofiel en we volgen je beoordeling en review-aantal automatisch — zo zie je precies wat je uitnodigingen opleveren.",
+      "startChip": "Startpunt",
+      "startB": "Dit is je startpunt van {date}. Vanaf nu volgen we je score — verstuur je eerste uitnodigingen om 'm in beweging te krijgen."
+    },
+    "tempo": {
+      "title": "Houd het tempo erin",
+      "sub": "Hoe meer recente reviews, hoe eerder je gemiddelde in beweging komt.",
+      "inviteT": "Klanten uitnodigen",
+      "inviteD": "Stuur na elke afspraak of levering een korte uitnodiging — de snelste route naar nieuwe reviews.",
+      "inviteWorking": "Je uitnodigingen werken: ze leverden al {n} reviews op. Blijf na elke afspraak uitnodigen.",
+      "inviteCta": "Uitnodiging versturen",
+      "inviteStats": "{sent} verstuurd · {done} reviews opgeleverd",
+      "linkT": "Reviewlink delen",
+      "linkD": "Zet de link op je bon, in je e-mailhandtekening of achter een QR-code aan de balie.",
+      "widgetT": "Widget installeren",
+      "widgetD": "Vraag bezoekers van je eigen website automatisch om een beoordeling via de pop-up.",
+      "widgetCta": "Widget instellen"
+    },
     "start": {
       "title": "Aan de slag",
       "s1": "Deel je reviewlink",
@@ -510,7 +540,17 @@
       "share": "Liever zelf delen?",
       "shareHint": "Deel deze link via WhatsApp of social, of scan/print de QR-code:",
       "tip": "Tip",
-      "tipBody": "Het beste moment om uit te nodigen is vlak na een positieve ervaring — bijvoorbeeld direct na levering of afspraak."
+      "tipBody": "Het beste moment om uit te nodigen is vlak na een positieve ervaring — bijvoorbeeld direct na levering of afspraak.",
+      "history": "Verstuurde uitnodigingen",
+      "historyEmpty": "Nog geen uitnodigingen verstuurd.",
+      "historyHint": "\"Geopend\" betekent: de e-mail is geopend of de reviewlink is aangeklikt.",
+      "status": {
+        "pending": "In behandeling",
+        "sent": "Verstuurd",
+        "failed": "Mislukt",
+        "opened": "Geopend",
+        "completed": "Ingevuld"
+      }
     },
     "install": {
       "intro": "Plak één van onderstaande codes op je website om de reviewwidget te tonen. Eén regel code, geen technische kennis nodig — vergelijkbaar met het plaatsen van een Google Analytics-tag.",
@@ -554,6 +594,11 @@
       "platform": "Platform",
       "placeId": "Google Place ID",
       "placeIdHelp": "De review-link wordt hier automatisch uit gegenereerd.",
+      "placeSearch": "Koppel je Google-bedrijfsprofiel",
+      "placeSearchHelp": "Zoek je bedrijf op, dan genereren we de Google-reviewlink automatisch.",
+      "placeChange": "Wijzigen",
+      "placeCancel": "Annuleren",
+      "placeLinked": "Google-bedrijfsprofiel gekoppeld",
       "url": "Review-URL",
       "urlHelp": "De directe 'schrijf een review'-link van je platform.",
       "prompt": "Feedback-prompt (1–3 sterren)",

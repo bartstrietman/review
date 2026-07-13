@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { serverSupabaseUser, serverSupabaseSession } from '#supabase/server'
+import { renderInviteEmail, type InviteTexts } from '~~/shared/utils/inviteEmail'
 
 const bodySchema = z.object({
   slug: z.string().min(1).max(100),
@@ -26,9 +27,10 @@ export default defineEventHandler(async (event) => {
   const supaKey = process.env.SUPABASE_KEY
   if (!token || !supaUrl || !supaKey) throw createError({ statusCode: 401, statusMessage: 'Sessie ontbreekt' })
 
-  const rows = await $fetch<{ company_name: string | null; slug: string }[]>(
-    `${supaUrl}/rest/v1/customers?slug=eq.${encodeURIComponent(body.slug)}&select=company_name,slug`,
-    { headers: { apikey: supaKey, Authorization: `Bearer ${token}` } },
+  const userHeaders = { apikey: supaKey, Authorization: `Bearer ${token}` }
+  const rows = await $fetch<{ id: string; company_name: string | null; slug: string; bg_color: string | null; text_color: string | null; invite_texts: InviteTexts | null }[]>(
+    `${supaUrl}/rest/v1/customers?slug=eq.${encodeURIComponent(body.slug)}&select=id,company_name,slug,bg_color,text_color,invite_texts`,
+    { headers: userHeaders },
   )
   const customer = rows?.[0]
   if (!customer) throw createError({ statusCode: 403, statusMessage: 'Geen toegang tot dit bedrijf' })
@@ -36,48 +38,61 @@ export default defineEventHandler(async (event) => {
   const origin = getRequestURL(event).origin
   const reviewUrl = `${origin}/r/${customer.slug}`
   const company = customer.company_name || 'ons'
+  const message = body.message?.trim() || ''
 
-  const intro = body.message?.trim()
-    ? `<p style="color:#444;white-space:pre-wrap">${escapeHtml(body.message.trim())}</p>`
-    : ''
-
-  function emailHtml() {
-    return `<div style="font-family:Inter,Arial,sans-serif;color:#1A1A1A;max-width:480px">
-      <h2 style="color:#0F3D2E">Laat een review achter voor ${escapeHtml(company)}</h2>
-      <p style="color:#6B6B63">Je wordt uitgenodigd om je ervaring te delen. Het duurt minder dan een minuut.</p>
-      ${intro}
-      <p style="margin:24px 0">
-        <a href="${reviewUrl}" style="background:#0F3D2E;color:#fff;text-decoration:none;padding:12px 22px;border-radius:8px;font-weight:600;display:inline-block">Geef je beoordeling</a>
-      </p>
-      <p style="color:#9a958a;font-size:12px">Of open: ${reviewUrl}</p>
-    </div>`
-  }
-
-  // Send one email per recipient (privacy: no shared To).
+  // Send one email per recipient (privacy: no shared To). Each recipient gets an
+  // invites row first; its id doubles as the tracking token in the link + pixel.
   let sent = 0
   const failed: string[] = []
   for (const to of body.emails) {
+    // Log the invite (insert under the user's JWT; RLS enforces ownership).
+    // Logging failure must never block sending — fall back to an untracked mail.
+    let inviteId: string | null = null
+    try {
+      const created = await $fetch<{ id: string }[]>(`${supaUrl}/rest/v1/invites`, {
+        method: 'POST',
+        headers: { ...userHeaders, Prefer: 'return=representation' },
+        body: { customer_id: customer.id, email: to, message: message || null },
+      })
+      inviteId = created?.[0]?.id ?? null
+    }
+    catch { /* untracked send */ }
+
+    const { subject, html } = renderInviteEmail({
+      company,
+      reviewUrl: inviteId ? `${reviewUrl}?i=${inviteId}` : reviewUrl,
+      texts: customer.invite_texts,
+      message,
+      pixelUrl: inviteId ? `${origin}/t/${inviteId}` : undefined,
+      bgColor: customer.bg_color,
+      textColor: customer.text_color,
+    })
+
+    let ok = false
     try {
       await $fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${config.resendKey}`, 'Content-Type': 'application/json' },
-        body: {
-          from: config.resendFrom,
-          to,
-          subject: `Laat een review achter voor ${company}`,
-          html: emailHtml(),
-        },
+        body: { from: config.resendFrom, to, subject, html },
       })
+      ok = true
       sent++
     }
     catch {
       failed.push(to)
     }
+
+    if (inviteId) {
+      try {
+        await $fetch(`${supaUrl}/rest/v1/rpc/mark_invite_sent`, {
+          method: 'POST',
+          headers: userHeaders,
+          body: { p_invite: inviteId, p_ok: ok },
+        })
+      }
+      catch { /* status stays pending; the send itself already happened */ }
+    }
   }
 
   return { sent, failed }
 })
-
-function escapeHtml(s: string) {
-  return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', '\'': '&#39;' }[c]!))
-}

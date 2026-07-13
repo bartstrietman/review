@@ -322,9 +322,7 @@
     "steps": [
       "Package",
       "Business",
-      "Style",
-      "Payment",
-      "Done"
+      "Style"
     ],
     "pkg": {
       "h": "Which package suits you?",
@@ -370,21 +368,16 @@
         "label": "Preview",
         "text": "How was your experience?"
       },
-      "hex": "Custom color code (hex)"
+      "hex": "Custom color code (hex)",
+      "detected": "Found on your website"
     },
-    "pay": {
-      "h": "Almost done",
-      "sub": "14 days free. You only pay after the trial period, and you can cancel anytime.",
-      "biz": "Business",
-      "pkg": "Package",
-      "after": "After trial",
-      "method": "Payment method",
-      "stripe": "Stripe Checkout will load here (integration coming in a later build phase)",
-      "email": {
-        "label": "Email address",
-        "hint": "Your widget code will be sent here immediately after confirmation."
-      },
-      "cta": "Start free trial"
+    "coupon": {
+      "toggle": "Have a promo code?",
+      "label": "Promo code",
+      "apply": "Apply",
+      "applied": "Promo code applied: your first {n} months are free.",
+      "invalid": "This promo code is not valid.",
+      "remove": "Remove"
     },
     "btn": {
       "next": "Next",
@@ -395,6 +388,7 @@
     "h": "Email & verification",
     "sub": "No password needed. We email you a confirmation link.",
     "email": "Email address",
+    "emailHint": "Your widget code will be sent here immediately after confirmation.",
     "send": "Send confirmation link",
     "code": "Verification code",
     "codeHint": "Check your inbox for the 6-digit code.",
@@ -476,6 +470,42 @@
       "avg": "Avg. review score",
       "improvements": "Private improvement points"
     },
+    "google": {
+      "eyebrow": "Your Google rating",
+      "reviewsOn": "reviews on Google",
+      "reviewsShort": "reviews",
+      "now": "now",
+      "chipReviews": "reviews",
+      "newSince": "{n} new review | {n} new reviews",
+      "sinceStart": "since your starting point on {date}",
+      "attrAll": "all through your invitations.",
+      "attrSome": "{n} of them through your invitations.",
+      "noNewYet": "No new reviews since your starting point on {date} — send invitations to get the counter moving.",
+      "scoreFlat": "Score: {a} → {b}. Your average moves as more reviews come in — with {count} reviews every new one counts.",
+      "scoreUp": "Your score went from {a} to {b} since you started.",
+      "chartTitle": "Number of reviews",
+      "scoreLabel": "Score",
+      "flatNote": "still flat — that's normal in the first weeks",
+      "ghostTag": "Example",
+      "linkH": "Show how your score grows since ReviewUpgrade",
+      "linkB": "Link your Google Business Profile and we'll track your rating and review count automatically — so you see exactly what your invitations deliver.",
+      "startChip": "Starting point",
+      "startB": "This is your starting point from {date}. From now on we track your score — send your first invitations to get it moving."
+    },
+    "tempo": {
+      "title": "Keep up the pace",
+      "sub": "The more recent reviews, the sooner your average starts moving.",
+      "inviteT": "Invite customers",
+      "inviteD": "Send a short invitation after every appointment or delivery — the fastest route to new reviews.",
+      "inviteWorking": "Your invitations are working: they already delivered {n} reviews. Keep inviting after every appointment.",
+      "inviteCta": "Send invitation",
+      "inviteStats": "{sent} sent · {done} reviews delivered",
+      "linkT": "Share review link",
+      "linkD": "Put the link on your receipt, in your email signature or behind a QR code at the counter.",
+      "widgetT": "Install widget",
+      "widgetD": "Automatically ask visitors of your own website for a rating via the pop-up.",
+      "widgetCta": "Set up widget"
+    },
     "start": {
       "title": "Get started",
       "s1": "Share your review link",
@@ -510,7 +540,17 @@
       "share": "Rather share yourself?",
       "shareHint": "Share this link via WhatsApp or social, or scan/print the QR code:",
       "tip": "Tip",
-      "tipBody": "The best moment to invite is right after a positive experience — for example right after delivery or an appointment."
+      "tipBody": "The best moment to invite is right after a positive experience — for example right after delivery or an appointment.",
+      "history": "Sent invitations",
+      "historyEmpty": "No invitations sent yet.",
+      "historyHint": "\"Opened\" means: the email was opened or the review link was clicked.",
+      "status": {
+        "pending": "Processing",
+        "sent": "Sent",
+        "failed": "Failed",
+        "opened": "Opened",
+        "completed": "Completed"
+      }
     },
     "install": {
       "intro": "Paste one of the codes below on your website to show the review widget. One line of code, no technical knowledge needed — similar to adding a Google Analytics tag.",
@@ -554,6 +594,11 @@
       "platform": "Platform",
       "placeId": "Google Place ID",
       "placeIdHelp": "The review link is generated from this automatically.",
+      "placeSearch": "Link your Google Business Profile",
+      "placeSearchHelp": "Search for your business and we'll generate the Google review link automatically.",
+      "placeChange": "Change",
+      "placeCancel": "Cancel",
+      "placeLinked": "Google Business Profile linked",
       "url": "Review URL",
       "urlHelp": "Your platform’s direct 'write a review' link.",
       "prompt": "Feedback prompt (1–3 stars)",

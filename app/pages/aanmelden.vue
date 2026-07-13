@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type { Database } from '~/types/database.types'
 import { COLOR_PALETTE } from '~/data/marketing'
 
 const { t, tm, rt } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
 const router = useRouter()
-const supabase = useSupabaseClient()
+const supabase = useSupabaseClient<Database>()
 const user = useSupabaseUser()
 const config = useRuntimeConfig()
 const toast = useToast()
@@ -28,8 +29,60 @@ const stepLabels = computed(() => {
   return [label(0, 'Pakket'), label(1, 'Bedrijf'), label(2, 'Huisstijl'), t('otp.h')]
 })
 
-function next() { if (step.value < totalSteps) step.value++ }
+function next() {
+  if (step.value === 2) scanBrand()
+  if (step.value < totalSteps) step.value++
+}
 function back() { if (step.value > 1) step.value-- }
+
+// Brand-scan: as soon as the website is known we fetch its colors in the
+// background, so step 3 (huisstijl) opens with the site's palette suggested.
+const scannedUrl = ref('')
+async function scanBrand() {
+  const url = data.value.eigenSite.trim()
+  if (!url || url === scannedUrl.value) return
+  scannedUrl.value = url
+  try {
+    const res = await $fetch<{ colors: string[]; suggestedBg: string | null; suggestedText: string | null }>(
+      '/api/brand-scan',
+      { method: 'POST', body: { url } },
+    )
+    data.value.brandColors = res.colors
+    // Only prefill while the user is still on the defaults.
+    if (res.suggestedBg && data.value.achtergrondkleur === '#0F3D2E') {
+      data.value.achtergrondkleur = res.suggestedBg
+      if (res.suggestedText) data.value.tekstkleur = res.suggestedText
+    }
+  }
+  catch { /* stil: defaults blijven staan */ }
+}
+
+// Coupon (step 1): validated against the coupons table via the anon RPC; a
+// valid code makes the first N months free (billing handled in useSaveCustomer).
+const couponOpen = ref(false)
+const couponInput = ref('')
+const couponLoading = ref(false)
+const couponError = ref(false)
+
+async function applyCoupon() {
+  const code = couponInput.value.trim()
+  if (!code) return
+  couponLoading.value = true
+  couponError.value = false
+  const { data: rows, error } = await supabase.rpc('validate_coupon', { p_code: code })
+  couponLoading.value = false
+  const hit = rows?.[0]
+  if (error || !hit) { couponError.value = true; return }
+  data.value.coupon = hit.code
+  data.value.couponFreeMonths = hit.free_months
+}
+
+function removeCoupon() {
+  data.value.coupon = ''
+  data.value.couponFreeMonths = 0
+  couponInput.value = ''
+  couponError.value = false
+}
 
 // Autofill from a Google Maps (Serper) result — user can still edit everything.
 const placeFilled = ref(false)
@@ -44,6 +97,7 @@ function onPlaceSelect(p: import('~/components/Signup/BusinessSearch.vue').Place
   if (p.reviewUrl) d.googleUrl = p.reviewUrl
   if (p.placeId) d.googlePlaceId = p.placeId
   placeFilled.value = true
+  if (d.eigenSite) scanBrand()
 }
 
 // ── Auth state ──────────────────────────────────────────────
@@ -152,6 +206,32 @@ usePageTitle(() => t('signup.h2'))
                 <p class="text-[13px] text-muted mt-1.5">{{ t(`flow.pkg.${p}.desc`) }}</p>
               </button>
             </div>
+
+            <div class="mt-5">
+              <div v-if="data.coupon" class="flex items-center justify-between gap-2 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-800">
+                <span class="flex items-center gap-1.5">
+                  <UIcon name="i-lucide-ticket-percent" class="size-4 shrink-0" />
+                  {{ t('flow.coupon.applied', { n: data.couponFreeMonths }) }}
+                </span>
+                <UButton variant="link" color="neutral" size="xs" class="!px-0" @click="removeCoupon">{{ t('flow.coupon.remove') }}</UButton>
+              </div>
+              <template v-else>
+                <UButton
+                  v-if="!couponOpen"
+                  variant="link" color="neutral" size="xs" class="!px-0" icon="i-lucide-ticket-percent"
+                  @click="couponOpen = true"
+                >
+                  {{ t('flow.coupon.toggle') }}
+                </UButton>
+                <UFormField v-else :label="t('flow.coupon.label')" :error="couponError ? t('flow.coupon.invalid') : undefined">
+                  <div class="flex gap-2">
+                    <UInput v-model="couponInput" class="flex-1" @keydown.enter="applyCoupon" />
+                    <UButton color="neutral" variant="soft" :loading="couponLoading" @click="applyCoupon">{{ t('flow.coupon.apply') }}</UButton>
+                  </div>
+                </UFormField>
+              </template>
+            </div>
+
             <div class="flex justify-end mt-7">
               <UButton color="primary" trailing-icon="i-lucide-arrow-right" @click="next">{{ t('flow.btn.next') }}</UButton>
             </div>
@@ -203,7 +283,7 @@ usePageTitle(() => t('signup.h2'))
             <h3 class="text-xl font-semibold">{{ t('flow.style.h') }}</h3>
             <p class="text-sm text-muted mb-6">{{ t('flow.style.sub') }}</p>
 
-            <SignupColorBlock v-model="data.achtergrondkleur" :label="t('flow.style.bg')" :palette="COLOR_PALETTE" />
+            <SignupColorBlock v-model="data.achtergrondkleur" :label="t('flow.style.bg')" :palette="COLOR_PALETTE" :detected="data.brandColors" />
             <SignupColorBlock v-model="data.tekstkleur" :label="t('flow.style.fg')" :palette="COLOR_PALETTE" />
 
             <UFormField :label="t('flow.style.preview.label')">
@@ -239,7 +319,7 @@ usePageTitle(() => t('signup.h2'))
 
             <!-- email entry -->
             <div v-else-if="linkPhase === 'email'">
-              <UFormField :label="t('otp.email')" :help="t('flow.pay.email.hint')">
+              <UFormField :label="t('otp.email')" :help="t('otp.emailHint')">
                 <UInput v-model="data.email" type="email" class="w-full" placeholder="naam@bedrijf.nl" @keydown.enter="sendLink" />
               </UFormField>
               <UButton color="primary" block size="lg" class="mt-5" :loading="otpLoading" @click="sendLink">

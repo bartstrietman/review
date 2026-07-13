@@ -24,6 +24,20 @@ watchEffect(() => {
   })
 })
 
+// Google Place linking: reuse the signup search to (re)link the business profile.
+const linkingPlace = ref(false)
+async function onPlaceSelect(p: import('~/components/Signup/BusinessSearch.vue').PlaceResult) {
+  if (!customer.value || !p.placeId) return
+  const { error } = await supabase.from('customers').update({
+    google_place_id: p.placeId,
+    google_url: p.reviewUrl || customer.value.google_url,
+  }).eq('id', customer.value.id)
+  if (error) { toast.add({ title: error.message, color: 'error' }); return }
+  linkingPlace.value = false
+  toast.add({ title: t('dash.set.placeLinked'), color: 'success', icon: 'i-lucide-check' })
+  await refresh()
+}
+
 const saving = ref(false)
 async function save() {
   if (!customer.value) return
@@ -78,16 +92,32 @@ usePageTitle('Instellingen')
             </UFormField>
 
             <UFormField
-              v-if="form.review_platform === 'google' && customer.google_place_id"
+              v-if="form.review_platform === 'google' && customer.google_place_id && !linkingPlace"
               :label="t('dash.set.placeId')"
               :help="t('dash.set.placeIdHelp')"
             >
-              <UInput :model-value="customer.google_place_id" readonly class="w-full font-mono text-xs" :aria-label="t('dash.set.placeId')" />
+              <div class="flex gap-2">
+                <UInput :model-value="customer.google_place_id" readonly class="flex-1 font-mono text-xs" :aria-label="t('dash.set.placeId')" />
+                <UButton color="neutral" variant="soft" @click="linkingPlace = true">{{ t('dash.set.placeChange') }}</UButton>
+              </div>
             </UFormField>
 
             <UFormField v-else :label="t('dash.set.url')" :help="t('dash.set.urlHelp')">
               <UInput v-model="form.google_url" class="w-full" placeholder="https://…" />
             </UFormField>
+
+            <div v-if="form.review_platform === 'google' && (!customer.google_place_id || linkingPlace)" class="sm:col-span-2">
+              <UFormField :label="t('dash.set.placeSearch')" :help="t('dash.set.placeSearchHelp')">
+                <SignupBusinessSearch @select="onPlaceSelect" />
+              </UFormField>
+              <UButton
+                v-if="linkingPlace"
+                variant="link" color="neutral" size="xs" class="!px-0"
+                @click="linkingPlace = false"
+              >
+                {{ t('dash.set.placeCancel') }}
+              </UButton>
+            </div>
           </div>
         </UCard>
 

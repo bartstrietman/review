@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ modelValue: string; label: string; palette: string[] }>()
+const props = defineProps<{ modelValue: string; label: string; palette: string[]; detected?: string[] }>()
 const emit = defineEmits<{ (e: 'update:modelValue', v: string): void }>()
 const { t } = useI18n()
 
@@ -19,6 +19,22 @@ function isLight(c: string) { return c.toUpperCase() === '#FFFFFF' || c.toUpperC
 
 <template>
   <UFormField :label="label" class="mb-5">
+    <div v-if="detected?.length" class="mb-3">
+      <p class="text-xs font-medium text-green-700 mb-1.5 flex items-center gap-1">
+        <UIcon name="i-lucide-sparkles" class="size-3.5" />{{ t('flow.style.detected') }}
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <button
+          v-for="c in detected" :key="`d-${c}`"
+          type="button"
+          class="size-7 rounded-md transition-transform hover:scale-110"
+          :class="modelValue.toUpperCase() === c.toUpperCase() ? 'ring-2 ring-green-700 ring-offset-2' : ''"
+          :style="{ background: c, border: isLight(c) ? '1px solid var(--color-sand-200)' : 'none' }"
+          :aria-label="c"
+          @click="pick(c)"
+        />
+      </div>
+    </div>
     <div class="flex flex-wrap gap-2 mb-3">
       <button
         v-for="c in palette" :key="c"

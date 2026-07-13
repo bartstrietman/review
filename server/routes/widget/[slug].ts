@@ -1,13 +1,32 @@
 // Serves the embeddable widget loader: GET /widget/<slug>.js
 // - data-mode="popup" (default): floating launcher → modal iframe of /r/<slug>
 // - data-mode="embed" data-target="id": inline iframe inside that element
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const raw = getRouterParam(event, 'slug') || ''
   const slug = raw.replace(/\.js$/, '').replace(/[^a-z0-9-]/gi, '')
   const origin = getRequestURL(event).origin
 
   setHeader(event, 'Content-Type', 'application/javascript; charset=utf-8')
   setHeader(event, 'Cache-Control', 'public, max-age=300')
+
+  // Launcher button in the customer's brand colors (fall back to defaults if
+  // the lookup fails — the widget must keep working regardless).
+  let bg = '#0F3D2E'
+  let fg = '#fff'
+  const supaUrl = process.env.SUPABASE_URL
+  const supaKey = process.env.SUPABASE_KEY
+  if (slug && supaUrl && supaKey) {
+    try {
+      const rows = await $fetch<{ bg_color: string | null; text_color: string | null }[]>(
+        `${supaUrl}/rest/v1/rpc/get_widget`,
+        { method: 'POST', headers: { apikey: supaKey, Authorization: `Bearer ${supaKey}` }, body: { p_slug: slug } },
+      )
+      const w = rows?.[0]
+      if (w?.bg_color && /^#[0-9a-f]{3,8}$/i.test(w.bg_color)) bg = w.bg_color
+      if (w?.text_color && /^#[0-9a-f]{3,8}$/i.test(w.text_color)) fg = w.text_color
+    }
+    catch { /* keep defaults */ }
+  }
 
   const S = JSON.stringify(slug)
   const O = JSON.stringify(origin)
@@ -25,7 +44,7 @@ export default defineEventHandler((event) => {
   var open=false;
   var btn=document.createElement('button');
   btn.type='button';btn.textContent='Laat een review achter';
-  btn.style.cssText='position:fixed;right:20px;bottom:20px;z-index:2147483000;background:#0F3D2E;color:#fff;border:0;border-radius:999px;padding:12px 18px;font:600 14px Inter,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.18);cursor:pointer';
+  btn.style.cssText='position:fixed;right:20px;bottom:20px;z-index:2147483000;background:${bg};color:${fg};border:0;border-radius:999px;padding:12px 18px;font:600 14px Inter,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.18);cursor:pointer';
   btn.onclick=function(){if(open)return;open=true;
     var ov=document.createElement('div');
     ov.style.cssText='position:fixed;inset:0;z-index:2147483001;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px';

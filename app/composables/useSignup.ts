@@ -1,5 +1,5 @@
 import type { Database } from '~/types/database.types'
-import { slugify } from '~/data/marketing'
+import { PRICING_PLANS, slugify } from '~/data/marketing'
 
 export interface SignupData {
   pakket: 'lokaal' | 'pro'
@@ -14,6 +14,9 @@ export interface SignupData {
   achtergrondkleur: string
   tekstkleur: string
   email: string
+  coupon: string
+  couponFreeMonths: number
+  brandColors: string[]
 }
 
 const STORAGE_KEY = 'rs_signup'
@@ -32,6 +35,9 @@ function defaults(): SignupData {
     achtergrondkleur: '#0F3D2E',
     tekstkleur: '#FFFFFF',
     email: '',
+    coupon: '',
+    couponFreeMonths: 0,
+    brandColors: [],
   }
 }
 
@@ -70,6 +76,14 @@ export function useSaveCustomer() {
 
   return async (d: SignupData, userId: string): Promise<string> => {
     const base = slugify(d.bedrijfsnaam)
+    // Billing: valid coupon → free period; otherwise a 14-day trial after
+    // which the invoice is sent manually by email (no payment provider).
+    const hasCoupon = !!d.coupon && d.couponFreeMonths > 0
+    const freeUntil = new Date()
+    freeUntil.setMonth(freeUntil.getMonth() + d.couponFreeMonths)
+    const trialUntil = new Date(Date.now() + 14 * 86400_000)
+    const isoDate = (dt: Date) => dt.toISOString().slice(0, 10)
+
     const payload = {
       user_id: userId,
       company_name: d.bedrijfsnaam,
@@ -85,6 +99,11 @@ export function useSaveCustomer() {
       text_color: d.tekstkleur,
       email: d.email,
       status: 'trial' as const,
+      coupon: hasCoupon ? d.coupon : null,
+      monthly_price_cents: PRICING_PLANS.find(p => p.id === d.pakket)?.priceCents ?? null,
+      billing_status: hasCoupon ? 'free' : 'trial',
+      free_until: hasCoupon ? isoDate(freeUntil) : null,
+      trial_until: hasCoupon ? null : isoDate(trialUntil),
     }
 
     for (let attempt = 0; attempt < 6; attempt++) {

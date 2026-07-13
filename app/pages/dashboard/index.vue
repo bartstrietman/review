@@ -20,15 +20,35 @@ const { data: feedback, refresh } = await useAsyncData('dash-feedback', async ()
   return data ?? []
 }, { watch: [customer] })
 
+// Google-score history (server refreshes today's snapshot when needed).
+const requestFetch = useRequestFetch()
+const { data: google } = await useAsyncData('dash-google', async () => {
+  if (!customer.value) return null
+  try {
+    return await requestFetch<{ placeLinked: boolean; history: { rating: number | null; review_count: number | null; captured_at: string }[] }>(
+      '/api/google-score',
+      { query: { customer_id: customer.value.id } },
+    )
+  }
+  catch { return null }
+}, { watch: [customer] })
+
+// Invite stats feed the honest attribution line + the tempo card footer.
+const { data: inviteStats } = await useAsyncData('dash-invite-stats', async () => {
+  if (!customer.value) return { sent: 0, completed: 0 }
+  const { data } = await supabase
+    .from('invites')
+    .select('status')
+    .eq('customer_id', customer.value.id)
+  const rows = data ?? []
+  return {
+    sent: rows.filter(r => ['sent', 'opened', 'completed'].includes(r.status)).length,
+    completed: rows.filter(r => r.status === 'completed').length,
+  }
+}, { watch: [customer] })
+
 const reviews = computed(() => (feedback.value ?? []).filter(f => f.rating >= 4))
 const improvements = computed(() => (feedback.value ?? []).filter(f => f.rating <= 3))
-
-// Average of PUBLIC reviews only (4–5). The private 1–3 feedback never goes
-// public, so mixing it into one "score" misleads the owner.
-const avgReview = computed(() => {
-  if (!reviews.value.length) return '—'
-  return (reviews.value.reduce((s, f) => s + f.rating, 0) / reviews.value.length).toFixed(1).replace('.', ',')
-})
 
 const reviewUrl = computed(() => customer.value ? `${origin}/r/${customer.value.slug}` : '')
 const hasAny = computed(() => (feedback.value?.length ?? 0) > 0)
@@ -71,32 +91,71 @@ usePageTitle('Overzicht')
         <UButton :to="localePath('/aanmelden')" color="primary">{{ t('dash.signup') }}</UButton>
       </div>
 
-      <template v-else>
+      <!-- single wrapper: the panel body is a flex column; cards with
+           overflow-hidden would otherwise be squashed as flex items -->
+      <div v-else>
         <div class="flex items-center gap-2 mb-5">
           <UBadge variant="subtle" color="neutral">{{ customer.package }}</UBadge>
           <UBadge variant="subtle" :color="statusColor(customer.status)">{{ customer.status }}</UBadge>
         </div>
 
-        <!-- how it works -->
+        <!-- how it works (first run only) -->
         <UAlert
+          v-if="!hasAny"
           color="primary" variant="subtle" icon="i-lucide-info" class="mb-6"
           :title="t('dash.how.title')"
           :description="t('dash.how.body')"
         />
 
-        <!-- stats -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-          <UCard>
-            <p class="text-sm text-muted flex items-center gap-1.5"><UIcon name="i-lucide-star" class="size-4 text-gold-500" />{{ t('dash.stat.reviews') }}</p>
-            <p class="font-display text-3xl font-bold mt-1">{{ reviews.length }}</p>
+        <!-- Google score hero -->
+        <DashboardGoogleScoreCard
+          class="mb-8"
+          :place-linked="google?.placeLinked ?? false"
+          :history="google?.history ?? []"
+          :invites-sent="inviteStats?.sent ?? 0"
+          :invites-completed="inviteStats?.completed ?? 0"
+        />
+
+        <!-- keep the tempo: the three ways to collect reviews -->
+        <div class="mb-2 flex items-baseline gap-2 flex-wrap">
+          <h2 class="font-display font-bold">{{ t('dash.tempo.title') }}</h2>
+          <span class="text-sm text-muted">{{ t('dash.tempo.sub') }}</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <UCard class="ring-1 ring-green-200">
+            <div class="size-10 rounded-lg bg-green-700 flex items-center justify-center mb-3">
+              <UIcon name="i-lucide-send" class="size-5 text-gold-400" />
+            </div>
+            <h3 class="font-semibold mb-1">{{ t('dash.tempo.inviteT') }}</h3>
+            <p class="text-sm text-muted mb-4">
+              {{ (inviteStats?.completed ?? 0) > 0 ? t('dash.tempo.inviteWorking', { n: inviteStats!.completed }) : t('dash.tempo.inviteD') }}
+            </p>
+            <UButton :to="localePath('/dashboard/uitnodigen')" color="primary" size="sm">{{ t('dash.tempo.inviteCta') }}</UButton>
+            <p v-if="(inviteStats?.sent ?? 0) > 0" class="text-xs text-muted mt-3 flex items-center gap-1">
+              <UIcon name="i-lucide-check" class="size-3.5 text-green-600" />
+              {{ t('dash.tempo.inviteStats', { sent: inviteStats!.sent, done: inviteStats!.completed }) }}
+            </p>
           </UCard>
+
           <UCard>
-            <p class="text-sm text-muted">{{ t('dash.stat.avg') }}</p>
-            <p class="font-display text-3xl font-bold mt-1">{{ avgReview }}<span v-if="avgReview !== '—'" class="text-lg text-muted"> / 5</span></p>
+            <div class="size-10 rounded-lg bg-green-50 flex items-center justify-center mb-3">
+              <UIcon name="i-lucide-link" class="size-5 text-green-700" />
+            </div>
+            <h3 class="font-semibold mb-1">{{ t('dash.tempo.linkT') }}</h3>
+            <p class="text-sm text-muted mb-4">{{ t('dash.tempo.linkD') }}</p>
+            <div class="flex gap-2">
+              <UInput :model-value="reviewUrl" readonly class="flex-1 font-mono text-[11px]" :aria-label="t('dash.link.label')" />
+              <UButton icon="i-lucide-copy" color="neutral" variant="soft" size="sm" @click="copy(reviewUrl)">{{ t('dash.link.copy') }}</UButton>
+            </div>
           </UCard>
+
           <UCard>
-            <p class="text-sm text-muted">{{ t('dash.stat.improvements') }}</p>
-            <p class="font-display text-3xl font-bold mt-1">{{ improvements.length }}</p>
+            <div class="size-10 rounded-lg bg-green-50 flex items-center justify-center mb-3">
+              <UIcon name="i-lucide-code" class="size-5 text-green-700" />
+            </div>
+            <h3 class="font-semibold mb-1">{{ t('dash.tempo.widgetT') }}</h3>
+            <p class="text-sm text-muted mb-4">{{ t('dash.tempo.widgetD') }}</p>
+            <UButton :to="localePath('/dashboard/widget') + '?step=2'" color="neutral" variant="soft" size="sm">{{ t('dash.tempo.widgetCta') }}</UButton>
           </UCard>
         </div>
 
@@ -126,18 +185,6 @@ usePageTitle('Overzicht')
               </div>
             </li>
           </ol>
-        </UCard>
-
-        <!-- review link strip -->
-        <UCard class="mb-6">
-          <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-            <div class="sm:flex-1 min-w-0">
-              <p class="text-sm font-semibold mb-0.5">{{ t('dash.link.title') }}</p>
-              <p class="text-xs text-muted">{{ t('dash.link.hint') }} <code>?score=5</code></p>
-            </div>
-            <UInput :model-value="reviewUrl" readonly class="sm:flex-1 font-mono text-xs" :aria-label="t('dash.link.label')" />
-            <UButton icon="i-lucide-copy" color="primary" class="shrink-0" @click="copy(reviewUrl)">{{ t('dash.link.copy') }}</UButton>
-          </div>
         </UCard>
 
         <!-- reviews -->
@@ -183,7 +230,7 @@ usePageTitle('Overzicht')
             </div>
           </div>
         </UCard>
-      </template>
+      </div>
     </template>
   </UDashboardPanel>
 </template>

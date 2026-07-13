@@ -1,10 +1,33 @@
 <script setup lang="ts">
+import type { Database } from '~/types/database.types'
+
 definePageMeta({ layout: 'customer', middleware: 'auth' })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const toast = useToast()
 const origin = useRequestURL().origin
+const supabase = useSupabaseClient<Database>()
 const { customer } = useMyBusiness()
+
+// Recent invites with tracking status (RLS scopes to the owner's rows).
+const { data: invites, refresh: refreshInvites } = await useAsyncData(
+  'dash-invites',
+  async () => {
+    if (!customer.value) return []
+    const { data } = await supabase
+      .from('invites')
+      .select('id, email, status, created_at')
+      .eq('customer_id', customer.value.id)
+      .order('created_at', { ascending: false })
+      .limit(50)
+    return data ?? []
+  },
+  { watch: [customer] },
+)
+
+const STATUS_COLOR: Record<string, 'neutral' | 'error' | 'secondary' | 'primary'> = {
+  pending: 'neutral', sent: 'neutral', failed: 'error', opened: 'secondary', completed: 'primary',
+}
 
 const emailsRaw = ref('')
 const message = ref('')
@@ -35,6 +58,7 @@ async function send() {
       emailsRaw.value = ''; message.value = ''
     }
     if (res.failed?.length) toast.add({ title: `${res.failed.length} mislukt`, description: res.failed.join(', '), color: 'warning' })
+    await refreshInvites()
   }
   catch (e: unknown) {
     toast.add({ title: (e as { statusMessage?: string })?.statusMessage ?? 'Versturen mislukt', color: 'error' })
@@ -91,6 +115,27 @@ usePageTitle('Uitnodigen')
             />
           </div>
         </div>
+
+        <UCard class="mt-6">
+          <template #header>
+            <div class="flex items-center justify-between gap-2">
+              <h2 class="font-semibold">{{ t('dash.invite.history') }}</h2>
+              <span class="text-xs text-muted">{{ t('dash.invite.historyHint') }}</span>
+            </div>
+          </template>
+          <p v-if="!invites?.length" class="text-sm text-muted">{{ t('dash.invite.historyEmpty') }}</p>
+          <ul v-else class="divide-y divide-default">
+            <li v-for="inv in invites" :key="inv.id" class="flex items-center justify-between gap-3 py-2.5">
+              <span class="text-sm truncate">{{ inv.email }}</span>
+              <span class="flex items-center gap-3 shrink-0">
+                <span class="text-xs text-muted">{{ relativeTime(inv.created_at, locale as 'nl' | 'en') }}</span>
+                <UBadge :color="STATUS_COLOR[inv.status] ?? 'neutral'" variant="subtle" size="sm">
+                  {{ t(`dash.invite.status.${inv.status}`) }}
+                </UBadge>
+              </span>
+            </li>
+          </ul>
+        </UCard>
       </div>
     </template>
   </UDashboardPanel>

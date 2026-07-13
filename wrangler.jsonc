@@ -12,13 +12,15 @@
   "observability": {
     "enabled": true
   },
+  "routes": [
+    { "pattern": "reviewupgrade.nl", "custom_domain": true },
+    { "pattern": "www.reviewupgrade.nl", "custom_domain": true }
+  ],
   // SUPABASE_KEY is the publishable/anon key (safe to expose; RLS protects data).
-  // DEV_LOGIN_ENABLED is intentionally on for this review deploy — turn OFF for
-  // a real production launch (see DEPLOY.md).
+  // Dev-login vars are deliberately absent: this config deploys to production
+  // (reviewupgrade.nl) — see DEPLOY.md.
   "vars": {
     "SUPABASE_URL": "https://outddpbiubsqnqxzufcm.supabase.co",
-    "SUPABASE_KEY": "sb_publishable_Y8VREQfrem6LULE5PtwfKw_TLtGuDKo",
-    "DEV_LOGIN_ENABLED": "true",
-    "DEV_ADMIN_EMAIL": "admin@reviewupgrade.test"
+    "SUPABASE_KEY": "sb_publishable_Y8VREQfrem6LULE5PtwfKw_TLtGuDKo"
   }
 }

@@ -18,6 +18,12 @@ export type Database = {
         Update: { created_at?: string; email?: string | null; id?: string; message?: string | null; name?: string | null }
         Relationships: []
       }
+      coupons: {
+        Row: { code: string; free_months: number; active: boolean; redeemed_count: number; created_at: string }
+        Insert: { code: string; free_months?: number; active?: boolean; redeemed_count?: number; created_at?: string }
+        Update: { code?: string; free_months?: number; active?: boolean; redeemed_count?: number; created_at?: string }
+        Relationships: []
+      }
       customers: {
         Row: {
           bg_color: string; company_name: string | null; created_at: string; email: string | null
@@ -25,6 +31,8 @@ export type Database = {
           postcode: string | null; city: string | null; slug: string; status: string; street: string | null
           text_color: string; user_id: string; website: string | null
           feedback_prompt: string; review_platform: string; google_place_id: string | null; widget_texts: Json
+          coupon: string | null; trial_until: string | null; free_until: string | null
+          monthly_price_cents: number | null; billing_status: string; invite_texts: Json
         }
         Insert: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
@@ -32,6 +40,8 @@ export type Database = {
           postcode?: string | null; city?: string | null; slug: string; status?: string; street?: string | null
           text_color?: string; user_id: string; website?: string | null
           feedback_prompt?: string; review_platform?: string; google_place_id?: string | null; widget_texts?: Json
+          coupon?: string | null; trial_until?: string | null; free_until?: string | null
+          monthly_price_cents?: number | null; billing_status?: string; invite_texts?: Json
         }
         Update: {
           bg_color?: string; company_name?: string | null; created_at?: string; email?: string | null
@@ -39,8 +49,59 @@ export type Database = {
           postcode?: string | null; city?: string | null; slug?: string; status?: string; street?: string | null
           text_color?: string; user_id?: string; website?: string | null
           feedback_prompt?: string; review_platform?: string; google_place_id?: string | null; widget_texts?: Json
+          coupon?: string | null; trial_until?: string | null; free_until?: string | null
+          monthly_price_cents?: number | null; billing_status?: string; invite_texts?: Json
         }
         Relationships: []
+      }
+      google_review_snapshots: {
+        Row: {
+          id: string; customer_id: string; rating: number | null; review_count: number | null
+          source: string; captured_at: string
+        }
+        Insert: {
+          id?: string; customer_id: string; rating?: number | null; review_count?: number | null
+          source?: string; captured_at?: string
+        }
+        Update: {
+          id?: string; customer_id?: string; rating?: number | null; review_count?: number | null
+          source?: string; captured_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'google_review_snapshots_customer_id_fkey'
+            columns: ['customer_id']
+            isOneToOne: false
+            referencedRelation: 'customers'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      invites: {
+        Row: {
+          id: string; customer_id: string; email: string; source: string; status: string
+          message: string | null; sent_at: string | null; opened_at: string | null
+          completed_at: string | null; feedback_id: string | null; created_at: string
+        }
+        Insert: {
+          id?: string; customer_id: string; email: string; source?: string; status?: string
+          message?: string | null; sent_at?: string | null; opened_at?: string | null
+          completed_at?: string | null; feedback_id?: string | null; created_at?: string
+        }
+        Update: {
+          id?: string; customer_id?: string; email?: string; source?: string; status?: string
+          message?: string | null; sent_at?: string | null; opened_at?: string | null
+          completed_at?: string | null; feedback_id?: string | null; created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'invites_customer_id_fkey'
+            columns: ['customer_id']
+            isOneToOne: false
+            referencedRelation: 'customers'
+            referencedColumns: ['id']
+          },
+        ]
       }
       feedback: {
         Row: { created_at: string; customer_id: string; id: string; message: string | null; rating: number }
@@ -66,6 +127,17 @@ export type Database = {
     Views: Record<never, never>
     Functions: {
       is_admin: { Args: Record<string, never>; Returns: boolean }
+      validate_coupon: {
+        Args: { p_code: string }
+        Returns: { code: string; free_months: number }[]
+      }
+      mark_invite_sent: { Args: { p_invite: string; p_ok: boolean }; Returns: undefined }
+      record_google_snapshot: {
+        Args: { p_customer: string; p_rating: number | null; p_count: number | null; p_source?: string }
+        Returns: undefined
+      }
+      mark_invite_opened: { Args: { p_invite: string }; Returns: undefined }
+      mark_invite_completed: { Args: { p_invite: string; p_feedback: string }; Returns: undefined }
       get_widget: {
         Args: { p_slug: string }
         Returns: {
@@ -87,6 +159,7 @@ export type TablesUpdate<T extends keyof PublicSchema['Tables']> = PublicSchema[
 
 export type Customer = Tables<'customers'>
 export type Feedback = Tables<'feedback'>
+export type Invite = Tables<'invites'>
 export type WidgetPublic = Database['public']['Functions']['get_widget']['Returns'][number]
 export type Lead = Tables<'leads'>
 export type ContactMessage = Tables<'contact_messages'>
