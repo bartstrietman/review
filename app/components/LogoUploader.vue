@@ -21,6 +21,7 @@ const ALLOWED: Record<string, string> = {
   'image/jpeg': 'jpg',
   'image/webp': 'webp',
   'image/gif': 'gif',
+  'image/svg+xml': 'svg',
 }
 const MAX_BYTES = 2_000_000
 
@@ -67,7 +68,7 @@ async function onFileChange(e: Event) {
         </UButton>
         <p v-if="!modelValue" class="text-xs text-muted mt-1.5">{{ t('dash.set.logoNone') }}</p>
         <input
-          ref="inputEl" type="file" accept="image/png,image/jpeg,image/webp,image/gif"
+          ref="inputEl" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
           class="hidden" @change="onFileChange"
         >
       </div>

@@ -12,6 +12,9 @@ const CONTENT_TYPE_EXT: Record<string, string> = {
   'image/jpeg': 'jpg',
   'image/webp': 'webp',
   'image/gif': 'gif',
+  // ponytail: SVG stored as-is (shown via <img>, source = customer's own site, admin action).
+  // No sanitisation for now; add DOMPurify/SVG-scrub if these ever render inline or from untrusted sources.
+  'image/svg+xml': 'svg',
 }
 
 type AdminClient = ReturnType<typeof serverSupabaseServiceRole<Database>>

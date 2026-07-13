@@ -5,7 +5,7 @@
 const BLOCKED_HOST = /^(localhost|.*\.(local|internal|test)|\[.*\]|\d{1,3}(\.\d{1,3}){3})$/i
 const HTML_MAX_BYTES = 1_000_000
 const CSS_MAX_BYTES = 300_000
-const MAX_STYLESHEETS = 3
+const MAX_STYLESHEETS = 5
 
 export function normalizeSiteUrl(input: string): URL | null {
   let raw = input.trim()
@@ -136,30 +136,70 @@ function safeLogoUrl(cand: string, site: URL): string | null {
   return u.href
 }
 
-/** First hit wins, in order of confidence: logo-ish <img>, apple-touch-icon, og:image, favicon. */
+// Third-party / utility icons that show up in headers but are never the brand logo
+// (review widgets, socials, payment methods, cookie/placeholder + Material-icon SVGs).
+const LOGO_REJECT = /google|facebook|instagram|twitter|\bx\.com|linkedin|youtube|tiktok|pinterest|whats-?app|trustpilot|tripadvisor|kiyoh|feedbackcompany|klarna|\bideal\b|visa|mastercard|paypal|app-?store|google-?play|play-?store|appstore|googleplay|\bbadge\b|payment|cookie|placeholder|material|icon-embed|_24dp|sprite|avatar|flag/i
+// Webflow "brand wall" images (logo1_.. logo9_) = brands a shop sells, not its own logo.
+const BRAND_WALL_CLASS = /class=["'][^"']*\blogo\d+_/i
+// src filename that actually carries a "logo" token: /logo.svg, _logo.svg, /logo-vector/…
+const SRC_LOGO_TOKEN = /[/_-]logo[._-]|[/_-]logo\.[a-z]+(?:$|\?)/i
+
+function imgClassOrAltHasLogo(tag: string): boolean {
+  const cls = tag.match(/class=["']([^"']*)["']/i)?.[1] ?? ''
+  const alt = tag.match(/alt=["']([^"']*)["']/i)?.[1] ?? ''
+  return /logo|brand/i.test(cls) || /logo|brand/i.test(alt)
+}
+
+/**
+ * Scored logo detection: JSON-LD > src-filename "logo" token > apple-touch-icon >
+ * class/alt logo > favicon. Third-party/utility icons and Webflow brand-wall images
+ * are rejected. og:image is deliberately ignored (it's a hero photo, not a logo).
+ * Higher tiers win; within a tier the earliest (header) match wins.
+ */
 export function extractLogo(html: string, site: URL): string | null {
-  for (const m of html.matchAll(/<img\b[^>]*>/gi)) {
-    const tag = m[0]
-    if (!/(?:class|alt|src)=["'][^"']*logo[^"']*["']/i.test(tag)) continue
+  // 1. JSON-LD Organization logo (highest confidence).
+  for (const block of html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    const json = block[1] ?? ''
+    const cand = (json.match(/"logo"\s*:\s*"([^"]+)"/i)?.[1]
+      ?? json.match(/"logo"\s*:\s*\{[^}]*?"url"\s*:\s*"([^"]+)"/i)?.[1])?.replace(/\\\//g, '/')
+    if (cand && !LOGO_REJECT.test(cand)) {
+      const abs = safeLogoUrl(cand, site)
+      if (abs) return abs
+    }
+  }
+
+  const imgs = [...html.matchAll(/<img\b[^>]*>/gi)].map(m => m[0])
+
+  // 2. <img> whose src filename carries a "logo" token = the real brand logo.
+  for (const tag of imgs) {
+    if (LOGO_REJECT.test(tag) || BRAND_WALL_CLASS.test(tag)) continue
     const src = tag.match(/src=["']([^"']+)["']/i)?.[1]
-    const abs = src ? safeLogoUrl(src, site) : null
+    if (!src || !SRC_LOGO_TOKEN.test(src)) continue
+    const abs = safeLogoUrl(src, site)
     if (abs) return abs
   }
+
+  // 3. apple-touch-icon (reliable, savable raster brand mark).
   for (const m of html.matchAll(/<link[^>]+>/gi)) {
     const tag = m[0]
-    if (!/rel=["']?apple-touch-icon/i.test(tag)) continue
+    if (!/rel=["']?apple-touch-icon/i.test(tag) || LOGO_REJECT.test(tag)) continue
     const href = tag.match(/href=["']([^"']+)["']/i)?.[1]
     const abs = href ? safeLogoUrl(href, site) : null
     if (abs) return abs
   }
-  for (const m of html.matchAll(/<meta[^>]+property=["']og:image["'][^>]*>/gi)) {
-    const content = m[0].match(/content=["']([^"']+)["']/i)?.[1]
-    const abs = content ? safeLogoUrl(content, site) : null
+
+  // 4. <img> with logo/brand only in class or alt.
+  for (const tag of imgs) {
+    if (LOGO_REJECT.test(tag) || BRAND_WALL_CLASS.test(tag) || !imgClassOrAltHasLogo(tag)) continue
+    const src = tag.match(/src=["']([^"']+)["']/i)?.[1]
+    const abs = src ? safeLogoUrl(src, site) : null
     if (abs) return abs
   }
+
+  // 5. favicon / mask-icon (last resort). og:image is intentionally skipped.
   for (const m of html.matchAll(/<link[^>]+>/gi)) {
     const tag = m[0]
-    if (!/rel=["']?(?:shortcut icon|icon)["']?/i.test(tag)) continue
+    if (!/rel=["']?(?:shortcut icon|icon|mask-icon)["']?/i.test(tag) || LOGO_REJECT.test(tag)) continue
     const href = tag.match(/href=["']([^"']+)["']/i)?.[1]
     const abs = href ? safeLogoUrl(href, site) : null
     if (abs) return abs
@@ -190,18 +230,19 @@ export async function scanBrandColors(input: string): Promise<BrandScanResult> {
   for (const m of html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) collect(m[1]!, scores, add)
   for (const m of html.matchAll(/style=["']([^"']+)["']/gi)) collect(m[1]!, scores, add)
 
-  // A few same-origin stylesheets (Workers subrequest budget: hard cap).
+  // A few stylesheets (Workers subrequest budget: hard cap). Same-origin is always
+  // fine; cross-origin CDN sheets (Webflow/Shopify/Wix) must pass the SSRF guard so
+  // we never fetch an internal/IP host. Still pure text parsing — safe on Workers.
   const hrefs: string[] = []
   for (const m of html.matchAll(/<link[^>]+>/gi)) {
     const tag = m[0]
     if (!/rel=["']?[^"'>]*stylesheet/i.test(tag)) continue
     const href = tag.match(/href=["']([^"']+)["']/i)?.[1]
     if (!href) continue
-    try {
-      const u = new URL(href, site.href)
-      if (u.origin === site.origin && (u.protocol === 'https:' || u.protocol === 'http:')) hrefs.push(u.href)
-    }
-    catch { /* skip */ }
+    let abs: URL
+    try { abs = new URL(href, site.href) }
+    catch { continue }
+    if (abs.origin === site.origin || normalizeSiteUrl(abs.href)) hrefs.push(abs.href)
     if (hrefs.length >= MAX_STYLESHEETS) break
   }
   const sheets = await Promise.all(hrefs.map(h => fetchText(h, CSS_MAX_BYTES)))
