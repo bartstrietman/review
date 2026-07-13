@@ -40,6 +40,16 @@ npx wrangler secret put SUPABASE_KEY          # sb_publishable_... (publishable/
 npx wrangler secret put SUPABASE_SERVICE_KEY
 ```
 
+**Resend (review-uitnodigingen + account-activatiemail):** Nuxt leest de
+runtime-config `resendKey`/`resendFrom` runtime uit `NUXT_`-secrets. Het
+`from`-adres moet op een in Resend **geverifieerd** domein staan
+(`reviewupgrade.nl` is geverifieerd):
+
+```bash
+npx wrangler secret put NUXT_RESEND_KEY       # re_... (Resend API key)
+npx wrangler secret put NUXT_RESEND_FROM      # ReviewUpgrade <noreply@reviewupgrade.nl>
+```
+
 **Serper (bedrijf-zoeken bij aanmelden):** de key `SERPER_KEY` staat in `.env`
 (server-only, gitignored) en wordt bij `pnpm build` in de server-bundle gebakken
 (niet in de client). Bij **git-based CI-deploys** zet je 'm als Worker-secret:
