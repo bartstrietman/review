@@ -10,7 +10,7 @@ const { customers, customer, selectedId } = useMyBusiness()
 const links = computed(() => [[
   { label: t('dash.nav.overview'), icon: 'i-lucide-layout-dashboard', to: localePath('/dashboard'), exact: true },
   { label: t('dash.widget.nav'), icon: 'i-lucide-paintbrush', to: localePath('/dashboard/widget') },
-  { label: t('dash.nav.invite'), icon: 'i-lucide-user-plus', to: localePath('/dashboard/uitnodigen') },
+  { label: t('dash.nav.invite'), icon: 'i-lucide-user-plus', to: localePath('/dashboard/emails') },
   { label: t('dash.nav.settings'), icon: 'i-lucide-settings', to: localePath('/dashboard/instellingen') },
 ], [
   { label: t('dash.nav.viewPage'), icon: 'i-lucide-external-link', to: customer.value ? `/r/${customer.value.slug}` : localePath('/dashboard'), target: '_blank' },

@@ -411,7 +411,7 @@
   "dash": {
     "nav": {
       "overview": "Overzicht",
-      "invite": "Uitnodigen",
+      "invite": "E-mails",
       "install": "Installeren",
       "settings": "Instellingen",
       "viewPage": "Bekijk reviewpagina",
@@ -492,6 +492,12 @@
     "emptyImpr": "Nog geen verbeterpunten ontvangen — dat is goed nieuws.",
     "invite": {
       "intro": "Nodig (oud-)klanten uit om een review achter te laten. Ze krijgen een e-mail met jouw reviewlink en een knop om direct een beoordeling te geven. Bij 4–5 sterren worden ze doorgestuurd naar Google; bij 1–3 sterren krijg jij de feedback privé binnen.",
+      "compose": "Uitnodigen",
+      "composeSub": "Dit is de e-mail die je klant krijgt. Pas de tekst direct aan en verstuur.",
+      "toPlaceholder": "klant{'@'}voorbeeld.nl — meerdere? scheid met komma of enter",
+      "msgPlaceholder": "Voeg hier een persoonlijk bericht toe (optioneel)…",
+      "msgExample": "Bedankt voor je bezoek! Het was fijn om je te helpen — we horen graag wat je van onze service vond.",
+      "brandNote": "Wordt verstuurd in jouw huisstijl",
       "send": "Verstuur uitnodigingen",
       "emails": "E-mailadressen",
       "emailsHelp": "Meerdere? Scheid met komma, spatie of nieuwe regel (max. 25 per keer).",

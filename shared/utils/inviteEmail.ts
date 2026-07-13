@@ -69,9 +69,9 @@ export function renderInviteEmail(opts: {
     : ''
 
   const html = `<div style="font-family:Inter,Arial,sans-serif;color:#1A1A1A;max-width:480px">
+      ${messageBlock}
       <h2 style="color:${bg}">${escapeHtml(heading)}</h2>
       <p style="color:#6B6B63;white-space:pre-wrap">${escapeHtml(intro)}</p>
-      ${messageBlock}
       <p style="margin:22px 0 4px;font-weight:600;font-size:15px">Hoe was je ervaring? Klik op een ster:</p>
       <p style="margin:0 0 6px">${stars}</p>
       <p style="color:#6B6B63;font-size:13px;margin:0 0 4px">${escapeHtml(starsHint)}</p>

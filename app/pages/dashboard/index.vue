@@ -130,7 +130,7 @@ usePageTitle('Overzicht')
             <p class="text-sm text-muted mb-5">
               {{ (inviteStats?.completed ?? 0) > 0 ? t('dash.tempo.inviteWorking', { n: inviteStats!.completed }) : t('dash.tempo.inviteD') }}
             </p>
-            <UButton :to="localePath('/dashboard/uitnodigen')" color="primary" size="lg" class="px-5">
+            <UButton :to="localePath('/dashboard/emails')" color="primary" size="lg" class="px-5">
               {{ t('dash.tempo.inviteCta') }}
             </UButton>
             <p v-if="(inviteStats?.sent ?? 0) > 0" class="text-xs text-muted mt-3.5 flex items-center gap-1">
@@ -186,7 +186,7 @@ usePageTitle('Overzicht')
             <li class="flex items-start gap-3">
               <span class="size-6 shrink-0 rounded-full bg-green-700 text-white text-xs flex items-center justify-center font-bold">3</span>
               <div>
-                <p class="text-sm font-medium">{{ t('dash.start.s3') }} <NuxtLink :to="localePath('/dashboard/uitnodigen')" class="text-green-700 underline">→ {{ t('dash.nav.invite') }}</NuxtLink></p>
+                <p class="text-sm font-medium">{{ t('dash.start.s3') }} <NuxtLink :to="localePath('/dashboard/emails')" class="text-green-700 underline">→ {{ t('dash.nav.invite') }}</NuxtLink></p>
                 <p class="text-xs text-muted">{{ t('dash.start.s3d') }}</p>
               </div>
             </li>
@@ -216,7 +216,7 @@ usePageTitle('Overzicht')
             </div>
             <div v-else class="text-center text-muted py-10 text-sm">
               <UIcon name="i-lucide-star-off" class="size-9 mx-auto mb-2 text-dimmed" />
-              {{ t('dash.emptyReviews') }} <NuxtLink :to="localePath('/dashboard/uitnodigen')" class="text-green-700 underline">{{ t('dash.inviteCustomers') }}</NuxtLink>.
+              {{ t('dash.emptyReviews') }} <NuxtLink :to="localePath('/dashboard/emails')" class="text-green-700 underline">{{ t('dash.inviteCustomers') }}</NuxtLink>.
             </div>
           </div>
 
