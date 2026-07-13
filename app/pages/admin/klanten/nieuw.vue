@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import type { Database } from '~/types/database.types'
+
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 
 const router = useRouter()
 const toast = useToast()
+const supabase = useSupabaseClient<Database>()
 
 const form = reactive({
   company_name: '', email: '', street: '', postcode: '', city: '', phone: '',
@@ -13,6 +16,28 @@ const form = reactive({
 const brand = reactive<{ colors: string[], logo: string | null, scanned: string }>({
   colors: [], logo: null, scanned: '',
 })
+
+// Logo the admin picked by hand — overrides the one plucked from the site.
+// The customer row doesn't exist yet, so we hold the file and upload it to
+// Storage once we have the new customer id (in submit()).
+const LOGO_TYPES: Record<string, string> = {
+  'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif', 'image/svg+xml': 'svg',
+}
+const LOGO_MAX = 2_000_000
+const logoFile = ref<File | null>(null)
+const logoPreview = ref<string | null>(null)
+const logoInputEl = ref<HTMLInputElement>()
+
+function onLogoPick(e: Event) {
+  const file = (e.target as HTMLInputElement).files?.[0]
+  if (logoInputEl.value) logoInputEl.value.value = ''
+  if (!file) return
+  if (!LOGO_TYPES[file.type]) { toast.add({ title: 'Alleen PNG, JPG, WebP, GIF of SVG', color: 'error' }); return }
+  if (file.size > LOGO_MAX) { toast.add({ title: 'Bestand te groot (max 2 MB)', color: 'error' }); return }
+  if (logoPreview.value) URL.revokeObjectURL(logoPreview.value)
+  logoFile.value = file
+  logoPreview.value = URL.createObjectURL(file)
+}
 
 function onPlaceSelect(p: import('~/components/Signup/BusinessSearch.vue').PlaceResult) {
   form.company_name = p.title || form.company_name
@@ -53,10 +78,21 @@ async function submit() {
   }
   creating.value = true
   try {
+    // A hand-picked file wins over the scanned logo; upload it after creation.
     const res = await $fetch<{ id: string, slug: string, invited: boolean }>('/api/admin/customers', {
       method: 'POST',
-      body: { ...form, logo_url: brand.logo || undefined },
+      body: { ...form, logo_url: logoFile.value ? undefined : (brand.logo || undefined) },
     })
+    if (logoFile.value) {
+      const ext = LOGO_TYPES[logoFile.value.type]
+      const path = `${res.id}/${Math.random().toString(36).slice(2)}.${ext}`
+      const { error: upErr } = await supabase.storage.from('logos').upload(path, logoFile.value, { upsert: false, contentType: logoFile.value.type })
+      if (upErr) { toast.add({ title: `Logo uploaden mislukt: ${upErr.message}`, color: 'warning' }) }
+      else {
+        const publicUrl = supabase.storage.from('logos').getPublicUrl(path).data.publicUrl
+        await supabase.from('customers').update({ logo_url: publicUrl }).eq('id', res.id)
+      }
+    }
     toast.add({ title: 'Klant aangemaakt', color: 'success', icon: 'i-lucide-check' })
     if (!res.invited) toast.add({ title: 'Account gemaakt, uitnodiging is niet verstuurd.', color: 'warning' })
     await router.push(`/admin/klanten/${res.id}`)
@@ -136,8 +172,24 @@ async function submit() {
 
           <UCard>
             <template #header><h3 class="font-semibold">Logo</h3></template>
-            <img v-if="brand.logo" :src="brand.logo" alt="" class="max-h-16 max-w-full object-contain">
-            <p v-else class="text-sm text-muted">Geen logo gevonden — klant kan later uploaden.</p>
+            <div class="flex items-center gap-4">
+              <div class="size-16 rounded-lg border border-default bg-elevated flex items-center justify-center overflow-hidden shrink-0">
+                <img v-if="logoPreview || brand.logo" :src="logoPreview || brand.logo!" alt="" class="size-full object-contain">
+                <UIcon v-else name="i-lucide-image" class="size-6 text-muted" />
+              </div>
+              <div>
+                <UButton size="sm" color="neutral" variant="soft" icon="i-lucide-upload" @click="logoInputEl?.click()">
+                  {{ (logoPreview || brand.logo) ? 'Ander logo' : 'Logo uploaden' }}
+                </UButton>
+                <p class="text-xs text-muted mt-1.5">
+                  {{ brand.logo && !logoPreview ? 'Automatisch van de website — of upload een eigen bestand.' : 'PNG, JPG, WebP, GIF of SVG — max 2 MB.' }}
+                </p>
+                <input
+                  ref="logoInputEl" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
+                  class="hidden" @change="onLogoPick"
+                >
+              </div>
+            </div>
           </UCard>
         </div>
       </div>
