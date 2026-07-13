@@ -186,27 +186,17 @@
   },
   "pricing": {
     "eyebrow": "Pricing",
-    "h2": "Simple prices, no surprises",
-    "sub": "Start with one platform, or cover everything at once. Cancel monthly.",
-    "lokaal": {
-      "name": "Local",
-      "sub": "For those just starting with review management",
-      "f1": "Widget linked to 1 platform (e.g. Google)",
-      "f2": "Ready-made WhatsApp and email templates",
-      "f3": "Basic color customizable",
-      "f4": "Live within 1 minute",
-      "cta": "Choose Local"
-    },
-    "pro": {
-      "name": "Professional",
-      "sub": "For those who want to be everywhere",
-      "f1": "Unlimited platforms (Google, Trustpilot, TripAdvisor)",
-      "f2": "Full brand styling: color, logo, font",
+    "h2": "One simple price, no surprises",
+    "sub": "One complete plan, cancel monthly.",
+    "plan": {
+      "name": "ReviewUpgrade",
+      "sub": "Everything you need for more positive reviews",
+      "f1": "Widget for Google, Trustpilot or TripAdvisor",
+      "f2": "Fully in your own branding",
       "f3": "Ready-made WhatsApp and email templates",
       "f4": "Live within 1 minute",
-      "cta": "Choose Professional"
+      "cta": "Try 14 days free"
     },
-    "popular": "Most popular",
     "permonth": "month",
     "trial": "14 days free trial"
   },
@@ -251,7 +241,7 @@
     "restart": "Simulate new sign-up",
     "detail": {
       "biz": "Business",
-      "pkg": "Package",
+      "pkg": "Subscription",
       "color": "Brand style",
       "tel": "Phone",
       "notfilled": "Not provided"
@@ -320,24 +310,8 @@
   },
   "flow": {
     "steps": [
-      "Package",
-      "Business",
-      "Style"
+      "Business"
     ],
-    "pkg": {
-      "h": "Which package suits you?",
-      "sub": "You can always upgrade later.",
-      "lokaal": {
-        "name": "Local",
-        "price": "€19.99",
-        "desc": "1 platform, basic color"
-      },
-      "pro": {
-        "name": "Professional",
-        "price": "€34.49",
-        "desc": "Unlimited platforms, full branding"
-      }
-    },
     "biz": {
       "h": "Tell us about your business",
       "sub": "We use this to automatically build your widget.",
@@ -358,18 +332,6 @@
         "hint": "This is the specific \"write a review\" link. Found in your Google Business Profile under \"Ask for reviews\"."
       },
       "plaats": "City"
-    },
-    "style": {
-      "h": "Choose your brand style",
-      "sub": "Set a background and text color, or enter your own color code.",
-      "bg": "Background color",
-      "fg": "Text color",
-      "preview": {
-        "label": "Preview",
-        "text": "How was your experience?"
-      },
-      "hex": "Custom color code (hex)",
-      "detected": "Found on your website"
     },
     "coupon": {
       "toggle": "Have a promo code?",
@@ -544,6 +506,20 @@
       "history": "Sent invitations",
       "historyEmpty": "No invitations sent yet.",
       "historyHint": "\"Opened\" means: the email was opened or the review link was clicked.",
+      "editor": {
+        "title": "Email text",
+        "subject": "Subject",
+        "heading": "Heading",
+        "intro": "Intro text",
+        "button": "Button label",
+        "starsHint": "Text below the stars",
+        "save": "Save text",
+        "saved": "Email text saved",
+        "preview": "Preview of the email",
+        "previewFrom": "From",
+        "previewTo": "To",
+        "previewNote": "This is exactly the email that will be sent — including your personal message and your brand colors."
+      },
       "status": {
         "pending": "Processing",
         "sent": "Sent",

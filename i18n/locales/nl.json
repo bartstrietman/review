@@ -185,28 +185,18 @@
     "yearly": "Vaak jaarcontract"
   },
   "pricing": {
-    "eyebrow": "Pakketten",
-    "h2": "Simpele prijzen, geen verrassingen",
-    "sub": "Begin met één platform, of dek alles in één keer af. Maandelijks opzegbaar.",
-    "lokaal": {
-      "name": "Lokaal",
-      "sub": "Voor wie net begint met reviewbeheer",
-      "f1": "Widget gekoppeld aan 1 platform (bijv. Google)",
-      "f2": "Kant-en-klare WhatsApp- en mailteksten",
-      "f3": "Basiskleur instelbaar",
-      "f4": "Installatie binnen 1 minuut",
-      "cta": "Kies Lokaal"
-    },
-    "pro": {
-      "name": "Professional",
-      "sub": "Voor wie overal aanwezig wil zijn",
-      "f1": "Onbeperkt platforms (Google, Trustpilot, TripAdvisor)",
-      "f2": "Volledige huisstijl: kleur, logo, lettertype",
+    "eyebrow": "Prijs",
+    "h2": "Simpele prijs, geen verrassingen",
+    "sub": "Eén compleet pakket, maandelijks opzegbaar.",
+    "plan": {
+      "name": "ReviewUpgrade",
+      "sub": "Alles wat je nodig hebt voor meer positieve reviews",
+      "f1": "Widget voor Google, Trustpilot of TripAdvisor",
+      "f2": "Volledig in je eigen huisstijl",
       "f3": "Kant-en-klare WhatsApp- en mailteksten",
       "f4": "Installatie binnen 1 minuut",
-      "cta": "Kies Professional"
+      "cta": "Probeer 14 dagen gratis"
     },
-    "popular": "Meest gekozen",
     "permonth": "maand",
     "trial": "14 dagen gratis proberen"
   },
@@ -251,7 +241,7 @@
     "restart": "Nieuwe aanmelding simuleren",
     "detail": {
       "biz": "Bedrijf",
-      "pkg": "Pakket",
+      "pkg": "Abonnement",
       "color": "Huisstijl",
       "tel": "Telefoon",
       "notfilled": "Niet opgegeven"
@@ -320,24 +310,8 @@
   },
   "flow": {
     "steps": [
-      "Pakket",
-      "Bedrijf",
-      "Huisstijl"
+      "Bedrijf"
     ],
-    "pkg": {
-      "h": "Welk pakket past bij jou?",
-      "sub": "Je kunt later altijd upgraden.",
-      "lokaal": {
-        "name": "Lokaal",
-        "price": "€19,99",
-        "desc": "1 platform, basiskleur"
-      },
-      "pro": {
-        "name": "Professional",
-        "price": "€34,49",
-        "desc": "Onbeperkt platforms, volledige huisstijl"
-      }
-    },
     "biz": {
       "h": "Vertel ons over je bedrijf",
       "sub": "Deze gegevens gebruiken we om jouw widget automatisch te maken.",
@@ -358,18 +332,6 @@
         "hint": "Dit is de specifieke \"schrijf een review\"-link. Te vinden via je Google Bedrijfsprofiel onder \"Reviews aanvragen\"."
       },
       "plaats": "Plaats"
-    },
-    "style": {
-      "h": "Kies de huisstijl",
-      "sub": "Stel een achtergrond- en tekstkleur in, of vul je eigen kleurcode in.",
-      "bg": "Achtergrondkleur",
-      "fg": "Tekstkleur",
-      "preview": {
-        "label": "Voorbeeld",
-        "text": "Hoe was uw ervaring?"
-      },
-      "hex": "Eigen kleurcode (hex)",
-      "detected": "Gevonden op jouw website"
     },
     "coupon": {
       "toggle": "Heb je een actiecode?",
@@ -544,6 +506,20 @@
       "history": "Verstuurde uitnodigingen",
       "historyEmpty": "Nog geen uitnodigingen verstuurd.",
       "historyHint": "\"Geopend\" betekent: de e-mail is geopend of de reviewlink is aangeklikt.",
+      "editor": {
+        "title": "E-mailtekst",
+        "subject": "Onderwerp",
+        "heading": "Kop",
+        "intro": "Introtekst",
+        "button": "Knoptekst",
+        "starsHint": "Tekst onder de sterren",
+        "save": "Tekst opslaan",
+        "saved": "E-mailtekst opgeslagen",
+        "preview": "Voorbeeld van de e-mail",
+        "previewFrom": "Van",
+        "previewTo": "Aan",
+        "previewNote": "Dit is exact de e-mail die verstuurd wordt — inclusief je persoonlijke bericht en je huisstijlkleuren."
+      },
       "status": {
         "pending": "In behandeling",
         "sent": "Verstuurd",
