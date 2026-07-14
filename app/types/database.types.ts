@@ -130,6 +130,7 @@ export type Database = {
     Views: Record<never, never>
     Functions: {
       is_admin: { Args: Record<string, never>; Returns: boolean }
+      admin_user_logins: { Args: Record<string, never>; Returns: { user_id: string; last_sign_in_at: string | null }[] }
       validate_coupon: {
         Args: { p_code: string }
         Returns: { code: string; free_months: number }[]
