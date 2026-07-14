@@ -19,12 +19,17 @@ const { data: stats } = await useAsyncData('admin-stats', async () => ({
 }))
 
 const { data: recent } = await useAsyncData('admin-recent-customers', async () => {
-  const { data } = await supabase
-    .from('customers')
-    .select('id, company_name, status, created_at, slug')
-    .order('created_at', { ascending: false })
-    .limit(5)
-  return data ?? []
+  const [{ data }, { data: logins }] = await Promise.all([
+    supabase
+      .from('customers')
+      .select('id, company_name, status, created_at, slug, user_id')
+      .order('created_at', { ascending: false })
+      .limit(5),
+    // auth.users isn't client-readable → admin-only SECURITY DEFINER function.
+    supabase.rpc('admin_user_logins'),
+  ])
+  const lastById = new Map((logins ?? []).map(l => [l.user_id, l.last_sign_in_at]))
+  return (data ?? []).map(r => ({ ...r, last_login: lastById.get(r.user_id) ?? null }))
 })
 
 const cards = computed(() => [
@@ -73,11 +78,20 @@ const cards = computed(() => [
             :to="`/admin/klanten/${r.id}`"
             class="flex items-center justify-between py-3 hover:bg-elevated -mx-2 px-2 rounded-lg"
           >
-            <div>
-              <p class="font-medium">{{ r.company_name || '—' }}</p>
-              <p class="text-xs text-muted">{{ r.slug }}</p>
+            <div class="min-w-0">
+              <p class="font-medium truncate">{{ r.company_name || '—' }}</p>
+              <p class="text-xs text-muted truncate">{{ r.slug }}</p>
             </div>
-            <UBadge variant="subtle" :color="statusColor(r.status)">{{ r.status }}</UBadge>
+            <div class="flex items-center gap-4 shrink-0">
+              <div class="hidden sm:block text-right text-xs text-muted">
+                <div>Aangemeld {{ relativeTime(r.created_at, 'nl') }}</div>
+                <div class="mt-0.5 flex items-center justify-end gap-1.5">
+                  <span class="size-1.5 rounded-full" :class="r.last_login ? 'bg-green-500' : 'bg-neutral-300'" />
+                  <span>{{ r.last_login ? `ingelogd ${relativeTime(r.last_login, 'nl')}` : 'nog nooit ingelogd' }}</span>
+                </div>
+              </div>
+              <UBadge variant="subtle" :color="statusColor(r.status)">{{ r.status }}</UBadge>
+            </div>
           </NuxtLink>
         </div>
         <p v-else class="text-sm text-muted py-6 text-center">Nog geen aanmeldingen.</p>
