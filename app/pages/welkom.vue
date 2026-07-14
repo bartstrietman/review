@@ -15,10 +15,17 @@ async function complete(u: { id: string; app_metadata?: { role?: string } }) {
   if (done) return
   done = true
 
-  // No pending signup data → this was just a login: route by role.
+  // Admins never complete a signup — straight to the admin area. This must run
+  // BEFORE the signup-data branch, otherwise stale localStorage from an earlier
+  // signup makes an admin login re-create a (duplicate) customer.
+  if (u.app_metadata?.role === 'admin') {
+    await router.replace(localePath('/admin'))
+    return
+  }
+
+  // No pending signup data → this was just a login: go to the dashboard.
   if (!data.value.bedrijfsnaam) {
-    const isAdmin = u.app_metadata?.role === 'admin'
-    await router.replace(localePath(isAdmin ? '/admin' : '/dashboard'))
+    await router.replace(localePath('/dashboard'))
     return
   }
   try {
