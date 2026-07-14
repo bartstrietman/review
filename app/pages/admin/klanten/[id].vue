@@ -13,29 +13,47 @@ const { data: c, refresh } = await useAsyncData(`admin-customer-${id}`, async ()
   return data
 })
 
+const origEmail = ref(c.value?.email ?? '')
+
+// Edit against a plain reactive form. USelect's v-model doesn't reliably write
+// back through the useAsyncData data proxy (a picked option was silently
+// dropped on save), so we mirror the DB-editable fields here and save from this.
+const FIELDS = ['company_name', 'street', 'postcode', 'city', 'phone', 'website',
+  'google_url', 'bg_color', 'text_color', 'feedback_prompt', 'review_platform',
+  'package', 'status'] as const
+type Field = typeof FIELDS[number]
+const form = reactive(Object.fromEntries(FIELDS.map(k => [k, ''])) as Record<Field, string>)
+// Re-init only when the loaded customer changes (not on every c mutation, e.g.
+// a logo upload) so it doesn't wipe unsaved edits.
+watch(() => c.value?.id, () => {
+  if (c.value) for (const k of FIELDS) form[k] = (c.value[k] as string | null) ?? ''
+}, { immediate: true })
+
 const saving = ref(false)
 async function save() {
   if (!c.value) return
   saving.value = true
-  const { error } = await supabase.from('customers').update({
-    company_name: c.value.company_name,
-    street: c.value.street,
-    postcode: c.value.postcode,
-    city: c.value.city,
-    phone: c.value.phone,
-    website: c.value.website,
-    google_url: c.value.google_url,
-    bg_color: c.value.bg_color,
-    text_color: c.value.text_color,
-    feedback_prompt: c.value.feedback_prompt,
-    review_platform: c.value.review_platform,
-    package: c.value.package,
-    status: c.value.status,
-  }).eq('id', id)
-  saving.value = false
-  if (error) { toast.add({ title: error.message, color: 'error' }); return }
-  toast.add({ title: 'Opgeslagen', color: 'success', icon: 'i-lucide-check' })
-  await refresh()
+  try {
+    // Email is the login identity → goes through the admin server route
+    // (updates auth.users + customers). Only call it when it actually changed.
+    const newEmail = (c.value.email ?? '').trim()
+    if (newEmail && newEmail !== (origEmail.value ?? '')) {
+      await $fetch(`/api/admin/customers/${id}`, { method: 'PATCH', body: { email: newEmail } })
+      origEmail.value = newEmail
+    }
+
+    const { error } = await supabase.from('customers').update({ ...form }).eq('id', id)
+    if (error) throw new Error(error.message)
+
+    toast.add({ title: 'Opgeslagen', color: 'success', icon: 'i-lucide-check' })
+    await refresh()
+  }
+  catch (e: unknown) {
+    toast.add({ title: (e as { statusMessage?: string, message?: string })?.statusMessage ?? (e as Error)?.message ?? 'Opslaan mislukt', color: 'error' })
+  }
+  finally {
+    saving.value = false
+  }
 }
 
 const origin = useRequestURL().origin
@@ -63,14 +81,16 @@ const popupCode = computed(() =>
           <UCard>
             <template #header><h3 class="font-semibold">Bedrijfsgegevens</h3></template>
             <div class="grid sm:grid-cols-2 gap-4">
-              <UFormField label="Bedrijfsnaam"><UInput v-model="c.company_name" class="w-full" /></UFormField>
-              <UFormField label="E-mail"><UInput v-model="c.email" class="w-full" disabled /></UFormField>
-              <UFormField label="Straat + huisnummer"><UInput v-model="c.street" class="w-full" /></UFormField>
-              <UFormField label="Postcode"><UInput v-model="c.postcode" class="w-full" /></UFormField>
-              <UFormField label="Plaats"><UInput v-model="c.city" class="w-full" /></UFormField>
-              <UFormField label="Telefoon"><UInput v-model="c.phone" class="w-full" /></UFormField>
-              <UFormField label="Website"><UInput v-model="c.website" class="w-full" /></UFormField>
-              <UFormField label="Google review-URL" class="sm:col-span-2"><UInput v-model="c.google_url" class="w-full" /></UFormField>
+              <UFormField label="Bedrijfsnaam"><UInput v-model="form.company_name" class="w-full" /></UFormField>
+              <UFormField label="E-mail" help="Dit is ook het inlogadres van de klant.">
+                <UInput v-model="c.email" type="email" class="w-full" />
+              </UFormField>
+              <UFormField label="Straat + huisnummer"><UInput v-model="form.street" class="w-full" /></UFormField>
+              <UFormField label="Postcode"><UInput v-model="form.postcode" class="w-full" /></UFormField>
+              <UFormField label="Plaats"><UInput v-model="form.city" class="w-full" /></UFormField>
+              <UFormField label="Telefoon"><UInput v-model="form.phone" class="w-full" /></UFormField>
+              <UFormField label="Website"><UInput v-model="form.website" class="w-full" /></UFormField>
+              <UFormField label="Google review-URL" class="sm:col-span-2"><UInput v-model="form.google_url" class="w-full" /></UFormField>
               <UFormField v-if="c.google_place_id" label="Google Place ID" class="sm:col-span-2">
                 <UInput :model-value="c.google_place_id" readonly class="w-full font-mono text-xs" />
               </UFormField>
@@ -81,10 +101,10 @@ const popupCode = computed(() =>
             <template #header><h3 class="font-semibold">Abonnement</h3></template>
             <div class="grid sm:grid-cols-2 gap-4">
               <UFormField label="Pakket">
-                <USelect v-model="c.package" :items="['lokaal', 'pro']" class="w-full" />
+                <USelect v-model="form.package" :items="['lokaal', 'pro']" class="w-full" />
               </UFormField>
               <UFormField label="Status">
-                <USelect v-model="c.status" :items="['trial', 'active', 'paused', 'cancelled']" class="w-full" />
+                <USelect v-model="form.status" :items="['trial', 'active', 'paused', 'cancelled']" class="w-full" />
               </UFormField>
             </div>
           </UCard>
@@ -99,20 +119,20 @@ const popupCode = computed(() =>
           <UCard>
             <template #header><h3 class="font-semibold">Widget-config</h3></template>
             <div class="space-y-4">
-              <ColorField v-model="c.bg_color" label="Achtergrondkleur" />
-              <ColorField v-model="c.text_color" label="Tekstkleur" />
-              <div class="rounded-xl p-5 text-center font-semibold" :style="{ background: c.bg_color, color: c.text_color }">
+              <ColorField v-model="form.bg_color" label="Achtergrondkleur" />
+              <ColorField v-model="form.text_color" label="Tekstkleur" />
+              <div class="rounded-xl p-5 text-center font-semibold" :style="{ background: form.bg_color, color: form.text_color }">
                 Hoe was uw ervaring?
               </div>
               <UFormField label="Reviewplatform" help="Waar 4–5 sterren naartoe gaan.">
                 <USelect
-                  v-model="c.review_platform"
+                  v-model="form.review_platform"
                   :items="['google', 'trustpilot', 'tripadvisor', 'facebook', 'overig']"
                   class="w-full"
                 />
               </UFormField>
               <UFormField label="Feedback-prompt (1–3 sterren)" help="De vraag die ontevreden klanten zien.">
-                <UInput v-model="c.feedback_prompt" class="w-full" placeholder="Wat kunnen we verbeteren?" />
+                <UInput v-model="form.feedback_prompt" class="w-full" placeholder="Wat kunnen we verbeteren?" />
               </UFormField>
             </div>
           </UCard>
