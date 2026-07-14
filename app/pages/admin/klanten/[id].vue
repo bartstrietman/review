@@ -38,8 +38,9 @@ async function save() {
   await refresh()
 }
 
+const origin = useRequestURL().origin
 const popupCode = computed(() =>
-  c.value ? `<script src="https://reviewupgrade.nl/widget/${c.value.slug}.js" data-mode="popup"><\/script>` : '',
+  c.value ? `<script src="${origin}/widget/${c.value.slug}.js" data-mode="popup"><\/script>` : '',
 )
 </script>
 
@@ -98,18 +99,8 @@ const popupCode = computed(() =>
           <UCard>
             <template #header><h3 class="font-semibold">Widget-config</h3></template>
             <div class="space-y-4">
-              <UFormField label="Achtergrondkleur">
-                <div class="flex items-center gap-2">
-                  <span class="size-8 rounded-md border border-default" :style="{ background: c.bg_color }" />
-                  <UInput v-model="c.bg_color" class="w-32" />
-                </div>
-              </UFormField>
-              <UFormField label="Tekstkleur">
-                <div class="flex items-center gap-2">
-                  <span class="size-8 rounded-md border border-default" :style="{ background: c.text_color }" />
-                  <UInput v-model="c.text_color" class="w-32" />
-                </div>
-              </UFormField>
+              <ColorField v-model="c.bg_color" label="Achtergrondkleur" />
+              <ColorField v-model="c.text_color" label="Tekstkleur" />
               <div class="rounded-xl p-5 text-center font-semibold" :style="{ background: c.bg_color, color: c.text_color }">
                 Hoe was uw ervaring?
               </div>
