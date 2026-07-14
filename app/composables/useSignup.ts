@@ -77,8 +77,12 @@ export function useSignup() {
 /** Inserts the customer under the signed-in user's session (RLS: user_id = auth.uid()). */
 export function useSaveCustomer() {
   const supabase = useSupabaseClient<Database>()
+  const user = useSupabaseUser()
 
   return async (d: SignupData, userId: string): Promise<string> => {
+    // The login identity is the source of truth for email — the form state in
+    // d.email is lost when the magic link is opened in another tab/browser.
+    const email = user.value?.email ?? d.email
     const base = slugify(d.bedrijfsnaam)
     // Billing: valid coupon → free period; otherwise a 14-day trial after
     // which the invoice is sent manually by email (no payment provider).
@@ -101,7 +105,7 @@ export function useSaveCustomer() {
       package: PRICING_PLAN.id,
       bg_color: d.achtergrondkleur,
       text_color: d.tekstkleur,
-      email: d.email,
+      email,
       status: 'trial' as const,
       coupon: hasCoupon ? d.coupon : null,
       monthly_price_cents: PRICING_PLAN.priceCents,
